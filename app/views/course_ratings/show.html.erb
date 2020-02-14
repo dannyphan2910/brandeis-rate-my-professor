@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Review:</strong>
+  <%= @course_rating.review_id %>
+</p>
+
+<p>
+  <strong>Cat1:</strong>
+  <%= @course_rating.cat1 %>
+</p>
+
+<p>
+  <strong>Cat2:</strong>
+  <%= @course_rating.cat2 %>
+</p>
+
+<p>
+  <strong>Cat3:</strong>
+  <%= @course_rating.cat3 %>
+</p>
+
+<p>
+  <strong>Cat4:</strong>
+  <%= @course_rating.cat4 %>
+</p>
+
+<p>
+  <strong>Cat5:</strong>
+  <%= @course_rating.cat5 %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @course_rating.content %>
+</p>
+
+<%= link_to 'Edit', edit_course_rating_path(@course_rating) %> |
+<%= link_to 'Back', course_ratings_path %>
