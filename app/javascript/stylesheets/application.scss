@@ -1,0 +1,58 @@
+@import "bootstrap";
+@import "../../assets/stylesheets/application.css";
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+nav {
+    background-color: pink;
+    height: 100px;
+}
+
+.logo {
+    width: 33.3%;
+}
+
+.nav-content {
+    width: 66.7%;
+}
+
+.search-form {
+    width: 65%;
+}
+
+.nav-links {
+    width: inherit;
+}
+
+.main {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.block-1 {
+    height: 80vh;
+    width: 100%;
+
+    .block-1-content {
+        width: 100%;
+    }
+}
+
+.search-bar {
+    width: 100%;
+}
+
+.search-input {
+    width: 60%;
+}
+
+.card-block {
+    min-width: 200px;
+}

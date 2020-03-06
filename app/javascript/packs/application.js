@@ -15,3 +15,19 @@ require("channels")
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+
+import "bootstrap";
+import "../stylesheets/application";
+
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})
+
+$(function() {
+    $('[data-toggle="popover"]').popover();
+});
+
+$(function() {
+    $('[data-toggle="modal"]').modal();
+});
