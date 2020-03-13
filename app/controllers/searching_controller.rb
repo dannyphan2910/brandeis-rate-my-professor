@@ -1,5 +1,5 @@
 SearchingController < ApplicationController
     def render_searching
-        render 'searching_index'
+        render 'searching/index'
     end
 end
