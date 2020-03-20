@@ -23,8 +23,20 @@
 <div class="container-fluid main">
   <div class="block-1 d-flex align-items-center">
     <div class="block-1-content d-flex flex-column align-items-center">
-    
-      '<button type="button" class="btn btn-info m-3">Make A Review</button>'
+
+    <img src="pencil.svg" alt="" width="32" height="32" title="Bootstrap">
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+      <img src="pencil.svg" alt="" width="32" height="32" title="Bootstrap">Write Review!</img>
+    </button>
+
+  
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <%= render 'new_release' %>
+    </div>
+
+
         
         <h3 class="m-3">OR</h3>
 
