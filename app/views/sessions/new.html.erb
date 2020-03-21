@@ -1,0 +1,40 @@
+<div class="container-fluid outer-container d-flex align-items-center">
+    <div class="inner-container d-flex flex-column align-items-center">
+        <h1 class="mb-4">Sign In</h1>
+        <%= form_tag '/login' do %>
+        <div class="container text-center">
+            <div class="row">
+                <div class="col">
+                    <%= label_tag :email, "Enter email:" %>
+                </div>
+                <div class="col">
+                    <%= text_field_tag :email, '', required: true %>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <%= label_tag :password, "Enter password:" %>
+                </div>
+                <div class="col">
+                    <%= password_field_tag :password, '', required: true %>
+                </div>
+            </div>
+            <%= submit_tag "Login", {class: 'btn btn-lg btn-success mt-3'}%>
+        </div>
+        <% end %>
+        <div class="dropdown-divider"></div>
+        <%= link_to  "New around here? Sign up", "/users/new", class: "dropdown-item" %>
+        <%= link_to  "Forgot password?", "#", class: "dropdown-item" %>
+
+
+        <div class="error-msg mt-5">
+            <% flash.each do |type, msg| %>
+            <% if type == 'danger' %>
+            <div class="alert alert-danger" role="alert">
+                <%= msg %>
+            </div>
+            <% end %>
+            <% end %>
+        </div>
+    </div>
+</div>

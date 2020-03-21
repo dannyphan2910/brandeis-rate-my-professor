@@ -37,13 +37,6 @@ ActiveRecord::Schema.define(version: 2020_02_14_002321) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "gets", force: :cascade do |t|
-    t.integer "course_id"
-    t.integer "review_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "professor_ratings", force: :cascade do |t|
     t.integer "review_id"
     t.integer "cat1"
@@ -69,6 +62,7 @@ ActiveRecord::Schema.define(version: 2020_02_14_002321) do
 
   create_table "reviews", force: :cascade do |t|
     t.integer "user_id"
+    t.integer "course_id"
     t.string "title"
     t.integer "rate_up"
     t.integer "rate_down"
@@ -80,6 +74,7 @@ ActiveRecord::Schema.define(version: 2020_02_14_002321) do
     t.string "first_name"
     t.string "last_name"
     t.string "email"
+    t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
