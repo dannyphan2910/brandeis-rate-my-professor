@@ -24,6 +24,10 @@ $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 })
 
+$(function () {
+    $('[data-toggle="dropdown"]').dropdown()
+})
+
 $(function() {
     $('[data-toggle="popover"]').popover();
 });

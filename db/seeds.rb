@@ -22,8 +22,8 @@ end
 40.times do 
     c = Course.create(professor_id: Professor.all.sample.id, semester: ['Fall', 'Spring'].sample, year: Faker::Number.number(digits: 4), course_title: Faker::Job.key_skill, course_description: Faker::Quote.famous_last_words)
 end
-50.times do
+500.times do
     r = Review.create(user_id: User.all.sample.id, course_id: Course.all.sample.id, title: Faker::Movie.quote, rate_up: Faker::Number.between(from: 1, to: 50), rate_down: Faker::Number.between(from: 1, to: 50))
-    course_r = CourseRating.create(review_id: r.id, cat1: Faker::Number.between(from: 1, to: 5), cat2: Faker::Number.between(from: 1, to: 10), cat3: Faker::Number.between(from: 1, to: 10), cat4: Faker::Number.between(from: 1, to: 10), cat5: Faker::Number.between(from: 1, to: 10), content: Faker::Quote.famous_last_words)
-    prof_r = ProfessorRating.create(review_id: r.id, cat1: Faker::Number.between(from: 1, to: 5), cat2: Faker::Number.between(from: 1, to: 10), cat3: Faker::Number.between(from: 1, to: 10), cat4: Faker::Number.between(from: 1, to: 10), cat5: Faker::Number.between(from: 1, to: 10), strength: Faker::Quote.famous_last_words, improvement: Faker::Quote.famous_last_words)
+    course_r = CourseRating.create(review_id: r.id, cat1: Faker::Number.between(from: 1, to: 5), cat2: Faker::Number.between(from: 1, to: 5), cat3: Faker::Number.between(from: 1, to: 5), cat4: Faker::Number.between(from: 1, to: 5), cat5: Faker::Number.between(from: 1, to: 5), content: Faker::Quote.famous_last_words)
+    prof_r = ProfessorRating.create(review_id: r.id, cat1: Faker::Number.between(from: 1, to: 5), cat2: Faker::Number.between(from: 1, to: 5), cat3: Faker::Number.between(from: 1, to: 5), cat4: Faker::Number.between(from: 1, to: 5), cat5: Faker::Number.between(from: 1, to: 5), strength: Faker::Quote.famous_last_words, improvement: Faker::Quote.famous_last_words)
 end

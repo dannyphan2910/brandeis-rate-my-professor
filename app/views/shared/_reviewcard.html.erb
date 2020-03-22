@@ -1,0 +1,12 @@
+<div class="card mb-3 card-block border-success shadow" style="max-width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title h4"><%= data["course_title"] ||= (data["prof_first_name"] + ' ' + data["prof_last_name"]) %></h5>
+        <h6 class="card-subtitle mb-4 text-muted"><%= data["dept_name"] ||= (data["semester"] + ' ' + data["year"].to_s) %></h6>
+        <div class="ratings">
+            <% ["avg_cat1", "avg_cat2", "avg_cat3", "avg_cat4", "avg_cat5"].each do |cat| %>
+            <p><b>Category <%= cat[-1,1] %></b>: <%= number_with_precision(data[cat], precision: 2) %> / 5</p>
+            <% end %>
+        </div>
+        <p class="card-text"><small class="text-muted"><%= data["total_reviews"]%> reviews</small></p>
+    </div>
+</div>
