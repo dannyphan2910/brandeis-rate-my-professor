@@ -1,3 +1,25 @@
+<div class="row">
+                <div class= "col">
+                    <div class ="row justify-content-center">
+                    Course Review
+                    </div>
+                </div>
+                <div class= "col">
+                    <div class ="row justify-content-center">
+                    Professor Review
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class "col">
+                            
+                </div>
+                <div class "col">
+
+                </div>
+            </div>
+                
+
 <%= form_with(model: review, local: true) do |form| %>
   <% if review.errors.any? %>
     <div id="error_explanation">
@@ -12,23 +34,8 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :student_id %>
-    <%= form.number_field :student_id %>
-  </div>
-
-  <div class="field">
     <%= form.label :title %>
     <%= form.text_field :title %>
-  </div>
-
-  <div class="field">
-    <%= form.label :rate_up %>
-    <%= form.number_field :rate_up %>
-  </div>
-
-  <div class="field">
-    <%= form.label :rate_down %>
-    <%= form.number_field :rate_down %>
   </div>
 
   <div class="actions">
