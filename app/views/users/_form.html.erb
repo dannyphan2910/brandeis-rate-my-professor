@@ -1,32 +1,66 @@
-<%= form_with(model: user, local: true) do |form| %>
-  <% if user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<div class="container-fluid outer-container d-flex align-items-center">
+    <div class="inner-container d-flex flex-column align-items-center">
+        <h1 class="mb-4">Registration</h1>
+        <%= form_for @user do |form|%>
+        <div class="container text-center">
+            <div class="row">
+                <div class="col">
+                    <%= form.label :first_name %>
+                </div>
+                <div class="col">
+                    <%= form.text_field :first_name, required: true %>
+                </div>
+            </div>
 
-      <ul>
-        <% user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+            <div class="row">
+                <div class="col">
+                    <%= form.label :last_name %>
+                </div>
+                <div class="col">
+                    <%= form.text_field :last_name, required: true %>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <%= form.label :email %>
+                </div>
+                <div class="col">
+                    <%= form.text_field :email, required: true %>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <%= form.label :password %>
+                </div>
+                <div class="col">
+                    <%= form.password_field :password, required: true %>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <%= form.label :password_confirmation %>
+                </div>
+                <div class="col">
+                    <%= form.password_field :password_confirmation, required: true %>
+                </div>
+            </div>
+
+            <%= form.submit 'Register', {class: 'btn btn-lg btn-success mt-3'} %>
+        </div>
         <% end %>
-      </ul>
+        <div class="error-msg mt-5">
+            <% flash.each do |type, msg| %>
+            <% if type == 'alert' %>
+            <% msg.split("\n").each do |message| %>
+            <div class="alert alert-warning" role="alert">
+                <%= message %>
+            </div>
+            <% end %>
+            <% end %>
+            <% end %>
+        </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :first_name %>
-    <%= form.text_field :first_name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :last_name %>
-    <%= form.text_field :last_name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>
