@@ -4,6 +4,7 @@ class CreateCourses < ActiveRecord::Migration[6.0]
       t.integer :professor_id
       t.string :semester
       t.integer :year
+      t.string :course_code
       t.string :course_title
       t.string :course_description
 

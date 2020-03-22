@@ -1,6 +1,10 @@
 <div class="card mb-3 card-block border-success shadow" style="max-width: 18rem;">
     <div class="card-body">
-        <h5 class="card-title h4"><%= data["course_title"] ||= (data["prof_first_name"] + ' ' + data["prof_last_name"]) %></h5>
+        <% if data["course_code"] && data["course_title"] %>
+        <h5 class="card-title h4"><%= data["course_code"] + ': ' + data["course_title"] %></h5>
+        <% else %>
+        <h5 class="card-title h4"><%= data["prof_first_name"] + ' ' + data["prof_last_name"] %></h5>
+        <% end %>
         <h6 class="card-subtitle mb-4 text-muted"><%= data["dept_name"] ||= (data["semester"] + ' ' + data["year"].to_s) %></h6>
         <div class="ratings">
             <% ["avg_cat1", "avg_cat2", "avg_cat3", "avg_cat4", "avg_cat5"].each do |cat| %>
