@@ -24,20 +24,20 @@ class ReviewsController < ApplicationController
   # POST /reviews
   # POST /reviews.json
   def create
-    respond_with Review.create(review_params.merge(user_id: current_user.id))
-    # @review = Review.new(review_params)
-    # if logged_in?
-    #   @user = current_user
-    # end
-    # respond_to do |format|
-    #   if @review.save
-    #     format.html { redirect_to @review, notice: 'Review was successfully created.' }
-    #     format.json { render :show, status: :created, location: @review }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @review.errors, status: :unprocessable_entity }
-    #   end
-    # end
+    
+    @review = Review.new(review_params)
+    if logged_in?
+      @user = current_user
+    end
+    respond_to do |format|
+       if @review.save
+         format.html { redirect_to @review, notice: 'Review was successfully created.' }
+         format.json { render :show, status: :created, location: @review }
+       else
+         format.html { render :new }
+         format.json { render json: @review.errors, status: :unprocessable_entity }
+       end
+     end
   end
 
   # PATCH/PUT /reviews/1
