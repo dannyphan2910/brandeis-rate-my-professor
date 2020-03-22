@@ -3,17 +3,22 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <a class="navbar-brand logo" href="#">
-        <img src="https://upload.wikimedia.org/wikipedia/en/3/32/Brandeis_University_seal.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-        <span>Rate My Professor</span>
+    <a class="navbar-brand logo d-flex align-items-center ml-4" href="/">
+        <img src="https://upload.wikimedia.org/wikipedia/en/3/32/Brandeis_University_seal.svg" width="70" height="70" class="d-inline-block align-top" alt="">
+        <span class="h3 ml-3">Rate My Professor</span>
     </a>
 
     <div class="collapse navbar-collapse nav-content" id="navbarToggler">
+        <% if request.path == '/' || request.path == '/welcome' %>
+        <div class="form-inline my-2 my-lg-0 search-form d-flex justify-content-center"></div>
+        <% else %>
         <form class="form-inline my-2 my-lg-0 search-form d-flex justify-content-center">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
+        <% end %>
         <div class="d-flex justify-content-end nav-links">
+<<<<<<< HEAD
             <% if logged_in? %>
             <a class="nav-item nav-link left-align" href="#">Make A Review</a>
             
@@ -26,11 +31,22 @@
                         <button class="dropdown-item" type="button">View Profile</button>
                         <%= button_to  "Log Out", "/logout", method: :get, class: "dropdown-item" %>
                     </div>
+=======
+            <a class="nav-item nav-link left-align h5 text-center" href="#">Make A Review</a>
+            <% if logged_in? %>
+            <div class="dropdown nav-item nav-link left-align authentication">
+                <a class="dropdown-toggle h5" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Hi <%= @user.first_name  %>!
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+                    <%= button_to  "View Profile", "#", method: :get, class: "dropdown-item" %>
+                    <%= button_to  "Log Out", "/logout", method: :get, class: "dropdown-item" %>
+>>>>>>> 6941a19e1fafd9b852d2bf0dbc867951eb794af0
                 </div>
             </div>
 
             <% else %>
-            <%= link_to  "Sign In", "/login", class: "nav-item nav-link left-align" %>
+            <%= link_to  "Sign In", "/login", class: "nav-item nav-link left-align h5 authentication text-center" %>
             <% end %>
         </div>
     </div>

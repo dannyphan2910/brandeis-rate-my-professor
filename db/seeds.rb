@@ -20,10 +20,11 @@ end
     p = Professor.create(prof_first_name: Faker::Name.first_name, prof_last_name: Faker::Name.last_name, prof_email: Faker::Internet.email, dept_name: Faker::Job.field, prof_info: Faker::Job.title)
 end
 40.times do 
-    c = Course.create(professor_id: Professor.all.sample.id, semester: ['Fall', 'Spring'].sample, year: Faker::Number.number(digits: 4), course_title: Faker::Job.key_skill, course_description: Faker::Quote.famous_last_words)
+    c = Course.create(professor_id: Professor.all.sample.id, semester: ['Fall', 'Spring'].sample, year: Faker::Number.number(digits: 4), course_code: ["201COSI-121B-1", "201COSI-127B-1", "201COSI-131A-1", "201COSI-166B-1", "201ECON-82B-2", "201POL-15A-1"].sample, course_title: Faker::Job.key_skill, course_description: Faker::Quote.famous_last_words)
 end
-50.times do
-    r = Review.create(user_id: User.all.sample.id, course_id: Course.all.sample.id, title: Faker::Movie.quote, rate_up: Faker::Number.between(from: 1, to: 50), rate_down: Faker::Number.between(from: 1, to: 50))
-    course_r = CourseRating.create(review_id: r.id, cat1: Faker::Number.between(from: 1, to: 5), cat2: Faker::Number.between(from: 1, to: 10), cat3: Faker::Number.between(from: 1, to: 10), cat4: Faker::Number.between(from: 1, to: 10), cat5: Faker::Number.between(from: 1, to: 10), content: Faker::Quote.famous_last_words)
-    prof_r = ProfessorRating.create(review_id: r.id, cat1: Faker::Number.between(from: 1, to: 5), cat2: Faker::Number.between(from: 1, to: 10), cat3: Faker::Number.between(from: 1, to: 10), cat4: Faker::Number.between(from: 1, to: 10), cat5: Faker::Number.between(from: 1, to: 10), strength: Faker::Quote.famous_last_words, improvement: Faker::Quote.famous_last_words)
+500.times do
+    c_id = Course.all.sample.id
+    r = Review.create(user_id: User.all.sample.id, course_id: c_id, professor_id: Course.find(c_id).professor.id, title: Faker::Movie.quote, rate_up: Faker::Number.between(from: 1, to: 50), rate_down: Faker::Number.between(from: 1, to: 50))
+    course_r = CourseRating.create(review_id: r.id, cat1: Faker::Number.between(from: 1, to: 5), cat2: Faker::Number.between(from: 1, to: 5), cat3: Faker::Number.between(from: 1, to: 5), cat4: Faker::Number.between(from: 1, to: 5), cat5: Faker::Number.between(from: 1, to: 5), content: Faker::Quote.famous_last_words)
+    prof_r = ProfessorRating.create(review_id: r.id, cat1: Faker::Number.between(from: 1, to: 5), cat2: Faker::Number.between(from: 1, to: 5), cat3: Faker::Number.between(from: 1, to: 5), cat4: Faker::Number.between(from: 1, to: 5), cat5: Faker::Number.between(from: 1, to: 5), strength: Faker::Quote.famous_last_words, improvement: Faker::Quote.famous_last_words)
 end

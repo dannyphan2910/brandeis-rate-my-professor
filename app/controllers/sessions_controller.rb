@@ -20,6 +20,8 @@ class SessionsController < ApplicationController
     if logged_in?
       @user = current_user
     end
+    @courses_most_reviewed = get_courses_most_reviewed(5)
+    @professors_most_reviewed = get_professors_most_reviewed(5)
   end
 
   def destroy

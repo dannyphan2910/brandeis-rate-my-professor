@@ -3,6 +3,7 @@
 <div class="container-fluid main">
     <div class="block-1 d-flex align-items-center">
         <div class="block-1-content d-flex flex-column align-items-center">
+<<<<<<< HEAD
 
             <% if logged_in? %>
                 <button type="button" class="btn btn-info m-3" data-toggle="modal" data-target="#formModal">
@@ -21,13 +22,17 @@
             </div>
 
             <h3 class="m-3">OR</h3>
+=======
+            <button type="button" class="btn btn-info btn-lg m-3">Make A Review</button>
+            <h3 class="m-2">OR</h3>
+>>>>>>> 6941a19e1fafd9b852d2bf0dbc867951eb794af0
 
             <div class="search-bar m-3">
                 <form class="d-flex flex-column align-items-center">
                     <h5>Search for a course, professor, or department..</h5>
                     <div class="form-group search-input">
-                        <div class="input-group">
-                            <input type="text" class="form-control" aria-label="Search bar with filter options" placeholder="COSI 166B, Pito Salas, Computer Science, ...">
+                        <div class="input-group" style="height:50px;">
+                            <input type="text" style="height:50px;" class="form-control" aria-label="Search bar with filter options" placeholder="COSI 166B, Pito Salas, Computer Science, ...">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filters</button>
                                 <div class="dropdown-menu">
@@ -39,7 +44,7 @@
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-success m-3" type="submit">Search</button>
+                    <button class="btn btn-success btn-lg m-3" type="submit">Search</button>
                 </form>
             </div>
         </div>
@@ -47,18 +52,20 @@
 
     <% ['Courses', 'Professors'].each do |category| %>
     <div class="dropdown-divider"></div>
-    <div class="block">
-        <h2>Suggested <%= category %></h2>
-        <div class="card-deck row flex-row flex-nowrap overflow-auto">
-            <% 25.times do %>
-            <div class="card bg-light mb-3 card-block" style="max-width: 18rem;">
-                <div class="card-header">Header</div>
-                <div class="card-body">
-                    <h5 class="card-title">Light card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
+    <div class="block d-flex justify-content-center">
+        <div class="my-3">
+            <h2 class="mb-3">Suggested <%= category %></h2>
+            <div class="card-deck row flex-row flex-nowrap overflow-auto">
+                <% if category == 'Courses'%>
+                <% @courses_most_reviewed.each do |course| %>
+                <%= render 'shared/reviewcard', data: course %>
+                <% end %>
+                <% else %>
+                <% @professors_most_reviewed.each do |prof| %>
+                <%= render 'shared/reviewcard', data: prof %>
+                <% end %>
+                <% end %>
             </div>
-            <% end %>
         </div>
     </div>
     <% end %>

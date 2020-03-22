@@ -4,6 +4,7 @@ class CreateReviews < ActiveRecord::Migration[6.0]
       t.references :user, null: false, foreign_key: true
       t.references :course, null: false, foreign_key: true
       t.integer :course_id
+      t.integer :professor_id
       t.string :title
       t.integer :rate_up
       t.integer :rate_down
