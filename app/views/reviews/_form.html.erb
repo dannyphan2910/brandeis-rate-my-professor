@@ -12,23 +12,15 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :student_id %>
-    <%= form.number_field :student_id %>
+    
+      <%= form.label :user_id %>
+      <%= form.number_field :user_id, :value => session[:user_id].to_i %>
+    
   </div>
 
   <div class="field">
     <%= form.label :title %>
     <%= form.text_field :title %>
-  </div>
-
-  <div class="field">
-    <%= form.label :rate_up %>
-    <%= form.number_field :rate_up %>
-  </div>
-
-  <div class="field">
-    <%= form.label :rate_down %>
-    <%= form.number_field :rate_down %>
   </div>
 
   <div class="actions">
