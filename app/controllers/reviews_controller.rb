@@ -24,13 +24,39 @@ class ReviewsController < ApplicationController
   # POST /reviews
   # POST /reviews.json
   def create
+    form_input = params[:review]
+
+    u_id = session[:user_id]
+    p_id = form_input[:professor_id]
+    c_id = form_input[:course_id]
+    t = form_input[:title]
+
+    @review = Review.new(user_id:u_id, course_id: c_id, professor_id: p_id, title: t, rate_up: 0, rate_down: 0)
     
-    @review = Review.new(review_params)
-    if logged_in?
-      @user = current_user
-    end
     respond_to do |format|
-       if @review.save
+      if @review.save
+
+        course_r = CourseRating.create(
+          review_id: @review.id, 
+          cat1: form_input[:course_cat1], 
+          cat2: form_input[:course_cat2], 
+          cat3: form_input[:course_cat3], 
+          cat4: form_input[:course_cat4], 
+          cat5: form_input[:course_cat5], 
+          content: form_input[:course_content]
+        )
+
+        professor_r = ProfessorRating.create(
+          review_id: @review.id, 
+          cat1: form_input[:professor_cat1], 
+          cat2: form_input[:professor_cat2], 
+          cat3: form_input[:professor_cat3], 
+          cat4: form_input[:professor_cat4], 
+          cat5: form_input[:professor_cat5], 
+          strength: form_input[:professor_strength],
+          improvement: form_input[:professor_improvement]
+        )
+
          format.html { redirect_to @review, notice: 'Review was successfully created.' }
          format.json { render :show, status: :created, location: @review }
        else
@@ -72,6 +98,11 @@ class ReviewsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def review_params
-      params.require(:review).permit(:student_id, :title, :rate_up, :rate_down)
+      params.require(:review).permit(
+        :user_id, 
+        :title, 
+        :course_id, 
+        :professor_id,
+      )
     end
 end
