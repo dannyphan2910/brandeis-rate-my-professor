@@ -1,5 +1,5 @@
-
-<%= form_with(model: review, local: true) do |form| %>
+<div class = "container">
+<%= form_with(model: review, class: "float-center", local: true) do |form| %>
   <% if review.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(review.errors.count, "error") %> prohibited this review from being saved:</h2>
@@ -12,27 +12,42 @@
     </div>
   <% end %>
 
-  <div class = "row">
-
-    <div class="field">
-      
-      <%= form.label :course_id %>
-      <%= collection_select(:review, :course_id, Course.all, :id, :show_course_info) %>
-
+  <div class = "field">
+    <div class="row">
+      <div class = "col">
+        <%= form.label :course_id %>
+      </div>
+      <div class = "col">
+        <%= collection_select(:review, :course_id, Course.all, :id, :show_course_info) %>
+      </div>
     </div>
+  </div>
 
-    <div class="field">
-      <%= form.label :professor_id %>
-      <%= form.number_field :professor_id %>
+  
+  <div class="field">
+    <div class = "row">
+      <div class = "col">
+        <%= form.label :professor_id %>
+      </div>
+      <div class = "col">
+        <%= form.number_field :professor_id , placeholder: "Professor Name", :size=>"50" %>
+      </div>
     </div>
-    
-    <div class="field">
-      <%= form.label :title %>
-      <%= form.text_field :title %>
-    </div>
+  </div>
 
+  <div class = "field"> 
+    <div class="row">
+      <div class = "col">
+        <%= form.label :title %>
+      </div>
+      <div class = "col">
+        <%= form.text_field :title %>
+      </div>
+    </div>
   </div>
   
+  <hr>
+
   <div class = "row">
       <div class = "col">
         <div class ="field">
@@ -59,12 +74,16 @@
           <%= form.label :cat5 %>
           <%= form.number_field :course_cat5 %>
         </div>
-
+      </div>
+      <div class = "col">
         <div class ="field">
           <%= form.label :content %>
           <%= form.text_field :course_content %>
         </div>
       </div>
+    </div>
+    <hr>
+    <div class = "row">
       <div class = "col">
         <div class ="field">
           <%= form.label :cat1 %>
@@ -90,7 +109,8 @@
           <%= form.label :cat5 %>
           <%= form.number_field :professor_cat5 %>
         </div>
-
+      </div>
+      <div class = "col">
         <div class ="field">
           <%= form.label :"Professor's Strength" %>
           <%= form.text_field :professor_strength %>
@@ -102,8 +122,13 @@
         </div>
       </div>
     </div>
-  
+  <hr>
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit 'Submit Review', class: 'btn btn-primary float-right' %>
   </div>
 <% end %>
+</div>
+
+<script>
+$(.)
+</script>
