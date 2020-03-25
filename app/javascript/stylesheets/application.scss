@@ -1,6 +1,54 @@
 @import "bootstrap";
 @import "../../assets/stylesheets/application.css";
 
+#review_course_cat1{
+    display:none;
+    position:absolute;
+}
+
+#review_course_cat2{
+    display:none;
+    position:absolute;
+}
+#review_course_cat3{
+    display:none;
+    position:absolute;
+}
+#review_course_cat4{
+    display:none;
+    position:absolute;
+}
+
+#review_course_cat5{
+    display:none;
+    position:absolute;
+}
+
+#review_professor_cat1{
+    display:none;
+    position:absolute;
+}
+
+#review_professor_cat2{
+    display:none;
+    position:absolute;
+}
+
+#review_professor_cat3{
+    display:none;
+    position:absolute;
+}
+
+#review_professor_cat4{
+    display:none;
+    position:absolute;
+}
+
+#review_professor_cat5{
+    display:none;
+    position:absolute;
+}
+
 html, body {
     margin: 0;
     padding: 0;
@@ -77,3 +125,4 @@ nav {
 .authentication {
     width: 150px;
 }
+

@@ -38,11 +38,11 @@ class ReviewsController < ApplicationController
 
         course_r = CourseRating.create(
           review_id: @review.id, 
-          cat1: form_input[:course_cat1], 
-          cat2: form_input[:course_cat2], 
-          cat3: form_input[:course_cat3], 
-          cat4: form_input[:course_cat4], 
-          cat5: form_input[:course_cat5], 
+          cat1: form_input[:course_cat1].to_i, 
+          cat2: form_input[:course_cat2].to_i, 
+          cat3: form_input[:course_cat3].to_i, 
+          cat4: form_input[:course_cat4].to_i, 
+          cat5: form_input[:course_cat5].to_i, 
           content: form_input[:course_content]
         )
 
