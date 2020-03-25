@@ -7,49 +7,53 @@
             <h3 class="m-2">OR</h3>
 
             <div class="search-bar m-3">
-                <form class="d-flex flex-column align-items-center">
-                    <h5>Search for a course, professor, or department..</h5>
-                    <div class="form-group search-input">
-                        <div class="input-group" style="height:50px;">
-                            <input type="text" style="height:50px;" class="form-control" aria-label="Search bar with filter options" placeholder="COSI 166B, Pito Salas, Computer Science, ...">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filters</button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">General (default)</a>
-                                    <a class="dropdown-item" href="#">Course</a>
-                                    <a class="dropdown-item" href="#">Professor</a>
-                                    <a class="dropdown-item" href="#">Department</a>
+                <%= form_tag "/search", method: "get", class: "form" do %>
+                    <div class="d-flex flex-column align-items-center">
+                    <%= label_tag :search_text, "Search for a course, professor, or department..", class: 'h5' %>
+                        <div class="form-group search-input">
+                            <div class="input-group" style="height:50px;">
+                                <%= text_field_tag :search_text, params[:search_text], placeholder: "COSI 166B, Pito Salas, Computer Science, ...", class: 'form-control', style: "height:50px;" %>
+                                <div class="input-group-append">
+                                    <%= select_tag :filter, options_for_select(@filters_option, ""), class: 'custom-select btn', style: "height: 50px;" %>
                                 </div>
                             </div>
                         </div>
+                    <%= submit_tag "Search", class: 'btn btn-lg btn-success m-3' %>
                     </div>
-                    <button class="btn btn-success btn-lg m-3" type="submit">Search</button>
-                </form>
+                <% end %>
             </div>
         </div>
     </div>
 
-    <% ['Courses', 'Professors'].each do |category| %>
     <div class="dropdown-divider"></div>
     <div class="block d-flex justify-content-center">
         <div class="my-3">
-            <h2 class="mb-3">Suggested <%= category %></h2>
-            <div class="card-deck row flex-row flex-nowrap overflow-auto">
-                <% if category == 'Courses'%>
+            <h2 class="mb-3">Suggested Courses</h2>
+            <div class="card-deck row flex-row flex-nowrap">
                 <% @courses_most_reviewed.each do |course| %>
-                <%= render 'shared/reviewcard', data: course %>
-                <% end %>
-                <% else %>
-                <% @professors_most_reviewed.each do |prof| %>
-                <%= render 'shared/reviewcard', data: prof %>
-                <% end %>
+                <%= render 'shared/reviewcard', 
+                    data: course,
+                    card_title: course["course_code"] + ": " + "<div class='h5'>" + course["course_title"] + "</div>", 
+                    card_subtitle: course["semester"] + " " + course["year"].to_s,
+                    card_text: course["total_reviews"] %>
                 <% end %>
             </div>
         </div>
     </div>
-    <% end %>
 
-
-</div>
-
+    <div class="dropdown-divider"></div>
+    <div class="block d-flex justify-content-center">
+        <div class="my-3">
+            <h2 class="mb-3">Suggested Professors</h2>
+            <div class="card-deck row flex-row flex-nowrap">
+                <% @professors_most_reviewed.each do |prof| %>
+                <%= render 'shared/reviewcard', 
+                    data: prof,
+                    card_title: prof["prof_first_name"] + " " + prof["prof_last_name"], 
+                    card_subtitle: prof["dept_name"],
+                    card_text: prof["total_reviews"] %>
+                <% end %>
+            </div>
+        </div>
+    </div>
 </div>
