@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_22_074529) do
+ActiveRecord::Schema.define(version: 2020_02_14_002321) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,14 +61,8 @@ ActiveRecord::Schema.define(version: 2020_03_22_074529) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "review_forms", force: :cascade do |t|
-    t.bigint "review_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["review_id"], name: "index_review_forms_on_review_id"
-  end
-
   create_table "reviews", force: :cascade do |t|
+    t.integer "user_id"
     t.integer "course_id"
     t.integer "professor_id"
     t.string "title"
@@ -76,8 +70,6 @@ ActiveRecord::Schema.define(version: 2020_03_22_074529) do
     t.integer "rate_down"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "user_id", null: false
-    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -89,5 +81,4 @@ ActiveRecord::Schema.define(version: 2020_03_22_074529) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "reviews", "users"
 end

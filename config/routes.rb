@@ -17,5 +17,8 @@ Rails.application.routes.draw do
   get 'users/new', to: 'users#new'
   post 'users', to: 'users#create'
 
+  get 'search', to: 'search#search_result'
+  post 'search', to: 'search#search_result'
+
   root 'sessions#welcome'
 end
