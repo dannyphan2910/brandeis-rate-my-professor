@@ -31,7 +31,7 @@
             
             <div class="dropdown nav-item nav-link left-align authentication">
                 <a class="dropdown-toggle h5" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Hi <%= @user.first_name  %>!
+                    Hi <%= @current_user.first_name  %>!
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenu">
                     <%= button_to  "View Profile", "#", method: :get, class: "dropdown-item" %>
