@@ -2,13 +2,6 @@
 <html>
   <head>
     <title>RateMyProfessor</title>
-    <%
-=begin%>
- <%= csrf_meta_tags %>
-    <%= csp_meta_tag %> 
-<%
-=end%>
-
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -16,8 +9,10 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= render 'shared/nav' %>
 
-
+    <div class="w-100 h-100">
+      <%= yield %>
+    </div>
   </body>
 </html>

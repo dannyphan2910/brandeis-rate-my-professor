@@ -10,5 +10,7 @@ Rails.application.routes.draw do
   get 'search', to: 'search#search_result'
   post 'search', to: 'search#search_result'
 
+  get 'view_profile', to: 'profile#view_profile'
+
   root 'sessions#welcome'
 end

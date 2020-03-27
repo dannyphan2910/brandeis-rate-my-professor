@@ -1,3 +1,4 @@
+<% if !(request.path == '/login' || request.path == '/users/new') %>
 <nav class="navbar navbar-expand-md navbar-light">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -25,10 +26,10 @@
             <% if logged_in? %>
             <div class="dropdown nav-item nav-link left-align authentication">
                 <a class="dropdown-toggle h5" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Hi <%= @user.first_name  %>!
+                    Hi <%= current_user.first_name  %>!
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-                    <%= button_to  "View Profile", "#", method: :get, class: "dropdown-item" %>
+                    <%= button_to  "View Profile", "/view_profile", method: :get, class: "dropdown-item" %>
                     <%= button_to  "Log Out", "/logout", method: :get, class: "dropdown-item" %>
                 </div>
             </div>
@@ -39,3 +40,4 @@
         </div>
     </div>
 </nav>
+<% end %>
