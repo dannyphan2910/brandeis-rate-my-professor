@@ -7,7 +7,6 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
-require("bootstrap-modal")
 require('jquery')
 require('rateyo')
 require('js-autocomplete')
@@ -22,19 +21,4 @@ require('js-autocomplete')
 import "bootstrap";
 import "../stylesheets/application";
 
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-})
-
-$(function () {
-    $('[data-toggle="dropdown"]').dropdown()
-})
-
-$(function() {
-    $('[data-toggle="popover"]').popover();
-});
-
-$(function() {
-    $('[data-toggle="modal"]').modal();
-});
 
