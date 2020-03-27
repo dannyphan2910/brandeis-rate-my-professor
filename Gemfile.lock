@@ -75,9 +75,6 @@ GEM
       autoprefixer-rails (>= 9.1.0)
       popper_js (>= 1.14.3, < 2)
       sassc-rails (>= 2.0.0)
-    bootstrap-sass (3.4.1)
-      autoprefixer-rails (>= 5.2.1)
-      sassc (>= 2.0.0)
     builder (3.2.4)
     byebug (11.1.1)
     capybara (3.31.0)
@@ -170,8 +167,6 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.20.3, < 2.0)
     rake (13.0.1)
-    rateyo-rails (2.1.1)
-    ratyrate (1.2.2.alpha)
     rb-fsevent (0.10.3)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
@@ -240,7 +235,6 @@ DEPENDENCIES
   better_errors
   bootsnap (>= 1.4.2)
   bootstrap (~> 4.3.1)
-  bootstrap-sass
   byebug
   capybara (>= 2.15)
   faker
@@ -253,8 +247,6 @@ DEPENDENCIES
   pry-rails
   puma (~> 4.1)
   rails (~> 6.0.2, >= 6.0.2.1)
-  rateyo-rails (~> 2.1, >= 2.1.1)
-  ratyrate
   sass-rails (>= 6)
   selenium-webdriver
   spring

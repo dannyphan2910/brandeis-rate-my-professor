@@ -57,7 +57,7 @@ class ReviewsController < ApplicationController
           improvement: form_input[:professor_improvement]
         )
          
-         format.html { redirect_to @review, notice: 'Review was successfully created.' }
+         format.html { redirect_to '/view_profile', notice: 'Review was successfully created.' }
          format.json { render :show, status: :created, location: @review }
        else
          format.html { render :new }

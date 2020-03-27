@@ -16,29 +16,30 @@
 <div class="reviews mx-5">
     <h1 class="my-5">My Reviews</h1>
 
+    <% current_user.reviews.each do |review| %>
     <div class="card-columns">
         <div class="card border-secondary mb-3" style="min-width:80rem;">
             <div class="card-header d-flex justify-content-between bg-transparent border-secondary">
-                <%= link_to  "COSI 166B: Capstone Project for Software Engineering", "#", class: 'text-muted' %>
+                <%= link_to "#{review.course.course_code}: #{review.course.course_title} (#{review.course.semester} #{review.course.year})", "#", class: 'text-muted' %>
                 <a href="#"><span>&#10005;</span></a>
             </div>
             <div class="card-body">
-                <h5 class="card-title">Title</h5>
+                <h5 class="card-title"><%= review.title %></h5>
                 <p class="card-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    <%= review.course_rating.content %>
                 </p>
 
-                <a class="collapse-button" data-toggle="collapse" data-target="#collapse" aria-expanded="false" aria-controls="collapse">
+                <a class="collapse-button" data-toggle="collapse" data-target=<%="#collapse#{review.id}"%> aria-expanded="false" aria-controls="collapse">
                     &#9660;
                 </a>
 
-                <div class="collapse" id="collapse">
+                <div class="collapse" id=<%="collapse#{review.id}"%>>
                 <div class="row m-1">
                     <div class="col border border-info rounded m-2">
                         <div class="course-rating mt-2">
                             <h4 class="mb-3">Course Ratings</h4>
                             <% (1..5).each do |num| %>
-                            <p><b>Category <%= num %></b>: <%= number_with_precision 2.5, precision: 2 %> / 5</p>
+                            <p><b>Category <%= num %></b>: <%= review.course_rating["cat" + num.to_s] %> / 5</p>
                             <% end %>
                         </div>
                     </div>
@@ -46,7 +47,7 @@
                         <div class="professor-rating mt-2">
                             <h4 class="mb-3">Professor Ratings</h4>
                             <% (1..5).each do |num| %>
-                            <p><b>Category <%= num %></b>: <%= number_with_precision 2.5, precision: 2 %> / 5</p>
+                            <p><b>Category <%= num %></b>: <%= review.professor_rating["cat" + num.to_s] %> / 5</p>
                             <% end %>      
                         </div>
                     </div>
@@ -55,12 +56,14 @@
 
             </div>
             <div class="card-footer bg-transparent border-secondary">
-                <small class="text-muted">Last updated on 11/23/2019 12:09:23</small>
+                <small class="text-muted">Last updated on <%= review.updated_at %></small>
                 <br/>
-                <small class="text-muted">Created on 11/20/2019 23:21:00</small>
+                <small class="text-muted">Created on <%= review.created_at %></small>
             </div>
         </div>
     </div>
+
+    <% end %>
 
 </div>
 
