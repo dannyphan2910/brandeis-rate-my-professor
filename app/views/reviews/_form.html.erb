@@ -97,10 +97,11 @@ $(function () {
   });
 });
 
+
 </script>
 
-<div class = "container">
-<%= form_with(model: review, class: "float-center", local: true) do |form| %>
+
+<%= form_with(model: review) do |form| %>
   <% if review.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(review.errors.count, "error") %> prohibited this review from being saved:</h2>
@@ -112,134 +113,186 @@ $(function () {
       </ul>
     </div>
   <% end %>
-
-  <div class = "field">
-    <div class="row">
-      <div class = "col">
-        <%= form.label :course_id %>
+  
+  <fieldset>
+    <div class = "row">
+      <div class = "col-3">
+        <h5> <label for="course_id"> Review For... </label></h5>
       </div>
-      
-      <div class = "col">
-        
-        <%= collection_select(:review, :course_id, Course.all, :id, :show_course_info) %>
+      <div class = "col-9">
+        <%= collection_select(:review, :course_id, Course.all, :id, :show_course_info, {}, style: "width: 100%") %>
       </div>
     </div>
-  </div>
 
   
-  <div class="field">
     <div class = "row">
-      <div class = "col">
-        <%= form.label :professor_id %>
+      <div class = "col-3">
+        <h5><%= form.label :professor_id %></h5>
       </div>
-      <div class = "col">
-        <%= form.number_field :professor_id , placeholder: "Professor Name", :size=>"50" %>
+      <div class = "col-9">
+        <%= form.number_field :professor_id , placeholder: "Professor Name", style: "width: 100%" %>
       </div>
-    </div>
-  </div>
 
-  <div class = "field"> 
-    <div class="row">
-      <div class = "col">
-        <%= form.label :title %>
+    </div>
+
+    <div class = "row"> 
+      <div class = "col-3">
+        <h5><%= form.label :title %></h5>
       </div>
-      <div class = "col">
-        <%= form.text_field :title %>
+      <div class = "col-9">
+        <%= form.text_field :title, placeholder: "Title of your review", style: "width: 100%" %>
       </div>
     </div>
-  </div>
   
   <hr>
-
-  <div class = "row">
-      <div class = "col">
-        <div class ="field">
+      <div class = "row">
+          <div class = "col-6 text-center">
+            <h5>" Course Rating "</h5>
+          </div>
+          <div class = "col-6 text-center">
+            <h5>" Professor Rating "</h5>
+          </div>
+      </div>
+      <p></p>
+      <p></p>
+      
+      <div class ="row">
+        <div class = "col-2 text-center">
           <%= form.label :cat1 %>
+        </div>
+        <div class = "col-4">
           <div id="cc1"></div>
           <input id = "review_course_cat1" name = "review[course_cat1]" type="number" value = 3 />
         </div>
-
-        <div class ="field">
-        
-          <%= form.label :cat2 %>
-          <div id="cc2"></div>
-          <input id = "review_course_cat2" name = "review[course_cat2]" type="number" value = 3 />
-        </div>
-          
-        <div class ="field">
-          <%= form.label :cat3 %>
-          <div id="cc3"></div>
-          <input id = "review_course_cat3" name = "review[course_cat3]" type="number" value = 3 />
-        </div>
-
-        <div class ="field">
-          <%= form.label :cat4 %>
-          <div id="cc4"></div>
-          <input id = "review_course_cat4" name = "review[course_cat4]" type="number" value = 3 />
-        </div>
-
-        <div class ="field">
-          <%= form.label :cat5 %>
-          <div id="cc5"></div>
-          <input id = "review_course_cat5" name = "review[course_cat5]" type="number" value = 3 />
-        </div>
-      </div>
-      <div class = "col">
-        <div class ="field">
-          <%= form.label :content %>
-          <%= form.text_field :course_content %>
-        </div>
-      </div>
-    </div>
-    <hr>
-    <div class = "row">
-      <div class = "col">
-        <div class ="field">
+        <div class = "col-2 text-center">
           <%= form.label :cat1 %>
+        </div>
+        <div class = "col-4">
           <div id="pc1"></div>
           <input id = "review_professor_cat1" name = "review[professor_cat1]" type="number" value = 3 />
         </div>
-
-        <div class ="field">
-          <%= form.label :cat2 %>
-          <div id="pc2"></div>
-          <input id = "review_professor_cat2" name = "review[professor_cat2]" type="number" value = 3 />
-        </div>
-
-        <div class ="field">
-          <%= form.label :cat3 %>
-          <div id="pc3"></div>
-          <input id = "review_professor_cat3" name = "review[professor_cat3]" type="number" value = 3 />
-        </div>
-
-        <div class ="field">
-          <%= form.label :cat4 %>
-          <div id="pc4"></div>
-          <input id = "review_professor_cat4" name = "review[professor_cat4]" type="number" value = 3 />
-        </div>
-
-        <div class ="field">
-          <%= form.label :cat5 %>
-          <div id="pc5"></div>
-          <input id = "review_professor_cat5" name = "review[professor_cat5]" type="number" value = 3 />
-        </div>
       </div>
-      <div class = "col">
-        <div class ="field">
-          <%= form.label :"Professor's Strength" %>
-          <%= form.text_field :professor_strength %>
-        </div>
+    
 
-        <div class ="field">
-          <%= form.label :"Things to Improve"%>
-          <%= form.text_field :professor_improvement %>
+    <div class ="row">   
+    
+      <div class = "col-2 text-center">
+        <%= form.label :cat2 %>
+      </div>
+      <div class = "col-4">
+        <div id="cc2"></div>
+        <input id = "review_course_cat2" name = "review[course_cat2]" type="number" value = 3 />
+      </div>
+      <div class = "col-2 text-center">
+        <%= form.label :cat2 %>
+      </div>
+      <div class = "col-4">
+        <div id="pc2"></div>
+        <input id = "review_professor_cat2" name = "review[professor_cat2]" type="number" value = 3 />
+      </div>
+    </div>
+          
+    <div class ="row">
+      <div class = "col-2 text-center">
+        <%= form.label :cat3 %>
+      </div>
+      <div class = "col-4">
+        <div id="cc3"></div>
+        <input id = "review_course_cat3" name = "review[course_cat3]" type="number" value = 3 />
+      </div>
+      <div class = "col-2 text-center">
+        <%= form.label :cat3 %>
+      </div>
+      <div class = "col-4">
+        <div id="pc3"></div>
+        <input id = "review_professor_cat3" name = "review[professor_cat3]" type="number" value = 3 />
+      </div>
+    </div>
+
+    <div class ="row">
+      <div class = "col-2 text-center">
+        <%= form.label :cat4 %>
+      </div>
+      <div class = "col-4">
+        <div id="cc4"></div>
+        <input id = "review_course_cat4" name = "review[course_cat4]" type="number" value = 3 />
+      </div>
+      <div class = "col-2 text-center">
+        <%= form.label :cat4 %>
+      </div>
+      <div class = "col-4">
+        <div id="pc4"></div>
+        <input id = "review_professor_cat4" name = "review[professor_cat4]" type="number" value = 3 />
+      </div>
+    </div>
+
+    <div class ="row">
+      <div class ="col-2 text-center">
+        <%= form.label :cat5 %> 
+      </div>
+      <div class ="col-4">
+        <div id="cc5"></div>
+        <input id = "review_course_cat5" name = "review[course_cat5]" type="number" value = 3 />
+      </div>
+      <div class = "col-2 text-center">
+        <%= form.label :cat5 %>
+      </div>
+      <div class = "col-4">
+        <div id="pc5"></div>
+        <input id = "review_professor_cat5" name = "review[professor_cat5]" type="number" value = 3 />
+      </div>
+    </div>
+
+  <hr>
+      
+  <div class = "row">
+    <div class = "col-12">
+      <%= form.label :course_content %>
+    </div>
+  </div>
+  <div class ="row">
+    <div class = "col-12">
+      <%= form.text_area :course_content, rows:"6", style: "width: 100%"  %>
+    </div>
+  </div>
+  
+  <div class ="row">
+    <div class ="col-12">
+      <%= form.label :"Professor's Strength" %>
+    </div>
+  </div>
+  <div class ="row">
+    <div class ="col-12">
+      <%= form.text_area :professor_strength, rows:"6", style: "width: 100%" %>
+    </div>
+  </div>
+
+  <div class ="row">
+    <div class = "col-12">
+      <%= form.label :"Things to Improve"%>
+    </div>
+  </div>
+  <div class = "row">
+    <div class = "col-12">
+      <%= form.text_area :professor_improvement, rows:"6", style: "width: 100%" %>
+    </div>
+  </div>
+</fieldset>  
+  <hr>
+  <div class = "row">
+    <div class = "col-4 text-center">
+        
+    </div>
+    <div class = "col-4 text-center">
+      <div class="actions">
+        <div class = "real-submit">
+          <%= form.submit 'Submit Review', class: 'form-submission btn btn-primary' %>
         </div>
       </div>
     </div>
-  <hr>
-
-  <div class="actions">
-    <%= form.submit 'Submit Review', class: 'form-submission btn btn-primary float-right' %>
+    <div class = "col-4 text-center">
+    
+    </div>
   </div>
 <% end %>
-</div>
+

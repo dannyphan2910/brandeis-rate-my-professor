@@ -56,7 +56,7 @@ class ReviewsController < ApplicationController
           strength: form_input[:professor_strength],
           improvement: form_input[:professor_improvement]
         )
-
+         
          format.html { redirect_to @review, notice: 'Review was successfully created.' }
          format.json { render :show, status: :created, location: @review }
        else
