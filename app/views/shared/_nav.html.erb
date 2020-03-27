@@ -6,7 +6,9 @@
 
     <a class="navbar-brand logo d-flex align-items-center ml-4" href="/">
         <img src="https://upload.wikimedia.org/wikipedia/en/3/32/Brandeis_University_seal.svg" width="70" height="70" class="d-inline-block align-top" alt="">
-        <span class="h3 ml-3">Rate My Professor</span>
+        <span class="h3 ml-3">
+            Rate My Professor
+        </span>
     </a>
 
     <div class="collapse navbar-collapse nav-content" id="navbarToggler">
@@ -19,11 +21,18 @@
         <% end %>
         <% end %>
         <div class="d-flex justify-content-end nav-links">
+
             <% if !(request.path == '/' || request.path == '/welcome') %>
-            <a class="nav-item nav-link left-align h5 text-center" href="#">Make A Review</a>
+            <a class="nav-item nav-link left-align h5 text-center" href="#" data-toggle="modal" data-target="#formModal">Make A Review</a>
             <% end %>
 
             <% if logged_in? %>
+            
+            <div class="modal fade" id ="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
+                <div class = "container">
+                    <%= render 'sessions/reviewForm' %>
+                </div>
+            </div>
             <div class="dropdown nav-item nav-link left-align authentication">
                 <a class="dropdown-toggle h5" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Hi <%= current_user.first_name  %>!
