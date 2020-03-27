@@ -35,10 +35,6 @@
     <%= form.label :course_description %>
     <%= form.text_field :course_description %>
   </div>
-  <%= fields_for @professor do |p| %>
-    <%= p.label :prof_first_name %>
-    <%= p.text_field :prof_info %>
-  <% end %>
 
   <div class="actions">
     <%= form.submit %>
