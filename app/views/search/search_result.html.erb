@@ -1,0 +1,56 @@
+<div class="result-container">
+<div class="result-text ml-5 mb-4">
+<h2 class="mt-5">You've searched for <%= @filter.blank? ? "'#{@search_text}'" : "#{@filter}s related to '#{@search_text}'" %></h2>
+<h5><i><%= pluralize(@total_result, "result") %></i></h5>
+</div>
+
+    <% if !@courses.nil? %>
+    <div class="dropdown-divider"></div>
+    <div class="block mr-4">
+        <div class="my-3">
+            <h2 class="mb-3 mx-5">Suggested Courses</h2>
+            <div class="card-deck row flex-row flex-nowrap overflow-auto ml-4">
+                <% @courses.each do |course| %>
+                <%= render 'shared/reviewcard',
+                    data: course,
+                    card_title: course["course_code"] + ": " + "<div class='h5'>" + course["course_title"] + "</div>", 
+                    card_subtitle: course["semester"] + " " + course["year"].to_s,
+                    card_text: course["total_reviews"]%>
+                <% end %>
+            </div>
+        </div>
+    </div>
+    <% end %>
+
+    <% if !@professors.nil? %>
+    <div class="dropdown-divider"></div>
+    <div class="block mr-4">
+        <div class="my-3">
+            <h2 class="mb-3 ml-5">Suggested Professors</h2>
+            <div class="card-deck row flex-row flex-nowrap overflow-auto mx-4">
+                <% @professors.each do |prof| %>
+                <%= render 'shared/reviewcard', 
+                    data: prof,
+                    card_title: prof["prof_first_name"] + " " + prof["prof_last_name"], 
+                    card_subtitle: prof["dept_name"],
+                    card_text: prof["total_reviews"] %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+    <% end %>
+
+    <% if !@departments.nil? %>
+    <div class="dropdown-divider"></div>
+    <div class="block mr-4">
+        <div class="my-3">
+            <h2 class="mb-3 ml-5">Suggested Departments</h2>
+            <div class="card-deck row flex-row flex-nowrap overflow-auto mx-4">
+                <% @departments.each do |department| %>
+                <%= render 'shared/reviewcard', data: department %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+    <% end %>
+</div>

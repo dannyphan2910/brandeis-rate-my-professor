@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2020_02_14_002321) do
     t.integer "professor_id"
     t.string "semester"
     t.integer "year"
+    t.string "course_code"
     t.string "course_title"
     t.string "course_description"
     t.datetime "created_at", precision: 6, null: false
@@ -63,6 +64,7 @@ ActiveRecord::Schema.define(version: 2020_02_14_002321) do
   create_table "reviews", force: :cascade do |t|
     t.integer "user_id"
     t.integer "course_id"
+    t.integer "professor_id"
     t.string "title"
     t.integer "rate_up"
     t.integer "rate_down"
