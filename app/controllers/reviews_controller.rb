@@ -1,4 +1,6 @@
 class ReviewsController < ApplicationController
+  before_action :login_required
+  protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format == 'application/json' }
   before_action :set_review, only: [:show, :edit, :update, :destroy]
 
   # GET /reviews
@@ -28,13 +30,35 @@ class ReviewsController < ApplicationController
 
     respond_to do |format|
       if @review.save
-        format.html { redirect_to @review, notice: 'Review was successfully created.' }
-        format.json { render :show, status: :created, location: @review }
-      else
-        format.html { render :new }
-        format.json { render json: @review.errors, status: :unprocessable_entity }
-      end
-    end
+
+        course_r = CourseRating.create(
+          review_id: @review.id, 
+          cat1: form_input[:course_cat1].to_i, 
+          cat2: form_input[:course_cat2].to_i, 
+          cat3: form_input[:course_cat3].to_i, 
+          cat4: form_input[:course_cat4].to_i, 
+          cat5: form_input[:course_cat5].to_i, 
+          content: form_input[:course_content]
+        )
+
+        professor_r = ProfessorRating.create(
+          review_id: @review.id, 
+          cat1: form_input[:professor_cat1].to_i, 
+          cat2: form_input[:professor_cat2].to_i, 
+          cat3: form_input[:professor_cat3].to_i, 
+          cat4: form_input[:professor_cat4].to_i, 
+          cat5: form_input[:professor_cat5].to_i, 
+          strength: form_input[:professor_strength],
+          improvement: form_input[:professor_improvement]
+        )
+         
+         format.html { redirect_to '/view_profile', notice: 'Review was successfully created.' }
+         format.json { render :show, status: :created, location: @review }
+       else
+         format.html { render :new }
+         format.json { render json: @review.errors, status: :unprocessable_entity }
+       end
+     end
   end
 
   # PATCH/PUT /reviews/1
@@ -42,7 +66,7 @@ class ReviewsController < ApplicationController
   def update
     respond_to do |format|
       if @review.update(review_params)
-        format.html { redirect_to @review, notice: 'Review was successfully updated.' }
+        format.html { redirect_to '/view_profile', notice: 'Review was successfully updated.' }
         format.json { render :show, status: :ok, location: @review }
       else
         format.html { render :edit }
@@ -56,7 +80,7 @@ class ReviewsController < ApplicationController
   def destroy
     @review.destroy
     respond_to do |format|
-      format.html { redirect_to reviews_url, notice: 'Review was successfully destroyed.' }
+      format.html { redirect_to '/view_profile', notice: 'Review was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

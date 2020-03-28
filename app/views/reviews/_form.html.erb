@@ -1,15 +1,196 @@
-<%= form_with(model: review, local: true) do |form| %>
-  <% if review.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(review.errors.count, "error") %> prohibited this review from being saved:</h2>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
 
-      <ul>
-        <% review.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<div id="rateYo"></div>
+<script>
+var cc1 = 3;
+var cc2 = 3;
+var cc3 = 3;
+var cc4 = 3;
+var cc5 = 3;
+
+$(function () {
+  $("#cc1").rateYo({
+    rating: 3,
+    fullStar: true,
+    onSet: function (rating, rateYoInstance){
+      $("#review_course_cat1").val(rating);
+    }
+  });
+ 
+  
+  $("#cc2").rateYo({
+    rating: 3,
+    fullStar: true,
+    onSet: function (rating, rateYoInstance){
+      $("#review_course_cat2").val(rating);
+    }
+  });
+  
+  $("#cc3").rateYo({
+    rating: 3,
+    fullStar: true,
+    onSet: function (rating, rateYoInstance){
+      $("#review_course_cat3").val(rating);
+    }
+  });
+  
+  $("#cc4").rateYo({
+    rating: 3,
+    fullStar: true,
+    onSet: function (rating, rateYoInstance){
+      $("#review_course_cat4").val(rating);
+    }
+  });
+
+  $("#cc5").rateYo({
+    rating: 3,
+    fullStar: true,
+    onSet: function (rating, rateYoInstance){
+      $("#review_course_cat5").val(rating);
+    }
+  });
+
+  $("#pc1").rateYo({
+    rating: 3,
+    fullStar: true,
+    onSet: function (rating, rateYoInstance){
+      $("#review_professor_cat1").val(rating);
+    }
+  });
+ 
+  
+  $("#pc2").rateYo({
+    rating: 3,
+    fullStar: true,
+    onSet: function (rating, rateYoInstance){
+      $("#review_professor_cat2").val(rating);
+    }
+  });
+  
+  $("#pc3").rateYo({
+    rating: 3,
+    fullStar: true,
+    onSet: function (rating, rateYoInstance){
+      $("#review_professor_cat3").val(rating);
+    }
+  });
+  
+  $("#pc4").rateYo({
+    rating: 3,
+    fullStar: true,
+    onSet: function (rating, rateYoInstance){
+      $("#review_professor_cat4").val(rating);
+    }
+  });
+
+  $("#pc5").rateYo({
+    rating: 3,
+    fullStar: true,
+    onSet: function (rating, rateYoInstance){
+      $("#review_professor_cat5").val(rating);
+    }
+  });
+});
+
+</script>
+
+
+<%= form_with(model: review) do |form| %>  
+  <fieldset>
+    <div class = "row">
+      <div class = "col-3">
+        <h5> <label for="course_id"> Review For... </label></h5>
+      </div>
+      <div class = "col-9">
+        <%= form.text_field :term, id: "term" %>
+      </div>
     </div>
-  <% end %>
+
+  
+    <div class = "row">
+      <div class = "col-3">
+        <h5><%= form.label :professor_id %></h5>
+      </div>
+      <div class = "col-9">
+        <%= form.number_field :professor_id , placeholder: "Professor Name", style: "width: 100%" %>
+      </div>
+
+    </div>
+
+    <div class = "row"> 
+      <div class = "col-3">
+        <h5><%= form.label :title %></h5>
+      </div>
+      <div class = "col-9">
+        <%= form.text_field :title, placeholder: "Title of your review", style: "width: 100%" %>
+      </div>
+    </div>
+  
+  <hr>
+      <div class = "row">
+          <div class = "col-6 text-center">
+            <h5>Course Ratings</h5>
+          </div>
+          <div class = "col-6 text-center">
+            <h5>Professor Ratings</h5>
+          </div>
+      </div>
+      <p></p>
+      <p></p>
+      
+      <div class ="row">
+        <div class = "col-2 text-center">
+          <%= form.label :cat1 %>
+        </div>
+        <div class = "col-4">
+          <div id="cc1"></div>
+          <input id = "review_course_cat1" name = "review[course_cat1]" type="number" value = 3 />
+        </div>
+        <div class = "col-2 text-center">
+          <%= form.label :cat1 %>
+        </div>
+        <div class = "col-4">
+          <div id="pc1"></div>
+          <input id = "review_professor_cat1" name = "review[professor_cat1]" type="number" value = 3 />
+        </div>
+      </div>
+    
+
+    <div class ="row">   
+    
+      <div class = "col-2 text-center">
+        <%= form.label :cat2 %>
+      </div>
+      <div class = "col-4">
+        <div id="cc2"></div>
+        <input id = "review_course_cat2" name = "review[course_cat2]" type="number" value = 3 />
+      </div>
+      <div class = "col-2 text-center">
+        <%= form.label :cat2 %>
+      </div>
+      <div class = "col-4">
+        <div id="pc2"></div>
+        <input id = "review_professor_cat2" name = "review[professor_cat2]" type="number" value = 3 />
+      </div>
+    </div>
+          
+    <div class ="row">
+      <div class = "col-2 text-center">
+        <%= form.label :cat3 %>
+      </div>
+      <div class = "col-4">
+        <div id="cc3"></div>
+        <input id = "review_course_cat3" name = "review[course_cat3]" type="number" value = 3 />
+      </div>
+      <div class = "col-2 text-center">
+        <%= form.label :cat3 %>
+      </div>
+      <div class = "col-4">
+        <div id="pc3"></div>
+        <input id = "review_professor_cat3" name = "review[professor_cat3]" type="number" value = 3 />
+      </div>
+    </div>
 
   <div class="field">
     <%= form.label :student_id %>
