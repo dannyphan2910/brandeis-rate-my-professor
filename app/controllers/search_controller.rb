@@ -15,14 +15,14 @@ class SearchController < ApplicationController
   end
 
   def get_courses
-    courses = Course.where("UPPER(course_title) LIKE ? OR UPPER(course_code) LIKE ?", "%#{@search_text.upcase}%", "%#{@search_text.upcase}%").order(year: :desc, semester: :asc).distinct
+    courses = Course.search(@search_text).order(year: :desc, semester: :asc)
     return get_hash_result courses, true
   end
   
   def get_professors
-    professors = Professor.where("UPPER(prof_first_name) LIKE ? OR UPPER(prof_last_name) LIKE ?", "%#{@search_text.upcase}%", "%#{@search_text.upcase}%").distinct
+    professors = Professor.search(@search_text)
     already_chosen_ids = professors.ids
-    profesors_w_courses = Professor.where.not(id: already_chosen_ids).joins(:courses).where("UPPER(courses.course_title) LIKE ? OR UPPER(courses.course_code) LIKE ?", "%#{@search_text.upcase}%", "%#{@search_text.upcase}%").distinct
+    profesors_w_courses = Professor.joins(:courses, :general_courses).where("UPPER(general_courses.course_title) LIKE ? OR UPPER(general_courses.course_code) LIKE ?", "%#{@search_text.upcase}%", "%#{@search_text.upcase}%").where.not(id: already_chosen_ids).distinct
     all_professors = professors + profesors_w_courses
     return get_hash_result all_professors, false
   end

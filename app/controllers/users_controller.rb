@@ -28,7 +28,7 @@ class UsersController < ApplicationController
 
     if @user.save
       log_in(@user)
-      redirect_to '/'
+      redirect_to root_path
     else
       errors = ''
       @user.errors.full_messages.each do |message|
