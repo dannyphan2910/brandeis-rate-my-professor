@@ -93,17 +93,30 @@ $(function () {
   });
 });
 
+
 </script>
 
 
-<%= form_with(model: review) do |form| %>  
+<%= form_with(model: review) do |form| %>
+  <% if review.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(review.errors.count, "error") %> prohibited this review from being saved:</h2>
+
+      <ul>
+        <% review.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
   <fieldset>
     <div class = "row">
       <div class = "col-3">
         <h5> <label for="course_id"> Review For... </label></h5>
       </div>
       <div class = "col-9">
-        <%= form.text_field :term, id: "term" %>
+        <%= collection_select(:review, :course_id, Course.all, :id, :show_course_info, {}, style: "width: 100%") %>
       </div>
     </div>
 
@@ -192,27 +205,90 @@ $(function () {
       </div>
     </div>
 
-  <div class="field">
-    <%= form.label :student_id %>
-    <%= form.number_field :student_id %>
+    <div class ="row">
+      <div class = "col-2 text-center">
+        <%= form.label :cat4 %>
+      </div>
+      <div class = "col-4">
+        <div id="cc4"></div>
+        <input id = "review_course_cat4" name = "review[course_cat4]" type="number" value = 3 />
+      </div>
+      <div class = "col-2 text-center">
+        <%= form.label :cat4 %>
+      </div>
+      <div class = "col-4">
+        <div id="pc4"></div>
+        <input id = "review_professor_cat4" name = "review[professor_cat4]" type="number" value = 3 />
+      </div>
+    </div>
+
+    <div class ="row">
+      <div class ="col-2 text-center">
+        <%= form.label :cat5 %> 
+      </div>
+      <div class ="col-4">
+        <div id="cc5"></div>
+        <input id = "review_course_cat5" name = "review[course_cat5]" type="number" value = 3 />
+      </div>
+      <div class = "col-2 text-center">
+        <%= form.label :cat5 %>
+      </div>
+      <div class = "col-4">
+        <div id="pc5"></div>
+        <input id = "review_professor_cat5" name = "review[professor_cat5]" type="number" value = 3 />
+      </div>
+    </div>
+
+  <hr>
+      
+  <div class = "row">
+    <div class = "col-12">
+      <%= form.label :course_content %>
+    </div>
+  </div>
+  <div class ="row">
+    <div class = "col-12">
+      <%= form.text_area :course_content, rows:"6", style: "width: 100%"  %>
+    </div>
+  </div>
+  
+  <div class ="row">
+    <div class ="col-12">
+      <%= form.label :"Professor's Strength" %>
+    </div>
+  </div>
+  <div class ="row">
+    <div class ="col-12">
+      <%= form.text_area :professor_strength, rows:"6", style: "width: 100%" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+  <div class ="row">
+    <div class = "col-12">
+      <%= form.label :"Things to Improve"%>
+    </div>
   </div>
-
-  <div class="field">
-    <%= form.label :rate_up %>
-    <%= form.number_field :rate_up %>
+  <div class = "row">
+    <div class = "col-12">
+      <%= form.text_area :professor_improvement, rows:"6", style: "width: 100%" %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= form.label :rate_down %>
-    <%= form.number_field :rate_down %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+</fieldset>  
+  <hr>
+  <div class = "row">
+    <div class = "col-4 text-center">
+        
+    </div>
+    <div class = "col-4 text-center">
+      <div class="actions">
+        <div class = "real-submit">
+          <%= form.submit 'Submit Review', class: 'form-submission btn btn-primary' %>
+        </div>
+      </div>
+    </div>
+    <div class = "col-4 text-center">
+    
+    </div>
   </div>
 <% end %>
+

@@ -26,8 +26,15 @@ class ReviewsController < ApplicationController
   # POST /reviews
   # POST /reviews.json
   def create
-    @review = Review.new(review_params)
+    form_input = params[:review]
 
+    u_id = session[:user_id]
+    p_id = form_input[:professor_id]
+    c_id = form_input[:course_id]
+    t = form_input[:title]
+
+    @review = Review.new(user_id:u_id, course_id: c_id, professor_id: p_id, title: t, rate_up: 0, rate_down: 0)
+    
     respond_to do |format|
       if @review.save
 
@@ -85,6 +92,11 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def autocomplete
+    results = AutocompleteSearchService.new(params[:q]).callbacks
+    render json: results
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_review
@@ -93,6 +105,35 @@ class ReviewsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def review_params
-      params.require(:review).permit(:student_id, :title, :rate_up, :rate_down)
+      params.require(:review).permit(
+        :user_id, 
+        :title, 
+        :course_id, 
+        :professor_id,
+      )
     end
 end
+
+# class AutocompleteSearchService
+#   include HTTParty
+#   base_uri "https://api.github.com/"
+
+#   def initialize(term)
+#     @term = term
+#   end
+
+#   def call
+#     { users: users, skills: skills }
+#   end
+
+#   private
+
+#   def users
+#     response = self.class.get("/search/users", query: { q: @term })
+#     response["items"].map { |u| u["login"] }.take(5)
+#   end
+
+#   def skills
+#     Skill.find_by_name(@term).map(&:name).take(5)
+#   end
+# end

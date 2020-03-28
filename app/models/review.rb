@@ -19,6 +19,8 @@ class Review < ApplicationRecord
     validates :course_id, presence: true
     validates :professor_id, presence: true
     validates_with CourseProfessorValidator
+
+    accepts_nested_attributes_for :course_rating, :professor_rating
 end
 
 
