@@ -10,6 +10,10 @@ class GeneralCoursesController < ApplicationController
   # GET /general_courses/1
   # GET /general_courses/1.json
   def show
+    @reviews = @general_course.reviews
+    @courses = @general_course.courses.order(year: :desc, semester: :asc)
+    @highest_rated_review = @reviews.order(rate_up: :desc, rate_down: :asc).first
+    @overall_stat = @general_course.as_json.merge! @general_course.get_average
   end
 
   # GET /general_courses/new

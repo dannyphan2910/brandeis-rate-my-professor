@@ -10,6 +10,10 @@ class ProfessorsController < ApplicationController
   # GET /professors/1
   # GET /professors/1.json
   def show
+    @reviews = @professor.reviews
+    @courses = @professor.courses
+    @highest_rated_review = @reviews.order(rate_up: :desc, rate_down: :asc).first
+    @overall_stat = @professor.as_json.merge! @professor.get_average
   end
 
   # GET /professors/new

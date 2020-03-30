@@ -1,15 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  prof_id: 1
+  professor_id: 1
   semester: MyString
   year: 1
-  course_title: MyString
-  course_description: MyString
+  general_course_id: 1
 
 two:
-  prof_id: 1
+  professor_id: 1
   semester: MyString
   year: 1
-  course_title: MyString
-  course_description: MyString
+  general_course_id: 1

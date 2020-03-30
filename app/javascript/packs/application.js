@@ -21,6 +21,7 @@ require('js-autocomplete')
 
 import "bootstrap";
 import "../stylesheets/application";
+import "@fortawesome/fontawesome-free/js/all";
 
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
@@ -33,6 +34,11 @@ $(function () {
 $(function() {
     $('[data-toggle="popover"]').popover();
 });
+
+$(function() {
+    $('[data-toggle="collapse"]').collapse();
+});
+
 $(function() {
     var availableTags = [
         "ActionScript",

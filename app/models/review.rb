@@ -21,6 +21,8 @@ class Review < ApplicationRecord
     validates_with CourseProfessorValidator
 
     accepts_nested_attributes_for :course_rating, :professor_rating
+
+    scope :ordered_by_rate_up, -> { order(rate_up: :desc, rate_down: :asc) }
 end
 
 

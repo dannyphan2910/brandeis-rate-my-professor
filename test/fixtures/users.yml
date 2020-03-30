@@ -4,8 +4,10 @@ one:
   first_name: MyString
   last_name: MyString
   email: MyString
+  password_digest: <%= BCrypt::Password.create('123123') %>
 
 two:
   first_name: MyString
   last_name: MyString
   email: MyString
+  password_digest: MyString

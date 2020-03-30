@@ -23,7 +23,7 @@
         <div class="d-flex justify-content-end nav-links">
 
             <% if !(request.path == '/' || request.path == '/welcome') %>
-            <a class="nav-item nav-link left-align h5 text-center" href="#" data-toggle="modal" data-target="#formModal">Make A Review</a>
+            <a class="nav-item nav-link left-align h5 text-center text-primary" href="#" data-toggle="modal" data-target="#formModal">Make A Review</a>
             <% end %>
 
             <% if logged_in? %>
@@ -44,7 +44,7 @@
             </div>
 
             <% else %>
-            <%= link_to  "Sign In", "/login", class: "nav-item nav-link left-align h5 authentication text-center" %>
+            <%= link_to  "Sign In", "/login", class: "nav-item nav-link left-align h5 authentication text-center text-primary" %>
             <% end %>
         </div>
     </div>

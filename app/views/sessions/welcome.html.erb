@@ -42,10 +42,11 @@
             <h2 class="mb-3">Suggested Courses</h2>
             <div class="card-deck row flex-row flex-nowrap">
                 <% @courses_most_reviewed.each do |course| %>
-                <%= render 'shared/reviewcard', 
+                <%= render 'shared/review_card', 
                     data: course,
-                    card_title: course["course_code"] + ": " + "<div class='h5'>" + course["course_title"] + "</div>", 
-                    card_subtitle: course["semester"] + " " + course["year"].to_s,
+                    card_link: "/general_courses/#{course["general_course_id"]}",
+                    card_title: "#{course["course_code"]}: <div class='h5'>#{course["course_title"]}</div>", 
+                    card_subtitle: "#{course["semester"]} #{course["year"].to_s}",
                     card_text: course["total_reviews"] %>
                 <% end %>
             </div>
@@ -58,9 +59,10 @@
             <h2 class="mb-3">Suggested Professors</h2>
             <div class="card-deck row flex-row flex-nowrap">
                 <% @professors_most_reviewed.each do |prof| %>
-                <%= render 'shared/reviewcard', 
+                <%= render 'shared/review_card', 
                     data: prof,
-                    card_title: prof["prof_first_name"] + " " + prof["prof_last_name"], 
+                    card_link: "/professors/#{prof["id"]}",
+                    card_title: "#{prof["prof_first_name"]} #{prof["prof_last_name"]}", 
                     card_subtitle: prof["dept_name"],
                     card_text: prof["total_reviews"] %>
                 <% end %>

@@ -6,6 +6,10 @@ class Professor < ApplicationRecord
 
     scope :search, -> (term) { where("UPPER(prof_first_name) LIKE ? OR UPPER(prof_last_name) LIKE ?", "%#{term.upcase}%", "%#{term.upcase}%").order("prof_first_name, prof_last_name") }
 
+    def show_name
+        "#{prof_first_name} #{prof_last_name}"
+    end
+
     # Calculates the average of each category for every rating
     def get_average
         record_hash = {}

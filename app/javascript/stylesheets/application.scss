@@ -1,59 +1,18 @@
 @import "bootstrap";
 @import "../../assets/stylesheets/application.css";
-
-#review_course_cat1{
-    display:none;
-    position:absolute;
-}
-
-#review_course_cat2{
-    display:none;
-    position:absolute;
-}
-#review_course_cat3{
-    display:none;
-    position:absolute;
-}
-#review_course_cat4{
-    display:none;
-    position:absolute;
-}
-
-#review_course_cat5{
-    display:none;
-    position:absolute;
-}
-
-#review_professor_cat1{
-    display:none;
-    position:absolute;
-}
-
-#review_professor_cat2{
-    display:none;
-    position:absolute;
-}
-
-#review_professor_cat3{
-    display:none;
-    position:absolute;
-}
-
-#review_professor_cat4{
-    display:none;
-    position:absolute;
-}
-
-#review_professor_cat5{
-    display:none;
-    position:absolute;
-}
+@import '@fortawesome/fontawesome-free';
 
 html, body {
     margin: 0;
     padding: 0;
     width: 100vw;
     height: 100vh;
+}
+
+a, a:hover {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
 }
 
 body::-webkit-scrollbar {
@@ -138,4 +97,62 @@ nav {
 
 .collapse-button:hover {
     cursor: pointer;
+}
+
+#review_course_cat1{
+    display:none;
+    position:absolute;
+}
+
+#review_course_cat2{
+    display:none;
+    position:absolute;
+}
+#review_course_cat3{
+    display:none;
+    position:absolute;
+}
+#review_course_cat4{
+    display:none;
+    position:absolute;
+}
+
+#review_course_cat5{
+    display:none;
+    position:absolute;
+}
+
+#review_professor_cat1{
+    display:none;
+    position:absolute;
+}
+
+#review_professor_cat2{
+    display:none;
+    position:absolute;
+}
+
+#review_professor_cat3{
+    display:none;
+    position:absolute;
+}
+
+#review_professor_cat4{
+    display:none;
+    position:absolute;
+}
+
+#review_professor_cat5{
+    display:none;
+    position:absolute;
+}
+
+.suggestion-container {
+    display: -ms-flex; 
+    display: -webkit-flex; 
+    display: flex;
+}
+
+.suggestion-container > div {
+    flex: 1;
 }

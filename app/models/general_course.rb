@@ -12,4 +12,16 @@ class GeneralCourse < ApplicationRecord
         courses.each { |course| course.courses.each { |c| result.push(c) } }
         result
     end
+
+    # Calculates the average of each category for every rating
+    def get_average
+        record_hash = {}
+        record_hash['avg_cat1'] = course_ratings.average(:cat1) || 0
+        record_hash['avg_cat2'] = course_ratings.average(:cat2) || 0
+        record_hash['avg_cat3'] = course_ratings.average(:cat3) || 0
+        record_hash['avg_cat4'] = course_ratings.average(:cat4) || 0
+        record_hash['avg_cat5'] = course_ratings.average(:cat5) || 0
+        record_hash['total_reviews'] = course_ratings.length
+        return record_hash
+    end
 end

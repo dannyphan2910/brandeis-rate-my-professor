@@ -8,7 +8,11 @@ class Course < ApplicationRecord
     scope :search, -> (term) { joins(:general_course).where("UPPER(general_courses.course_code) LIKE ? OR UPPER(general_courses.course_title) LIKE ?", "%#{term.upcase}%", "%#{term.upcase}%").order("general_courses.course_code ASC") }
 
     def show_course_info
-        "#{course_code}. #{course_title}"
+        "#{course_code}: #{course_title}"
+    end
+
+    def show_course_offering
+        "#{semester} #{year}"
     end
 
     # Calculates the average of each category for every rating
