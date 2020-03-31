@@ -1,0 +1,2 @@
+module GeneralCoursesHelper
+end

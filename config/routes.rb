@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
+  resources :general_courses
   resources :professors
   resources :courses
   resources :professor_ratings
   resources :course_ratings
   resources :reviews
-
+  
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   get :autocomplete, to: 'pages#autocomplete'
   get 'login', to: 'sessions#new'

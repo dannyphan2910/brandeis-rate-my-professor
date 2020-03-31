@@ -11,6 +11,7 @@ Review.delete_all
 CourseRating.delete_all
 ProfessorRating.delete_all
 Course.delete_all
+GeneralCourse.delete_all
 Professor.delete_all
 
 require 'json'
@@ -68,15 +69,18 @@ assign_hash = {
     # "ITAL" => "Italian Studies"
 }
 
-5.times do 
-    course_hash.each do |course| 
-        course_code = course['code'].split(' ')[0]
-        if assign_hash.keys.include? course_code
+
+course_hash.each do |course| 
+    course_code = course['code'].split(' ')[0]
+    if assign_hash.keys.include? course_code
+        gen_c = GeneralCourse.create(course_code: course['code'], course_title: course['name'], course_description: course['description'])
+        5.times do 
             p_id = Professor.where(dept_name: assign_hash[course_code]).sample.id
-            c = Course.create(professor_id: p_id, semester: ['Fall', 'Spring'].sample, year: Faker::Number.between(from: 2005, to: 2020), course_code: course['code'], course_title: course['name'], course_description: course['description'])
+            c = Course.create(professor_id: p_id, semester: ['Fall', 'Spring'].sample, year: Faker::Number.between(from: 2005, to: 2020), general_course_id: gen_c.id)
         end
     end
-end 
+end
+
 
 2000.times do
     c_id = Course.all.sample.id

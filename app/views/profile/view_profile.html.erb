@@ -1,69 +1,25 @@
 <div class="header m-5">
-    <div class="row d-flex justify-content-start align-items-center">
-        <div class="col-1">
-            <%= gravatar_for current_user %>
-        </div>
-        <div class="col-4 text-left">
-            <h1><%= current_user.first_name + " " + current_user.last_name %></h1>
-            <h5><%= current_user.email %></h5>
-        </div>
-        <div class="col-7 text-right">
-            <%= button_to  "Log Out", "/logout", method: 'get', class: "btn btn-outline-danger btn-lg" %>
-        </div>
-    </div>
+	<div class="row d-flex justify-content-start align-items-center">
+		<div class="col-1">
+			<%= gravatar_for current_user %>
+		</div>
+		<div class="col-4 text-left">
+			<h1><%= current_user.first_name + " " + current_user.last_name %></h1>
+			<h5><%= current_user.email %></h5>
+		</div>
+		<div class="col-7 text-right">
+			<%= button_to  "Log Out", "/logout", method: 'get', class: "btn btn-outline-danger btn-lg" %>
+		</div>
+	</div>
 </div>
 <div class="dropdown-divider"></div>
-<div class="reviews mx-5">
-    <h1 class="my-5">My Reviews</h1>
-
-    <% current_user.reviews.each do |review| %>
-    <div class="card-columns">
-        <div class="card border-secondary mb-3" style="min-width:80rem;">
-            <div class="card-header d-flex justify-content-between bg-transparent border-secondary">
-                <%= link_to "#{review.course.course_code}: #{review.course.course_title} (#{review.course.semester} #{review.course.year})", "#", class: 'text-muted' %>
-                <a href="#"><span>&#10005;</span></a>
-            </div>
-            <div class="card-body">
-                <h5 class="card-title"><%= review.title %></h5>
-                <p class="card-text">
-                    <%= review.course_rating.content %>
-                </p>
-
-                <a class="collapse-button" data-toggle="collapse" data-target=<%="#collapse#{review.id}"%> aria-expanded="false" aria-controls="collapse">
-                    &#9660;
-                </a>
-
-                <div class="collapse" id=<%="collapse#{review.id}"%>>
-                <div class="row m-1">
-                    <div class="col border border-info rounded m-2">
-                        <div class="course-rating mt-2">
-                            <h4 class="mb-3">Course Ratings</h4>
-                            <% (1..5).each do |num| %>
-                            <p><b>Category <%= num %></b>: <%= review.course_rating["cat" + num.to_s] %> / 5</p>
-                            <% end %>
-                        </div>
-                    </div>
-                    <div class="col border border-info rounded m-2">
-                        <div class="professor-rating mt-2">
-                            <h4 class="mb-3">Professor Ratings</h4>
-                            <% (1..5).each do |num| %>
-                            <p><b>Category <%= num %></b>: <%= review.professor_rating["cat" + num.to_s] %> / 5</p>
-                            <% end %>      
-                        </div>
-                    </div>
-                </div>
-                </div>
-
-            </div>
-            <div class="card-footer bg-transparent border-secondary">
-                <small class="text-muted">Last updated on <%= review.updated_at %></small>
-                <br/>
-                <small class="text-muted">Created on <%= review.created_at %></small>
-            </div>
-        </div>
-    </div>
-
-    <% end %>
-
+<div class="reviews mx-5 row">
+	<div class="col">
+		<h1 class="my-5">My Reviews</h1>
+		<div class="w-75">
+			<% current_user.reviews.each do |review| %>
+				<%= render 'shared/review_details_card', review: review %>
+			<% end %>
+		</div>
+	</div>
 </div>
-

@@ -28,7 +28,7 @@ class UsersController < ApplicationController
 
     if @user.save
       log_in(@user)
-      redirect_to '/'
+      redirect_to root_url
     else
       errors = ''
       @user.errors.full_messages.each do |message|
@@ -71,6 +71,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_digest, :password_confirmation)
     end
 end

@@ -8,8 +8,10 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 require('jquery')
+require("jquery-ui")
 require('rateyo')
 require('js-autocomplete')
+
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
 // or the `imagePath` JavaScript helper below.
@@ -17,8 +19,54 @@ require('js-autocomplete')
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-
 import "bootstrap";
 import "../stylesheets/application";
+import "@fortawesome/fontawesome-free/js/all";
+
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})
+
+$(function () {
+    $('[data-toggle="dropdown"]').dropdown()
+})
+
+$(function() {
+    $('[data-toggle="popover"]').popover();
+});
+
+$(function() {
+    $('[data-toggle="collapse"]').collapse();
+});
+
+$(function() {
+    var availableTags = [
+        "ActionScript",
+        "AppleScript",
+        "Asp",
+        "BASIC",
+        "C",
+        "C++",
+        "Clojure",
+        "COBOL",
+        "ColdFusion",
+        "Erlang",
+        "Fortran",
+        "Groovy",
+        "Haskell",
+        "Java",
+        "JavaScript",
+        "Lisp",
+        "Perl",
+        "PHP",
+        "Python",
+        "Ruby",
+        "Scala",
+        "Scheme"
+      ];
+    $('#term').autocomplete({
+        source: availableTags
+    });
+});
 
 
