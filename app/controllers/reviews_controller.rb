@@ -1,4 +1,6 @@
 class ReviewsController < ApplicationController
+  before_action :login_required
+  protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format == 'application/json' }
   before_action :set_review, only: [:show, :edit, :update, :destroy]
 
   # GET /reviews
@@ -48,11 +50,11 @@ class ReviewsController < ApplicationController
 
         professor_r = ProfessorRating.create(
           review_id: @review.id, 
-          cat1: form_input[:professor_cat1], 
-          cat2: form_input[:professor_cat2], 
-          cat3: form_input[:professor_cat3], 
-          cat4: form_input[:professor_cat4], 
-          cat5: form_input[:professor_cat5], 
+          cat1: form_input[:professor_cat1].to_i, 
+          cat2: form_input[:professor_cat2].to_i, 
+          cat3: form_input[:professor_cat3].to_i, 
+          cat4: form_input[:professor_cat4].to_i, 
+          cat5: form_input[:professor_cat5].to_i, 
           strength: form_input[:professor_strength],
           improvement: form_input[:professor_improvement]
         )
@@ -71,7 +73,7 @@ class ReviewsController < ApplicationController
   def update
     respond_to do |format|
       if @review.update(review_params)
-        format.html { redirect_to @review, notice: 'Review was successfully updated.' }
+        format.html { redirect_to '/view_profile', notice: 'Review was successfully updated.' }
         format.json { render :show, status: :ok, location: @review }
       else
         format.html { render :edit }
@@ -85,7 +87,7 @@ class ReviewsController < ApplicationController
   def destroy
     @review.destroy
     respond_to do |format|
-      format.html { redirect_to reviews_url, notice: 'Review was successfully destroyed.' }
+      format.html { redirect_to '/view_profile', notice: 'Review was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -107,3 +109,26 @@ class ReviewsController < ApplicationController
     end
 end
 
+# class AutocompleteSearchService
+#   include HTTParty
+#   base_uri "https://api.github.com/"
+
+#   def initialize(term)
+#     @term = term
+#   end
+
+#   def call
+#     { users: users, skills: skills }
+#   end
+
+#   private
+
+#   def users
+#     response = self.class.get("/search/users", query: { q: @term })
+#     response["items"].map { |u| u["login"] }.take(5)
+#   end
+
+#   def skills
+#     Skill.find_by_name(@term).map(&:name).take(5)
+#   end
+# end
