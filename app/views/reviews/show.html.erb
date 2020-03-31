@@ -1,34 +1,36 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>User ID:</strong>
-  <%= @review.user_id %>
-</p>
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Course ID</strong>
-  <%= @review.course_id %>
-</p>
+  <p>
+    <strong>User ID:</strong>
+    <%= @review.user_id %>
+  </p>
 
-<p>
-  <strong>Professor ID</strong>
-  <%= @review.professor_id %>
-</p>
+  <p>
+    <strong>Course ID</strong>
+    <%= @review.course_id %>
+  </p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @review.title %>
-</p>
+  <p>
+    <strong>Professor ID</strong>
+    <%= @review.professor_id %>
+  </p>
 
-<p>
-  <strong>Rate up:</strong>
-  <%= @review.rate_up %>
-</p>
+  <p>
+    <strong>Title:</strong>
+    <%= @review.title %>
+  </p>
 
-<p>
-  <strong>Rate down:</strong>
-  <%= @review.rate_down %>
-</p>
+  <p>
+    <strong>Rate up:</strong>
+    <%= @review.rate_up %>
+  </p>
 
-<%= link_to 'Edit', edit_review_path(@review) %> |
-<%= link_to 'Back', reviews_path %>
+  <p>
+    <strong>Rate down:</strong>
+    <%= @review.rate_down %>
+  </p>
+
+  <%= link_to 'Edit', edit_review_path(@review) %> |
+  <%= link_to 'Back', reviews_path %>
+

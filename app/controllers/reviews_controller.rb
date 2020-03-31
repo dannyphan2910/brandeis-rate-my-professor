@@ -90,11 +90,6 @@ class ReviewsController < ApplicationController
     end
   end
 
-  def autocomplete
-    results = AutocompleteSearchService.new(params[:q]).callbacks
-    render json: results
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_review
