@@ -1,65 +1,83 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/themes/bars-1to10.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/jquery.barrating.min.js"></script>
 
 
+<script>
+$(document).on('turbolinks:load', function(){
 
-$(function() {
-  $('#review_professor_cat1').barrating({
-    theme: 'bars-1to10'
+
+  $(function() {
+    $('#review_course_cat1').barrating({
+      theme: 'bars-1to10'
+    });
+  });
+
+  $(function() {
+    $('#review_professor_cat1').barrating({
+      theme: 'bars-1to10'
+    });
+  });
+
+  $(function() {
+    $('#review_course_cat2').barrating({
+      theme: 'bars-1to10'
+    });
+  });
+
+  $(function() {
+    $('#review_professor_cat2').barrating({
+      theme: 'bars-1to10'
+    });
+  });
+
+  $(function() {
+    $('#review_course_cat3').barrating({
+      theme: 'bars-1to10'
+    });
+  });
+
+  $(function() {
+    $('#review_professor_cat3').barrating({
+      theme: 'bars-1to10'
+    });
+  });
+
+  $(function() {
+    $('#review_course_cat4').barrating({
+      theme: 'bars-1to10'
+    });
+  });
+
+  $(function() {
+    $('#review_professor_cat4').barrating({
+      theme: 'bars-1to10'
+    });
+  });
+
+  $(function() {
+    $('#review_course_cat5').barrating({
+      theme: 'bars-1to10'
+    });
+  });
+
+  $(function() {
+    $('#review_professor_cat5').barrating({
+      theme: 'bars-1to10'
+    });
   });
 });
 
-$(function() {
-  $('#review_course_cat2').barrating({
-    theme: 'bars-1to10'
-  });
+proflist = $('#review_professor_id').html();
+$('#review_course_id').change(function(){
+  selectcourse = $('#review_course_id :selected').text();
+  options = $(proflist).filter('optgroup[label="' + selectcourse + '"]').html();
+  if(options){
+    $('#review_professor_id').html(options);
+  }else{
+    $('#review_professor_id').empty();
+  }
 });
-
-$(function() {
-  $('#review_professor_cat2').barrating({
-    theme: 'bars-1to10'
-  });
-});
-
-$(function() {
-  $('#review_course_cat3').barrating({
-    theme: 'bars-1to10'
-  });
-});
-
-$(function() {
-  $('#review_professor_cat3').barrating({
-    theme: 'bars-1to10'
-  });
-});
-
-$(function() {
-  $('#review_course_cat4').barrating({
-    theme: 'bars-1to10'
-  });
-});
-
-$(function() {
-  $('#review_professor_cat4').barrating({
-    theme: 'bars-1to10'
-  });
-});
-
-$(function() {
-  $('#review_course_cat5').barrating({
-    theme: 'bars-1to10'
-  });
-});
-
-$(function() {
-  $('#review_professor_cat5').barrating({
-    theme: 'bars-1to10'
-  });
-});
-
-
 </script>
 
 
@@ -82,7 +100,7 @@ $(function() {
         <h5> <label for="course_id"> Review For... </label></h5>
       </div>
       <div class = "col-9">
-        <%= collection_select(:review, :course_id, Course.all, :id, :show_course_info, {}, style: "width: 100%") %>
+        <%= collection_select(:review, :course_id, GeneralCourse.all, :id, :show_course_info, {}, style: "width: 100%") %>
       </div>
     </div>
 
@@ -92,7 +110,7 @@ $(function() {
         <h5><%= form.label :professor_id %></h5>
       </div>
       <div class = "col-9">
-        <%= form.number_field :professor_id , placeholder: "Professor Name", style: "width: 100%" %>
+        <%= grouped_collection_select(:review, :professor_id, GeneralCourse.all, :professors, :show_course_info, :id, :show_name) %>
       </div>
 
     </div>
@@ -123,13 +141,13 @@ $(function() {
           <%= form.label :cat1 %>
         </div>
         <div class = "col-4">
-          <%= select(:review, :course_cat1, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5],['6', 6],['7', 7],['8', 8],['9', 9],['10', 10]]) %>
+          <%= select(:review, :course_cat1, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]) %>
         </div>
         <div class = "col-2 text-center">
           <%= form.label :cat1 %>
         </div>
         <div class = "col-4">
-          <%= select(:review, :professor_cat1, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5],['6', 6],['7', 7],['8', 8],['9', 9],['10', 10]]) %>
+          <%= select(:review, :professor_cat1, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]) %>
         </div>
       </div>
     
@@ -140,13 +158,13 @@ $(function() {
         <%= form.label :cat2 %>
       </div>
       <div class = "col-4">
-        <%= select(:review, :course_cat2, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5],['6', 6],['7', 7],['8', 8],['9', 9],['10', 10]]) %>
+        <%= select(:review, :course_cat2, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]) %>
       </div>
       <div class = "col-2 text-center">
         <%= form.label :cat2 %>
       </div>
       <div class = "col-4">
-        <%= select(:review, :professor_cat2, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5],['6', 6],['7', 7],['8', 8],['9', 9],['10', 10]]) %>
+        <%= select(:review, :professor_cat2, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]) %>
       </div>
     </div>
           
@@ -155,13 +173,13 @@ $(function() {
         <%= form.label :cat3 %>
       </div>
       <div class = "col-4">
-        <%= select(:review, :course_cat3, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5],['6', 6],['7', 7],['8', 8],['9', 9],['10', 10]]) %>
+        <%= select(:review, :course_cat3, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]) %>
       </div>
       <div class = "col-2 text-center">
         <%= form.label :cat3 %>
       </div>
       <div class = "col-4">
-        <%= select(:review, :professor_cat3, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5],['6', 6],['7', 7],['8', 8],['9', 9],['10', 10]]) %>
+        <%= select(:review, :professor_cat3, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]) %>
       </div>
     </div>
 
@@ -170,13 +188,13 @@ $(function() {
         <%= form.label :cat4 %>
       </div>
       <div class = "col-4">
-        <%= select(:review, :course_cat4, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5],['6', 6],['7', 7],['8', 8],['9', 9],['10', 10]]) %>
+        <%= select(:review, :course_cat4, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]) %>
       </div>
       <div class = "col-2 text-center">
         <%= form.label :cat4 %>
       </div>
       <div class = "col-4">
-        <%= select(:review, :professor_cat4, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5],['6', 6],['7', 7],['8', 8],['9', 9],['10', 10]]) %>
+        <%= select(:review, :professor_cat4, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]) %>
       </div>
     </div>
 
@@ -185,13 +203,13 @@ $(function() {
         <%= form.label :cat5 %> 
       </div>
       <div class ="col-4">
-        <%= select(:review, :course_cat5, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5],['6', 6],['7', 7],['8', 8],['9', 9],['10', 10]]) %>
+        <%= select(:review, :course_cat5, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]) %>
       </div>
       <div class = "col-2 text-center">
         <%= form.label :cat5 %>
       </div>
       <div class = "col-4">
-        <%= select(:review, :professor_cat5, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5],['6', 6],['7', 7],['8', 8],['9', 9],['10', 10]]) %>
+        <%= select(:review, :professor_cat5, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]) %>
       </div>
     </div>
 

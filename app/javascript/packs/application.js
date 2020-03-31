@@ -9,7 +9,7 @@ require("@rails/activestorage").start()
 require("channels")
 require('jquery')
 require("jquery-ui")
-require('rateyo')
+require("jquery-bar-rating")
 require('js-autocomplete')
 
 // Uncomment to copy all static images under ../images to the output folder and reference

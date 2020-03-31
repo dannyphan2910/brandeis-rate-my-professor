@@ -30,9 +30,9 @@ class ReviewsController < ApplicationController
 
     u_id = session[:user_id]
     p_id = form_input[:professor_id]
-    c_id = form_input[:course_id]
+    c_id = Course.find_by(general_course_id: form_input[:course_id], professor_id: p_id).id
     t = form_input[:title]
-
+    
     @review = Review.new(user_id:u_id, course_id: c_id, professor_id: p_id, title: t, rate_up: 0, rate_down: 0)
     
     respond_to do |format|
@@ -59,10 +59,10 @@ class ReviewsController < ApplicationController
           improvement: form_input[:professor_improvement]
         )
          
-         format.html { redirect_to '/view_profile', notice: 'Review was successfully created.' }
+         format.js {render 'reviews/create'}
          format.json { render :show, status: :created, location: @review }
        else
-         format.html { render :new }
+         format.html { render 'reviews/fail' }
          format.json { render json: @review.errors, status: :unprocessable_entity }
        end
      end
