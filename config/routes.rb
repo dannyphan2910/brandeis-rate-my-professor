@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   post 'search', to: 'search#search_result'
 
   get 'view_profile', to: 'profile#view_profile'
-
+  get 'filter_course_by_year' => 'reviews#filter_course_by_year'
+  get 'filter_professor_by_course' => 'reviews#filter_professor_by_course'
   root 'sessions#welcome'
 end

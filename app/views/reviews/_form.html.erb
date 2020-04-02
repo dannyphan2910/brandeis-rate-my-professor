@@ -68,16 +68,26 @@ $(document).on('turbolinks:load', function(){
   });
 });
 
-proflist = $('#review_professor_id').html();
-$('#review_course_id').change(function(){
-  selectcourse = $('#review_course_id :selected').text();
-  options = $(proflist).filter('optgroup[label="' + selectcourse + '"]').html();
-  if(options){
-    $('#review_professor_id').html(options);
-  }else{
-    $('#review_professor_id').empty();
-  }
+var course_selected = false;
+
+$("select#review_course_id").on("change", function(){
+  $.ajax({
+    url: "/filter_professor_by_course",
+    type: "GET",
+    data: {gcname: $("select#review_course_id").val(), year: $("select#review_course_year").val()}
+  });
 });
+
+$(function(){
+  $("select#review_course_year").on("change",function(){
+    $.ajax({
+      url: "/filter_course_by_year",
+      type: "GET",
+      data: {year: "year = " + $("select#review_course_year").val()}
+    });
+  });
+});
+
 </script>
 
 
@@ -94,14 +104,27 @@ $('#review_course_id').change(function(){
     </div>
   <% end %>
 
+
   <fieldset>
+    
+
+    <div class = "row">
+      <div class = "col-3">
+        <h5> <label for="course_year"> Year Taught... </label></h5>
+      </div>
+      <div class = "col-9">
+        <%= form.select(:course_year, options_for_select(all_years),{prompt: "Select year"},{style:"width:100%"}) %>
+      </div>
+    </div>
+
+
     <div class = "row">
       <div class = "col-3">
         <h5> <label for="course_id"> Review For... </label></h5>
       </div>
       <div class = "col-9">
-        <%= collection_select(:review, :course_id, GeneralCourse.all, :id, :show_course_info, {}, style: "width: 100%") %>
-      </div>
+        <%= form.select(:course_id, options_for_select(all_courses), {prompt: "Select A Course"}, {:disabled => true, style:"width:100%"}) %>
+       </div>
     </div>
 
   
@@ -110,7 +133,7 @@ $('#review_course_id').change(function(){
         <h5><%= form.label :professor_id %></h5>
       </div>
       <div class = "col-9">
-        <%= grouped_collection_select(:review, :professor_id, GeneralCourse.all, :professors, :show_course_info, :id, :show_name) %>
+        <%= form.collection_select :professor_id, Professor.all, :id, :show_name, { prompt: 'Select A Professor' }, {:disabled => true, style:"width:100%"} %>
       </div>
 
     </div>
