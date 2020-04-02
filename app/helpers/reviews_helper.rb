@@ -2,8 +2,9 @@ module ReviewsHelper
     def all_years
         years = []
         Course.all.each do |c|
-            if !years.include?(c.year)
-                years.push(c.year)
+            year_sem = "" + c.year.to_s + "," + c.semester.to_s
+            if !years.include?(year_sem)
+                years.push(year_sem)
             end
         end
         return years.sort.reverse

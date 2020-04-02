@@ -96,7 +96,10 @@ class ReviewsController < ApplicationController
   end
 
   def filter_course_by_year
-    filter = Course.where(params[:year])
+    ys = params[:year]
+    y = ys.split(",")[0]
+    s = ys.split(",")[1]
+    filter = Course.where(year:y,semester:s)
     used = []
     @filtered_course = ["Select A Course"]
     filter.each do |f|
@@ -110,8 +113,11 @@ class ReviewsController < ApplicationController
   end
 
   def filter_professor_by_course
+    ys = params[:year]
+    y = ys.split(",")[0]
+    s = ys.split(",")[1]
     gcid = GeneralCourse.find_by(course_code: params[:gcname].split(":")[0])
-    course = Course.where(general_course_id: gcid, year: params[:year])
+    course = Course.where(general_course_id: gcid, year: y, semester: s)
     @filtered_professor = []
     course.each do |c|
       @filtered_professor.push(c.professor)

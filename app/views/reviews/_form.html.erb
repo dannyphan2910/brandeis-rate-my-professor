@@ -83,7 +83,7 @@ $(function(){
     $.ajax({
       url: "/filter_course_by_year",
       type: "GET",
-      data: {year: "year = " + $("select#review_course_year").val()}
+      data: {year: $("select#review_course_year").val()}
     });
   });
 });
