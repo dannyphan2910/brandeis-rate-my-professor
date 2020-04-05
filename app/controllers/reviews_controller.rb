@@ -33,7 +33,7 @@ class ReviewsController < ApplicationController
     c_id = form_input[:course_id]
     t = form_input[:title]
 
-    @review = Review.new(user_id:u_id, course_id: c_id, professor_id: p_id, title: t, rate_up: 0, rate_down: 0)
+    @review = Review.new(user_id:u_id, course_id: c_id, professor_id: p_id, title: t)
     
     respond_to do |format|
       if @review.save

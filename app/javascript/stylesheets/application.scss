@@ -156,3 +156,31 @@ nav {
 .suggestion-container > div {
     flex: 1;
 }
+
+.fa-thumbs-up, .fa-thumbs-down {
+    font-size:18px;
+}
+
+.fa-thumbs-up {
+    color:rgb(184, 241, 156);
+}
+
+.fa-thumbs-down {
+    color:rgb(240, 169, 168);
+}
+
+.fa-thumbs-up:hover {
+    color: #98FB98;
+}
+
+.fa-thumbs-down:hover {
+    color: #E84D59;
+}
+
+.thumbs-up-active {
+    color:green;
+}
+
+.thumbs-down-active {
+    color:red;
+}

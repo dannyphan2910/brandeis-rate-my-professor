@@ -15,6 +15,9 @@ class Review < ApplicationRecord
     has_one :course_rating
     has_one :professor_rating
 
+    has_many :rate_ups
+    has_many :rate_downs
+
     validates :user_id, presence: true
     validates :course_id, presence: true
     validates :professor_id, presence: true
@@ -22,7 +25,15 @@ class Review < ApplicationRecord
 
     accepts_nested_attributes_for :course_rating, :professor_rating
 
-    scope :ordered_by_rate_up, -> { order(rate_up: :desc, rate_down: :asc) }
+    scope :ordered_by_rate_up, -> { all.sort_by(&:rate_up).reverse }
+
+    def rate_up
+        rate_ups.length
+    end
+
+    def rate_down
+        rate_downs.length
+    end
 end
 
 

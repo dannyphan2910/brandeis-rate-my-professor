@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :enrollments
+  resources :rate_downs
+  resources :rate_ups
   resources :general_courses
   resources :professors
   resources :courses
@@ -20,6 +23,7 @@ Rails.application.routes.draw do
   post 'search', to: 'search#search_result'
 
   get 'view_profile', to: 'profile#view_profile'
+  post 'view_profile', to: 'profile#view_profile'
 
   root 'sessions#welcome'
 end

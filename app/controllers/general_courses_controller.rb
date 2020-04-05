@@ -12,7 +12,7 @@ class GeneralCoursesController < ApplicationController
   def show
     @reviews = @general_course.reviews
     @courses = @general_course.courses.order(year: :desc, semester: :asc)
-    @highest_rated_review = @reviews.order(rate_up: :desc, rate_down: :asc).first
+    @highest_rated_review = @reviews.ordered_by_rate_up.first
     @overall_stat = @general_course.as_json.merge! @general_course.get_average
   end
 

@@ -14,12 +14,41 @@
 </div>
 <div class="dropdown-divider"></div>
 <div class="reviews mx-5 row">
-	<div class="col">
+	<div class="col-8">
 		<h1 class="my-5">My Reviews</h1>
-		<div class="w-75">
-			<% current_user.reviews.each do |review| %>
+		<div>
+			<% @user_reviews.each do |review| %>
 				<%= render 'shared/review_details_card', review: review %>
 			<% end %>
+		</div>
+	</div>
+	<div class="col-4">
+		<div class="mt-5">
+			<h1>My Courses</h1>
+			<p class="font-italic text-muted">By choosing your enrolled courses, you agree to share the information to other Brandeis students</p>
+		</div>
+		<div id="user-courses" class="mx-3 mb-2">
+			<%= render 'user_courses', user_courses: @user_courses %>
+		</div>
+		<div class="border border-info rounded py-3">
+			<div class="d-flex justify-content-center mb-3">
+			<%= form_tag 'view_profile', method: "post", remote: true, class: "search-form text-center d-flex flex-column align-content-center" do %>
+				<div class="row">
+					<div class="col">
+						<%= label_tag :search_text_courses, "Search for a course", class: 'h6' %>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-8">
+						<%= text_field_tag :search_text_courses, '', placeholder: "Search", class: 'form-control mr-sm-2' %>
+					</div>
+					<div class="col">
+						<%= submit_tag "Search", class: 'btn btn-outline-info my-2 my-sm-0' %>
+					</div>
+				</div>
+			<% end %>
+			</div>
+			<div id="courses-result" class="mx-3 overflow-auto" style="max-height: 300px"></div>
 		</div>
 	</div>
 </div>

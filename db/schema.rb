@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_28_143511) do
+ActiveRecord::Schema.define(version: 2020_04_04_204605) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,13 @@ ActiveRecord::Schema.define(version: 2020_03_28_143511) do
     t.integer "professor_id"
     t.string "semester"
     t.integer "year"
+    t.integer "general_course_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "enrollments", force: :cascade do |t|
+    t.integer "user_id"
     t.integer "general_course_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -67,13 +74,25 @@ ActiveRecord::Schema.define(version: 2020_03_28_143511) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "rate_downs", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "review_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "rate_ups", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "review_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "reviews", force: :cascade do |t|
     t.integer "user_id"
     t.integer "course_id"
     t.integer "professor_id"
     t.string "title"
-    t.integer "rate_up"
-    t.integer "rate_down"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
