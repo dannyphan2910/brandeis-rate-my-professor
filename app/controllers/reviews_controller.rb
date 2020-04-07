@@ -12,6 +12,7 @@ class ReviewsController < ApplicationController
   # GET /reviews/1
   # GET /reviews/1.json
   def show
+
   end
 
   # GET /reviews/new
@@ -21,6 +22,16 @@ class ReviewsController < ApplicationController
 
   # GET /reviews/1/edit
   def edit
+    f_id = params[:id]
+
+    @review = Review.find(f_id)
+    @course_rating = CourseRating.find_by(review_id: f_id)
+    @professor_rating = ProfessorRating.find_by(review_id: f_id)
+    @course = Course.find(@review.course_id)
+    @professor = Professor.find(@review.professor_id)
+    respond_to do |format|
+      format.js
+    end
   end
 
   # POST /reviews
@@ -65,7 +76,7 @@ class ReviewsController < ApplicationController
          format.js {render 'reviews/create'}
          format.json { render :show, status: :created, location: @review }
        else
-         format.html { render 'reviews/fail' }
+         format.js { render 'reviews/fail' }
          format.json { render json: @review.errors, status: :unprocessable_entity }
        end
      end
@@ -74,8 +85,17 @@ class ReviewsController < ApplicationController
   # PATCH/PUT /reviews/1
   # PATCH/PUT /reviews/1.json
   def update
+    
+    rid = params[:id]
+    ep = params[:review]
+    cr = CourseRating.find_by(review_id: rid)
+    cr.update(cat1:ep[:e_course_cat1], cat2:ep[:e_course_cat2], cat3: ep[:e_course_cat3], cat4:ep[:e_course_cat4], cat5: ep[:e_course_cat5], content: ep[:course_content])
+    pr = ProfessorRating.find_by(review_id: rid)
+    pr.update(cat1:ep[:e_professor_cat1], cat2:ep[:e_professor_cat2], cat3: ep[:e_professor_cat3], cat4:ep[:e_professor_cat4], cat5: ep[:e_professor_cat5], strength: ep[:professor_strength], improvement: ep[:professor_improvement])
+    
+    
     respond_to do |format|
-      if @review.update(review_params)
+      if @review.update(title: ep[:title])
         format.html { redirect_to '/view_profile', notice: 'Review was successfully updated.' }
         format.json { render :show, status: :ok, location: @review }
       else
@@ -123,6 +143,14 @@ class ReviewsController < ApplicationController
       @filtered_professor.push(c.professor)
     end
     return @filtered_professor
+  end
+
+  def open_edit_modal
+    f_id = params[:id]
+    @review = Review.find(f_id)
+    respond_to do |format| 
+      format.js {render 'reviews/open_edit_modal'}
+    end
   end
 
   private
