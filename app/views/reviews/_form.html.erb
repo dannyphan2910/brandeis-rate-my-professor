@@ -1,81 +1,43 @@
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/themes/bars-1to10.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/themes/bars-square.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/jquery.barrating.min.js"></script>
 
 
 <script>
-$(document).on('turbolinks:load', function(){
 
+var ratingFormCategories = [
+  '#review_course_cat1',
+  '#review_professor_cat1',
+  '#review_course_cat2',
+  '#review_professor_cat2',
+  '#review_course_cat3',
+  '#review_professor_cat3',
+  '#review_course_cat4',
+  '#review_professor_cat4',
+  '#review_course_cat5',
+  '#review_professor_cat5'
+]
 
-  $(function() {
-    $('#review_course_cat1').barrating({
-      theme: 'bars-1to10'
+$(function() {
+  ratingFormCategories.forEach(function(e){
+
+    $(function() {
+      $(e).barrating({
+        theme: 'bars-square',
+        showValues: true,
+        showSelectedRating: false
+      });
     });
-  });
 
-  $(function() {
-    $('#review_professor_cat1').barrating({
-      theme: 'bars-1to10'
-    });
-  });
-
-  $(function() {
-    $('#review_course_cat2').barrating({
-      theme: 'bars-1to10'
-    });
-  });
-
-  $(function() {
-    $('#review_professor_cat2').barrating({
-      theme: 'bars-1to10'
-    });
-  });
-
-  $(function() {
-    $('#review_course_cat3').barrating({
-      theme: 'bars-1to10'
-    });
-  });
-
-  $(function() {
-    $('#review_professor_cat3').barrating({
-      theme: 'bars-1to10'
-    });
-  });
-
-  $(function() {
-    $('#review_course_cat4').barrating({
-      theme: 'bars-1to10'
-    });
-  });
-
-  $(function() {
-    $('#review_professor_cat4').barrating({
-      theme: 'bars-1to10'
-    });
-  });
-
-  $(function() {
-    $('#review_course_cat5').barrating({
-      theme: 'bars-1to10'
-    });
-  });
-
-  $(function() {
-    $('#review_professor_cat5').barrating({
-      theme: 'bars-1to10'
-    });
   });
 });
-
-var course_selected = false;
 
 
 
 </script>
 
 
-<%= form_with(model: review) do |form| %>
+<%= form_with(model: review, :html => {:style=>"width:100%"}) do |form| %>
   <% if review.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(review.errors.count, "error") %> prohibited this review from being saved:</h2>
@@ -90,172 +52,220 @@ var course_selected = false;
 
 
   <fieldset>
-    
-
+  <div class="card" style="width:100%;">
+  <div class = "card-body">
+  <div class = "form-group">
     <div class = "row">
       <div class = "col-3">
         <h5> <label for="course_year"> Year Taught... </label></h5>
       </div>
       <div class = "col-9">
-        <%= form.select(:course_year, options_for_select(all_years),{prompt: "Select year"},{style:"width:100%"}) %>
+        <%= form.select(:course_year, options_for_select(all_years),{prompt: "Select year"},{class:"form-control",style:"width:100%"}) %>
       </div>
     </div>
+  </div>
 
-
+  <div class = "form-group">
     <div class = "row">
       <div class = "col-3">
         <h5> <label for="course_id"> Review For... </label></h5>
       </div>
       <div class = "col-9">
-        <%= form.select(:course_id, options_for_select(all_courses), {prompt: "Select A Course"}, {:disabled => true, style:"width:100%"}) %>
+        <%= form.select(:course_id, options_for_select(all_courses), {prompt: "Select A Course"}, {class:"form-control",:disabled => true, style:"width:100%;"}) %>
        </div>
     </div>
-
+  </div>
   
+  <div class = "form-group">
     <div class = "row">
       <div class = "col-3">
         <h5><%= form.label :professor_id %></h5>
       </div>
       <div class = "col-9">
-        <%= form.collection_select :professor_id, Professor.all, :id, :show_name, { prompt: 'Select A Professor' }, {:disabled => true, style:"width:100%"} %>
+        <%= form.collection_select :professor_id, Professor.all, :id, :show_name, { prompt: 'Select A Professor' }, {class:"form-control",:disabled => true, style:"width:100% "} %>
       </div>
-
     </div>
+  </div>
 
+  <div class = "form-group">
     <div class = "row"> 
       <div class = "col-3">
         <h5><%= form.label :title %></h5>
       </div>
       <div class = "col-9">
-        <%= form.text_field :title, placeholder: "Title of your review", style: "width: 100%" %>
+        <%= form.text_field :title, class:"form-control", placeholder: "Title of your review", style: "width: 100%" %>
       </div>
     </div>
+  </div>
+  </div>
+  </div>
   
-  <hr>
+  <p></p>
+  
+  <div class = "row">
+  <div class = "col-6">
+  <div class = "card" style="width:100%">
+    <div class = "card-body">
       <div class = "row">
-          <div class = "col-6 text-center">
+          <div class = "col text-center">
             <h5>Course Ratings</h5>
           </div>
-          <div class = "col-6 text-center">
-            <h5>Professor Ratings</h5>
-          </div>
       </div>
+
       <p></p>
       <p></p>
       
       <div class ="row">
-        <div class = "col-2 text-center">
+        <div class = "col-4 text-center">
           <%= form.label :cat1 %>
         </div>
-        <div class = "col-4">
+        <div class = "col-8">
           <%= select(:review, :course_cat1, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]) %>
-        </div>
-        <div class = "col-2 text-center">
-          <%= form.label :cat1 %>
-        </div>
-        <div class = "col-4">
-          <%= select(:review, :professor_cat1, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]) %>
         </div>
       </div>
     
 
     <div class ="row">   
     
-      <div class = "col-2 text-center">
+      <div class = "col-4 text-center">
         <%= form.label :cat2 %>
       </div>
-      <div class = "col-4">
+      <div class = "col-8">
         <%= select(:review, :course_cat2, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]) %>
-      </div>
-      <div class = "col-2 text-center">
-        <%= form.label :cat2 %>
-      </div>
-      <div class = "col-4">
-        <%= select(:review, :professor_cat2, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]) %>
       </div>
     </div>
           
     <div class ="row">
-      <div class = "col-2 text-center">
+      <div class = "col-4 text-center">
         <%= form.label :cat3 %>
       </div>
-      <div class = "col-4">
+      <div class = "col-8">
         <%= select(:review, :course_cat3, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]) %>
       </div>
-      <div class = "col-2 text-center">
-        <%= form.label :cat3 %>
-      </div>
-      <div class = "col-4">
-        <%= select(:review, :professor_cat3, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]) %>
-      </div>
     </div>
 
     <div class ="row">
-      <div class = "col-2 text-center">
+      <div class = "col-4 text-center">
         <%= form.label :cat4 %>
       </div>
-      <div class = "col-4">
+      <div class = "col-8">
         <%= select(:review, :course_cat4, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]) %>
       </div>
-      <div class = "col-2 text-center">
-        <%= form.label :cat4 %>
-      </div>
-      <div class = "col-4">
-        <%= select(:review, :professor_cat4, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]) %>
-      </div>
     </div>
 
     <div class ="row">
-      <div class ="col-2 text-center">
+      <div class ="col-4 text-center">
         <%= form.label :cat5 %> 
       </div>
-      <div class ="col-4">
+      <div class ="col-8">
         <%= select(:review, :course_cat5, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]) %>
       </div>
-      <div class = "col-2 text-center">
-        <%= form.label :cat5 %>
-      </div>
-      <div class = "col-4">
-        <%= select(:review, :professor_cat5, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]) %>
-      </div>
-    </div>
-
-  <hr>
-      
-  <div class = "row">
-    <div class = "col-12">
-      <%= form.label :course_content %>
     </div>
   </div>
-  <div class ="row">
-    <div class = "col-12">
-      <%= form.text_area :course_content, rows:"6", style: "width: 100%"  %>
+  </div>
+  </div>
+  <div class="col-6">
+    <div class="card" style="width:100%">
+      <div class = "card-body">
+        <div class = "row">
+          <div class = "col text-center">
+            <h5>Professor Ratings</h5>
+          </div>
+        </div>
+        <p></p>
+        <p></p>
+        <div class = "row">
+          <div class = "col-4 text-center">
+            <%= form.label :cat1 %>
+          </div>
+          <div class = "col-8">
+            <%= select(:review, :professor_cat1, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]) %>
+          </div>
+        </div>
+        <div class = "row">
+          <div class = "col-4 text-center">
+            <%= form.label :cat2 %>
+          </div>
+          <div class = "col-8">
+            <%= select(:review, :professor_cat2, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]) %>
+          </div>
+        </div>
+        <div class="row">
+          <div class = "col-4 text-center">
+            <%= form.label :cat3 %>
+          </div>
+          <div class = "col-8">
+            <%= select(:review, :professor_cat3, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]) %>
+          </div>
+        </div>
+        <div class = "row">
+          <div class = "col-4 text-center">
+            <%= form.label :cat4 %>
+          </div>
+          <div class = "col-8">
+            <%= select(:review, :professor_cat4, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]) %>
+          </div>
+        </div>
+        <div class = "row">
+          <div class = "col-4 text-center">
+            <%= form.label :cat5 %>
+          </div>
+          <div class = "col-8">
+            <%= select(:review, :professor_cat5, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]) %>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  </div>
+
+  
+  
+  
+  <p></p>
+
+  <div class = "form-group">
+    <div class = "row">
+      <div class = "col-12">
+        <%= form.label :course_content %>
+      </div>
+    </div>
+    <div class ="row">
+      <div class = "col-12">
+        <%= form.text_area :course_content, class:"form-control", rows:"6", style: "width: 100%"  %>
+      </div>
     </div>
   </div>
   
-  <div class ="row">
-    <div class ="col-12">
-      <%= form.label :"Professor's Strength" %>
+  <div class = "form-group">
+    <div class ="row">
+      <div class ="col-12">
+        <%= form.label :"Professor's Strength" %>
+      </div>
     </div>
-  </div>
-  <div class ="row">
-    <div class ="col-12">
-      <%= form.text_area :professor_strength, rows:"6", style: "width: 100%" %>
+    <div class ="row">
+      <div class ="col-12">
+        <%= form.text_area :professor_strength, class:"form-control", rows:"6", style: "width: 100%" %>
+      </div>
     </div>
   </div>
 
-  <div class ="row">
-    <div class = "col-12">
-      <%= form.label :"Things to Improve"%>
+  <div class = "form-group">
+    <div class ="row">
+      <div class = "col-12">
+        <%= form.label :"Things to Improve"%>
+      </div>
+    </div>
+    <div class = "row">
+      <div class = "col-12">
+        <%= form.text_area :professor_improvement, class:"form-control", rows:"6", style: "width: 100%" %>
+      </div>
     </div>
   </div>
-  <div class = "row">
-    <div class = "col-12">
-      <%= form.text_area :professor_improvement, rows:"6", style: "width: 100%" %>
-    </div>
-  </div>
+
 </fieldset>  
-  <hr>
+  
   <div class = "row">
     <div class = "col-4 text-center">
         
@@ -263,7 +273,7 @@ var course_selected = false;
     <div class = "col-4 text-center">
       <div class="actions">
         <div class = "real-submit">
-          <%= form.submit 'Submit Review', class: 'form-submission btn btn-primary' %>
+          <%= form.submit 'Submit Review', class: 'form-submission btn btn-outline-primary btn-block' %>
         </div>
       </div>
     </div>

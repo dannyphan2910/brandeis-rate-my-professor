@@ -1,69 +1,32 @@
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/themes/bars-1to10.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/themes/bars-square.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/jquery.barrating.min.js"></script>
 
 <script>
+var ratingCategories = [
+  '#review_e_course_cat1',
+  '#review_e_professor_cat1',
+  '#review_e_course_cat2',
+  '#review_e_professor_cat2',
+  '#review_e_course_cat3',
+  '#review_e_professor_cat3',
+  '#review_e_course_cat4',
+  '#review_e_professor_cat4',
+  '#review_e_course_cat5',
+  '#review_e_professor_cat5'
+]
+
 $(function() {
+  ratingCategories.forEach(function(e){
 
-
-  $(function() {
-    $('#review_e_course_cat1').barrating({
-      theme: 'bars-1to10'
+    $(function() {
+      $(e).barrating({
+        theme: 'bars-square',
+        showValues: true,
+        showSelectedRating: false
+      });
     });
-  });
 
-  $(function() {
-    $('#review_e_professor_cat1').barrating({
-      theme: 'bars-1to10'
-    });
-  });
-
-  $(function() {
-    $('#review_e_course_cat2').barrating({
-      theme: 'bars-1to10'
-    });
-  });
-
-  $(function() {
-    $('#review_e_professor_cat2').barrating({
-      theme: 'bars-1to10'
-    });
-  });
-
-  $(function() {
-    $('#review_e_course_cat3').barrating({
-      theme: 'bars-1to10'
-    });
-  });
-
-  $(function() {
-    $('#review_e_professor_cat3').barrating({
-      theme: 'bars-1to10'
-    });
-  });
-
-  $(function() {
-    $('#review_e_course_cat4').barrating({
-      theme: 'bars-1to10'
-    });
-  });
-
-  $(function() {
-    $('#review_e_professor_cat4').barrating({
-      theme: 'bars-1to10'
-    });
-  });
-
-  $(function() {
-    $('#review_e_course_cat5').barrating({
-      theme: 'bars-1to10'
-    });
-  });
-
-  $(function() {
-    $('#review_e_professor_cat5').barrating({
-      theme: 'bars-1to10'
-    });
   });
 });
 
@@ -86,187 +49,227 @@ $(function() {
 
 
   <fieldset>
-    
+  <div class = "card", style = "width:100%">
+    <div class = "card-body">
+      <div class = "form-group">
+        <div class = "row">
+          <div class = "col-3">
+            <h5> <label for="course_year"> Year Taught... </label></h5>
+          </div>
+          <div class = "col-9">
+            <%= @course.year %>, <%= @course.semester %>
+            <%= form.number_field :course_year, value: @course.year, disabled:'disabled', style:"display:none" %>
+            <%= form.text_field :course_year, value: @course.semester, disabled:'disabled', style:"display:none" %>
+          </div>
+        </div>
+      </div>
 
-  <div class = "row">
-    <div class = "col-3">
-      <h5> <label for="course_year"> Year Taught... </label></h5>
-    </div>
-    <div class = "col-9">
-      <%= @course.year %>, <%= @course.semester %>
-      <%= form.number_field :course_year, value: @course.year, disabled:'disabled', style:"display:none" %>
-      <%= form.text_field :course_year, value: @course.semester, disabled:'disabled', style:"display:none" %>
-    </div>
-  </div>
-
-  <div class = "row">
-    <div class = "col-3">
-      <h5> <label for="course_id"> Review For... </label></h5>
-    </div>
-    <div class = "col-9">
+      <div class = "form-group">
+        <div class = "row">
+          <div class = "col-3">
+            <h5> <label for="course_id"> Review For... </label></h5>
+          </div>
+          <div class = "col-9">
+            
+            <%= @course.show_course_info %>
+            <%= form.number_field :course_id, value: @course.id, disabled: 'disabled', style:"display:none" %>
+            </div>
+        </div>
+      </div>
       
-      <%= @course.show_course_info %>
-      <%= form.number_field :course_id, value: @course.id, disabled: 'disabled', style:"display:none" %>
+      <div class = "form-group">
+        <div class = "row">
+          <div class = "col-3">
+            <h5><%= form.label :professor_id %></h5>
+          </div>
+          <div class = "col-9">
+            <%= @professor.show_name  %>
+            <%= form.number_field :professor_id, value: @professor.id, disabled:'disabled', style:"display:none" %>
+          </div>
+        </div>
       </div>
-  </div>
 
-  
-  <div class = "row">
-    <div class = "col-3">
-      <h5><%= form.label :professor_id %></h5>
-    </div>
-    <div class = "col-9">
-      <%= @professor.show_name  %>
-      <%= form.number_field :professor_id, value: @professor.id, disabled:'disabled', style:"display:none" %>
-    </div>
-  </div>
-
-
-  <div class = "row"> 
-    <div class = "col-3">
-      <h5><%= form.label :title %></h5>
-    </div>
-    <div class = "col-9">
-      <%= form.text_field :title, value: @review.title, style: "width:100%" %>
-    </div>
-  </div>
-
-  
-  <hr>
-  <div class = "row">
-      <div class = "col-6 text-center">
-        <h5>Course Ratings</h5>
+      <div class = "form-group">
+        <div class = "row"> 
+          <div class = "col-3">
+            <h5><%= form.label :title %></h5>
+          </div>
+          <div class = "col-9">
+            <%= form.text_field :title, class:"form-control", value: @review.title, style: "width:100%" %>
+          </div>
+        </div>
       </div>
-      <div class = "col-6 text-center">
-        <h5>Professor Ratings</h5>
-      </div>
+    </div>
   </div>
-  <p></p>
+
   <p></p>
   
-  <div class ="row">
-    <div class = "col-2 text-center">
-      <%= form.label :cat1 %>
-    </div>
-    <div class = "col-4">
-      <%= form.select :e_course_cat1, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat1) %>
-      
-    </div>
-    <div class = "col-2 text-center">
-      <%= form.label :cat1 %>
-    </div>
-    <div class = "col-4">
-      <%= form.select :e_professor_cat1, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat1) %>
-    </div>
-  </div>
-
-
-  <div class ="row">   
-
-    <div class = "col-2 text-center">
-      <%= form.label :cat2 %>
-    </div>
-    <div class = "col-4">
-      <%= form.select :e_course_cat2, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat2) %>
-    </div>
-    <div class = "col-2 text-center">
-      <%= form.label :cat2 %>
-    </div>
-    <div class = "col-4">
-      <%= form.select :e_professor_cat2, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat2) %>
-    </div>
-  </div>
-        
-  <div class ="row">
-    <div class = "col-2 text-center">
-      <%= form.label :cat3 %>
-    </div>
-    <div class = "col-4">
-      <%= form.select :e_course_cat3, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat3) %>
-    </div>
-    <div class = "col-2 text-center">
-      <%= form.label :cat3 %>
-    </div>
-    <div class = "col-4">
-      <%= form.select :e_professor_cat3, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat3) %>
-    </div>
-  </div>
-
-  <div class ="row">
-    <div class = "col-2 text-center">
-      <%= form.label :cat4 %>
-    </div>
-    <div class = "col-4">
-      <%= form.select :e_course_cat4, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat4) %>
-    </div>
-    <div class = "col-2 text-center">
-      <%= form.label :cat4 %>
-    </div>
-    <div class = "col-4">
-      <%= form.select :e_professor_cat4, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat4) %>
-    </div>
-  </div>
-
-  <div class ="row">
-    <div class ="col-2 text-center">
-      <%= form.label :cat5 %> 
-    </div>
-    <div class ="col-4">
-      <%= form.select :e_course_cat5, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat5) %>
-    </div>
-    <div class = "col-2 text-center">
-      <%= form.label :cat5 %>
-    </div>
-    <div class = "col-4">
-      <%= form.select :e_professor_cat5, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat5) %>
-    </div>
-  </div>
-
-  <hr>
-
-
-
-
-
-
-      
   <div class = "row">
-    <div class = "col-12">
-      <%= form.label :course_content %>
+  <div class = "col-6">
+  <div class = "card" style = "width: 100%">
+    <div class = "card-body">
+      <div class = "row">
+          <div class = "col text-center">
+            <h5>Course Ratings</h5>
+          </div>
+      </div>
+      <p></p>
+      <p></p>
+      
+      <div class ="row">
+        <div class = "col-4 text-center">
+          <%= form.label :cat1 %>
+        </div>
+        <div class = "col-8">
+          <%= form.select :e_course_cat1, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat1) %>
+          
+        </div>
+      </div>
+
+
+      <div class ="row">   
+
+        <div class = "col-4 text-center">
+          <%= form.label :cat2 %>
+        </div>
+        <div class = "col-8">
+          <%= form.select :e_course_cat2, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat2) %>
+        </div>
+      </div>
+            
+      <div class ="row">
+        <div class = "col-4 text-center">
+          <%= form.label :cat3 %>
+        </div>
+        <div class = "col-8">
+          <%= form.select :e_course_cat3, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat3) %>
+        </div>
+      </div>
+
+      <div class ="row">
+        <div class = "col-4 text-center">
+          <%= form.label :cat4 %>
+        </div>
+        <div class = "col-8">
+          <%= form.select :e_course_cat4, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat4) %>
+        </div>
+      </div>
+
+      <div class ="row">
+        <div class ="col-4 text-center">
+          <%= form.label :cat5 %> 
+        </div>
+        <div class ="col-8">
+          <%= form.select :e_course_cat5, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat5) %>
+        </div>
+      </div>
     </div>
   </div>
-  <div class ="row">
-    <div class = "col-12">
-      <%= form.text_area :course_content, value: @course_rating.content , rows:"6", style: "width: 100%"  %>
+  </div>
+  <div class = "col-6">
+    <div class = "card" style="width:100%">
+      <div class = "card-body">
+        <div class = "row">
+          <div class ="col text-center">
+            
+            <h5>Professor Ratings</h5>
+            
+          </div>
+        </div>
+        <p></p>
+        <p></p>
+        <div class = "row">
+          <div class = "col-4 text-center">
+            <%= form.label :cat1 %>
+          </div>
+          <div class = "col-8">
+            <%= form.select :e_professor_cat1, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat1) %>
+          </div>
+        </div>
+        <div class = "row">
+          <div class = "col-4 text-center">
+            <%= form.label :cat2 %>
+          </div>
+          <div class = "col-8">
+            <%= form.select :e_professor_cat2, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat2) %>
+          </div>
+        </div>
+        <div class = "row">
+          <div class = "col-4 text-center">
+            <%= form.label :cat3 %>
+          </div>
+          <div class = "col-8">
+            <%= form.select :e_professor_cat3, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat3) %>
+          </div>
+        </div>
+        <div class = "row">
+          <div class = "col-4 text-center">
+            <%= form.label :cat4 %>
+          </div>
+          <div class = "col-8">
+            <%= form.select :e_professor_cat4, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat4) %>
+          </div>
+        </div>
+        <div class = "row">
+          <div class = "col-4 text-center">
+            <%= form.label :cat5 %>
+          </div>
+          <div class = "col-8">
+            <%= form.select :e_professor_cat5, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat5) %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  
+  <p></p>
+
+
+
+
+
+
+  <div class = "form-group">  
+    <div class = "row">
+      <div class = "col-12">
+        <%= form.label :course_content %>
+      </div>
+    </div>
+    <div class ="row">
+      <div class = "col-12">
+        <%= form.text_area :course_content, class:"form-control", value: @course_rating.content , rows:"6", style: "width: 100%"  %>
+      </div>
     </div>
   </div>
   
-  <div class ="row">
-    <div class ="col-12">
-      <%= form.label :"Professor's Strength" %>
+  <div class = "form-group">
+    <div class ="row">
+      <div class ="col-12">
+        <%= form.label :"Professor's Strength" %>
+      </div>
+    </div>
+    <div class ="row">
+      <div class ="col-12">
+        <%= form.text_area :professor_strength, class:"form-control", value: @professor_rating.strength, rows:"6", style: "width: 100%" %>
+      </div>
     </div>
   </div>
-  <div class ="row">
-    <div class ="col-12">
-      <%= form.text_area :professor_strength, value: @professor_rating.strength, rows:"6", style: "width: 100%" %>
+  
+  <div class = "form-group">
+    <div class ="row">
+      <div class = "col-12">
+        <%= form.label :"Things to Improve"%>
+      </div>
+    </div>
+    <div class = "row">
+      <div class = "col-12">
+        <%= form.text_area :professor_improvement, class:"form-control", value: @professor_rating.improvement, rows:"6", style: "width: 100%" %>
+      </div>
     </div>
   </div>
-
-  <div class ="row">
-    <div class = "col-12">
-      <%= form.label :"Things to Improve"%>
-    </div>
-  </div>
-  <div class = "row">
-    <div class = "col-12">
-      <%= form.text_area :professor_improvement, value: @professor_rating.improvement, rows:"6", style: "width: 100%" %>
-    </div>
-  </div>
-
 
   </fieldset> 
-
-  <hr>
 
   <div class = "row">
     <div class = "col-4 text-center">
@@ -274,9 +277,9 @@ $(function() {
     </div>
     <div class = "col-4 text-center">
       <div class="actions">
-        <div class = "real-submit">
-          <%= form.submit 'Submit Review', class: 'form-submission btn btn-primary' %>
-        </div>
+        
+          <%= form.submit 'Confirm', class: 'form-submission btn btn-outline-warning btn-block' %>
+        
       </div>
     </div>
     <div class = "col-4 text-center">
