@@ -1,0 +1,21 @@
+<div class="messenger-container row">
+	<div class="col-md-3">
+		<div class="card rounded-0">
+			<div class="card-header bg-transparent border border-light">
+				<span class="h2">My Inbox</span>
+			</div>
+			<div class="card-body p-0">
+				<ul class="list-group overflow-auto" style="max-height: 82vh;" id="users-list">
+					<%= render 'users_list', users: @users %>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-9">
+		<ul id="conversations-list">
+			<% @conversations.each do |conversation| %>
+				<%= render 'conversations/conversation', conversation: conversation, user: current_user %>
+			<% end %>
+		</ul>
+	</div>
+</div>

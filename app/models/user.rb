@@ -1,17 +1,23 @@
 class User < ApplicationRecord
-    include ActiveModel::SecurePassword
-    has_secure_password
+    # Include default devise modules. Others available are:
+    # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+    devise :database_authenticatable, :registerable,
+        :recoverable, :rememberable, :validatable
     
     has_many :rate_ups
     has_many :rate_downs
     has_many :reviews
     has_many :enrollments
     has_many :general_courses, through: :enrollments
+    has_many :messages
+    has_many :conversations, foreign_key: :sender_id
 
     validates :first_name, presence: true
     validates :last_name, presence: true
     validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP } 
     validates :password, presence: true, confirmation: { case_sensitive: true }
+
+    scope :conversation_with, -> (user_id) { where.not(id: user_id).joins("INNER JOIN conversations ON conversations.sender_id = users.id OR conversations.recipient_id = users.id") }
 
     def show_full_name
         "#{first_name} #{last_name}"

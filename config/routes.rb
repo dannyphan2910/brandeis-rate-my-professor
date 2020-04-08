@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  devise_for :users, path: '/', path_names: { sign_up: 'users/new', sign_in: 'login', sign_out: 'logout' }, controllers: {
+    sessions: 'users/sessions'
+  }
+
+  resources :conversations do
+    member do
+      post :close
+    end
+    resources :messages, only: [:create]
+  end
   resources :enrollments
   resources :rate_downs
   resources :rate_ups
@@ -10,7 +20,6 @@ Rails.application.routes.draw do
   resources :reviews
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  get :autocomplete, to: 'pages#autocomplete'
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   get 'welcome', to: 'sessions#welcome'
@@ -24,6 +33,8 @@ Rails.application.routes.draw do
 
   get 'view_profile', to: 'profile#view_profile'
   post 'view_profile', to: 'profile#view_profile'
+
+  get 'messenger_home', to: 'messenger#show'
 
   root 'sessions#welcome'
 end

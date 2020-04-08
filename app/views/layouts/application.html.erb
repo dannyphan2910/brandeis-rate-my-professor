@@ -14,6 +14,19 @@
   <body>
     <%= render 'shared/nav' %>
 
+    <% if notice %>
+      <div class="alert alert-success w-100 text-center fade show" style="position:absolute;z-index: 99;"><%= notice %></div>
+    <% end %>
+    <% if alert %>
+      <div class="alert alert-danger w-100 text-center fade show" style="position:absolute;z-index: 99;"><%= alert %></div>
+    <% end %>
+
+    <script>
+      setTimeout(function() {
+        $('.alert').alert('close')
+      }, 3000);
+    </script>
+
     <div class="w-100 h-100">
       <%= yield %>
     </div>

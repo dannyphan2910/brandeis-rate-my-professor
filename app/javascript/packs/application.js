@@ -39,34 +39,19 @@ $(function() {
     $('[data-toggle="collapse"]').collapse();
 });
 
-$(function() {
-    var availableTags = [
-        "ActionScript",
-        "AppleScript",
-        "Asp",
-        "BASIC",
-        "C",
-        "C++",
-        "Clojure",
-        "COBOL",
-        "ColdFusion",
-        "Erlang",
-        "Fortran",
-        "Groovy",
-        "Haskell",
-        "Java",
-        "JavaScript",
-        "Lisp",
-        "Perl",
-        "PHP",
-        "Python",
-        "Ruby",
-        "Scala",
-        "Scheme"
-      ];
-    $('#term').autocomplete({
-        source: availableTags
+(function() {
+    $(document).on('click', '.toggle-window', function(e) {
+      e.preventDefault();
+      var panel = $(this).parent().parent();
+      var messages_list = panel.find('.messages-list');
+  
+      panel.find('.card-body').toggle();
+      panel.attr('class', 'card border-info');
+  
+      if (panel.find('.card-body').is(':visible')) {
+        var height = messages_list[0].scrollHeight;
+        messages_list.scrollTop(height);
+      }
     });
-});
-
+})();
 
