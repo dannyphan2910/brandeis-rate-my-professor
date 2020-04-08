@@ -8,6 +8,10 @@ class GeneralCourse < ApplicationRecord
 
     scope :search, -> (term) { where("UPPER(course_code) LIKE ? OR UPPER(course_title) LIKE ?", "%#{term.upcase}%", "%#{term.upcase}%").order("course_code ASC") }
 
+    def show_course_info
+        "#{course_code}: #{course_title}"
+    end
+    
     def self.search_all term
         courses = self.search term
         result = []

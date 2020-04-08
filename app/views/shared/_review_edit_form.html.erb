@@ -3,7 +3,7 @@
         <div class="modal-header">
             <h4 class="modal-title w-100 font-weight-bold" id="exampleModalLabel">
                 <% if logged_in? %>
-                    <%= current_user.first_name %>'s Review Form 
+                    <%= current_user.first_name %>'s Review Edit
                 <% end %>
             </h4>
 
@@ -14,7 +14,7 @@
         </div>
         <div class="modal-body">
         
-                <%= render partial: 'reviews/form', locals: {review: Review.new}  %>
+                <%= render partial: 'reviews/edit_form', locals: {review: this_review} %>
             
         </div>
 

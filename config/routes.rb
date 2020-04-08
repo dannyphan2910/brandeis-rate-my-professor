@@ -7,7 +7,11 @@ Rails.application.routes.draw do
   resources :courses
   resources :professor_ratings
   resources :course_ratings
-  resources :reviews
+  resources :reviews do
+    collection do
+      get :open_edit_modal
+    end
+  end
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   get :autocomplete, to: 'pages#autocomplete'
@@ -25,5 +29,8 @@ Rails.application.routes.draw do
   get 'view_profile', to: 'profile#view_profile'
   post 'view_profile', to: 'profile#view_profile'
 
+  get 'filter_course_by_year' => 'reviews#filter_course_by_year'
+  get 'filter_professor_by_course' => 'reviews#filter_professor_by_course'
+  get 'open_edit_modal' => 'reviews#open_edit_modal'
   root 'sessions#welcome'
 end

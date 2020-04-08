@@ -9,7 +9,7 @@ require("@rails/activestorage").start()
 require("channels")
 require('jquery')
 require("jquery-ui")
-require('rateyo')
+require("jquery-bar-rating")
 require('js-autocomplete')
 
 // Uncomment to copy all static images under ../images to the output folder and reference
@@ -68,5 +68,23 @@ $(function() {
         source: availableTags
     });
 });
-
+$(function(){
+    $("select#review_course_id").on("change", function(){
+        $.ajax({
+            url: "/filter_professor_by_course",
+            type: "GET",
+            data: {gcname: $("select#review_course_id").val(), year: $("select#review_course_year").val()}
+        });
+    });
+});
+  
+  $(function(){
+    $("select#review_course_year").on("change",function(){
+      $.ajax({
+        url: "/filter_course_by_year",
+        type: "GET",
+        data: {year: $("select#review_course_year").val()}
+      });
+    });
+  });
 
