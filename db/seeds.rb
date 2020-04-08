@@ -10,9 +10,12 @@ User.delete_all
 Review.delete_all
 CourseRating.delete_all
 ProfessorRating.delete_all
+RateUp.delete_all
+RateDown.delete_all
 Course.delete_all
 GeneralCourse.delete_all
 Professor.delete_all
+Enrollment.delete_all
 
 require 'json'
 
@@ -29,7 +32,7 @@ subject_hash.each do |subject|
     subjects.push(subject['name'])
 end
 
-200.times do 
+100.times do 
     u = User.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, password: Faker::Internet.password(min_length: 10, max_length: 20))
 end
 
@@ -74,7 +77,7 @@ course_hash.each do |course|
     course_code = course['code'].split(' ')[0]
     if assign_hash.keys.include? course_code
         gen_c = GeneralCourse.create(course_code: course['code'], course_title: course['name'], course_description: course['description'])
-        5.times do 
+        4.times do 
             p_id = Professor.where(dept_name: assign_hash[course_code]).sample.id
             c = Course.create(professor_id: p_id, semester: ['Fall', 'Spring'].sample, year: Faker::Number.between(from: 2005, to: 2020), general_course_id: gen_c.id)
         end
@@ -84,7 +87,15 @@ end
 
 2000.times do
     c_id = Course.all.sample.id
-    r = Review.create(user_id: User.all.sample.id, course_id: c_id, professor_id: Course.find(c_id).professor.id, title: Faker::Movie.quote, rate_up: Faker::Number.between(from: 1, to: 50), rate_down: Faker::Number.between(from: 1, to: 50))
+    r = Review.create(user_id: User.all.sample.id, course_id: c_id, professor_id: Course.find(c_id).professor.id, title: Faker::Movie.quote)
     course_r = CourseRating.create(review_id: r.id, cat1: Faker::Number.between(from: 1, to: 5), cat2: Faker::Number.between(from: 1, to: 5), cat3: Faker::Number.between(from: 1, to: 5), cat4: Faker::Number.between(from: 1, to: 5), cat5: Faker::Number.between(from: 1, to: 5), content: Faker::Quote.famous_last_words)
     prof_r = ProfessorRating.create(review_id: r.id, cat1: Faker::Number.between(from: 1, to: 5), cat2: Faker::Number.between(from: 1, to: 5), cat3: Faker::Number.between(from: 1, to: 5), cat4: Faker::Number.between(from: 1, to: 5), cat5: Faker::Number.between(from: 1, to: 5), strength: Faker::Quote.famous_last_words, improvement: Faker::Quote.famous_last_words)
+
+    rand(0..5).times do
+        vote_up = RateUp.create(user_id: User.all.sample.id, review_id: r.id)
+    end
+
+    rand(0..5).times do
+        vote_down = RateDown.create(user_id: User.all.sample.id, review_id: r.id)
+    end
 end

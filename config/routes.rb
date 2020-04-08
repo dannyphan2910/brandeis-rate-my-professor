@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :enrollments
+  resources :rate_downs
+  resources :rate_ups
   resources :general_courses
   resources :professors
   resources :courses
@@ -24,6 +27,8 @@ Rails.application.routes.draw do
   post 'search', to: 'search#search_result'
 
   get 'view_profile', to: 'profile#view_profile'
+  post 'view_profile', to: 'profile#view_profile'
+
   get 'filter_course_by_year' => 'reviews#filter_course_by_year'
   get 'filter_professor_by_course' => 'reviews#filter_professor_by_course'
   get 'open_edit_modal' => 'reviews#open_edit_modal'

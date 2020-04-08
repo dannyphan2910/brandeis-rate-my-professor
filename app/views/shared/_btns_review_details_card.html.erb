@@ -1,0 +1,30 @@
+<div class="interaction-info d-flex justify-content-end align-items-center mx-3 mb-3 mt-1">
+	<div class="rate-up mr-3">
+		<% if current_user %>
+			<%= link_to rate_ups_path(review_id: review.id), method: 'post', remote: true, class: "thumbs-up" do %>
+				<% if current_user.has_rated_up(review.id) %>
+					<i class="fas fa-thumbs-up mr-1 thumbs-up-active"></i>
+				<% else %>
+					<i class="fas fa-thumbs-up mr-1"></i>
+				<% end %>
+			<% end %>
+		<% else %>
+			<i class="fas fa-thumbs-up mr-1 thumbs-up-active"></i>
+		<% end %>
+		<%= review.rate_up %>
+	</div>
+	<div class="rate-down">
+		<% if current_user %>
+			<%= link_to rate_downs_path(review_id: review.id), method: 'post', remote: true, class: "thumbs-down" do %>
+				<% if current_user.has_rated_down(review.id) %>
+					<i class="fas fa-thumbs-down mr-1 thumbs-down-active"></i>
+				<% else %>
+					<i class="fas fa-thumbs-down mr-1"></i>
+				<% end %>
+			<% end %>
+		<% else %>
+			<i class="fas fa-thumbs-down mr-1 thumbs-down-active"></i>
+		<% end %>
+		<%= review.rate_down %>
+	</div>
+</div>

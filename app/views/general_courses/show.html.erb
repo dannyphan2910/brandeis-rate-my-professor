@@ -16,8 +16,8 @@
 				<% @courses.each do |course| %>
 					<li class="list-group-item">
 						<a class="d-flex justify-content-between align-items-center" onclick=<%="get_focus(#{course.id})"%>>
-						<%= course.show_course_offering %>
-						<span class="badge badge-primary badge-pill"><%= course.reviews.length %></span>
+							<%= course.show_course_offering %>
+							<span class="badge badge-primary badge-pill"><%= course.reviews.length %></span>
 						</a>
 					</li>
 				<% end %>
@@ -45,26 +45,36 @@
 <div class="all-reviews-container m-5">
 	<div class="accordion" id="accordion">
 		<% @courses.each do |course| %>
-		<div class="collapse-by-offering" id=<%= "#collapse-offering-#{course.id}" %>>
-			<div class="card-header bg-transparent" id=<%= "heading#{course.id}"%>>
-				<h2 class="mb-0">
-					<a data-toggle="collapse" data-target=<%= "#collapse#{course.id}"%> <%= "#collapse#{course.id}"%> aria-expanded="true" aria-controls=<%= "collapse#{course.id}"%>>
-						<i class="fa fa-caret-down" aria-hidden="true"></i><span class="p ml-2 text-muted"><%= course.show_course_offering%></span>
-					</a>
-				</h2>
-			</div>
-			<div id=<%= "collapse#{course.id}"%> class="collapse" aria-labelledby=<%= "heading#{course.id}"%> data-parent="#accordion">
-				<div class="card-body">
-					<% course.reviews.ordered_by_rate_up.each do |review| %>
-						<%= render 'shared/review_details_card', review: review %>
-					<% end %>
+			<div class="collapse-by-offering" id=<%= "#collapse-offering-#{course.id}" %>>
+				<div class="card-header bg-transparent" id=<%= "heading#{course.id}"%>>
+					<h2 class="mb-0">
+						<a data-toggle="collapse" data-target=<%= "#collapse#{course.id}"%> <%= "#collapse#{course.id}"%> aria-expanded="true" aria-controls=<%= "collapse#{course.id}"%>>
+							<i class="fa fa-caret-down" aria-hidden="true"></i><span class="p ml-2 text-muted"><%= course.show_course_offering%></span>
+						</a>
+					</h2>
+				</div>
+				<div id=<%= "collapse#{course.id}"%> class="collapse" aria-labelledby=<%= "heading#{course.id}"%> data-parent="#accordion">
+					<div class="card-body">
+						<% course.reviews.ordered_by_rate_up.each do |review| %>
+							<%= render 'shared/review_details_card', review: review %>
+						<% end %>
+					</div>
 				</div>
 			</div>
-		</div>
 		<% end %>
 	</div>
 </div>
-
+<div class="dropdown-divider"></div>
+<div class="users-container m-5">
+	<h3>Past Students</h3>
+	<ul class="list-group">
+		<% @general_course.users.each do |user| %>
+			<li class="list-group-item">
+				<%= "#{user.show_full_name} (#{user.email})" %>
+			</li>
+		<% end %>
+	</ul>
+</div>
 <script>
 	function get_focus(course_id) {
 		console.log(course_id);
