@@ -3,7 +3,7 @@
 		<%= link_to "#{review.course.show_course_info} (#{review.course.show_course_offering})", "/general_courses/#{review.course.general_course_id}", class: 'text-muted' %>
 		<% if current_user && current_user.reviews.include?(review) %>
 			<div class="icons">
-				<%= link_to edit_review_path(id:review.id), , :class => "btn mr-3", :remote => true, "data-toggle" => "modal", "data-target" => "#editModal", style: 'font-size:20px' do %>
+				<%= link_to edit_review_path(id:review.id), class: "mr-3", :remote => true, "data-toggle" => "modal", "data-target" => "#editModal", style: 'font-size:20px' do %>
 					<i class="far fa-edit"></i>
 				<% end %>
 				<%= link_to  "/reviews/#{review.id}", method: 'delete', style: 'font-size:20px', :data => {:confirm => 'Would you like to delete this review?'} do %>
