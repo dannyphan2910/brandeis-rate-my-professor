@@ -12,6 +12,7 @@ require("jquery-ui")
 require("jquery-bar-rating")
 require('js-autocomplete')
 
+
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
 // or the `imagePath` JavaScript helper below.
@@ -68,7 +69,8 @@ $(function() {
         source: availableTags
     });
 });
-$(function(){
+
+$(document).on('turbolinks:load',function(){
     $("select#review_course_id").on("change", function(){
         $.ajax({
             url: "/filter_professor_by_course",
@@ -78,7 +80,7 @@ $(function(){
     });
 });
   
-  $(function(){
+  $(document).on('turbolinks:load',function(){
     $("select#review_course_year").on("change",function(){
       $.ajax({
         url: "/filter_course_by_year",
@@ -88,3 +90,4 @@ $(function(){
     });
   });
 
+  

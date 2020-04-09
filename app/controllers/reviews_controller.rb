@@ -18,6 +18,7 @@ class ReviewsController < ApplicationController
   # GET /reviews/new
   def new
     @review = Review.new
+    
   end
 
   # GET /reviews/1/edit
@@ -37,41 +38,53 @@ class ReviewsController < ApplicationController
   # POST /reviews
   # POST /reviews.json
   def create
+    @review = Review.new(review_params)
     form_input = params[:review]
-
     u_id = session[:user_id]
-    p_id = form_input[:professor_id]
     c_code = form_input[:course_id].split(":")[0]
     gc_id = GeneralCourse.find_by(course_code: c_code).id
     c_year = form_input[:course_year]
+    p_id = form_input[:professor_id]
     c_id = Course.find_by(general_course_id: gc_id, professor_id: p_id, year: c_year).id
-    t = form_input[:title]
+    
+    @review.course_id = c_id
+    @review.user_id = u_id
+    @review.professor_id = p_id
+    # form_input = params[:review]
 
-    @review = Review.new(user_id:u_id, course_id: c_id, professor_id: p_id, title: t)
+    # u_id = session[:user_id]
+    # p_id = form_input[:professor_id]
+    # c_code = form_input[:course_id].split(":")[0]
+    # gc_id = GeneralCourse.find_by(course_code: c_code).id
+    # c_year = form_input[:course_year]
+    # c_id = Course.find_by(general_course_id: gc_id, professor_id: p_id, year: c_year).id
+    # t = form_input[:title]
+
+    # @review = Review.new(user_id:u_id, course_id: c_id, professor_id: p_id, title: t)
     
     respond_to do |format|
       if @review.save
 
-        course_r = CourseRating.create(
-          review_id: @review.id, 
-          cat1: form_input[:course_cat1].to_i, 
-          cat2: form_input[:course_cat2].to_i, 
-          cat3: form_input[:course_cat3].to_i, 
-          cat4: form_input[:course_cat4].to_i, 
-          cat5: form_input[:course_cat5].to_i, 
-          content: form_input[:course_content]
-        )
+        # course_r = CourseRating.create(
+        #   review_id: @review.id, 
+        #   cat1: form_input[:course_cat1].to_i, 
+        #   cat2: form_input[:course_cat2].to_i, 
+        #   cat3: form_input[:course_cat3].to_i, 
+        #   cat4: form_input[:course_cat4].to_i, 
+        #   cat5: form_input[:course_cat5].to_i, 
+        #   content: form_input[:course_content]
+        # )
 
-        professor_r = ProfessorRating.create(
-          review_id: @review.id, 
-          cat1: form_input[:professor_cat1].to_i, 
-          cat2: form_input[:professor_cat2].to_i, 
-          cat3: form_input[:professor_cat3].to_i, 
-          cat4: form_input[:professor_cat4].to_i, 
-          cat5: form_input[:professor_cat5].to_i, 
-          strength: form_input[:professor_strength],
-          improvement: form_input[:professor_improvement]
-        )
+        # professor_r = ProfessorRating.create(
+        #   review_id: @review.id, 
+        #   cat1: form_input[:professor_cat1].to_i, 
+        #   cat2: form_input[:professor_cat2].to_i, 
+        #   cat3: form_input[:professor_cat3].to_i, 
+        #   cat4: form_input[:professor_cat4].to_i, 
+        #   cat5: form_input[:professor_cat5].to_i, 
+        #   strength: form_input[:professor_strength],
+        #   improvement: form_input[:professor_improvement]
+        # )
          
          format.js {render 'reviews/create'}
          format.json { render :show, status: :created, location: @review }
@@ -86,16 +99,16 @@ class ReviewsController < ApplicationController
   # PATCH/PUT /reviews/1.json
   def update
     
-    rid = params[:id]
-    ep = params[:review]
-    cr = CourseRating.find_by(review_id: rid)
-    cr.update(cat1:ep[:e_course_cat1], cat2:ep[:e_course_cat2], cat3: ep[:e_course_cat3], cat4:ep[:e_course_cat4], cat5: ep[:e_course_cat5], content: ep[:course_content])
-    pr = ProfessorRating.find_by(review_id: rid)
-    pr.update(cat1:ep[:e_professor_cat1], cat2:ep[:e_professor_cat2], cat3: ep[:e_professor_cat3], cat4:ep[:e_professor_cat4], cat5: ep[:e_professor_cat5], strength: ep[:professor_strength], improvement: ep[:professor_improvement])
+    # rid = params[:id]
+    # ep = params[:review]
+    # cr = CourseRating.find_by(review_id: rid)
+    # cr.update(cat1:ep[:e_course_cat1], cat2:ep[:e_course_cat2], cat3: ep[:e_course_cat3], cat4:ep[:e_course_cat4], cat5: ep[:e_course_cat5], content: ep[:course_content])
+    # pr = ProfessorRating.find_by(review_id: rid)
+    # pr.update(cat1:ep[:e_professor_cat1], cat2:ep[:e_professor_cat2], cat3: ep[:e_professor_cat3], cat4:ep[:e_professor_cat4], cat5: ep[:e_professor_cat5], strength: ep[:professor_strength], improvement: ep[:professor_improvement])
     
     
     respond_to do |format|
-      if @review.update(title: ep[:title])
+      if @review.update(review_edit_params)
         format.html { redirect_to '/view_profile', notice: 'Review was successfully updated.' }
         format.json { render :show, status: :ok, location: @review }
       else
@@ -162,10 +175,19 @@ class ReviewsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def review_params
       params.require(:review).permit(
-        :user_id, 
-        :title, 
-        :course_id, 
-        :professor_id,
+        :title,
+        :rate_up,
+        :rate_down,
+        professor_rating_attributes:[:cat1, :cat2, :cat3, :cat4, :cat5, :strength, :improvement],
+        course_rating_attributes:[:cat1, :cat2, :cat3, :cat4, :cat5, :content]
+      )
+    end
+
+    def review_edit_params
+      params.require(:review).permit(
+        :title,
+        professor_rating_attributes:[:id, :cat1, :cat2, :cat3, :cat4, :cat5, :strength, :improvement],
+        course_rating_attributes:[:id, :cat1, :cat2, :cat3, :cat4, :cat5, :content]
       )
     end
 end
