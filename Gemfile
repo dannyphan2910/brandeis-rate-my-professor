@@ -70,3 +70,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 #more efficient form creation gem 
 gem 'simple_form'
+
+#administrator side 
+gem 'rails_admin', '~> 2.0'
