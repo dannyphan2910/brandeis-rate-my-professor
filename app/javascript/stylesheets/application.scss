@@ -15,12 +15,13 @@ a, a:hover {
     cursor: pointer;
 }
 
-body::-webkit-scrollbar {
-    display: none;
-}
+// body::-webkit-scrollbar {
+//     display: none;
+// }
 
 body {
     -ms-overflow-style: none;
+    overflow:hidden;
 }
 
 // FOR sessions
@@ -230,3 +231,60 @@ nav {
       min-width: 800px;
     }
   }
+
+#site-content::-webkit-scrollbar {
+    width: 8px;
+}
+ 
+#site-content::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+ 
+#site-content::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+    background: #739ace;
+}
+
+#site-content{
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#editModal::-webkit-scrollbar {
+    width: 8px;
+}
+ 
+#editModal::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+ 
+#editModal::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+    background:white;
+}
+
+#editModal{
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+#formModal::-webkit-scrollbar {
+    width: 8px;
+}
+ 
+#formModal::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+ 
+#formModal::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+    background:white;
+}
+
+#formModal{
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
