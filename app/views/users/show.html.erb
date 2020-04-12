@@ -1,19 +1,25 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>First name:</strong>
-  <%= @user.first_name %>
-</p>
-
-<p>
-  <strong>Last name:</strong>
-  <%= @user.last_name %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<div class="header m-5">
+	<div class="row d-flex justify-content-start align-items-center">
+		<div class="col-1 ml-3">
+			<%= gravatar_for @user %>
+		</div>
+		<div class="col-4 text-left">
+			<h1><%= @user.show_full_name %></h1>
+			<h5><%= @user.email %></h5>
+		</div>
+		<div class="col text-right">
+			<%= button_to "Message", "/message/#{@user.id}", method: :post, remote: true, class: "btn btn-outline-primary btn-lg" %>
+		</div>
+	</div>
+</div>
+<div class="dropdown-divider"></div>
+<div class="reviews mx-5 row">
+	<div class="col-8">
+		<h1 class="my-5">Enrolled Courses</h1>
+		<ul>
+			<% @user_courses.each do |course| %>
+				<li><%= course.show_course_info %></li>
+			<% end %>
+		</ul>
+	</div>
+</div>

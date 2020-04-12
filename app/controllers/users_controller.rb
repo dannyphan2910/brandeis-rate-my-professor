@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @user_courses = @user.general_courses.order(:course_code)
   end
 
   # GET /users/new
