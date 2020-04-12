@@ -51,20 +51,10 @@ class ConversationsController < ApplicationController
     end
   end
 
-  def close
-    @conversation = Conversation.find(params[:id])
-
-    session[:conversations].delete(@conversation.id)
-
-    respond_to do |format|
-      format.js
-    end
-  end
-
   # DELETE /conversations/1
   # DELETE /conversations/1.json
   def destroy
-    session[:conversations].delete(@conversation.id)
+    session[:conversation] = nil
     @conversation.destroy
     
     @users = User.conversation_with(current_user.id).order("conversations.created_at DESC")
@@ -76,12 +66,11 @@ class ConversationsController < ApplicationController
 
   private
     def add_to_conversations
-      session[:conversations] ||= []
-      session[:conversations] << @conversation.id
+      session[:conversation] = @conversation.id
     end
 
     def conversated?
-      session[:conversations].include?(@conversation.id)
+      session[:conversation] == @conversation.id
     end
 
     # Use callbacks to share common setup or constraints between actions.

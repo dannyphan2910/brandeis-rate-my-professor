@@ -1,21 +1,58 @@
-<li>
-	<div class="card border-info" data-conversation-id="<%= conversation.id %>">
-		<div class="card-header">
-			<%= link_to conversation.opposed_user(user).email, '', class: 'toggle-window' %>
-			<%= link_to "x", close_conversation_path(conversation), class: "btn btn-default btn-xs float-right", remote: true, method: :post %>
-		</div>
-		<div class="card-body" style="display: none;">
-			<div class="messages-list">
-				<ul>
-					<%= render 'conversations/conversation_content', messages: conversation.messages, user: user %>
-				</ul>
-			</div>
-			<form class="new_message">
-        		<input name="conversation_id" type="hidden" value="<%= conversation.id %>">
-        		<input name="user_id" type="hidden" value="<%= user.id %>">
-        		<textarea name="body" class="form-control"></textarea>
-        		<input type="submit" class="btn btn-success" value="Send">
-      		</form>
+<div class="card rounded-0 border border-white conversation-container" data-conversation-id="<%= conversation.id %>">
+	<div class="card-header bg-transparent rounded-0 msg-header" style="height: 75px;">
+		<%= link_to "#{conversation.opposed_user(user).show_full_name ||= conversation.opposed_user(user).email}", user_path(conversation.opposed_user(user).id), method: :get, class: "h3 my-2 ml-2" %>
+	</div>
+	<div class="card-body msg-body" style="height:600px;">
+		<div class="messages-list">
+			<ul>
+				<%= render 'conversations/conversation_content', messages: conversation.messages, user: user %>
+			</ul>
 		</div>
 	</div>
-</li>
+	<div class="dropdown-divider mb-0"></div>
+	<div class="card-body msg-form pt-0" style="height: 50px;">
+		<div class="input-msg-container mx-4">
+			<form class="new_message row d-flex align-items-center">
+				<input name="conversation_id" type="hidden" value="<%= conversation.id %>">
+				<input name="user_id" type="hidden" value="<%= user.id %>">
+				<div class="col-11">
+					<% if !conversation.messages.any? %>
+						<div class="btns row d-flex align-items-center text-center mr-2">
+							<a class='col'>
+								<span class="badge badge-pill badge-warning"><%= "Hi #{conversation.opposed_user(user).first_name}!" %></span>
+							</a>
+							<a class='col'>
+								<span class="badge badge-pill badge-success"><%= "Hello! How are you today?" %></span>
+							</a>
+							<a class='col'>
+								<span class="badge badge-pill badge-info"><%= "Hi there! How’s it going?" %></span>
+							</a>
+							<a class='col'>
+								<span class="badge badge-pill badge-secondary"><%= "Hello. I am #{user.first_name}" %></span>
+							</a>
+							<a class='col'>
+								<span class="badge badge-pill badge-danger"><%= "Hey #{conversation.opposed_user(user).first_name}! Can we have a talk?" %></span>
+							</a>
+						</div>
+					<% else %>
+						<div class="mb-4"></div>
+					<% end %>
+					<textarea name="body" class="form-control overflow-auto" style="resize: none;"></textarea>
+				</div>
+				<div class="col-1 mt-4">
+					<%= button_tag class: "btn btn-lg bg-transparent btn-msg" do %>
+						<i class="fas fa-paper-plane fa-lg"></i>
+					<% end %>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script>
+$("a .badge").click(function(e) {
+  e.preventDefault();
+  var message = $(this).html();
+  $('textarea').val(message);
+});
+</script>

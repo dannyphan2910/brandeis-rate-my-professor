@@ -19,6 +19,15 @@ class User < ApplicationRecord
 
     scope :conversation_with, -> (user_id) { where.not(id: user_id).joins("INNER JOIN conversations ON conversations.sender_id = users.id OR conversations.recipient_id = users.id") }
 
+    def self.conversations_with_ordered_most_recent user_id
+        recipients = conversation_with(user_id)
+        recipients.sort_by { |recipient| 
+            Conversation.between(user_id, recipient.id).first.messages.any? ? 
+            Conversation.between(user_id, recipient.id).first.messages.maximum('created_at') : 
+            Conversation.between(user_id, recipient.id).first.created_at 
+        }.reverse 
+    end
+
     def show_full_name
         "#{first_name} #{last_name}"
     end

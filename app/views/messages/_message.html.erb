@@ -1,9 +1,9 @@
 <li>
-  <div class="row">
-    <div class="<%= user.id == message.user_id ? 'message-sent' : 'message-received' %>">
+  <div class="row <%= user.id == message.user_id ? 'd-flex justify-content-end' : 'd-flex justify-content-start' %>">
+    <div class="rounded-lg <%= user.id == message.user_id ? 'message-sent' : 'message-received' %>">
       <h6><%= message.user.show_full_name %></h6>
       <p><%= message.body %></p>
-      <small class="text-muted"><%= message.created_at %></small>
+      <small class="text-muted"><%= message.created_at.localtime.strftime("%H:%M:%S %m/%d/%Y") %></small>
     </div>
   </div>
 </li>
