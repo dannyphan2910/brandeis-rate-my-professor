@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :conversations do
     resources :messages, only: [:create]
   end
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :enrollments
   resources :rate_downs
   resources :rate_ups

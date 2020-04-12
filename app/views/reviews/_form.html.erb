@@ -6,16 +6,16 @@
 <script>
 
 var ratingFormCategories = [
-  '#review_course_cat1',
-  '#review_professor_cat1',
-  '#review_course_cat2',
-  '#review_professor_cat2',
-  '#review_course_cat3',
-  '#review_professor_cat3',
-  '#review_course_cat4',
-  '#review_professor_cat4',
-  '#review_course_cat5',
-  '#review_professor_cat5'
+  '.review_write_course_cat1',
+  '.review_write_professor_cat1',
+  '.review_write_course_cat2',
+  '.review_write_professor_cat2',
+  '.review_write_course_cat3',
+  '.review_write_professor_cat3',
+  '.review_write_course_cat4',
+  '.review_write_professor_cat4',
+  '.review_write_course_cat5',
+  '.review_write_professor_cat5'
 ]
 
 $(function() {
@@ -103,128 +103,134 @@ $(function() {
   <p></p>
   
   <div class = "row">
-  <div class = "col-6">
-  <div class = "card" style="width:100%">
-    <div class = "card-body">
-      <div class = "row">
-          <div class = "col text-center">
-            <h5>Course Ratings</h5>
+    <div class = "col-6">
+      <div class = "card" style="width:100%">
+        <div class = "card-body">
+          <div class = "row">
+              <div class = "col text-center">
+                <h5>Course Ratings</h5>
+              </div>
           </div>
-      </div>
 
-      <p></p>
-      <p></p>
-      
-      <div class ="row">
-        <div class = "col-4 text-center">
-          <%= form.label :cat1 %>
-        </div>
-        <div class = "col-8">
-          <%= select(:review, :course_cat1, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]) %>
-        </div>
-      </div>
-    
-
-    <div class ="row">   
-    
-      <div class = "col-4 text-center">
-        <%= form.label :cat2 %>
-      </div>
-      <div class = "col-8">
-        <%= select(:review, :course_cat2, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]) %>
-      </div>
-    </div>
+          <p></p>
+          <p></p>
           
-    <div class ="row">
-      <div class = "col-4 text-center">
-        <%= form.label :cat3 %>
-      </div>
-      <div class = "col-8">
-        <%= select(:review, :course_cat3, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]) %>
-      </div>
-    </div>
+        <% @course_rating = CourseRating.new %>
+        <%= form.fields_for :course_rating, @course_rating do |c_form| %>
+          <div class ="row">
+            <div class = "col-4 text-center">
+              <%= form.label :cat1 %>
+            </div>
+            <div class = "col-8">
+              <%= c_form.select :cat1, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]],{},{class:"review_write_course_cat1"} %>
+            </div>
+          </div>
+          
 
-    <div class ="row">
-      <div class = "col-4 text-center">
-        <%= form.label :cat4 %>
-      </div>
-      <div class = "col-8">
-        <%= select(:review, :course_cat4, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]) %>
-      </div>
-    </div>
+          <div class ="row">   
+          
+            <div class = "col-4 text-center">
+              <%= form.label :cat2 %>
+            </div>
+            <div class = "col-8">
+              <%= c_form.select :cat2, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]],{},{class:"review_write_course_cat2"} %>
+            </div>
+          </div>
+                
+          <div class ="row">
+            <div class = "col-4 text-center">
+              <%= form.label :cat3 %>
+            </div>
+            <div class = "col-8">
+              <%= c_form.select :cat3, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]],{},{class:"review_write_course_cat3"} %>
+            </div>
+          </div>
 
-    <div class ="row">
-      <div class ="col-4 text-center">
-        <%= form.label :cat5 %> 
-      </div>
-      <div class ="col-8">
-        <%= select(:review, :course_cat5, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]) %>
-      </div>
-    </div>
-  </div>
-  </div>
-  </div>
-  <div class="col-6">
-    <div class="card" style="width:100%">
-      <div class = "card-body">
-        <div class = "row">
-          <div class = "col text-center">
-            <h5>Professor Ratings</h5>
+          <div class ="row">
+            <div class = "col-4 text-center">
+              <%= form.label :cat4 %>
+            </div>
+            <div class = "col-8">
+              <%= c_form.select :cat4, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]],{},{class:"review_write_course_cat4"} %>
+            </div>
           </div>
+
+          <div class ="row">
+            <div class ="col-4 text-center">
+              <%= form.label :cat5 %> 
+            </div>
+            <div class ="col-8">
+              <%= c_form.select :cat5, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]],{},{class:"review_write_course_cat5"} %>
+            </div>
+          </div>
+        <% end %>
+          
         </div>
-        <p></p>
-        <p></p>
-        <div class = "row">
-          <div class = "col-4 text-center">
-            <%= form.label :cat1 %>
-          </div>
-          <div class = "col-8">
-            <%= select(:review, :professor_cat1, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]) %>
-          </div>
-        </div>
-        <div class = "row">
-          <div class = "col-4 text-center">
-            <%= form.label :cat2 %>
-          </div>
-          <div class = "col-8">
-            <%= select(:review, :professor_cat2, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]) %>
-          </div>
-        </div>
-        <div class="row">
-          <div class = "col-4 text-center">
-            <%= form.label :cat3 %>
-          </div>
-          <div class = "col-8">
-            <%= select(:review, :professor_cat3, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]) %>
-          </div>
-        </div>
-        <div class = "row">
-          <div class = "col-4 text-center">
-            <%= form.label :cat4 %>
-          </div>
-          <div class = "col-8">
-            <%= select(:review, :professor_cat4, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]) %>
-          </div>
-        </div>
-        <div class = "row">
-          <div class = "col-4 text-center">
-            <%= form.label :cat5 %>
-          </div>
-          <div class = "col-8">
-            <%= select(:review, :professor_cat5, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]) %>
-          </div>
-        </div>
-        
       </div>
     </div>
-  </div>
+    <div class="col-6">
+      <div class="card" style="width:100%">
+        <div class = "card-body">
+          <div class = "row">
+            <div class = "col text-center">
+              <h5>Professor Ratings</h5>
+            </div>
+          </div>
+          <p></p>
+          <p></p>
+          <% @professor_rating = ProfessorRating.new %>
+          <%= form.fields_for :professor_rating, @professor_rating do |p_form| %>
+            <div class = "row">
+              <div class = "col-4 text-center">
+                <%= form.label :cat1 %>
+              </div>
+              <div class = "col-8">
+                <%= p_form.select :cat1, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]],{},{class:"review_write_professor_cat1"} %>
+              </div>
+            </div>
+            <div class = "row">
+              <div class = "col-4 text-center">
+                <%= form.label :cat2 %>
+              </div>
+              <div class = "col-8">
+                <%= p_form.select :cat2, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]],{},{class:"review_write_professor_cat2"} %>
+              </div>
+            </div>
+            <div class="row">
+              <div class = "col-4 text-center">
+                <%= form.label :cat3 %>
+              </div>
+              <div class = "col-8">
+                <%= p_form.select :cat3, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]],{},{class:"review_write_professor_cat3"} %>
+              </div>
+            </div>
+            <div class = "row">
+              <div class = "col-4 text-center">
+                <%= form.label :cat4 %>
+              </div>
+              <div class = "col-8">
+                <%= p_form.select :cat4, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]],{},{class:"review_write_professor_cat4"} %>
+              </div>
+            </div>
+            <div class = "row">
+              <div class = "col-4 text-center">
+                <%= form.label :cat5 %>
+              </div>
+              <div class = "col-8">
+                <%= p_form.select :cat5, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]],{},{class:"review_write_professor_cat5"} %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
 
   
   
   
   <p></p>
-
+  <%= form.fields_for :course_rating, @course_rating do |c_form| %>
   <div class = "form-group">
     <div class = "row">
       <div class = "col-12">
@@ -233,11 +239,13 @@ $(function() {
     </div>
     <div class ="row">
       <div class = "col-12">
-        <%= form.text_area :course_content, class:"form-control", rows:"6", style: "width: 100%"  %>
+        <%= c_form.text_area :content, class:"form-control", rows:"6", style: "width: 100%"  %>
       </div>
     </div>
   </div>
+  <% end %>
   
+  <%= form.fields_for :professor_rating, @professor_rating do |p_form| %>
   <div class = "form-group">
     <div class ="row">
       <div class ="col-12">
@@ -246,10 +254,11 @@ $(function() {
     </div>
     <div class ="row">
       <div class ="col-12">
-        <%= form.text_area :professor_strength, class:"form-control", rows:"6", style: "width: 100%" %>
+        <%= p_form.text_area :strength, class:"form-control", rows:"6", style: "width: 100%" %>
       </div>
     </div>
   </div>
+  
 
   <div class = "form-group">
     <div class ="row">
@@ -259,11 +268,11 @@ $(function() {
     </div>
     <div class = "row">
       <div class = "col-12">
-        <%= form.text_area :professor_improvement, class:"form-control", rows:"6", style: "width: 100%" %>
+        <%= p_form.text_area :improvement, class:"form-control", rows:"6", style: "width: 100%" %>
       </div>
     </div>
   </div>
-
+  <% end %>
 </fieldset>  
   
   <div class = "row">

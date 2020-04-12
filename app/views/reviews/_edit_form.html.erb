@@ -4,16 +4,16 @@
 
 <script>
 var ratingCategories = [
-  '#review_e_course_cat1',
-  '#review_e_professor_cat1',
-  '#review_e_course_cat2',
-  '#review_e_professor_cat2',
-  '#review_e_course_cat3',
-  '#review_e_professor_cat3',
-  '#review_e_course_cat4',
-  '#review_e_professor_cat4',
-  '#review_e_course_cat5',
-  '#review_e_professor_cat5'
+  '.review_edit_course_cat1',
+  '.review_edit_professor_cat1',
+  '.review_edit_course_cat2',
+  '.review_edit_professor_cat2',
+  '.review_edit_course_cat3',
+  '.review_edit_professor_cat3',
+  '.review_edit_course_cat4',
+  '.review_edit_professor_cat4',
+  '.review_edit_course_cat5',
+  '.review_edit_professor_cat5'
 ]
 
 $(function() {
@@ -116,12 +116,14 @@ $(function() {
       <p></p>
       <p></p>
       
+      
+      <%= form.fields_for :course_rating, @course_rating do |c_form| %>
       <div class ="row">
         <div class = "col-4 text-center">
           <%= form.label :cat1 %>
         </div>
         <div class = "col-8">
-          <%= form.select :e_course_cat1, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat1) %>
+          <%= c_form.select :cat1, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat1), {},{class: "review_edit_course_cat1"} %>
           
         </div>
       </div>
@@ -133,7 +135,7 @@ $(function() {
           <%= form.label :cat2 %>
         </div>
         <div class = "col-8">
-          <%= form.select :e_course_cat2, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat2) %>
+          <%= c_form.select :cat2, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat2),{},{class: "review_edit_course_cat2"} %>
         </div>
       </div>
             
@@ -142,7 +144,7 @@ $(function() {
           <%= form.label :cat3 %>
         </div>
         <div class = "col-8">
-          <%= form.select :e_course_cat3, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat3) %>
+          <%= c_form.select :cat3, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat3),{},{class: "review_edit_course_cat3"} %>
         </div>
       </div>
 
@@ -151,7 +153,7 @@ $(function() {
           <%= form.label :cat4 %>
         </div>
         <div class = "col-8">
-          <%= form.select :e_course_cat4, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat4) %>
+          <%= c_form.select :cat4, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat4),{},{class: "review_edit_course_cat4"} %>
         </div>
       </div>
 
@@ -160,9 +162,12 @@ $(function() {
           <%= form.label :cat5 %> 
         </div>
         <div class ="col-8">
-          <%= form.select :e_course_cat5, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat5) %>
+          <%= c_form.select :cat5, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat5),{},{class: "review_edit_course_cat5"} %>
         </div>
       </div>
+
+      <% end %>
+
     </div>
   </div>
   </div>
@@ -178,12 +183,15 @@ $(function() {
         </div>
         <p></p>
         <p></p>
+
+        
+        <%= form.fields_for :professor_rating, @professor_rating do |p_form| %>
         <div class = "row">
           <div class = "col-4 text-center">
             <%= form.label :cat1 %>
           </div>
           <div class = "col-8">
-            <%= form.select :e_professor_cat1, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat1) %>
+            <%= p_form.select :cat1, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat1),{},{class: "review_edit_professor_cat1"}  %>
           </div>
         </div>
         <div class = "row">
@@ -191,7 +199,7 @@ $(function() {
             <%= form.label :cat2 %>
           </div>
           <div class = "col-8">
-            <%= form.select :e_professor_cat2, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat2) %>
+            <%= p_form.select :cat2, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat2),{},{class: "review_edit_professor_cat2"} %>
           </div>
         </div>
         <div class = "row">
@@ -199,7 +207,7 @@ $(function() {
             <%= form.label :cat3 %>
           </div>
           <div class = "col-8">
-            <%= form.select :e_professor_cat3, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat3) %>
+            <%= p_form.select :cat3, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat3),{},{class: "review_edit_professor_cat3"} %>
           </div>
         </div>
         <div class = "row">
@@ -207,7 +215,7 @@ $(function() {
             <%= form.label :cat4 %>
           </div>
           <div class = "col-8">
-            <%= form.select :e_professor_cat4, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat4) %>
+            <%= p_form.select :cat4, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat4),{},{class: "review_edit_professor_cat4"} %>
           </div>
         </div>
         <div class = "row">
@@ -215,9 +223,10 @@ $(function() {
             <%= form.label :cat5 %>
           </div>
           <div class = "col-8">
-            <%= form.select :e_professor_cat5, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat5) %>
+            <%= p_form.select :cat5, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat5),{},{class: "review_edit_professor_cat5"} %>
           </div>
         </div>
+        <% end %>
       </div>
     </div>
   </div>
@@ -229,7 +238,7 @@ $(function() {
 
 
 
-
+  <%= form.fields_for :course_rating, @course_rating do |c_form| %>
   <div class = "form-group">  
     <div class = "row">
       <div class = "col-12">
@@ -238,11 +247,13 @@ $(function() {
     </div>
     <div class ="row">
       <div class = "col-12">
-        <%= form.text_area :course_content, class:"form-control", value: @course_rating.content , rows:"6", style: "width: 100%"  %>
+        <%= c_form.text_area :content, class:"form-control", value: @course_rating.content , rows:"6", style: "width: 100%"  %>
       </div>
     </div>
   </div>
+  <% end %>
   
+  <%= form.fields_for :professor_rating, @professor_rating do |p_form| %>
   <div class = "form-group">
     <div class ="row">
       <div class ="col-12">
@@ -251,11 +262,12 @@ $(function() {
     </div>
     <div class ="row">
       <div class ="col-12">
-        <%= form.text_area :professor_strength, class:"form-control", value: @professor_rating.strength, rows:"6", style: "width: 100%" %>
+        <%= p_form.text_area :strength, class:"form-control", value: @professor_rating.strength, rows:"6", style: "width: 100%" %>
       </div>
     </div>
   </div>
   
+
   <div class = "form-group">
     <div class ="row">
       <div class = "col-12">
@@ -264,11 +276,11 @@ $(function() {
     </div>
     <div class = "row">
       <div class = "col-12">
-        <%= form.text_area :professor_improvement, class:"form-control", value: @professor_rating.improvement, rows:"6", style: "width: 100%" %>
+        <%= p_form.text_area :improvement, class:"form-control", value: @professor_rating.improvement, rows:"6", style: "width: 100%" %>
       </div>
     </div>
   </div>
-
+  <% end %>
   </fieldset> 
 
   <div class = "row">

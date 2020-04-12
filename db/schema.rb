@@ -113,6 +113,8 @@ ActiveRecord::Schema.define(version: 2020_04_06_181103) do
     t.integer "course_id"
     t.integer "professor_id"
     t.string "title"
+    t.integer "rate_up"
+    t.integer "rate_down"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

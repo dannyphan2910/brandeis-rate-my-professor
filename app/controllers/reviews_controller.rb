@@ -18,6 +18,7 @@ class ReviewsController < ApplicationController
   # GET /reviews/new
   def new
     @review = Review.new
+    
   end
 
   # GET /reviews/1/edit
@@ -37,41 +38,22 @@ class ReviewsController < ApplicationController
   # POST /reviews
   # POST /reviews.json
   def create
-    form_input = params[:review]
-
-    u_id = session[:user_id]
-    p_id = form_input[:professor_id]
-    c_code = form_input[:course_id].split(":")[0]
-    gc_id = GeneralCourse.find_by(course_code: c_code).id
-    c_year = form_input[:course_year]
-    c_id = Course.find_by(general_course_id: gc_id, professor_id: p_id, year: c_year).id
-    t = form_input[:title]
-
-    @review = Review.new(user_id:u_id, course_id: c_id, professor_id: p_id, title: t)
+ 
+    @review = Review.new(review_params)
+    # form_input = params[:review]
+    # u_id = session[:user_id]
+    # c_code = form_input[:course_id].split(":")[0]
+    # gc_id = GeneralCourse.find_by(course_code: c_code).id
+    # c_year = form_input[:course_year]
+    # p_id = form_input[:professor_id]
+    # c_id = Course.find_by(general_course_id: gc_id, professor_id: p_id, year: c_year).id
+    
+    # @review.course_id = c_id
+    # @review.user_id = u_id
+    # @review.professor_id = p_id
     
     respond_to do |format|
       if @review.save
-
-        course_r = CourseRating.create(
-          review_id: @review.id, 
-          cat1: form_input[:course_cat1].to_i, 
-          cat2: form_input[:course_cat2].to_i, 
-          cat3: form_input[:course_cat3].to_i, 
-          cat4: form_input[:course_cat4].to_i, 
-          cat5: form_input[:course_cat5].to_i, 
-          content: form_input[:course_content]
-        )
-
-        professor_r = ProfessorRating.create(
-          review_id: @review.id, 
-          cat1: form_input[:professor_cat1].to_i, 
-          cat2: form_input[:professor_cat2].to_i, 
-          cat3: form_input[:professor_cat3].to_i, 
-          cat4: form_input[:professor_cat4].to_i, 
-          cat5: form_input[:professor_cat5].to_i, 
-          strength: form_input[:professor_strength],
-          improvement: form_input[:professor_improvement]
-        )
          
          format.js {render 'reviews/create'}
          format.json { render :show, status: :created, location: @review }
@@ -86,16 +68,16 @@ class ReviewsController < ApplicationController
   # PATCH/PUT /reviews/1.json
   def update
     
-    rid = params[:id]
-    ep = params[:review]
-    cr = CourseRating.find_by(review_id: rid)
-    cr.update(cat1:ep[:e_course_cat1], cat2:ep[:e_course_cat2], cat3: ep[:e_course_cat3], cat4:ep[:e_course_cat4], cat5: ep[:e_course_cat5], content: ep[:course_content])
-    pr = ProfessorRating.find_by(review_id: rid)
-    pr.update(cat1:ep[:e_professor_cat1], cat2:ep[:e_professor_cat2], cat3: ep[:e_professor_cat3], cat4:ep[:e_professor_cat4], cat5: ep[:e_professor_cat5], strength: ep[:professor_strength], improvement: ep[:professor_improvement])
+    # rid = params[:id]
+    # ep = params[:review]
+    # cr = CourseRating.find_by(review_id: rid)
+    # cr.update(cat1:ep[:e_course_cat1], cat2:ep[:e_course_cat2], cat3: ep[:e_course_cat3], cat4:ep[:e_course_cat4], cat5: ep[:e_course_cat5], content: ep[:course_content])
+    # pr = ProfessorRating.find_by(review_id: rid)
+    # pr.update(cat1:ep[:e_professor_cat1], cat2:ep[:e_professor_cat2], cat3: ep[:e_professor_cat3], cat4:ep[:e_professor_cat4], cat5: ep[:e_professor_cat5], strength: ep[:professor_strength], improvement: ep[:professor_improvement])
     
     
     respond_to do |format|
-      if @review.update(title: ep[:title])
+      if @review.update(review_edit_params)
         format.html { redirect_to '/view_profile', notice: 'Review was successfully updated.' }
         format.json { render :show, status: :ok, location: @review }
       else
@@ -117,32 +99,47 @@ class ReviewsController < ApplicationController
 
   def filter_course_by_year
     ys = params[:year]
-    y = ys.split(",")[0]
-    s = ys.split(",")[1]
+    y = ys.split(" ")[0]
+    s = ys.split(" ")[1]
     filter = Course.where(year:y,semester:s)
+    user_reviewed_courses = filter_user_reviewed_courses
     used = []
-    @filtered_course = ["Select A Course"]
+    @filtered_course = []
     filter.each do |f|
+      cid = f.id
       gcid = f.general_course_id
-      if !used.include?(gcid)
+      if !used.include?(gcid) && !user_reviewed_courses.include?(cid)
         @filtered_course.push(GeneralCourse.find(gcid).show_course_info)
         used.push(gcid)
       end
     end
-    return @filtered_course
+    @filtered_course = @filtered_course.sort do |a,b|
+      if a.split(" ")[0] > b.split(" ")[0]
+        1
+      elsif a.split(" ")[0] < b.split(" ")[0]
+        -1
+      else
+        if only_number(a.split(" ")[1]) > only_number(b.split(" ")[1])
+          1
+        else
+          -1
+        end
+      end
+    end
+    return @filtered_course.insert(0,"Select A Course")
   end
 
   def filter_professor_by_course
     ys = params[:year]
-    y = ys.split(",")[0]
-    s = ys.split(",")[1]
+    y = ys.split(" ")[0]
+    s = ys.split(" ")[1]
     gcid = GeneralCourse.find_by(course_code: params[:gcname].split(":")[0])
     course = Course.where(general_course_id: gcid, year: y, semester: s)
     @filtered_professor = []
     course.each do |c|
       @filtered_professor.push(c.professor)
     end
-    return @filtered_professor
+    return @filtered_professor.sort
   end
 
   def open_edit_modal
@@ -159,14 +156,57 @@ class ReviewsController < ApplicationController
       @review = Review.find(params[:id])
     end
 
+    def filter_user_reviewed_courses
+      user_reviews = current_user.reviews
+      reviewed = []
+      user_reviews.each do |ur|
+          cid = ur.course_id
+          # gcid = Course.find(cid).general_course_id
+          # if !reviewed.include?(gcid)
+          #     reviewed.push(gcid)
+          # end
+          if !reviewed.include?(cid)
+            reviewed.push(cid)
+          end
+      end
+      return reviewed
+    end
+
     # Only allow a list of trusted parameters through.
     def review_params
-      params.require(:review).permit(
-        :user_id, 
-        :title, 
-        :course_id, 
+      form_input = params[:review]
+      c_year = form_input[:course_year].split(" ")[0]
+      c_semester = form_input[:course_year].split(" ")[1]
+      u_id = session[:user_id]
+      p_id = form_input[:professor_id]
+      c_code = form_input[:course_id].split(":")[0]
+      gc_id = GeneralCourse.find_by(course_code: c_code).id
+      c_id = Course.find_by(general_course_id: gc_id, professor_id: p_id, year: c_year, semester: c_semester).id
+      params[:review][:course_id] = c_id
+      params[:review][:user_id] = u_id
+      puts params
+      return params.require(:review).permit(
+        :user_id,
+        :title,
+        :rate_up,
+        :rate_down,
+        :course_id,
         :professor_id,
+        professor_rating_attributes:[:cat1, :cat2, :cat3, :cat4, :cat5, :strength, :improvement],
+        course_rating_attributes:[:cat1, :cat2, :cat3, :cat4, :cat5, :content]
+      ).merge({user_id: u_id})
+    end
+
+    def review_edit_params
+      params.require(:review).permit(
+        :title,
+        professor_rating_attributes:[:id, :cat1, :cat2, :cat3, :cat4, :cat5, :strength, :improvement],
+        course_rating_attributes:[:id, :cat1, :cat2, :cat3, :cat4, :cat5, :content]
       )
+    end
+
+    def only_number(num_ab)
+      return num_ab[0...-1].to_i
     end
 end
 
