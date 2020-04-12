@@ -8,17 +8,16 @@ module ReviewsHelper
             end
         end
         years = years.sort do |a,b|
-            case 
-            when a.split(" ")[0] > b.split(" ")[0]
+            if a.split(" ")[0] > b.split(" ")[0]
                 -1
-            when a.split(" ")[0] < b.split(" ")[0]
-                1
-            when a.split(" ")[1] > b.split(" ")[1]
-                -1
-            when a.split(" ")[1] < b.split(" ")[1]
+            elsif a.split(" ")[0] < b.split(" ")[0]
                 1
             else
-                a.split(" ")[1] <=> b.split(" ")[0]
+                if a.split(" ")[1] > b.split(" ")[1]
+                    1
+                else
+                    -1
+                end
             end
         end
         return years

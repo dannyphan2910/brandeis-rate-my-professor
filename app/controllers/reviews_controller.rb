@@ -104,7 +104,7 @@ class ReviewsController < ApplicationController
     filter = Course.where(year:y,semester:s)
     user_reviewed_courses = filter_user_reviewed_courses
     used = []
-    @filtered_course = ["Select A Course"]
+    @filtered_course = []
     filter.each do |f|
       cid = f.id
       gcid = f.general_course_id
@@ -113,7 +113,20 @@ class ReviewsController < ApplicationController
         used.push(gcid)
       end
     end
-    return @filtered_course.sort
+    @filtered_course = @filtered_course.sort do |a,b|
+      if a.split(" ")[0] > b.split(" ")[0]
+        1
+      elsif a.split(" ")[0] < b.split(" ")[0]
+        -1
+      else
+        if only_number(a.split(" ")[1]) > only_number(b.split(" ")[1])
+          1
+        else
+          -1
+        end
+      end
+    end
+    return @filtered_course.insert(0,"Select A Course")
   end
 
   def filter_professor_by_course
@@ -190,6 +203,10 @@ class ReviewsController < ApplicationController
         professor_rating_attributes:[:id, :cat1, :cat2, :cat3, :cat4, :cat5, :strength, :improvement],
         course_rating_attributes:[:id, :cat1, :cat2, :cat3, :cat4, :cat5, :content]
       )
+    end
+
+    def only_number(num_ab)
+      return num_ab[0...-1].to_i
     end
 end
 
