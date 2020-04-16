@@ -25,10 +25,26 @@
       setTimeout(function() {
         $('.alert').alert('close')
       }, 3000);
+
+      $(function(){
+        var t;
+        $("#site-content").on('scroll',function(e){
+            clearTimeout(t);
+            if(!$("#site-content").hasClass("scrolling")){
+              $("#site-content").addClass("scrolling");
+            }
+            checkScroll();
+        });
+        
+        function checkScroll(){
+            t = setTimeout(function(){
+               $("#site-content").removeClass("scrolling");
+            },500);
+        }
+      });
     </script>
 
-    <div>
-    <div class="w-100 h-100" id="site-content">
+    <div id="site-content">
       <%= yield %>
     </div>
   </body>

@@ -296,6 +296,12 @@ li {
     opacity: 1;
 }
 
+#site-content{
+    position:relative;
+    width: 100vw;
+    height: 90vh;
+}
+
 #site-content::-webkit-scrollbar {
     width: 8px;
 }
@@ -307,7 +313,13 @@ li {
 #site-content::-webkit-scrollbar-thumb {
     border-radius: 10px;
     // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
-    background: #739ace;
+    background-color: transparent;
+}
+
+#site-content.scrolling::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    background-color: #739ace;
 }
 
 #site-content {
