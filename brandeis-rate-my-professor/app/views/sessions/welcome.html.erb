@@ -1,0 +1,72 @@
+<div class="container-fluid main" style="position:relative;">
+    <div class="block-1 d-flex align-items-center">
+        <div class="block-1-content d-flex flex-column align-items-center">
+            <% if logged_in? %>
+                <button type="button" class="btn btn-info btn-lg m-3" data-toggle="modal" data-target="#formModal">
+                    Make A Review
+                </button>
+            <% else %>
+                <%= button_to  "Sign in and Make A Review", "/login", method: 'get', class: "btn btn-warning btn-lg m-3" %>
+            <% end %>
+
+            <div class="modal fade" id ="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
+                
+                    <%= render 'shared/reviewForm' %>
+                
+            </div>
+
+            <h3 class="m-2">OR</h3>
+
+            <div class="search-bar m-3">
+                <%= form_tag "/search", method: "get", class: "form" do %>
+                    <div class="d-flex flex-column align-items-center">
+                    <%= label_tag :search_text, "Search for a course, professor, or department...", class: 'h5' %>
+                        <div class="form-group search-input">
+                            <div class="input-group" style="height:50px;">
+                                <%= text_field_tag :search_text, params[:search_text], placeholder: "COSI 166B, Pito Salas, Computer Science, ...", class: 'form-control', style: "height:50px;" %>
+                                <div class="input-group-append">
+                                    <%= select_tag :filter, options_for_select(@filters_option, ""), class: 'custom-select btn', style: "height: 50px;" %>
+                                </div>
+                            </div>
+                        </div>
+                    <%= submit_tag "Search", class: 'btn btn-lg btn-success m-3' %>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+
+    <div class="dropdown-divider"></div>
+    <div class="block d-flex justify-content-center">
+        <div class="my-3">
+            <h2 class="mb-3">Suggested Courses</h2>
+            <div class="card-deck row flex-row flex-nowrap">
+                <% @courses_most_reviewed.each do |course| %>
+                <%= render 'shared/review_card', 
+                    data: course,
+                    card_link: "/general_courses/#{course["general_course_id"]}",
+                    card_title: "#{course["course_code"]}: <div class='h5'>#{course["course_title"]}</div>", 
+                    card_subtitle: "#{course["semester"]} #{course["year"].to_s}",
+                    card_text: course["total_reviews"] %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+
+    <div class="dropdown-divider"></div>
+    <div class="block d-flex justify-content-center">
+        <div class="my-3">
+            <h2 class="mb-3">Suggested Professors</h2>
+            <div class="card-deck row flex-row flex-nowrap">
+                <% @professors_most_reviewed.each do |prof| %>
+                <%= render 'shared/review_card', 
+                    data: prof,
+                    card_link: "/professors/#{prof["id"]}",
+                    card_title: "#{prof["prof_first_name"]} #{prof["prof_last_name"]}", 
+                    card_subtitle: prof["dept_name"],
+                    card_text: prof["total_reviews"] %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>

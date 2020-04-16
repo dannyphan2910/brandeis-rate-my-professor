@@ -1,0 +1,294 @@
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/themes/bars-square.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/jquery.barrating.min.js"></script>
+
+
+<script>
+
+var ratingFormCategories = [
+  '.review_write_course_cat1',
+  '.review_write_professor_cat1',
+  '.review_write_course_cat2',
+  '.review_write_professor_cat2',
+  '.review_write_course_cat3',
+  '.review_write_professor_cat3',
+  '.review_write_course_cat4',
+  '.review_write_professor_cat4',
+  '.review_write_course_cat5',
+  '.review_write_professor_cat5'
+]
+
+$(function() {
+  ratingFormCategories.forEach(function(e){
+
+    $(function() {
+      $(e).barrating({
+        theme: 'bars-square',
+        showValues: true,
+        showSelectedRating: false
+      });
+    });
+
+  });
+});
+
+
+
+</script>
+
+
+<%= form_with(model: review, :html => {:style=>"width:100%"}) do |form| %>
+  <% if review.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(review.errors.count, "error") %> prohibited this review from being saved:</h2>
+
+      <ul>
+        <% review.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <fieldset>
+  <div class="card" style="width:100%;">
+  <div class = "card-body">
+  <div class = "form-group">
+    <div class = "row">
+      <div class = "col-3">
+        <h5> <label for="course_year"> Year Taught... </label></h5>
+      </div>
+      <div class = "col-9">
+        <%= form.select(:course_year, options_for_select(all_years),{prompt: "Select year"},{class:"form-control",style:"width:100%"}) %>
+      </div>
+    </div>
+  </div>
+
+  <div class = "form-group">
+    <div class = "row">
+      <div class = "col-3">
+        <h5> <label for="course_id"> Review For... </label></h5>
+      </div>
+      <div class = "col-9">
+        <%= form.select(:course_id, options_for_select(all_courses), {prompt: "Select A Course"}, {class:"form-control",:disabled => true, style:"width:100%;"}) %>
+       </div>
+    </div>
+  </div>
+  
+  <div class = "form-group">
+    <div class = "row">
+      <div class = "col-3">
+        <h5><%= form.label :professor_id %></h5>
+      </div>
+      <div class = "col-9">
+        <%= form.collection_select :professor_id, Professor.all, :id, :show_name, { prompt: 'Select A Professor' }, {class:"form-control",:disabled => true, style:"width:100% "} %>
+      </div>
+    </div>
+  </div>
+
+  <div class = "form-group">
+    <div class = "row"> 
+      <div class = "col-3">
+        <h5><%= form.label :title %></h5>
+      </div>
+      <div class = "col-9">
+        <%= form.text_field :title, class:"form-control", placeholder: "Title of your review", style: "width: 100%" %>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  
+  <p></p>
+  
+  <div class = "row">
+    <div class = "col-6">
+      <div class = "card" style="width:100%">
+        <div class = "card-body">
+          <div class = "row">
+              <div class = "col text-center">
+                <h5>Course Ratings</h5>
+              </div>
+          </div>
+
+          <p></p>
+          <p></p>
+          
+        <% @course_rating = CourseRating.new %>
+        <%= form.fields_for :course_rating, @course_rating do |c_form| %>
+          <div class ="row">
+            <div class = "col-4 text-center">
+              <%= form.label :cat1 %>
+            </div>
+            <div class = "col-8">
+              <%= c_form.select :cat1, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]],{},{class:"review_write_course_cat1"} %>
+            </div>
+          </div>
+          
+
+          <div class ="row">   
+          
+            <div class = "col-4 text-center">
+              <%= form.label :cat2 %>
+            </div>
+            <div class = "col-8">
+              <%= c_form.select :cat2, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]],{},{class:"review_write_course_cat2"} %>
+            </div>
+          </div>
+                
+          <div class ="row">
+            <div class = "col-4 text-center">
+              <%= form.label :cat3 %>
+            </div>
+            <div class = "col-8">
+              <%= c_form.select :cat3, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]],{},{class:"review_write_course_cat3"} %>
+            </div>
+          </div>
+
+          <div class ="row">
+            <div class = "col-4 text-center">
+              <%= form.label :cat4 %>
+            </div>
+            <div class = "col-8">
+              <%= c_form.select :cat4, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]],{},{class:"review_write_course_cat4"} %>
+            </div>
+          </div>
+
+          <div class ="row">
+            <div class ="col-4 text-center">
+              <%= form.label :cat5 %> 
+            </div>
+            <div class ="col-8">
+              <%= c_form.select :cat5, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]],{},{class:"review_write_course_cat5"} %>
+            </div>
+          </div>
+        <% end %>
+          
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="card" style="width:100%">
+        <div class = "card-body">
+          <div class = "row">
+            <div class = "col text-center">
+              <h5>Professor Ratings</h5>
+            </div>
+          </div>
+          <p></p>
+          <p></p>
+          <% @professor_rating = ProfessorRating.new %>
+          <%= form.fields_for :professor_rating, @professor_rating do |p_form| %>
+            <div class = "row">
+              <div class = "col-4 text-center">
+                <%= form.label :cat1 %>
+              </div>
+              <div class = "col-8">
+                <%= p_form.select :cat1, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]],{},{class:"review_write_professor_cat1"} %>
+              </div>
+            </div>
+            <div class = "row">
+              <div class = "col-4 text-center">
+                <%= form.label :cat2 %>
+              </div>
+              <div class = "col-8">
+                <%= p_form.select :cat2, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]],{},{class:"review_write_professor_cat2"} %>
+              </div>
+            </div>
+            <div class="row">
+              <div class = "col-4 text-center">
+                <%= form.label :cat3 %>
+              </div>
+              <div class = "col-8">
+                <%= p_form.select :cat3, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]],{},{class:"review_write_professor_cat3"} %>
+              </div>
+            </div>
+            <div class = "row">
+              <div class = "col-4 text-center">
+                <%= form.label :cat4 %>
+              </div>
+              <div class = "col-8">
+                <%= p_form.select :cat4, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]],{},{class:"review_write_professor_cat4"} %>
+              </div>
+            </div>
+            <div class = "row">
+              <div class = "col-4 text-center">
+                <%= form.label :cat5 %>
+              </div>
+              <div class = "col-8">
+                <%= p_form.select :cat5, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]],{},{class:"review_write_professor_cat5"} %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  
+  
+  <p></p>
+  <%= form.fields_for :course_rating, @course_rating do |c_form| %>
+  <div class = "form-group">
+    <div class = "row">
+      <div class = "col-12">
+        <%= form.label :course_content %>
+      </div>
+    </div>
+    <div class ="row">
+      <div class = "col-12">
+        <%= c_form.text_area :content, class:"form-control", rows:"6", style: "width: 100%"  %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+  
+  <%= form.fields_for :professor_rating, @professor_rating do |p_form| %>
+  <div class = "form-group">
+    <div class ="row">
+      <div class ="col-12">
+        <%= form.label :"Professor's Strength" %>
+      </div>
+    </div>
+    <div class ="row">
+      <div class ="col-12">
+        <%= p_form.text_area :strength, class:"form-control", rows:"6", style: "width: 100%" %>
+      </div>
+    </div>
+  </div>
+  
+
+  <div class = "form-group">
+    <div class ="row">
+      <div class = "col-12">
+        <%= form.label :"Things to Improve"%>
+      </div>
+    </div>
+    <div class = "row">
+      <div class = "col-12">
+        <%= p_form.text_area :improvement, class:"form-control", rows:"6", style: "width: 100%" %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</fieldset>  
+  
+  <div class = "row">
+    <div class = "col-4 text-center">
+        
+    </div>
+    <div class = "col-4 text-center">
+      <div class="actions">
+        <div class = "real-submit">
+          <%= form.submit 'Submit Review', class: 'form-submission btn btn-outline-primary btn-block' %>
+        </div>
+      </div>
+    </div>
+    <div class = "col-4 text-center">
+    
+    </div>
+  </div>
+<% end %>
+

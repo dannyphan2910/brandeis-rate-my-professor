@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RateMyProfessor</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= render 'shared/nav' %>
+
+    <% if notice %>
+      <div class="alert alert-success w-100 text-center fade show" style="position:absolute;z-index: 99;"><%= notice %></div>
+    <% end %>
+    <% if alert %>
+      <div class="alert alert-danger w-100 text-center fade show" style="position:absolute;z-index: 99;"><%= alert %></div>
+    <% end %>
+
+    <script>
+      setTimeout(function() {
+        $('.alert').alert('close')
+      }, 3000);
+    </script>
+
+    <div>
+    <div class="w-100 h-100" id="site-content">
+      <%= yield %>
+    </div>
+  </body>
+</html>

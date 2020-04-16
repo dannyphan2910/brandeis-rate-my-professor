@@ -1,0 +1,52 @@
+<%= form_with(model: course_rating, local: true) do |form| %>
+  <% if course_rating.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(course_rating.errors.count, "error") %> prohibited this course_rating from being saved:</h2>
+
+      <ul>
+        <% course_rating.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :review_id %>
+    <%= form.number_field :review_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cat1 %>
+    <%= form.number_field :cat1 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cat2 %>
+    <%= form.number_field :cat2 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cat3 %>
+    <%= form.number_field :cat3 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cat4 %>
+    <%= form.number_field :cat4 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cat5 %>
+    <%= form.number_field :cat5 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_field :content %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

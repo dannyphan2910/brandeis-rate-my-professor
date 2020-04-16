@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Professor Ratings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Review</th>
+      <th>Cat1</th>
+      <th>Cat2</th>
+      <th>Cat3</th>
+      <th>Cat4</th>
+      <th>Cat5</th>
+      <th>Strength</th>
+      <th>Improvement</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @professor_ratings.each do |professor_rating| %>
+      <tr>
+        <td><%= professor_rating.review_id %></td>
+        <td><%= professor_rating.cat1 %></td>
+        <td><%= professor_rating.cat2 %></td>
+        <td><%= professor_rating.cat3 %></td>
+        <td><%= professor_rating.cat4 %></td>
+        <td><%= professor_rating.cat5 %></td>
+        <td><%= professor_rating.strength %></td>
+        <td><%= professor_rating.improvement %></td>
+        <td><%= link_to 'Show', professor_rating %></td>
+        <td><%= link_to 'Edit', edit_professor_rating_path(professor_rating) %></td>
+        <td><%= link_to 'Destroy', professor_rating, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Professor Rating', new_professor_rating_path %>
