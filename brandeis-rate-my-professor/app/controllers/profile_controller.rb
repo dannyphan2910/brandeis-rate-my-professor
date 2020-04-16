@@ -3,7 +3,7 @@ class ProfileController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def view_profile
-    @user_reviews = current_user.reviews
+    @user_reviews = sort_by_created(current_user.reviews)
     @user_courses = current_user.general_courses.order(:course_code)
     if params[:search_text_courses]
       if params[:search_text_courses].blank?
@@ -17,5 +17,10 @@ class ProfileController < ApplicationController
       format.html { }
       format.js { }
     end
+  end
+
+  def sort_by_created(sth)
+    rtn = sth.sort_by(&:created_at).reverse!
+    return rtn
   end
 end

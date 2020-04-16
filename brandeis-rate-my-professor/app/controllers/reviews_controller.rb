@@ -161,15 +161,33 @@ class ReviewsController < ApplicationController
       reviewed = []
       user_reviews.each do |ur|
           cid = ur.course_id
+          curr_course = Course.find(cid)
+          gcid = curr_course.general_course_id;
+          y = curr_course.year
+          s = curr_course.semester
+          same_name_ys = Course.where(general_course_id: gcid, year: y, semester: s)
           # gcid = Course.find(cid).general_course_id
           # if !reviewed.include?(gcid)
           #     reviewed.push(gcid)
           # end
           if !reviewed.include?(cid)
-            reviewed.push(cid)
+            same_name_ys.each do |c|
+              reviewed.push(c.id)
+            end
+            # reviewed.push(cid)
+            # curr_course = Course.find(cid)
           end
       end
       return reviewed
+    end
+
+    def same_name_course(gcid,yr,smstr)
+      ids = []
+      courses = Course.where(general_course_id:gcid, year: yr, semester: smstr)
+      courses.each do |c|
+        ids.push(c.id)
+      end
+      return ids
     end
 
     # Only allow a list of trusted parameters through.
