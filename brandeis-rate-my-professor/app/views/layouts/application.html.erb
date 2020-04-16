@@ -41,9 +41,22 @@
                $("#site-content").removeClass("scrolling");
             },500);
         }
+
+        $("#scrollbar-area").hover(
+          function(){
+            $("#scrollbar-area").addClass("mouse-on");
+            if(!$("#site-content").hasClass("scrolling")){
+              $("#site-content").addClass("scrolling");
+            }
+          },
+          function(){
+            $("#scrollbar-area").removeClass("mouse-on");
+            $("#site-content").removeClass("scrolling");
+          }
+        );
       });
     </script>
-
+    <div id = "scrollbar-area"></div>
     <div id="site-content">
       <%= yield %>
     </div>

@@ -374,3 +374,16 @@ li {
 .thankyou-redirect-profile{
     text-align: center;
 }
+
+#scrollbar-area{
+    z-index:1;
+    position:fixed;
+    right: 0;
+    height:100%;
+    width: 10px;
+    background-color: transparent;
+}
+
+#scrollbar-area.mouse-on{
+    z-index:-1;
+}
