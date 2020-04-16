@@ -22,7 +22,8 @@ class Review < ApplicationRecord
     validates :course_id, presence: true
     validates :professor_id, presence: true
     validates_with CourseProfessorValidator
-
+    validates :title, presence: true
+    
     accepts_nested_attributes_for :course_rating, :professor_rating
 
     scope :ordered_by_rate_up, -> { all.sort_by(&:rate_up).reverse }

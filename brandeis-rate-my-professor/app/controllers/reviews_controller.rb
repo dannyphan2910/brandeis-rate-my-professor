@@ -18,7 +18,7 @@ class ReviewsController < ApplicationController
   # GET /reviews/new
   def new
     @review = Review.new
-    
+    @error_up = false;
   end
 
   # GET /reviews/1/edit
@@ -57,10 +57,10 @@ class ReviewsController < ApplicationController
          
          format.js {render 'reviews/create'}
          format.json { render :show, status: :created, location: @review }
-       else
+      else
          format.js { render 'reviews/fail' }
          format.json { render json: @review.errors, status: :unprocessable_entity }
-       end
+      end
      end
   end
 
@@ -192,17 +192,24 @@ class ReviewsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def review_params
-      form_input = params[:review]
-      c_year = form_input[:course_year].split(" ")[0]
-      c_semester = form_input[:course_year].split(" ")[1]
-      u_id = session[:user_id]
-      p_id = form_input[:professor_id]
-      c_code = form_input[:course_id].split(":")[0]
-      gc_id = GeneralCourse.find_by(course_code: c_code).id
-      c_id = Course.find_by(general_course_id: gc_id, professor_id: p_id, year: c_year, semester: c_semester).id
-      params[:review][:course_id] = c_id
-      params[:review][:user_id] = u_id
-      puts params
+      begin 
+        form_input = params[:review]
+        c_year = form_input[:course_year].split(" ")[0]
+        c_semester = form_input[:course_year].split(" ")[1]
+        u_id = session[:user_id]
+        p_id = form_input[:professor_id]
+        c_code = form_input[:course_id].split(":")[0]
+        gc_id = GeneralCourse.find_by(course_code: c_code).id
+        c_id = Course.find_by(general_course_id: gc_id, professor_id: p_id, year: c_year, semester: c_semester).id
+        params[:review][:course_id] = c_id
+        params[:review][:user_id] = u_id
+        puts params
+      rescue => e
+      rescue ActiveRecord::RecordNotFound
+        
+      rescue ActiveRecord::ActiveRecordError
+      rescue Exception
+      end
       return params.require(:review).permit(
         :user_id,
         :title,

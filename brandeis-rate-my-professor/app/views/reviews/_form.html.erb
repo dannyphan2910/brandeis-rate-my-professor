@@ -32,6 +32,39 @@ $(function() {
   });
 });
 
+$(document).ready(function() {
+  var review_text = $(".w-content");
+  var counter     = $("#w-content-counter");
+  var max_length  = counter.data("maximum-length");
+
+  review_text.keyup(function() {
+      counter.text(max_length - $(this).val().length);
+  });
+
+});
+
+$(document).ready(function() {
+  var review_text = $(".w-strength");
+  var counter     = $("#w-strength-counter");
+  var max_length  = counter.data("maximum-length");
+
+  review_text.keyup(function() {
+      counter.text(max_length - $(this).val().length);
+  });
+
+});
+
+$(document).ready(function() {
+  var review_text = $(".w-improvement");
+  var counter     = $("#w-improvement-counter");
+  var max_length  = counter.data("maximum-length");
+
+  review_text.keyup(function() {
+      counter.text(max_length - $(this).val().length);
+  });
+
+});
+
 
 
 </script>
@@ -93,7 +126,7 @@ $(function() {
         <h5><%= form.label :title %></h5>
       </div>
       <div class = "col-9">
-        <%= form.text_field :title, class:"form-control", placeholder: "Title of your review", style: "width: 100%" %>
+        <%= form.text_field :title, class:"form-control", placeholder: "Title of your review", maxlength: 50, size: 30, style: "width: 100%" %>
       </div>
     </div>
   </div>
@@ -239,7 +272,8 @@ $(function() {
     </div>
     <div class ="row">
       <div class = "col-12">
-        <%= c_form.text_area :content, class:"form-control", rows:"6", style: "width: 100%"  %>
+        <%= c_form.text_area :content, class:"form-control w-content", placeholder: "Type up to 500 characters.", maxlength: 500, size: 30, rows:"6", style: "width: 100%"  %>    
+        <span id="w-content-counter" data-maximum-length="500">500</span>  
       </div>
     </div>
   </div>
@@ -254,7 +288,8 @@ $(function() {
     </div>
     <div class ="row">
       <div class ="col-12">
-        <%= p_form.text_area :strength, class:"form-control", rows:"6", style: "width: 100%" %>
+        <%= p_form.text_area :strength, class:"form-control w-strength", placeholder: "Type up to 500 characters.", maxlength: 500, size: 30, rows:"6", style: "width: 100%" %>
+        <span id="w-strength-counter" data-maximum-length="500">500</span>
       </div>
     </div>
   </div>
@@ -268,7 +303,8 @@ $(function() {
     </div>
     <div class = "row">
       <div class = "col-12">
-        <%= p_form.text_area :improvement, class:"form-control", rows:"6", style: "width: 100%" %>
+        <%= p_form.text_area :improvement, class:"form-control w-improvement", placeholder: "Type up to 500 characters.", maxlength: 500, size: 30, rows:"6", style: "width: 100%" %>
+        <span id="w-improvement-counter" data-maximum-length="500">500</span>
       </div>
     </div>
   </div>
