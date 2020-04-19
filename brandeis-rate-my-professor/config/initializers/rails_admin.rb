@@ -1,5 +1,11 @@
 RailsAdmin.config do |config|
 
+
+  config.authenticate_with do
+    warden.authenticate! scope: :user
+  end
+  config.current_user_method(&:current_user)
+
   ### Popular gems integration
 
   ## == Devise ==
@@ -26,7 +32,7 @@ RailsAdmin.config do |config|
   config.actions do
     all
     import
-
+  
     ## With an audit adapter, you can add:
     # history_index
     # history_show

@@ -20,7 +20,7 @@ class ProfileController < ApplicationController
   end
 
   def sort_by_created(sth)
-    rtn = sth.sort_by(&:created_at).reverse!
+    rtn = sth.sort_by(&:updated_at).reverse!
     return rtn
   end
 end

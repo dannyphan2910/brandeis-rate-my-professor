@@ -1,5 +1,5 @@
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/themes/bars-square.css">
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/jquery.barrating.min.js"></script>
 
 <script>
@@ -137,131 +137,254 @@ $(document).ready(function() {
   <p></p>
   
   <div class = "row">
-  <div class = "col-6">
-  <div class = "card" style = "width: 100%">
-    <div class = "card-body">
-      <div class = "row">
-          <div class = "col text-center">
-            <h5>Course Ratings</h5>
+    <div class = "col-12">
+      <div class = "card" style = "width: 100%">
+        <div class = "card-header">
+          <div class = "row">
+              <div class = "col text-center">
+                <h5>Course Ratings</h5>
+              </div>
           </div>
-      </div>
-      <p></p>
-      <p></p>
-      
-      
-      <%= form.fields_for :course_rating, @course_rating do |c_form| %>
-      <div class ="row">
-        <div class = "col-4 text-center">
-          <%= form.label :cat1 %>
         </div>
-        <div class = "col-8">
-          <%= c_form.select :cat1, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat1), {},{class: "review_edit_course_cat1"} %>
-          
-        </div>
-      </div>
+        <%= form.fields_for :course_rating, @course_rating do |c_form| %>
+        <ul class = "list-group list-group-flush">
+          <li class="list-group-item">
+            <div class = "row">
+              <div class = "col-12 text-center">
+                <p>Category 1</p>
 
-
-      <div class ="row">   
-
-        <div class = "col-4 text-center">
-          <%= form.label :cat2 %>
-        </div>
-        <div class = "col-8">
-          <%= c_form.select :cat2, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat2),{},{class: "review_edit_course_cat2"} %>
-        </div>
-      </div>
+                <div class = "explanation">This is some explanation about what this category is about, and instructions
+                on how the user should rate (1 is more toward cat1, whereas 5 is more toward its opposite.)</div>
+              </div>
+            </div>
             
-      <div class ="row">
-        <div class = "col-4 text-center">
-          <%= form.label :cat3 %>
-        </div>
-        <div class = "col-8">
-          <%= c_form.select :cat3, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat3),{},{class: "review_edit_course_cat3"} %>
-        </div>
-      </div>
+            <div class ="row">
+              <div class = "col-3 text-right">
+                category 1
+              </div>
+              <div class = "col-6 text-center">
+                <%= c_form.select :cat1, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat1), {},{class: "review_edit_course_cat1"} %>
+              </div>
+              <div class = "col-3 text-left">
+                not category 1
+              </div>
+            </div>         
+          </li>
+          <li class="list-group-item">
+            <div class = "row">
+              <div class = "col-12 text-center">
+                <p>Category 2</p>
 
-      <div class ="row">
-        <div class = "col-4 text-center">
-          <%= form.label :cat4 %>
-        </div>
-        <div class = "col-8">
-          <%= c_form.select :cat4, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat4),{},{class: "review_edit_course_cat4"} %>
-        </div>
-      </div>
+                <div class = "explanation">This is some explanation about what this category is about, and instructions
+                on how the user should rate (1 is more toward cat1, whereas 5 is more toward its opposite.)</div>
+              </div>
+            </div>
+            <div class ="row">   
+              <div class = "col-3 text-right">
+                category 2
+              </div>
+              <div class = "col-6 text-center">
+                <%= c_form.select :cat2, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat2),{},{class: "review_edit_course_cat2"} %>
+              </div>
+              <div class = "col-3 text-left">
+                not category 2
+              </div> 
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class = "row">
+              <div class = "col-12 text-center">
+                <p>Category 3</p>
 
-      <div class ="row">
-        <div class ="col-4 text-center">
-          <%= form.label :cat5 %> 
-        </div>
-        <div class ="col-8">
-          <%= c_form.select :cat5, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat5),{},{class: "review_edit_course_cat5"} %>
-        </div>
-      </div>
+                <div class = "explanation">This is some explanation about what this category is about, and instructions
+                on how the user should rate (1 is more toward cat1, whereas 5 is more toward its opposite.)</div>
+              </div>
+            </div>  
+            <div class ="row">
+              <div class = "col-3 text-right">
+                category 3
+              </div>
+              <div class = "col-6 text-center">
+                <%= c_form.select :cat3, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat3),{},{class: "review_edit_course_cat3"} %>
+              </div>
+              <div class = "col-3 text-left">
+                not category 3
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class = "row">
+              <div class = "col-12 text-center">
+                <p>Category 4</p>
 
-      <% end %>
+                <div class = "explanation">This is some explanation about what this category is about, and instructions
+                on how the user should rate (1 is more toward cat1, whereas 5 is more toward its opposite.)</div>
+              </div>
+            </div>
+            <div class ="row">
+              <div class = "col-3 text-right">
+                category 4
+              </div>
+              <div class = "col-6 text-center">
+                <%= c_form.select :cat4, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat4),{},{class: "review_edit_course_cat4"} %>
+              </div>
+              <div class = "col-3 text-left">
+                not category 4
+              </div>
+            </div>
+          </li>
+        </ul>
+        <div class = "card-body">
+          <div class = "row">
+            <div class = "col-12 text-center">
+              <p>Category 5</p>
 
-    </div>
-  </div>
-  </div>
-  <div class = "col-6">
-    <div class = "card" style="width:100%">
-      <div class = "card-body">
-        <div class = "row">
-          <div class ="col text-center">
-            
-            <h5>Professor Ratings</h5>
-            
+              <div class = "explanation">This is some explanation about what this category is about, and instructions
+                on how the user should rate (1 is more toward cat1, whereas 5 is more toward its opposite.)</div>
+            </div>
           </div>
-        </div>
-        <p></p>
-        <p></p>
-
-        
-        <%= form.fields_for :professor_rating, @professor_rating do |p_form| %>
-        <div class = "row">
-          <div class = "col-4 text-center">
-            <%= form.label :cat1 %>
-          </div>
-          <div class = "col-8">
-            <%= p_form.select :cat1, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat1),{},{class: "review_edit_professor_cat1"}  %>
-          </div>
-        </div>
-        <div class = "row">
-          <div class = "col-4 text-center">
-            <%= form.label :cat2 %>
-          </div>
-          <div class = "col-8">
-            <%= p_form.select :cat2, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat2),{},{class: "review_edit_professor_cat2"} %>
-          </div>
-        </div>
-        <div class = "row">
-          <div class = "col-4 text-center">
-            <%= form.label :cat3 %>
-          </div>
-          <div class = "col-8">
-            <%= p_form.select :cat3, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat3),{},{class: "review_edit_professor_cat3"} %>
-          </div>
-        </div>
-        <div class = "row">
-          <div class = "col-4 text-center">
-            <%= form.label :cat4 %>
-          </div>
-          <div class = "col-8">
-            <%= p_form.select :cat4, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat4),{},{class: "review_edit_professor_cat4"} %>
-          </div>
-        </div>
-        <div class = "row">
-          <div class = "col-4 text-center">
-            <%= form.label :cat5 %>
-          </div>
-          <div class = "col-8">
-            <%= p_form.select :cat5, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat5),{},{class: "review_edit_professor_cat5"} %>
+          <div class ="row">
+            <div class ="col-3 text-right">
+              category 5
+            </div>
+            <div class ="col-6 text-center">
+              <%= c_form.select :cat5, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat5),{},{class: "review_edit_course_cat5"} %>
+            </div>
+            <div class = "col-3 text-left">
+              not category 5
+            </div>
           </div>
         </div>
         <% end %>
       </div>
     </div>
   </div>
+  
+  <p></p>
+
+  <div class = "row">
+    <div class = "col-12">
+      <div class = "card" style="width:100%">
+        <div class = "card-header">
+          <div class = "row">
+            <div class ="col text-center">
+          
+            <h5>Professor Ratings</h5>
+          
+            </div>
+          </div>
+        </div>
+        <%= form.fields_for :professor_rating, @professor_rating do |p_form| %>
+        <ul class = "list-group list-group-flush">
+          <li class = "list-group-item">
+            <div class = "row">
+              <div class = "col-12 text-center">
+                <p>Category 1</p>
+
+                <div class = "explanation">This is some explanation about what this category is about, and instructions
+                on how the user should rate (1 is more toward cat1, whereas 5 is more toward its opposite.)</div>
+              </div>
+            </div>
+            <div class = "row">
+              <div class = "col-3 text-right">
+                category 1
+              </div>
+              <div class = "col-6 text-center">
+                <%= p_form.select :cat1, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat1),{},{class: "review_edit_professor_cat1"}  %>
+              </div>
+              <div class = "col-3 text-left">
+                not category 1
+              </div>
+            </div>
+          </li>
+          <li class = "list-group-item">
+            <div class = "row">
+              <div class = "col-12 text-center">
+                <p>Category 2</p>
+
+                <div class = "explanation">This is some explanation about what this category is about, and instructions
+                on how the user should rate (1 is more toward cat1, whereas 5 is more toward its opposite.)</div>
+              </div>
+            </div>
+            <div class = "row">
+              <div class = "col-3 text-right">
+                category 2
+              </div>
+              <div class = "col-6 text-center">
+                <%= p_form.select :cat2, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat2),{},{class: "review_edit_professor_cat2"} %>
+              </div>
+              <div class = "col-3 text-left">
+                not category 2
+              </div>
+            </div>
+          </li>
+          <li class = "list-group-item">
+          <div class = "row">
+              <div class = "col-12 text-center">
+                <p>Category 3</p>
+
+                <div class = "explanation">This is some explanation about what this category is about, and instructions
+                on how the user should rate (1 is more toward cat1, whereas 5 is more toward its opposite.)</div>
+              </div>
+            </div>
+            <div class = "row">
+              <div class = "col-3 text-right">
+                category 3
+              </div>
+              <div class = "col-6 text-center">
+                <%= p_form.select :cat3, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat3),{},{class: "review_edit_professor_cat3"} %>
+              </div>
+              <div class = "col-3 text-left">
+                not category 3
+              </div>
+            </div>
+          </li>
+          <li class = "list-group-item">
+          <div class = "row">
+              <div class = "col-12 text-center">
+                <p>Category 4</p>
+
+                <div class = "explanation">This is some explanation about what this category is about, and instructions
+                on how the user should rate (1 is more toward cat1, whereas 5 is more toward its opposite.)</div>
+              </div>
+            </div>
+            <div class = "row">
+              <div class = "col-3 text-right">
+                category 4
+              </div>
+              <div class = "col-6 text-center">
+                <%= p_form.select :cat4, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat4),{},{class: "review_edit_professor_cat4"} %>
+              </div>
+              <div class = "col-3 text-left">
+                not category 4
+              </div>
+            </div>
+          </li>
+        <ul>
+        <div class = "card-body">
+          <div class = "row">
+            <div class = "col-12 text-center">
+              <p>Category 5</p>
+
+              <div class = "explanation">This is some explanation about what this category is about, and instructions
+              on how the user should rate (1 is more toward cat1, whereas 5 is more toward its opposite.)</div>
+            </div>
+          </div>
+          <div class = "row">
+            <div class = "col-3 text-right">
+              category 5
+            </div>
+            <div class = "col-6 text-center">
+              <%= p_form.select :cat5, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat5),{},{class: "review_edit_professor_cat5"} %>
+            </div>
+            <div class = "col-3 text-left">
+              not category 5
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
   </div>
   
   <p></p>
@@ -279,8 +402,8 @@ $(document).ready(function() {
     </div>
     <div class ="row">
       <div class = "col-12">
-        <%= c_form.text_area :content, class:"form-control e-content", value: @course_rating.content , placeholder: "Type up to 500 characters.", maxlength: 500, size: 30, rows:"6", style: "width: 100%"  %>
-        <span id="e-content-counter" data-maximum-length="500"><%= 500-@course_rating.content.length %></span>
+        <%= c_form.text_area :content, class:"form-control e-content", value: @course_rating.content , placeholder: "Type up to 300 characters.", maxlength: 300, size: 30, rows:"6", style: "width: 100%"  %>
+        <span id="e-content-counter" data-maximum-length="300"><%= 300-@course_rating.content.length %></span>
       </div>
     </div>
   </div>
@@ -295,8 +418,8 @@ $(document).ready(function() {
     </div>
     <div class ="row">
       <div class ="col-12">
-        <%= p_form.text_area :strength, class:"form-control e-strength", value: @professor_rating.strength,placeholder: "Type up to 500 characters.",maxlength: 500, size: 30, rows:"6", style: "width: 100%" %>
-        <span id="e-strength-counter" data-maximum-length="500"><%= 500-@professor_rating.strength.length %></span>
+        <%= p_form.text_area :strength, class:"form-control e-strength", value: @professor_rating.strength,placeholder: "Type up to 300 characters.",maxlength: 300, size: 30, rows:"6", style: "width: 100%" %>
+        <span id="e-strength-counter" data-maximum-length="300"><%= 300-@professor_rating.strength.length %></span>
       </div>
     </div>
   </div>
@@ -310,8 +433,8 @@ $(document).ready(function() {
     </div>
     <div class = "row">
       <div class = "col-12">
-        <%= p_form.text_area :improvement, class:"form-control e-improvement", value: @professor_rating.improvement,placeholder: "Type up to 500 characters.",maxlength: 500, size: 30, rows:"6", style: "width: 100%" %>
-        <span id="e-improvement-counter" data-maximum-length="500"><%= 500-@professor_rating.improvement.length %></span>
+        <%= p_form.text_area :improvement, class:"form-control e-improvement", value: @professor_rating.improvement,placeholder: "Type up to 300 characters.",maxlength: 300, size: 30, rows:"6", style: "width: 100%" %>
+        <span id="e-improvement-counter" data-maximum-length="300"><%= 300-@professor_rating.improvement.length %></span>
       </div>
     </div>
   </div>
