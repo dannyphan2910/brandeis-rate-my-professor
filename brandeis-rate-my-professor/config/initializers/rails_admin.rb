@@ -1,11 +1,14 @@
 RailsAdmin.config do |config|
 
 
-  config.authenticate_with do
-    warden.authenticate! scope: :user
-  end
-  config.current_user_method(&:current_user)
+  # config.authenticate_with do
+  #   warden.authenticate! scope: :user
+  # end
+  # config.current_user_method(&:current_user)
 
+  config.authorize_with do
+    redirect_to main_app.root_path unless current_user.is_admin == true
+  end
   ### Popular gems integration
 
   ## == Devise ==
@@ -32,7 +35,6 @@ RailsAdmin.config do |config|
   config.actions do
     all
     import
-  
     ## With an audit adapter, you can add:
     # history_index
     # history_show
