@@ -1,9 +1,0 @@
-<div class="dropdown-divider"></div>
-<% courses.each do |course| %>
-	<div>
-		<%= link_to enrollments_path(general_course_id: course.id, search_text_courses: params[:search_text_courses]), method: 'post', remote: true, id: course.id do %>
-			<i class="far fa-plus-square" style="color:green;"></i>
-		<% end %>
-		<%= label_tag course.id, course.show_course_info %>
-	</div>
-<% end %>
