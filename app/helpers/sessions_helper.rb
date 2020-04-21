@@ -33,4 +33,30 @@ module SessionsHelper
         professors = Professor.where(id: ids)
         return get_hash_result professors, false
     end
+
+    def get_hash data
+        arr = (data['course_title']) ?
+            ["Content", "Participation", "Workload", "Testing", "Grading"] :
+            ["Delivery", "Accessibility", "Expertise", "Expectations", "Preparedness"] 
+            
+        res = {}
+        (1..5).each do |num|
+            res["avg_cat" + num.to_s] = arr[num-1]
+        end
+        res
+    end
+
+    def icon_for score
+        if score == "N/A"
+            return content_tag :i, '', class: 'far fa-question-circle fa-2x text-secondary'
+        end
+        score = score.to_f * 100
+        icon = case score
+            when 0..133 then content_tag :i, '', class: 'far fa-frown fa-2x text-danger'
+            when 134..332 then content_tag :i, '', class: 'far fa-meh fa-2x text-info'
+            when 333..449 then content_tag :i, '', class: 'far fa-smile-beam fa-2x text-success'
+            when 450..500 then content_tag :i, '', class: 'far fa-grin-stars fa-2x text-warning'
+        end
+        icon
+    end
 end

@@ -63,7 +63,7 @@ nav {
 
 .outer-container {
     width: 100%;
-    height: 66.67%;
+    height: 70%;
 
     .inner-container {
         width: 100%;
@@ -193,6 +193,7 @@ nav {
 .thumbs-down-active {
     color: red;
 }
+
 .modal-header {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -351,4 +352,12 @@ li {
 #formModal {
     overflow-y: scroll;
     overflow-x: hidden;
+}
+
+.google-auth {
+    border-color: #F2F2F2;
+}
+
+.google-auth:hover {
+    border-color: #4285F4;
 }

@@ -1,16 +1,24 @@
 <div class="card mb-3 card-block border-success shadow" style="width: 18rem; min-width: 18rem; max-width: 18rem;">
     <div class="card-header bg-transparent border-success">
-            <h4 class="card-title h4">
+            <h4 class="card-title ">
                 <%= link_to card_link do %>
                     <%= sanitize card_title %>
                 <% end %>
             </h4>
             <h6 class="card-subtitle text-muted"><%= card_subtitle %></h6>
     </div> 
-    <div class="card-body">
+    <div class="card-body pb-0">
         <div class="ratings">
-            <% ["avg_cat1", "avg_cat2", "avg_cat3", "avg_cat4", "avg_cat5"].each do |cat| %>
-            <p><b>Category <%= cat[-1,1] %></b>: <%= number_with_precision data[cat], precision: 2 %> / 5</p>
+            <% get_hash(data).each do |key, label| %>
+                <div class="d-flex justify-content-between align-content-center">
+                    <div>
+                        <p>
+                            <b><%= label %></b>
+                            : <%= (card_text == 0) ? 'N/A' : number_with_precision(data[key], precision: 2) %>
+                        </p>
+                    </div>
+                    <%= card_text == 0 ? icon_for('N/A') : icon_for(number_with_precision(data[key], precision: 2)) %>
+                </div>
             <% end %>
         </div>
     </div>

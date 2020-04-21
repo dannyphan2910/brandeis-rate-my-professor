@@ -2,6 +2,7 @@ require 'test_helper'
 
 class UserFlowTest < ActionDispatch::IntegrationTest
   fixtures :users
+  include Devise::Test::IntegrationHelpers
 
   test "can see home page" do
     get '/'
@@ -14,7 +15,8 @@ class UserFlowTest < ActionDispatch::IntegrationTest
     get '/users/new'
     assert_response :success
     
-    post '/users', params: { user: { first_name: 'Test', last_name: 'Testinf', email: 'abc@test.com', password: '123123', password_confirmation: '123123' }}
+    user = { user: { first_name: 'Test', last_name: 'Testinf', email: 'abc@test.com', password: '123123', password_confirmation: '123123' }}
+    sign_up user
     assert_response :redirect
     follow_redirect!
     assert_response :success

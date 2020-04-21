@@ -32,6 +32,7 @@ class RateDownsController < ApplicationController
     if RateDown.exists?(user_id: user_id, review_id: review_id)
       RateDown.find_by(user_id: user_id, review_id: review_id).delete
     else
+      RateUp.find_by(user_id: user_id, review_id: review_id).delete if RateUp.exists?(user_id: user_id, review_id: review_id)
       RateDown.create(user_id: user_id, review_id: review_id)
     end
     @review = Review.find(review_id)

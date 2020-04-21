@@ -1,18 +1,29 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  # before_action :configure_sign_up_params, only: [:create]
-  # before_action :configure_account_update_params, only: [:update]
+  before_action :configure_sign_up_params, only: [:create]
+  before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
-
-  # POST /resource
-  def create
+  def new
+    if session['devise.google_data']
+      @suggested_first_name = session['devise.google_data']['info']['first_name'] || ''
+      @suggested_last_name = session['devise.google_data']['info']['last_name'] || ''
+      @suggested_email = session['devise.google_data']['info']['email'] || ''
+    elsif session['devise.facebook_data']
+      full_name = session['devise.facebook_data']['info']['name'].split(' ', 2)
+      @suggested_first_name = full_name[0] || ''
+      @suggested_last_name = full_name[1] || ''
+      @suggested_email = session['devise.facebook_data']['info']['email'] || ''
+    end
+ 
     super
   end
+
+  # POST /resource
+  # def create
+  #   super
+  # end
 
   # GET /resource/edit
   # def edit
@@ -46,14 +57,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   # If you have extra params to permit, append them to the sanitizer.
-  # def configure_account_update_params
-  #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
-  # end
+  def configure_account_update_params
+    devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name])
+  end
 
   # The path used after sign up.
-  def after_sign_up_path_for(resource)
-    super(resource)
-  end
+  # def after_sign_up_path_for(resource)
+  #   suoer(resource)
+  # end
 
   # The path used after sign up for inactive accounts.
   # def after_inactive_sign_up_path_for(resource)

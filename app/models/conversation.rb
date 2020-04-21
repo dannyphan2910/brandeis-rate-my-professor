@@ -15,7 +15,7 @@ class Conversation < ApplicationRecord
         conversation = between(sender_id, recipient_id).first
         return conversation if conversation.present?
     
-        create(sender_id: sender_id, recipient_id: recipient_id)
+        create(sender_id: sender_id, recipient_id: recipient_id) if !between(sender_id, recipient_id).first.present?
     end
 
     def opposed_user(user)

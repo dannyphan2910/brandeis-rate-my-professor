@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users, path: '/', path_names: { sign_up: 'users/new', sign_in: 'login', sign_out: 'logout' }, controllers: {
-    sessions: 'users/sessions'
+  devise_for :users, path: '/', path_names: { sign_in: 'login', sign_out: 'logout', registration: 'users' }, controllers: {
+    omniauth_callbacks: 'users/omniauth_callbacks',
+    registrations: 'users/registrations'
   }
 
   resources :conversations do
@@ -23,10 +24,10 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  get 'login', to: 'sessions#new'
-  post 'login', to: 'sessions#create'
-  get 'welcome', to: 'sessions#welcome'
-  get 'logout', to: 'sessions#destroy'
+  # get 'login', to: 'sessions#new'
+  # post 'login', to: 'sessions#create'
+  # get 'welcome', to: 'sessions#welcome'
+  # get 'logout', to: 'sessions#destroy'
 
   get 'search', to: 'search#search_result'
   post 'search', to: 'search#search_result'

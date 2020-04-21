@@ -1,4 +1,4 @@
-<% if !(request.path == '/login' || request.path == '/users/new') %>
+<% if !(request.path == new_user_session_path || request.path == new_user_registration_path) %>
 <nav class="navbar navbar-expand-md navbar-light">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -12,7 +12,7 @@
     </a>
 
     <div class="collapse navbar-collapse nav-content" id="navbarToggler">
-        <% if request.path == '/' || request.path == '/welcome' %>
+        <% if request.path == root_path %>
         <div class="form-inline my-2 my-lg-0 search-form d-flex justify-content-center"></div>
         <% else %>
         <%= form_tag "/search", method: "get", class: "form-inline my-2 my-lg-0 search-form d-flex justify-content-center" do %>
@@ -22,7 +22,7 @@
         <% end %>
         <div class="d-flex justify-content-end nav-links">
 
-            <% if !(request.path == '/' || request.path == '/welcome') %>
+            <% if !(request.path == root_path) %>
             <a class="nav-item nav-link left-align h5 text-center text-primary" href="#" data-toggle="modal" data-target="#formModal">Make A Review</a>
             <% end %>
 
