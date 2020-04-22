@@ -15,6 +15,10 @@ class Course < ApplicationRecord
         "#{semester} #{year}"
     end
 
+    def admin_course_label
+        "#{semester} #{year} #{course_code}"
+    end
+
     # Calculates the average of each category for every rating
     def get_average
         record_hash = {}

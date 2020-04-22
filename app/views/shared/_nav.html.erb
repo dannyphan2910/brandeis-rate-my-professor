@@ -22,7 +22,7 @@
         <% end %>
         <div class="d-flex justify-content-end nav-links">
 
-            <% if !(request.path == '/' || request.path == '/welcome') %>
+            <% if !(request.path == '/' || request.path == '/welcome') && !current_user.is_admin_user %>
             <a class="nav-item nav-link left-align h5 text-center text-primary" href="#" data-toggle="modal" data-target="#formModal">Make A Review</a>
             <% end %>
 

@@ -1,12 +1,14 @@
 <div class="container-fluid main" style="position:relative;">
     <div class="block-1 d-flex align-items-center">
         <div class="block-1-content d-flex flex-column align-items-center">
-            <% if logged_in? %>
-                <button type="button" class="btn btn-info btn-lg m-3" data-toggle="modal" data-target="#formModal">
-                    Make A Review
-                </button>
-            <% else %>
+            <% if !logged_in?%>
                 <%= button_to  "Sign in and Make A Review", "/login", method: 'get', class: "btn btn-warning btn-lg m-3" %>
+            <% else %>
+                <% if !current_user.is_admin_user %>
+                    <button type="button" class="btn btn-info btn-lg m-3" data-toggle="modal" data-target="#formModal">
+                        Make A Review
+                    </button>
+                <% end %>
             <% end %>
 
             <div class="modal fade" id ="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
@@ -14,9 +16,9 @@
                     <%= render 'shared/reviewForm' %>
                 
             </div>
-
-            <h3 class="m-2">OR</h3>
-
+            <% if !logged_in? || (logged_in? && !current_user.is_admin_user) %>
+                <h3 class="m-2">OR</h3>
+            <% end %>
             <div class="search-bar m-3">
                 <%= form_tag "/search", method: "get", class: "form" do %>
                     <div class="d-flex flex-column align-items-center">
