@@ -17,7 +17,12 @@ class User < ApplicationRecord
     # validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP } 
     # validates :password, presence: true, confirmation: { case_sensitive: true }
 
-    scope :conversation_with, -> (user_id) { where.not(id: user_id).joins("INNER JOIN conversations ON conversations.sender_id = users.id OR conversations.recipient_id = users.id") }
+    # scope :conversation_with, -> (user_id) { where.not(id: user_id).joins("INNER JOIN conversations ON conversations.sender_id = users.id OR conversations.recipient_id = users.id") }
+    
+    def self.conversation_with user_id
+        users = where.not(id: user_id)
+        users.select { |recipient| Conversation.between(user_id, recipient.id).exists? }
+    end
 
     def self.conversations_with_ordered_most_recent user_id
         recipients = conversation_with(user_id)

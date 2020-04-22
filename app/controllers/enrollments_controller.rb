@@ -64,7 +64,7 @@ class EnrollmentsController < ApplicationController
     #   Enrollment.find_by(user_id: user_id, general_course_id: general_course_id).delete
     # end
     @user_courses = current_user.general_courses.order(:course_code)
-    @courses = GeneralCourse.not_taken_by_user(current_user.id).search(params[:search_text_courses])
+    @courses = params[:search_text_courses].blank? ? [] : GeneralCourse.not_taken_by_user(current_user.id).search(params[:search_text_courses])
     respond_to do |format|
       format.js { }
     end

@@ -7,7 +7,7 @@
 		<div class="user-card-icon">
 			<i class="fas fa-ellipsis-v dropdown-toggle" type="button" id="userDropdown" data-toggle="dropdown"></i>
 			<div class="dropdown-menu" aria-labelledby="userDropdown">
-				<%= link_to "Delete", "/conversations/#{find_conversation(current_user.id, user.id).id}", method: :delete, remote: true, data: { confirm: "Do you want to delete this conversation?" }, class: "dropdown-item" %>
+				<%= link_to "Delete", "/conversations/#{find_conversation(current_user.id, user.id).id}", method: :delete, remote: true, data: { confirm: "Do you want to delete this conversation and all of its history?" }, class: "dropdown-item" %>
 			</div>
 		</div>
 	</div>

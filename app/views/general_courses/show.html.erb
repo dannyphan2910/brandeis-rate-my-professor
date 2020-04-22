@@ -46,12 +46,27 @@
 	<div class="accordion" id="accordion">
 		<% @courses.each do |course| %>
 			<div class="collapse-by-offering" id=<%= "#collapse-offering-#{course.id}" %>>
-				<div class="card-header bg-transparent" id=<%= "heading#{course.id}"%>>
+				<div class="card-header bg-transparent d-flex justify-content-between" id=<%= "heading#{course.id}"%>>
 					<h2 class="mb-0">
 						<a data-toggle="collapse" data-target=<%= "#collapse#{course.id}"%> <%= "#collapse#{course.id}"%> aria-expanded="true" aria-controls=<%= "collapse#{course.id}"%>>
 							<i class="fa fa-caret-down" aria-hidden="true"></i><span class="p ml-2 text-muted"><%= course.show_course_offering%></span>
 						</a>
 					</h2>
+					<div class="score-container d-flex align-content-center">
+						<% data = course.get_average %>
+						<% get_hash(data).each do |key, label| %>
+							<div class="d-flex align-content-center ml-2">
+								<div class="mr-2">
+									<b><%= label %></b>
+									: 
+									<div class="tooltip-container">
+										<%= course.reviews.length == 0 ? icon_for('N/A') : icon_for(number_with_precision(data[key], precision: 2)) %>
+										<span class="tooltiptext"><%= (course.reviews.length == 0) ? 'N/A' : number_with_precision(data[key], precision: 2) %></span>
+									</div>
+								</div>
+							</div>
+						<% end %>
+					</div>
 				</div>
 				<div id=<%= "collapse#{course.id}"%> class="collapse" aria-labelledby=<%= "heading#{course.id}"%> data-parent="#accordion">
 					<div class="card-body">

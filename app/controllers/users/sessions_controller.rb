@@ -8,13 +8,10 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  # def create
-  #   self.resource = warden.authenticate!(auth_options)
-  #   set_flash_message!(:notice, :signed_in)
-  #   sign_in(resource_name, resource)
-  #   log_in current_user
-  #   redirect_to root_url
-  # end
+  def create
+    super
+    puts resource.valid?
+  end
 
   # DELETE /resource/sign_out
   # def destroy
@@ -24,10 +21,14 @@ class Users::SessionsController < Devise::SessionsController
   #   redirect_to root_url
   # end
 
-  # protected
+  protected
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+
+  def after_sign_in_path_for(resource)
+    puts resource.errors.full_messages.join(', ')
+  end
 end

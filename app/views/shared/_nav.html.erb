@@ -1,4 +1,4 @@
-<% if !(request.path == new_user_session_path || request.path == new_user_registration_path) %>
+<% if !([new_user_session_path, new_user_registration_path, new_user_password_path, edit_user_password_path].include? request.path) %>
 <nav class="navbar navbar-expand-md navbar-light">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

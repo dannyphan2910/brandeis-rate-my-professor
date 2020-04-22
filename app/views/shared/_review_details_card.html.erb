@@ -86,8 +86,8 @@
 		<%= render 'shared/btns_review_details_card', review: review %>
 	</div>
 	<div class="card-footer bg-transparent border-secondary">
-		<small class="text-muted">Last updated on <%= review.updated_at %></small>
+		<small class="text-muted">Last updated on <%= review.updated_at.localtime.strftime("%H:%M:%S %m/%d/%Y") %></small>
 		<br />
-		<small class="text-muted">Created on <%= review.created_at %></small>
+		<small class="text-muted">Created on <%= review.created_at.localtime.strftime("%H:%M:%S %m/%d/%Y") %></small>
 	</div>
 </div>

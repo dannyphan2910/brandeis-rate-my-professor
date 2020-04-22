@@ -57,7 +57,7 @@ class ConversationsController < ApplicationController
     session[:conversation] = nil
     @conversation.destroy
     
-    @users = User.conversation_with(current_user.id).order("conversations.created_at DESC")
+    @users = User.conversations_with_ordered_most_recent(current_user.id)
 
     respond_to do |format|
       format.js { }

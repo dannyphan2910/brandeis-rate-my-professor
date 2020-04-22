@@ -5,7 +5,6 @@ class MessengerController < ApplicationController
   # GET /messenger_home
   def show
     @users = User.conversations_with_ordered_most_recent(current_user.id)
-    # @users = User.conversation_with current_user.id
   end
 
   # POST /message/:id

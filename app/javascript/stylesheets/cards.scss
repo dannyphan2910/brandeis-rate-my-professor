@@ -1,0 +1,90 @@
+/* Tooltip container */
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+}
+
+/* Tooltip text */
+.tooltip-container .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.tooltip-container .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip-container:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+// RATE UP - RATE DOWN BUTTONS
+.fa-thumbs-up,
+.fa-thumbs-down {
+    font-size: 18px;
+}
+
+.fa-thumbs-up {
+    color: rgb(184, 241, 156);
+}
+
+.fa-thumbs-down {
+    color: rgb(240, 169, 168);
+}
+
+.fa-thumbs-up:hover {
+    color: #98fb98;
+}
+
+.fa-thumbs-down:hover {
+    color: #e84d59;
+}
+
+.thumbs-up-active {
+    color: green;
+}
+
+.thumbs-down-active {
+    color: red;
+}
+
+// CARD
+
+.card {
+    width: 400px;
+}
+
+
+.card-deck {
+    width: 100%;
+
+    .card-block {
+        min-width: 200px;
+    }
+}
