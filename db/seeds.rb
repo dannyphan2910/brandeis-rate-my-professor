@@ -45,32 +45,32 @@ assign_hash = {
     "MATH" => "Mathematics",
     "COSI" => "Computer Science",
     "ECON" => "Economics",
-    # "ENG" => "English",
-    # "ANTH" => "Anthropology",
-    # "POL" => "Politics",
-    # "IGS" => "International and Global Studies",
+    "ENG" => "English",
+    "ANTH" => "Anthropology",
+    "POL" => "Politics",
+    "IGS" => "International and Global Studies",
     "PSYC" => "Psychology",
-    # "BUS" => ["Economics", "Business", "International Business School"],
-    # "FIN" => ["Business", "International Business School"],
-    # "PHYS" => ["Physics", "Biophysics and Structural Biology", "Biochemistry and Biophysics"],
-    # "CHEM" => ["Biochemistry and Biophysics", "Biochemistry", "Chemistry"],
-    # "BCHM" => "Biochemistry and Biophysics",
-    # "BIO" => ["Molecular and Cell Biology", "Quantitative Biology", "Biophysics and Structural Biology", "Biochemistry and Biophysics", "Biochemistry"],
-    # "NEJS" => ["Hornstein Jewish Professional Leadership Program", "Islamic and Middle Eastern Studies"],
-    # "KOR" => "Korean",
-    # "JAPN" => "Japanese",
-    # "RUS" => "Russian Studies",
-    # "MUS" => "Music",
-    # "THA" => "Theater Arts",
-    # "HBRW" => "Hebrew",
-    # "FREN" => "French and Francophone Studies",
-    # "ARBC" => "Arabic Language and Literature", 
-    # "HINDI" => "Hindi",
-    # "LAT" => "Latin",
-    # "GER" => "German Studies",
-    # "CHIN" => "Chinese",
-    # "GRK" => "Greek",
-    # "ITAL" => "Italian Studies"
+    "BUS" => ["Economics", "Business", "International Business School"],
+    "FIN" => ["Business", "International Business School"],
+    "PHYS" => ["Physics", "Biophysics and Structural Biology", "Biochemistry and Biophysics"],
+    "CHEM" => ["Biochemistry and Biophysics", "Biochemistry", "Chemistry"],
+    "BCHM" => "Biochemistry and Biophysics",
+    "BIO" => ["Molecular and Cell Biology", "Quantitative Biology", "Biophysics and Structural Biology", "Biochemistry and Biophysics", "Biochemistry"],
+    "NEJS" => ["Hornstein Jewish Professional Leadership Program", "Islamic and Middle Eastern Studies"],
+    "KOR" => "Korean",
+    "JAPN" => "Japanese",
+    "RUS" => "Russian Studies",
+    "MUS" => "Music",
+    "THA" => "Theater Arts",
+    "HBRW" => "Hebrew",
+    "FREN" => "French and Francophone Studies",
+    "ARBC" => "Arabic Language and Literature", 
+    "HINDI" => "Hindi",
+    "LAT" => "Latin",
+    "GER" => "German Studies",
+    "CHIN" => "Chinese",
+    "GRK" => "Greek",
+    "ITAL" => "Italian Studies"
 }
 
 
@@ -78,7 +78,7 @@ course_hash.each do |course|
     course_code = course['code'].split(' ')[0]
     if assign_hash.keys.include? course_code
         gen_c = GeneralCourse.create(course_code: course['code'], course_title: course['name'], course_description: course['description'])
-        4.times do 
+        5.times do 
             p_id = Professor.where(dept_name: assign_hash[course_code]).sample.id
             c = Course.create(professor_id: p_id, semester: ['Fall', 'Spring'].sample, year: Faker::Number.between(from: 2005, to: 2020), general_course_id: gen_c.id)
         end

@@ -7,7 +7,6 @@ class Users::PasswordsController < Devise::PasswordsController
   # end
 
   # POST /resource/password
-<<<<<<< HEAD
   def create
     self.resource = resource_class.send_reset_password_instructions(resource_params)
     yield resource if block_given?
@@ -18,11 +17,6 @@ class Users::PasswordsController < Devise::PasswordsController
       redirect_to new_user_password_path, alert: 'We could not find a registered user with that email. You can create an account instead.'
     end
   end
-=======
-  # def create
-  #   super
-  # end
->>>>>>> c690c1544f33ef95f3c794339d01804c697bb601
 
   # GET /resource/password/edit?reset_password_token=abcdef
   # def edit
@@ -30,7 +24,6 @@ class Users::PasswordsController < Devise::PasswordsController
   # end
 
   # PUT /resource/password
-<<<<<<< HEAD
   def update
     self.resource = resource_class.reset_password_by_token(resource_params)
     yield resource if block_given?
@@ -51,11 +44,6 @@ class Users::PasswordsController < Devise::PasswordsController
       redirect_to edit_user_password_path(reset_password_token: resource.reset_password_token), alert: resource.errors.full_messages.first
     end
   end
-=======
-  # def update
-  #   super
-  # end
->>>>>>> c690c1544f33ef95f3c794339d01804c697bb601
 
   # protected
 
