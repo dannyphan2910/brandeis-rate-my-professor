@@ -28,11 +28,11 @@ class User < ApplicationRecord
         }.reverse 
     end
 
-    def is_admin
+    def is_admin_user
         if email == "admin@brandeis.edu"
             return true
         else 
-            return false
+            return is_admin
         end
     end
 

@@ -38,7 +38,7 @@
                     Hi <%= current_user.first_name %>!
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-                    <% if current_user.is_admin != true %>
+                    <% if current_user.is_admin_user != true %>
                         <%= button_to  "My Profile", "/view_profile", method: :get, class: "dropdown-item" %>
                         <%= button_to  "Messages", "/messenger_home", method: :get, class: "dropdown-item" %>
                     <% else %>

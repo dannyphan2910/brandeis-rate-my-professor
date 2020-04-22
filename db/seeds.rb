@@ -34,7 +34,7 @@ end
 
 100.times do 
     pass = Faker::Internet.password(min_length: 10, max_length: 20)
-    u = User.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, password: pass, password_confirmation: pass)
+    u = User.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, password: pass, password_confirmation: pass, is_admin:false)
 end
 
 instructor_hash.each do |instructor|
