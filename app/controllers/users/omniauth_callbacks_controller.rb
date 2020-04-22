@@ -8,6 +8,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # def twitter
   # end
 
+<<<<<<< HEAD
   def google_oauth2
     # You need to implement the method below in your model (e.g. app/models/user.rb)
     @user = User.from_omniauth(request.env['omniauth.auth'])
@@ -34,6 +35,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
 
+=======
+>>>>>>> c690c1544f33ef95f3c794339d01804c697bb601
   # More info at:
   # https://github.com/plataformatec/devise#omniauth
 
@@ -43,9 +46,15 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # end
 
   # GET|POST /users/auth/twitter/callback
+<<<<<<< HEAD
   def failure
     redirect_to root_path
   end
+=======
+  # def failure
+  #   super
+  # end
+>>>>>>> c690c1544f33ef95f3c794339d01804c697bb601
 
   # protected
 

@@ -15,8 +15,7 @@ class UserFlowTest < ActionDispatch::IntegrationTest
     get '/users/new'
     assert_response :success
     
-    user = { user: { first_name: 'Test', last_name: 'Testinf', email: 'abc@test.com', password: '123123', password_confirmation: '123123' }}
-    sign_up user
+    post '/users', params: { user: { first_name: 'Test', last_name: 'Testinf', email: 'abc@test.com', password: '123123', password_confirmation: '123123' }}
     assert_response :redirect
     follow_redirect!
     assert_response :success

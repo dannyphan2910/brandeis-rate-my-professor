@@ -82,9 +82,11 @@
 			</div>
 		</div>
 	</div>
-	<div class=<%= "btns-review-card-#{review.id}"%>>
-		<%= render 'shared/btns_review_details_card', review: review %>
-	</div>
+	<% if !current_user.is_admin_user %>
+		<div class=<%= "btns-review-card-#{review.id}"%>>
+			<%= render 'shared/btns_review_details_card', review: review %>
+		</div>
+	<% end %>
 	<div class="card-footer bg-transparent border-secondary">
 		<small class="text-muted">Last updated on <%= review.updated_at.localtime.strftime("%H:%M:%S %m/%d/%Y") %></small>
 		<br />

@@ -1,5 +1,4 @@
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/themes/bars-square.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/jquery.barrating.min.js"></script>
 
 <script>
@@ -30,6 +29,38 @@ $(function() {
   });
 });
 
+$(document).ready(function() {
+  var e_review_text = $(".e-content");
+  var e_counter     = $("#e-content-counter");
+  var e_max_length  = e_counter.data("maximum-length");
+
+  e_review_text.keyup(function() {
+      e_counter.text(e_max_length - $(this).val().length);
+  });
+
+});
+
+$(document).ready(function() {
+  var e_review_text = $(".e-strength");
+  var e_counter     = $("#e-strength-counter");
+  var e_max_length  = e_counter.data("maximum-length");
+
+  e_review_text.keyup(function() {
+      e_counter.text(e_max_length - $(this).val().length);
+  });
+
+});
+
+$(document).ready(function() {
+  var e_review_text = $(".e-improvement");
+  var e_counter     = $("#e-improvement-counter");
+  var e_max_length  = e_counter.data("maximum-length");
+
+  e_review_text.keyup(function() {
+      e_counter.text(e_max_length - $(this).val().length);
+  });
+});
+
 
 </script>
 
@@ -54,7 +85,7 @@ $(function() {
       <div class = "form-group">
         <div class = "row">
           <div class = "col-3">
-            <h5> <label for="course_year"> Year Taught... </label></h5>
+            <h5> <label for="course_year"> Semester... </label></h5>
           </div>
           <div class = "col-9">
             <%= @course.year %>, <%= @course.semester %>
@@ -95,7 +126,7 @@ $(function() {
             <h5><%= form.label :title %></h5>
           </div>
           <div class = "col-9">
-            <%= form.text_field :title, class:"form-control", value: @review.title, style: "width:100%" %>
+            <%= form.text_field :title, class:"form-control", value: @review.title, maxlength: 50, size: 30,style: "width:100%" %>
           </div>
         </div>
       </div>
@@ -105,131 +136,244 @@ $(function() {
   <p></p>
   
   <div class = "row">
-  <div class = "col-6">
-  <div class = "card" style = "width: 100%">
-    <div class = "card-body">
-      <div class = "row">
-          <div class = "col text-center">
-            <h5>Course Ratings</h5>
+    <div class = "col-12">
+      <div class = "card" style = "width: 100%">
+        <div class = "card-header">
+          <div class = "row">
+              <div class = "col text-center">
+                <h5>Course Ratings</h5>
+              </div>
           </div>
-      </div>
-      <p></p>
-      <p></p>
-      
-      
-      <%= form.fields_for :course_rating, @course_rating do |c_form| %>
-      <div class ="row">
-        <div class = "col-4 text-center">
-          <%= form.label :cat1 %>
         </div>
-        <div class = "col-8">
-          <%= c_form.select :cat1, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat1), {},{class: "review_edit_course_cat1"} %>
-          
-        </div>
-      </div>
+        <%= form.fields_for :course_rating, @course_rating do |c_form| %>
+        <ul class = "list-group list-group-flush">
+          <li class="list-group-item">
+            <div class = "row">
+              <div class = "col-12 text-center">
+                <p>Content</p>
 
-
-      <div class ="row">   
-
-        <div class = "col-4 text-center">
-          <%= form.label :cat2 %>
-        </div>
-        <div class = "col-8">
-          <%= c_form.select :cat2, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat2),{},{class: "review_edit_course_cat2"} %>
-        </div>
-      </div>
+                <div class = "explanation">Is the content being taught in the course interesting to you?</div>
+              </div>
+            </div>
             
-      <div class ="row">
-        <div class = "col-4 text-center">
-          <%= form.label :cat3 %>
-        </div>
-        <div class = "col-8">
-          <%= c_form.select :cat3, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat3),{},{class: "review_edit_course_cat3"} %>
-        </div>
-      </div>
+            <div class ="row">
+              <div class = "col-3 text-right">
+                Not interesting
+              </div>
+              <div class = "col-6 text-center">
+                <%= c_form.select :cat1, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat1), {},{class: "review_edit_course_cat1"} %>
+              </div>
+              <div class = "col-3 text-left">
+                Very interesting
+              </div>
+            </div>         
+          </li>
+          <li class="list-group-item">
+            <div class = "row">
+              <div class = "col-12 text-center">
+                <p>Participation</p>
 
-      <div class ="row">
-        <div class = "col-4 text-center">
-          <%= form.label :cat4 %>
-        </div>
-        <div class = "col-8">
-          <%= c_form.select :cat4, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat4),{},{class: "review_edit_course_cat4"} %>
-        </div>
-      </div>
+                <div class = "explanation">Did you feel that the course requires high level of participation? (i.e attendance, in-class participation, etc.)</div>
+              </div>
+            </div>
+            <div class ="row">   
+              <div class = "col-3 text-right">
+                Lenient
+              </div>
+              <div class = "col-6 text-center">
+                <%= c_form.select :cat2, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat2),{},{class: "review_edit_course_cat2"} %>
+              </div>
+              <div class = "col-3 text-left">
+                Strict
+              </div> 
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class = "row">
+              <div class = "col-12 text-center">
+                <p>Workload</p>
 
-      <div class ="row">
-        <div class ="col-4 text-center">
-          <%= form.label :cat5 %> 
-        </div>
-        <div class ="col-8">
-          <%= c_form.select :cat5, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat5),{},{class: "review_edit_course_cat5"} %>
-        </div>
-      </div>
+                <div class = "explanation">Did the course require a great amount of time dedicated to assignments?</div>
+              </div>
+            </div>  
+            <div class ="row">
+              <div class = "col-3 text-right">
+                Not intense
+              </div>
+              <div class = "col-6 text-center">
+                <%= c_form.select :cat3, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat3),{},{class: "review_edit_course_cat3"} %>
+              </div>
+              <div class = "col-3 text-left">
+                Very intense
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class = "row">
+              <div class = "col-12 text-center">
+                <p>Test</p>
 
-      <% end %>
+                <div class = "explanation">What was your experience regarding amount of test and exams in this course?</div>
+              </div>
+            </div>
+            <div class ="row">
+              <div class = "col-3 text-right">
+                Little or no test
+              </div>
+              <div class = "col-6 text-center">
+                <%= c_form.select :cat4, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat4),{},{class: "review_edit_course_cat4"} %>
+              </div>
+              <div class = "col-3 text-left">
+                Many tests
+              </div>
+            </div>
+          </li>
+        </ul>
+        <div class = "card-body">
+          <div class = "row">
+            <div class = "col-12 text-center">
+              <p>Grading</p>
 
-    </div>
-  </div>
-  </div>
-  <div class = "col-6">
-    <div class = "card" style="width:100%">
-      <div class = "card-body">
-        <div class = "row">
-          <div class ="col text-center">
-            
-            <h5>Professor Ratings</h5>
-            
+              <div class = "explanation">Was the grading in the course harsh or lenient for this assignments and exams?</div>
+            </div>
           </div>
-        </div>
-        <p></p>
-        <p></p>
-
-        
-        <%= form.fields_for :professor_rating, @professor_rating do |p_form| %>
-        <div class = "row">
-          <div class = "col-4 text-center">
-            <%= form.label :cat1 %>
-          </div>
-          <div class = "col-8">
-            <%= p_form.select :cat1, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat1),{},{class: "review_edit_professor_cat1"}  %>
-          </div>
-        </div>
-        <div class = "row">
-          <div class = "col-4 text-center">
-            <%= form.label :cat2 %>
-          </div>
-          <div class = "col-8">
-            <%= p_form.select :cat2, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat2),{},{class: "review_edit_professor_cat2"} %>
-          </div>
-        </div>
-        <div class = "row">
-          <div class = "col-4 text-center">
-            <%= form.label :cat3 %>
-          </div>
-          <div class = "col-8">
-            <%= p_form.select :cat3, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat3),{},{class: "review_edit_professor_cat3"} %>
-          </div>
-        </div>
-        <div class = "row">
-          <div class = "col-4 text-center">
-            <%= form.label :cat4 %>
-          </div>
-          <div class = "col-8">
-            <%= p_form.select :cat4, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat4),{},{class: "review_edit_professor_cat4"} %>
-          </div>
-        </div>
-        <div class = "row">
-          <div class = "col-4 text-center">
-            <%= form.label :cat5 %>
-          </div>
-          <div class = "col-8">
-            <%= p_form.select :cat5, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat5),{},{class: "review_edit_professor_cat5"} %>
+          <div class ="row">
+            <div class ="col-3 text-right">
+              Not strict
+            </div>
+            <div class ="col-6 text-center">
+              <%= c_form.select :cat5, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat5),{},{class: "review_edit_course_cat5"} %>
+            </div>
+            <div class = "col-3 text-left">
+              Very strict
+            </div>
           </div>
         </div>
         <% end %>
       </div>
     </div>
   </div>
+  
+  <p></p>
+
+  <div class = "row">
+    <div class = "col-12">
+      <div class = "card" style="width:100%">
+        <div class = "card-header">
+          <div class = "row">
+            <div class ="col text-center">
+          
+            <h5>Professor Ratings</h5>
+          
+            </div>
+          </div>
+        </div>
+        <%= form.fields_for :professor_rating, @professor_rating do |p_form| %>
+        <ul class = "list-group list-group-flush">
+          <li class = "list-group-item">
+            <div class = "row">
+              <div class = "col-12 text-center">
+                <p>Delivery</p>
+
+                <div class = "explanation">Does the professor deliver the contents in a comprehensible manner? (i.e. tone, pacing, etc.)  </div>
+              </div>
+            </div>
+            <div class = "row">
+              <div class = "col-3 text-right">
+                Not comprehensible
+              </div>
+              <div class = "col-6 text-center">
+                <%= p_form.select :cat1, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat1),{},{class: "review_edit_professor_cat1"}  %>
+              </div>
+              <div class = "col-3 text-left">
+                Easily comprehensible
+              </div>
+            </div>
+          </li>
+          <li class = "list-group-item">
+            <div class = "row">
+              <div class = "col-12 text-center">
+                <p>Accessibility</p>
+
+                <div class = "explanation">Was the professor easy to reach both online (i.e. email) and offline(i.e office hours)?</div>
+              </div>
+            </div>
+            <div class = "row">
+              <div class = "col-3 text-right">
+                Not accessible
+              </div>
+              <div class = "col-6 text-center">
+                <%= p_form.select :cat2, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat2),{},{class: "review_edit_professor_cat2"} %>
+              </div>
+              <div class = "col-3 text-left">
+                Easily accessible
+              </div>
+            </div>
+          </li>
+          <li class = "list-group-item">
+          <div class = "row">
+              <div class = "col-12 text-center">
+                <p>Expertise</p>
+
+                <div class = "explanation">Did the professor demonstrate a solid grasp of the content of the course in the lecture?</div>
+              </div>
+            </div>
+            <div class = "row">
+              <div class = "col-3 text-right">
+                General knowledge
+              </div>
+              <div class = "col-6 text-center">
+                <%= p_form.select :cat3, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat3),{},{class: "review_edit_professor_cat3"} %>
+              </div>
+              <div class = "col-3 text-left">
+                Expert knowledge
+              </div>
+            </div>
+          </li>
+          <li class = "list-group-item">
+          <div class = "row">
+              <div class = "col-12 text-center">
+                <p>Expectation</p>
+
+                <div class = "explanation">Was the professor’s expectations in terms of grading rubrics, workload, and difficulty clear throughout the course? (i.e course syllabus)</div>
+              </div>
+            </div>
+            <div class = "row">
+              <div class = "col-3 text-right">
+                Not clear
+              </div>
+              <div class = "col-6 text-center">
+                <%= p_form.select :cat4, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat4),{},{class: "review_edit_professor_cat4"} %>
+              </div>
+              <div class = "col-3 text-left">
+                Very clear
+              </div>
+            </div>
+          </li>
+        <ul>
+        <div class = "card-body">
+          <div class = "row">
+            <div class = "col-12 text-center">
+              <p>Preparedness</p>
+
+              <div class = "explanation">Did the professor prepare the lecture and assignment materials persistently throughout the course?</div>
+            </div>
+          </div>
+          <div class = "row">
+            <div class = "col-3 text-right">
+              Not persistent
+            </div>
+            <div class = "col-6 text-center">
+              <%= p_form.select :cat5, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat5),{},{class: "review_edit_professor_cat5"} %>
+            </div>
+            <div class = "col-3 text-left">
+              Very persistent
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
   </div>
   
   <p></p>
@@ -247,7 +391,8 @@ $(function() {
     </div>
     <div class ="row">
       <div class = "col-12">
-        <%= c_form.text_area :content, class:"form-control", value: @course_rating.content , rows:"6", style: "width: 100%"  %>
+        <%= c_form.text_area :content, class:"form-control e-content", value: @course_rating.content , placeholder: "Type up to 300 characters.", maxlength: 300, size: 30, rows:"6", style: "width: 100%"  %>
+        <span id="e-content-counter" data-maximum-length="300"><%= 300-@course_rating.content.length %></span>
       </div>
     </div>
   </div>
@@ -262,7 +407,8 @@ $(function() {
     </div>
     <div class ="row">
       <div class ="col-12">
-        <%= p_form.text_area :strength, class:"form-control", value: @professor_rating.strength, rows:"6", style: "width: 100%" %>
+        <%= p_form.text_area :strength, class:"form-control e-strength", value: @professor_rating.strength,placeholder: "Type up to 300 characters.",maxlength: 300, size: 30, rows:"6", style: "width: 100%" %>
+        <span id="e-strength-counter" data-maximum-length="300"><%= 300-@professor_rating.strength.length %></span>
       </div>
     </div>
   </div>
@@ -276,7 +422,8 @@ $(function() {
     </div>
     <div class = "row">
       <div class = "col-12">
-        <%= p_form.text_area :improvement, class:"form-control", value: @professor_rating.improvement, rows:"6", style: "width: 100%" %>
+        <%= p_form.text_area :improvement, class:"form-control e-improvement", value: @professor_rating.improvement,placeholder: "Type up to 300 characters.",maxlength: 300, size: 30, rows:"6", style: "width: 100%" %>
+        <span id="e-improvement-counter" data-maximum-length="300"><%= 300-@professor_rating.improvement.length %></span>
       </div>
     </div>
   </div>

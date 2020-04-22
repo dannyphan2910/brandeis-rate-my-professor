@@ -33,6 +33,14 @@ class User < ApplicationRecord
         }.reverse 
     end
 
+    def is_admin_user
+        if email == "admin@brandeis.edu"
+            return true
+        else 
+            return is_admin
+        end
+    end
+
     def show_full_name
         "#{first_name} #{last_name}"
     end

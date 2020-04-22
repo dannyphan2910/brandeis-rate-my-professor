@@ -1,2 +1,6 @@
 $('select#review_course_id').html('<%= j options_for_select(@filtered_course) %>')
 $('#review_course_id').prop('disabled',false);
+$('#review_course_name').attr('autocomplete','on');
+$('#review_course_name').autocomplete({
+    source:['ku','klex','klan']
+});

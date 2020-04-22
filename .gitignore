@@ -32,5 +32,3 @@ yarn-debug.log*
 public/packs/manifest.json
 
 .env
-public/packs/js/application-1483f8f54306e0907887.js
-public/packs/js/application-1483f8f54306e0907887.js.map

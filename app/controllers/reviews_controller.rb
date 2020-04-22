@@ -40,6 +40,7 @@ class ReviewsController < ApplicationController
   def create
  
     @review = Review.new(review_params)
+<<<<<<< HEAD
     # form_input = params[:review]
     # u_id = session[:user_id]
     # c_code = form_input[:course_id].split(":")[0]
@@ -61,6 +62,22 @@ class ReviewsController < ApplicationController
          format.js { render 'reviews/fail' }
          format.json { render json: @review.errors, status: :unprocessable_entity }
        end
+=======
+ 
+    respond_to do |format|
+      begin
+        if @review.save 
+          format.js {render 'reviews/create'}
+          format.json { render :show, status: :created, location: @review }
+        else
+          format.js { render 'reviews/fail' }
+          format.json { render json: @review.errors, status: :unprocessable_entity }
+        end
+      rescue ActiveRecord::RecordNotFound
+        format.js { render 'reviews/fail' }
+        format.json { render json: @review.errors, status: :unprocessable_entity }
+      end
+>>>>>>> c690c1544f33ef95f3c794339d01804c697bb601
      end
   end
 
@@ -161,17 +178,34 @@ class ReviewsController < ApplicationController
       reviewed = []
       user_reviews.each do |ur|
           cid = ur.course_id
+<<<<<<< HEAD
+=======
+          curr_course = Course.find(cid)
+          gcid = curr_course.general_course_id;
+          y = curr_course.year
+          s = curr_course.semester
+          same_name_ys = Course.where(general_course_id: gcid, year: y, semester: s)
+>>>>>>> c690c1544f33ef95f3c794339d01804c697bb601
           # gcid = Course.find(cid).general_course_id
           # if !reviewed.include?(gcid)
           #     reviewed.push(gcid)
           # end
           if !reviewed.include?(cid)
+<<<<<<< HEAD
             reviewed.push(cid)
+=======
+            same_name_ys.each do |c|
+              reviewed.push(c.id)
+            end
+            # reviewed.push(cid)
+            # curr_course = Course.find(cid)
+>>>>>>> c690c1544f33ef95f3c794339d01804c697bb601
           end
       end
       return reviewed
     end
 
+<<<<<<< HEAD
     # Only allow a list of trusted parameters through.
     def review_params
       form_input = params[:review]
@@ -185,6 +219,36 @@ class ReviewsController < ApplicationController
       params[:review][:course_id] = c_id
       params[:review][:user_id] = u_id
       puts params
+=======
+    def same_name_course(gcid,yr,smstr)
+      ids = []
+      courses = Course.where(general_course_id:gcid, year: yr, semester: smstr)
+      courses.each do |c|
+        ids.push(c.id)
+      end
+      return ids
+    end
+
+    # Only allow a list of trusted parameters through.
+    def review_params
+      begin 
+        form_input = params[:review]
+        c_year = form_input[:course_year].split(" ")[0]
+        c_semester = form_input[:course_year].split(" ")[1]
+        u_id = session[:user_id]
+        p_id = form_input[:professor_id]
+        c_code = form_input[:course_id].split(":")[0]
+        gc_id = GeneralCourse.find_by(course_code: c_code).id
+        c_id = Course.find_by(general_course_id: gc_id, professor_id: p_id, year: c_year, semester: c_semester).id
+        params[:review][:course_id] = c_id
+        params[:review][:user_id] = u_id
+        puts params
+      rescue => e
+      rescue ActiveRecord::RecordNotFound
+      rescue ActiveRecord::ActiveRecordError
+      rescue Exception
+      end
+>>>>>>> c690c1544f33ef95f3c794339d01804c697bb601
       return params.require(:review).permit(
         :user_id,
         :title,

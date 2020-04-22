@@ -3,7 +3,7 @@ class ProfileController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def view_profile
-    @user_reviews = current_user.reviews
+    @user_reviews = current_user.reviews.order(updated_at: :desc, created_at: :asc)
     @user_courses = current_user.general_courses.order(:course_code)
     if params[:search_text_courses]
       if params[:search_text_courses].blank?
