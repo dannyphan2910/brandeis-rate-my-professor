@@ -151,85 +151,81 @@ $(document).ready(function() {
           <li class="list-group-item">
             <div class = "row">
               <div class = "col-12 text-center">
-                <p>Category 1</p>
+                <p>Content</p>
 
-                <div class = "explanation">This is some explanation about what this category is about, and instructions
-                on how the user should rate (1 is more toward cat1, whereas 5 is more toward its opposite.)</div>
+                <div class = "explanation">Is the content being taught in the course interesting to you?</div>
               </div>
             </div>
             
             <div class ="row">
               <div class = "col-3 text-right">
-                category 1
+                Not interesting
               </div>
               <div class = "col-6 text-center">
                 <%= c_form.select :cat1, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat1), {},{class: "review_edit_course_cat1"} %>
               </div>
               <div class = "col-3 text-left">
-                not category 1
+                Very interesting
               </div>
             </div>         
           </li>
           <li class="list-group-item">
             <div class = "row">
               <div class = "col-12 text-center">
-                <p>Category 2</p>
+                <p>Participation</p>
 
-                <div class = "explanation">This is some explanation about what this category is about, and instructions
-                on how the user should rate (1 is more toward cat1, whereas 5 is more toward its opposite.)</div>
+                <div class = "explanation">Did you feel that the course requires high level of participation? (i.e attendance, in-class participation, etc.)</div>
               </div>
             </div>
             <div class ="row">   
               <div class = "col-3 text-right">
-                category 2
+                Lenient
               </div>
               <div class = "col-6 text-center">
                 <%= c_form.select :cat2, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat2),{},{class: "review_edit_course_cat2"} %>
               </div>
               <div class = "col-3 text-left">
-                not category 2
+                Strict
               </div> 
             </div>
           </li>
           <li class="list-group-item">
             <div class = "row">
               <div class = "col-12 text-center">
-                <p>Category 3</p>
+                <p>Workload</p>
 
-                <div class = "explanation">This is some explanation about what this category is about, and instructions
-                on how the user should rate (1 is more toward cat1, whereas 5 is more toward its opposite.)</div>
+                <div class = "explanation">Did the course require a great amount of time dedicated to assignments?</div>
               </div>
             </div>  
             <div class ="row">
               <div class = "col-3 text-right">
-                category 3
+                Not intense
               </div>
               <div class = "col-6 text-center">
                 <%= c_form.select :cat3, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat3),{},{class: "review_edit_course_cat3"} %>
               </div>
               <div class = "col-3 text-left">
-                not category 3
+                Very intense
               </div>
             </div>
           </li>
           <li class="list-group-item">
             <div class = "row">
               <div class = "col-12 text-center">
-                <p>Category 4</p>
+                <p>Test</p>
 
-                <div class = "explanation">This is some explanation about what this category is about, and instructions
-                on how the user should rate (1 is more toward cat1, whereas 5 is more toward its opposite.)</div>
+                <div class = "explanation">What was your experience regarding amount of test and exams in this course?</div>
               </div>
             </div>
             <div class ="row">
               <div class = "col-3 text-right">
-                category 4
+                Little or no test
               </div>
               <div class = "col-6 text-center">
                 <%= c_form.select :cat4, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat4),{},{class: "review_edit_course_cat4"} %>
               </div>
               <div class = "col-3 text-left">
-                not category 4
+                Many tests
               </div>
             </div>
           </li>
@@ -237,21 +233,20 @@ $(document).ready(function() {
         <div class = "card-body">
           <div class = "row">
             <div class = "col-12 text-center">
-              <p>Category 5</p>
+              <p>Grading</p>
 
-              <div class = "explanation">This is some explanation about what this category is about, and instructions
-                on how the user should rate (1 is more toward cat1, whereas 5 is more toward its opposite.)</div>
+              <div class = "explanation">Was the grading in the course harsh or lenient for this assignments and exams?</div>
             </div>
           </div>
           <div class ="row">
             <div class ="col-3 text-right">
-              category 5
+              Not strict
             </div>
             <div class ="col-6 text-center">
               <%= c_form.select :cat5, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @course_rating.cat5),{},{class: "review_edit_course_cat5"} %>
             </div>
             <div class = "col-3 text-left">
-              not category 5
+              Very strict
             </div>
           </div>
         </div>
@@ -279,84 +274,80 @@ $(document).ready(function() {
           <li class = "list-group-item">
             <div class = "row">
               <div class = "col-12 text-center">
-                <p>Category 1</p>
+                <p>Delivery</p>
 
-                <div class = "explanation">This is some explanation about what this category is about, and instructions
-                on how the user should rate (1 is more toward cat1, whereas 5 is more toward its opposite.)</div>
+                <div class = "explanation">Does the professor deliver the contents in a comprehensible manner? (i.e. tone, pacing, etc.)  </div>
               </div>
             </div>
             <div class = "row">
               <div class = "col-3 text-right">
-                category 1
+                Not comprehensible
               </div>
               <div class = "col-6 text-center">
                 <%= p_form.select :cat1, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat1),{},{class: "review_edit_professor_cat1"}  %>
               </div>
               <div class = "col-3 text-left">
-                not category 1
+                Easily comprehensible
               </div>
             </div>
           </li>
           <li class = "list-group-item">
             <div class = "row">
               <div class = "col-12 text-center">
-                <p>Category 2</p>
+                <p>Accessibility</p>
 
-                <div class = "explanation">This is some explanation about what this category is about, and instructions
-                on how the user should rate (1 is more toward cat1, whereas 5 is more toward its opposite.)</div>
+                <div class = "explanation">Was the professor easy to reach both online (i.e. email) and offline(i.e office hours)?</div>
               </div>
             </div>
             <div class = "row">
               <div class = "col-3 text-right">
-                category 2
+                Not accessible
               </div>
               <div class = "col-6 text-center">
                 <%= p_form.select :cat2, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat2),{},{class: "review_edit_professor_cat2"} %>
               </div>
               <div class = "col-3 text-left">
-                not category 2
+                Easily accessible
               </div>
             </div>
           </li>
           <li class = "list-group-item">
           <div class = "row">
               <div class = "col-12 text-center">
-                <p>Category 3</p>
+                <p>Expertise</p>
 
-                <div class = "explanation">This is some explanation about what this category is about, and instructions
-                on how the user should rate (1 is more toward cat1, whereas 5 is more toward its opposite.)</div>
+                <div class = "explanation">Did the professor demonstrate a solid grasp of the content of the course in the lecture?</div>
               </div>
             </div>
             <div class = "row">
               <div class = "col-3 text-right">
-                category 3
+                General knowledge
               </div>
               <div class = "col-6 text-center">
                 <%= p_form.select :cat3, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat3),{},{class: "review_edit_professor_cat3"} %>
               </div>
               <div class = "col-3 text-left">
-                not category 3
+                Expert knowledge
               </div>
             </div>
           </li>
           <li class = "list-group-item">
           <div class = "row">
               <div class = "col-12 text-center">
-                <p>Category 4</p>
+                <p>Expectation</p>
 
-                <div class = "explanation">This is some explanation about what this category is about, and instructions
-                on how the user should rate (1 is more toward cat1, whereas 5 is more toward its opposite.)</div>
+                <div class = "explanation">Was the professor’s expectations in terms of grading rubrics, workload, and difficulty clear throughout the course? (i.e course syllabus)</div>
               </div>
             </div>
             <div class = "row">
               <div class = "col-3 text-right">
-                category 4
+                Not clear
               </div>
               <div class = "col-6 text-center">
                 <%= p_form.select :cat4, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat4),{},{class: "review_edit_professor_cat4"} %>
               </div>
               <div class = "col-3 text-left">
-                not category 4
+                Very clear
               </div>
             </div>
           </li>
@@ -364,21 +355,20 @@ $(document).ready(function() {
         <div class = "card-body">
           <div class = "row">
             <div class = "col-12 text-center">
-              <p>Category 5</p>
+              <p>Preparedness</p>
 
-              <div class = "explanation">This is some explanation about what this category is about, and instructions
-              on how the user should rate (1 is more toward cat1, whereas 5 is more toward its opposite.)</div>
+              <div class = "explanation">Did the professor prepare the lecture and assignment materials persistently throughout the course?</div>
             </div>
           </div>
           <div class = "row">
             <div class = "col-3 text-right">
-              category 5
+              Not persistent
             </div>
             <div class = "col-6 text-center">
               <%= p_form.select :cat5, options_for_select([["1",1],["2",2],["3",3],["4",4],["5",5]], @professor_rating.cat5),{},{class: "review_edit_professor_cat5"} %>
             </div>
             <div class = "col-3 text-left">
-              not category 5
+              Very persistent
             </div>
           </div>
         </div>
