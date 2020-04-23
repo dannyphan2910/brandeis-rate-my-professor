@@ -28,11 +28,6 @@
 
             <% if logged_in? %>
             
-            <div class="modal fade" id ="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
-                <div class = "container">
-                    <%= render 'shared/reviewForm' %>
-                </div>
-            </div>
             <div class="dropdown nav-item nav-link left-align authentication">
                 <a class="dropdown-toggle h5" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Hi <%= current_user.first_name %>!
@@ -55,3 +50,9 @@
     </div>
 </nav>
 <% end %>
+
+<div class="modal fade" id ="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
+    <div class = "container">
+        <%= render 'shared/reviewForm' %>
+    </div>
+</div>
