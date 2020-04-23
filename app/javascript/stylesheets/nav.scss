@@ -4,7 +4,6 @@ nav {
 }
 
 .logo {
-    color: white;
     width: 33.3%;
 }
 
@@ -18,4 +17,34 @@ nav {
 
 .nav-links {
     width: inherit;
+}
+
+.nav-title {
+    font-family: 'Bangers', cursive;
+    color: white;
+}
+
+.nav-text {
+    color: white !important;
+}
+
+.nav-review-text {
+    color: white;
+    border: solid transparent 1px;
+}
+
+.nav-review-text:hover {
+    border-color: white;
+}
+
+.nav-mobile-container a, .nav-mobile-container button {
+    margin: 20px auto;
+    font-size: 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .nav-review-text {
+        color: black !important;
+        border: solid transparent 1px;
+    }
 }

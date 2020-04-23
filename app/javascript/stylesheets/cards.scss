@@ -76,10 +76,9 @@
 
 // CARD
 
-.card {
+.card.card-block {
     width: 400px;
 }
-
 
 .card-deck {
     width: 100%;
@@ -87,4 +86,39 @@
     .card-block {
         min-width: 200px;
     }
+}
+
+.card.card-block, .card-header.bg-transparent, .card-footer.bg-transparent {
+    border-color: $main !important;
+}
+
+h4.card-title a {
+    font-weight: 500 !important;
+}
+
+.card-label {
+    padding-bottom: 2px;
+    border-bottom: 2px solid #f13f5b;
+}
+
+// ICONS
+
+.fa-question-circle {
+    color: #868E96; 
+}
+
+.fa-frown {
+    color: #DC3545; 
+}
+
+.fa-meh {
+    color: #33b5e5;
+}
+
+.fa-smile-beam {
+    color: #00c851;
+}
+
+.fa-grin-stars {
+    color: #ffbb33;
 }

@@ -48,14 +48,14 @@ module SessionsHelper
 
     def icon_for score
         if score == "N/A"
-            return content_tag :i, '', class: 'far fa-question-circle fa-2x text-secondary'
+            return content_tag :i, '', class: 'far fa-question-circle fa-2x'
         end
         score = score.to_f * 100
         icon = case score
-            when 0..133 then content_tag :i, '', class: 'far fa-frown fa-2x text-danger'
-            when 134..332 then content_tag :i, '', class: 'far fa-meh fa-2x text-info'
-            when 333..449 then content_tag :i, '', class: 'far fa-smile-beam fa-2x text-success'
-            when 450..500 then content_tag :i, '', class: 'far fa-grin-stars fa-2x text-warning'
+            when 0..133 then content_tag :i, '', class: 'far fa-frown fa-2x'
+            when 134..332 then content_tag :i, '', class: 'far fa-meh fa-2x'
+            when 333..449 then content_tag :i, '', class: 'far fa-smile-beam fa-2x'
+            when 450..500 then content_tag :i, '', class: 'far fa-grin-stars fa-2x'
         end
         icon
     end
