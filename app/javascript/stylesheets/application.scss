@@ -29,10 +29,10 @@ a:hover {
 //     display: none;
 // }
 
-// body {
-//     -ms-overflow-style: none;
-//     overflow: hidden;
-// }
+body {
+   -ms-overflow-style: none;
+   overflow: hidden;
+}
 
 // FOR sessions
 .main {
@@ -208,7 +208,7 @@ li {
 }
 
 #site-content {
-    overflow-y: auto;
+    overflow-y: scroll;
     overflow-x: hidden;
 }
 
