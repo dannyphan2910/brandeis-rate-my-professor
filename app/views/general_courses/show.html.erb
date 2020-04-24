@@ -1,18 +1,32 @@
 <div class="header m-5">
 	<div class="row d-flex justify-content-start align-items-center">
 		<div class="col">
-			<h1><%= "#{@general_course.course_code}: #{@general_course.course_title}" %></h1>
-			<p><%= @general_course.course_description %></p>
+			<h1 class="text-break"><span class="border-bottom border-danger"><%= "#{@general_course.course_code}"%></span>: <%= "#{@general_course.course_title}" %></h1>
+			<p class="text-break"><%= @general_course.course_description %></p>
 		</div>
+	</div>
+	<div class="overall-stats d-flex align-content-center flex-wrap">
+		<% get_hash(@overall_stat).each do |key, label| %>
+			<div class="d-flex align-content-center ml-2">
+				<div class="mr-2">
+					<b><%= label %></b>
+					: 
+					<%= @general_course.reviews.length == 0 ? 'N/A' : number_with_precision(@overall_stat[key], precision: 2) %>
+					<span class="ml-3">
+						<%= @general_course.reviews.length == 0 ? icon_for('N/A') : icon_for(number_with_precision(@overall_stat[key], precision: 2)) %>
+					</span>
+				</div>
+			</div>
+		<% end %>
 	</div>
 </div>
 <div class="dropdown-divider"></div>
 <div class="suggestion-container row m-5">
-	<div class="col-3">
+	<div class="col-lg-5">
 		<h4><%= @general_course.reviews.length %> total reviews</h4>
 		<div class="available mt-5">
 			<h5 class="mb-2">Available Offerings:</h5>
-			<ul class="list-group w-75 overflow-auto" style="height:260px;">
+			<ul class="list-group mw-75 overflow-auto" style="height:280px;">
 				<% @courses.each do |course| %>
 					<li class="list-group-item">
 						<a class="d-flex justify-content-between align-items-center" onclick=<%="get_focus(#{course.id})"%>>
@@ -24,20 +38,14 @@
 			</ul>
 		</div>
 	</div>
-	<div class="col">
+	<div class="col-lg">
 		<div class="most-helpful">
-			<h4>Most Helpful</h4>
-			<%= render 'shared/review_details_card', review: @highest_rated_review %>
-		</div>
-	</div>
-	<div class="col-2 mr-5">
-		<div class="overall-stat">
-			<%= render 'shared/review_card',
-                data: @overall_stat,
-                card_link: "",
-                card_title: "Overall Ratings", 
-                card_subtitle: "aggregated over the years",
-                card_text: @overall_stat["total_reviews"] %>
+			<h4 class="mb-5">Most Helpful</h4>
+			<% if @highest_rated_review %>
+				<%= render 'shared/review_details_card', review: @highest_rated_review %>
+			<% else %>
+				<h3 class="text-center mt-5 font-weight-light">Sorry, there are not enough reviews for this course.</h3>
+			<% end %>
 		</div>
 	</div>
 </div>
@@ -47,12 +55,12 @@
 		<% @courses.each do |course| %>
 			<div class="collapse-by-offering" id=<%= "#collapse-offering-#{course.id}" %>>
 				<div class="card-header bg-transparent d-flex justify-content-between" id=<%= "heading#{course.id}"%>>
-					<h2 class="mb-0">
+					<h2 class="mb-0 mr-3">
 						<a data-toggle="collapse" data-target=<%= "#collapse#{course.id}"%> <%= "#collapse#{course.id}"%> aria-expanded="true" aria-controls=<%= "collapse#{course.id}"%>>
-							<i class="fa fa-caret-down" aria-hidden="true"></i><span class="p ml-2 text-muted"><%= course.show_course_offering%></span>
+							<i class="fa fa-caret-down" aria-hidden="true"></i><span class="p ml-sm-2 text-muted"><%= course.show_course_offering%></span>
 						</a>
 					</h2>
-					<div class="score-container d-flex align-content-center">
+					<div class="score-container d-flex align-content-center flex-wrap">
 						<% data = course.get_average %>
 						<% get_hash(data).each do |key, label| %>
 							<div class="d-flex align-content-center ml-2">

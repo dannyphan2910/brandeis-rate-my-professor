@@ -1,6 +1,6 @@
 <div class="container-fluid outer-container d-flex align-items-end" style="position:absolute;z-index=1;">
 	<div class="inner-container d-flex flex-column align-items-center container-form">
-		<div class="card" style="min-width:30%;">
+		<div class="card" style="min-width:30vw;">
 			<div class="card-body">
 				<h1 class="mt-2 mb-4 text-center">Sign In</h1>
 				<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -21,7 +21,7 @@
 								<%= f.password_field :password, required: true, class: 'form-control form-control-lg' %>
 							</div>
 						</div>
-						<%= f.submit "Login", {class: 'btn btn-lg btn-success mt-3'}%>
+						<%= f.submit "Login", {class: 'btn btn-lg btn-success rounded-pill py-2 px-4 mt-3'}%>
 					</div>
 				<% end %>
 				<div class="btn-login mt-2 d-flex flex-column align-items-center">

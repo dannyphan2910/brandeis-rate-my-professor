@@ -50,16 +50,30 @@
 				<div class="col border border-info rounded mx-2 mt-2">
 					<div class="course-rating mt-2">
 						<h4 class="mb-3">Course Ratings</h4>
-						<% (1..5).each do |num| %>
-							<p><b>Category <%= num %></b>: <%= review.course_rating["cat" + num.to_s] %> / 5</p>
+						<% get_labels(forCourse: true).each_with_index do |label, index| %>
+							<div class="d-flex justify-content-between align-content-center">
+								<div>
+									<p><b class="card-label"><%= label %></b>
+										: 
+										<%= review.course_rating["cat#{index + 1}"] %></p>
+								</div>
+								<%= icon_for(review.course_rating["cat#{index + 1}"]) %>
+							</div>
 						<% end %>
 					</div>
 				</div>
 				<div class="col border border-info rounded mx-2 mt-2">
 					<div class="professor-rating mt-2">
 						<h4 class="mb-3">Professor Ratings</h4>
-						<% (1..5).each do |num| %>
-							<p><b>Category <%= num %></b>: <%= review.professor_rating["cat" + num.to_s] %> / 5</p>
+						<% get_labels(forCourse: false).each_with_index do |label, index| %>
+							<div class="d-flex justify-content-between align-content-center">
+								<div>
+									<p><b class="card-label"><%= label %></b>
+										: 
+										<%= review.professor_rating["cat#{index + 1}"] %></p>
+								</div>
+								<%= icon_for(review.professor_rating["cat#{index + 1}"]) %>
+							</div>
 						<% end %>
 					</div>
 				</div>
@@ -75,8 +89,8 @@
 				</div>
 				<div class="col border border-info rounded mx-2 mt-2">
 					<div class="professor-rating mt-2">
-						<h4 class="mb-3">Improvement Suggestion</h4>
-						<%= review.professor_rating.improvement %>
+						<h4 class="mb-3">Suggestion</h4>
+						<p><%= review.professor_rating.improvement %></p>
 					</div>
 				</div>
 			</div>

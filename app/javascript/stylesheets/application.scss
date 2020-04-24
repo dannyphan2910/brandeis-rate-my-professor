@@ -11,7 +11,7 @@
 $primary: #7678ed;
 $secondary: #9a8c98;
 $warning: #f2e863;
-$danger: #f25757;
+$danger: #f13f5b;
 $success: #7ee781;
 $info: #61e8e1;
 $main: #115bae;
@@ -427,22 +427,14 @@ li {
       padding-bottom: 20px;
   }
 
-#show-mobile {
-    display: none !important;
-}
-
 @media screen and (max-width: 500px) {
     #hide-mobile-small {
         display: none !important;
     }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1200px) {
     #hide-mobile {
         display: none !important;
-    }
-
-    #show-mobile {
-        display: block !important; 
     }
 }

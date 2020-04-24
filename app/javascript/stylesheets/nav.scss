@@ -42,9 +42,23 @@ nav {
     font-size: 20px;
 }
 
+#show-mobile {
+    display: none !important;
+}
+
 @media screen and (max-width: 768px) {
     .nav-review-text {
         color: black !important;
         border: solid transparent 1px;
+    }
+
+    #show-mobile {
+        display: block !important;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    #hide-mobile {
+        display: none !important;
     }
 }

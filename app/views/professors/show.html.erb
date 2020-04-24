@@ -1,88 +1,97 @@
 <div class="header m-5">
 	<div class="row d-flex justify-content-start align-items-center">
 		<div class="col">
-			<h1><%= "#{@professor.show_name}" %></h1>
-			<h3 class="text-muted"><%= @professor.dept_name %></h3>
-			<p><%= @professor.prof_info %></p>
+			<h1 class="text-break"><span class="border-bottom border-danger"><%= "#{@professor.show_name}" %></span></h1>
+			<h3 class="text-muted text-break"><%= @professor.dept_name %></h3>
+			<p class="text-break"><%= @professor.prof_info %></p>
 		</div>
 	</div>
-</div>
-<div class="dropdown-divider"></div>
-<div class="suggestion-container row m-5">
-	<div class="col-3">
-		<h4><%= @professor.reviews.length %> total reviews</h4>
-		<div class="available mt-5">
-			<h5 class="mb-2">Available Courses:</h5>
-			<ul class="list-group overflow-auto" style="height:260px;">
-				<% @courses.each do |course| %>
-					<li class="list-group-item">
-						<a class="d-flex justify-content-between align-items-center" onclick=<%="get_focus(#{course.id})"%>>
-							<%= "#{course.show_course_info} (#{course.show_course_offering})" %>
-							<span class="badge badge-primary badge-pill"><%= course.reviews.length %></span>
-						</a>
-					</li>
-				<% end %>
-			</ul>
-		</div>
-	</div>
-	<div class="col">
-		<div class="most-helpful">
-			<h4>Most Helpful</h4>
-			<%= render 'shared/review_details_card', review: @highest_rated_review %>
-		</div>
-	</div>
-	<div class="col-2 mr-5">
-		<div class="overall-stat">
-			<%= render 'shared/review_card',
-                data: @overall_stat,
-                card_link: "",
-                card_title: "Overall Ratings", 
-                card_subtitle: "aggregated over the years",
-                card_text: @overall_stat["total_reviews"] %>
-		</div>
-	</div>
-</div>
-<div class="dropdown-divider"></div>
-<div class="all-reviews-container m-5">
-	<div class="accordion" id="accordion">
-		<% @courses.each do |course| %>
-			<div class="collapse-by-offering" id=<%= "#collapse-offering-#{course.id}" %>>
-				<div class="card-header bg-transparent d-flex justify-content-between" id=<%= "heading#{course.id}"%>>
-					<h4 class="mb-2" style="width:40%;">
-						<a data-toggle="collapse" data-target=<%= "#collapse#{course.id}"%> <%= "#collapse#{course.id}"%> aria-expanded="true" aria-controls=<%= "collapse#{course.id}"%>>
-							<i class="fa fa-caret-down" aria-hidden="true"></i><span class="p ml-2 text-muted"><%= sanitize "#{course.show_course_info}<br/>(#{course.show_course_offering})" %></span>
-						</a>
-					</h4>
-					<div class="score-container d-flex align-content-center">
-						<% data = course.get_average %>
-						<% get_hash(data).each do |key, label| %>
-							<div class="d-flex align-content-center ml-2">
-								<div class="mr-2">
-									<p>
-										<b><%= label %></b>
-										: <%= (course.reviews.length == 0) ? 'N/A' : number_with_precision(data[key], precision: 2) %>
-									</p>
-								</div>
-								<%= course.reviews.length == 0 ? icon_for('N/A') : icon_for(number_with_precision(data[key], precision: 2)) %>
-							</div>
-						<% end %>
-					</div>
-				</div>
-				<div id=<%= "collapse#{course.id}"%> class="collapse" aria-labelledby=<%= "heading#{course.id}"%> data-parent="#accordion">
-					<div class="card-body">
-						<% course.reviews.ordered_by_rate_up.each do |review| %>
-							<%= render 'shared/review_details_card', review: review %>
-						<% end %>
-					</div>
+	<div class="overall-stats d-flex align-content-center flex-wrap">
+		<% get_hash(@overall_stat).each do |key, label| %>
+			<div class="d-flex align-content-center ml-2">
+				<div class="mr-2">
+					<b><%= label %></b>
+					: 
+					<%= @professor.reviews.length == 0 ? 'N/A' : number_with_precision(@overall_stat[key], precision: 2) %>
+					<span class="ml-3">
+						<%= @professor.reviews.length == 0 ? icon_for('N/A') : icon_for(number_with_precision(@overall_stat[key], precision: 2)) %>
+					</span>
 				</div>
 			</div>
 		<% end %>
 	</div>
 </div>
-<script>
-	function get_focus(course_id) {
-		console.log(course_id);
-		$("#collapse" + course_id).collapse('show');
-		document.getElementById("#collapse-offering-" + course_id).scrollIntoView();
-	}
-</script>
+	<div class="dropdown-divider"></div>
+	<div class="suggestion-container row m-5">
+		<div class="col-lg-5">
+			<h4><%= @professor.reviews.length %> total reviews</h4>
+			<div class="available mt-5">
+				<h5 class="mb-2">Available Courses:</h5>
+				<ul class="list-group mw-75 overflow-auto" style="height:280px;">
+					<% @courses.each do |course| %>
+						<li class="list-group-item">
+							<a class="d-flex justify-content-between align-items-center" onclick=<%="get_focus(#{course.id})"%>>
+								<%= "#{course.show_course_info} (#{course.show_course_offering})" %>
+								<span class="badge badge-primary badge-pill"><%= course.reviews.length %></span>
+							</a>
+						</li>
+					<% end %>
+				</ul>
+			</div>
+		</div>
+		<div class="col-lg">
+			<div class="most-helpful">
+				<h4 class="mb-5">Most Helpful</h4>
+				<% if @highest_rated_review %>
+					<%= render 'shared/review_details_card', review: @highest_rated_review %>
+				<% else %>
+					<h3 class="text-center mt-5 font-weight-light text-break">Sorry, there are not enough reviews for this course.</h3>
+				<% end %>
+			</div>
+		</div>
+	</div>
+	<div class="dropdown-divider"></div>
+	<div class="all-reviews-container m-5">
+		<div class="accordion" id="accordion">
+			<% @courses.each do |course| %>
+				<div class="collapse-by-offering" id=<%= "#collapse-offering-#{course.id}" %>>
+					<div class="card-header bg-transparent d-flex justify-content-between" id=<%= "heading#{course.id}"%>>
+						<h4 class="mb-2">
+							<a data-toggle="collapse" data-target=<%= "#collapse#{course.id}"%> <%= "#collapse#{course.id}"%> aria-expanded="true" aria-controls=<%= "collapse#{course.id}"%>>
+								<i class="fa fa-caret-down" aria-hidden="true"></i><span class="p ml-sm-2 text-muted text-break"><%= sanitize "#{course.show_course_info}<br/>(#{course.show_course_offering})" %></span>
+							</a>
+						</h4>
+						<div class="score-container d-flex align-content-center flex-wrap">
+							<% data = course.get_average %>
+							<% get_hash(data).each do |key, label| %>
+								<div class="d-flex align-content-center ml-2">
+									<div class="mr-2">
+										<b><%= label %></b>
+										: 
+										<div class="tooltip-container">
+											<%= course.reviews.length == 0 ? icon_for('N/A') : icon_for(number_with_precision(data[key], precision: 2)) %>
+											<span class="tooltiptext"><%= (course.reviews.length == 0) ? 'N/A' : number_with_precision(data[key], precision: 2) %></span>
+										</div>
+									</div>
+								</div>
+							<% end %>
+						</div>
+					</div>
+					<div id=<%= "collapse#{course.id}"%> class="collapse" aria-labelledby=<%= "heading#{course.id}"%> data-parent="#accordion">
+						<div class="card-body">
+							<% course.reviews.ordered_by_rate_up.each do |review| %>
+								<%= render 'shared/review_details_card', review: review %>
+							<% end %>
+						</div>
+					</div>
+				</div>
+			<% end %>
+		</div>
+	</div>
+	<script>
+		function get_focus(course_id) {
+			console.log(course_id);
+			$("#collapse" + course_id).collapse('show');
+			document.getElementById("#collapse-offering-" + course_id).scrollIntoView();
+		}
+	</script>

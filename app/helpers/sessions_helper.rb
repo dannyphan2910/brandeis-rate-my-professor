@@ -35,15 +35,17 @@ module SessionsHelper
     end
 
     def get_hash data
-        arr = (data['course_title']) ?
-            ["Content", "Participation", "Workload", "Testing", "Grading"] :
-            ["Delivery", "Accessibility", "Expertise", "Expectations", "Preparedness"] 
+        arr = (data['course_title']) ? get_labels(forCourse: true) : get_labels(forCourse: false)
             
         res = {}
         (1..5).each do |num|
             res["avg_cat" + num.to_s] = arr[num-1]
         end
         res
+    end
+
+    def get_labels forCourse
+        forCourse ? ["Content", "Participation", "Workload", "Testing", "Grading"] : ["Delivery", "Accessibility", "Expertise", "Expectations", "Preparedness"] 
     end
 
     def icon_for score
