@@ -3,13 +3,14 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-
+    <% if false %>
     <a class="navbar-brand logo d-flex align-items-center ml-4" href="/">
         <img src="https://upload.wikimedia.org/wikipedia/en/3/32/Brandeis_University_seal.svg" width="70" height="70" class="d-inline-block align-top" alt="">
-        <span class="h3 ml-3">
+        
             Rate My Professor
-        </span>
+        
     </a>
+    <%end %>
 
     <div class="collapse navbar-collapse nav-content" id="navbarToggler">
         <% if request.path == root_path %>

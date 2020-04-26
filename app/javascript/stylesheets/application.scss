@@ -25,6 +25,7 @@ $info: #61e8e1;
 @import 'nav';
 @import 'messenger';
 @import 'review';
+@import 'profile';
 
 
 html,
@@ -32,7 +33,6 @@ body {
     margin: 0;
     padding: 0;
     width: 100%;
-    height: 100vh;
     font-family: 'Quicksand', sans-serif;
 }
 
@@ -116,24 +116,11 @@ li {
 }
 
 #site-content::-webkit-scrollbar {
-    width: 8px;
+   display: none;
 }
 
-#site-content::-webkit-scrollbar-track {
-    border-radius: 10px;
-}
 
-#site-content::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
-    background-color: transparent;
-}
 
-#site-content.scrolling::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
-    background-color: #739ace;
-}
 
 #site-content {
     position:absolute;
@@ -143,6 +130,27 @@ li {
     overflow-x: hidden;
 }
 
+@media(min-width: 768px){
+    #site-content::-webkit-scrollbar {
+        display: block;
+        width: 8px;
+    }
+    #site-content::-webkit-scrollbar-track {
+        border-radius: 10px;
+    }
+    
+    #site-content::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+        background-color: transparent;
+    }
+    
+    #site-content.scrolling::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+        background-color: #739ace;
+    }
+}
 #editModal::-webkit-scrollbar {
     width: 8px;
 }
@@ -200,9 +208,9 @@ li {
 
 #scrollbar-area{
     z-index:1;
-    position:fixed;
+    position:absolute;
     right: 0;
-    height:100%;
+    height:90%;
     width: 10px;
     background-color: transparent;
 }

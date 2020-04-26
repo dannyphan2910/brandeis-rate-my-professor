@@ -1,0 +1,89 @@
+
+.profile-area{
+    display:flex;
+    flex-flow: row wrap;
+    padding-top: 0.5rem;
+}
+
+.review-view-area{
+    display:flex;
+    flex-flow: row wrap;
+}
+
+.review-cards-area{
+    order: 2;
+    width: 100%;
+    padding: 1rem;
+}
+
+.course-search-area{
+    order: 1;
+    width: 100%;
+    padding: 1rem;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.profile-gravatar-area{
+    padding-top: 3px;
+    text-align: center;
+    order: 1;
+    width: 100%;
+}
+
+.profile-name-area{
+    text-align: center;
+    order: 2;
+    width: 100%;
+
+}
+
+.profile-button-area{
+    text-align: center;
+    order: 3;
+    width: 100%;
+    margin-bottom: 10px;
+    padding-top: 20px;
+
+}
+
+.message-button{
+    margin-right: 10px;
+}
+
+.message-button-area{
+    display: inline-block;
+}
+
+.login-button-area{
+    display: inline-block;
+}
+
+
+@media (min-width: 768px) {
+    .profile-gravatar-area{
+        order: 1;
+        width: 33.333%;
+        margin-top: 0;
+    }
+    
+    .profile-name-area{
+        order: 2;
+        width: 33.333%;
+    }
+    
+    .profile-button-area{
+        order: 3;
+        width: 33.333%;
+        margin-bottom: 0;
+    }    
+
+    .review-cards-area{
+        order: 1;
+        width: 66.667%;
+    }
+    
+    .course-search-area{
+        order: 2;
+        width: 33.333%;
+    }
+}
