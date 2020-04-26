@@ -5,13 +5,9 @@ one:
   course_id: 1
   professor_id: 1
   title: MyString
-  rate_up: 1
-  rate_down: 1
 
 two:
   user_id: 1
   course_id: 1
   professor_id: 1
   title: MyString
-  rate_up: 1
-  rate_down: 1

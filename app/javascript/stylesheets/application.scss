@@ -427,15 +427,3 @@ li {
       padding: 10px;
       padding-bottom: 20px;
   }
-
-@media screen and (max-width: 500px) {
-    #hide-mobile-small {
-        display: none !important;
-    }
-}
-
-@media screen and (max-width: 1200px) {
-    #hide-mobile {
-        display: none !important;
-    }
-}

@@ -12,7 +12,7 @@ class UserFlowTest < ActionDispatch::IntegrationTest
   end
 
   test "can create an account" do
-    get '/users/new'
+    get '/users/sign_up'
     assert_response :success
     
     post '/users', params: { user: { first_name: 'Test', last_name: 'Testinf', email: 'abc@test.com', password: '123123', password_confirmation: '123123' }}

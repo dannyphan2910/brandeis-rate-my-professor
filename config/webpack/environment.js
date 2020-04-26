@@ -12,6 +12,4 @@ new webpack.ProvidePlugin({
 }),
 );
 
-environment.config.set('resolve.alias', aliasConfig);
-
 module.exports = environment;
