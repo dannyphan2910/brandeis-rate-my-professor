@@ -9,7 +9,7 @@
 			</div>
 			<div class="main-content">
 				<% if !logged_in?%>
-					<%= button_to  "Sign in and Make A Review", "/login", method: 'get', class: "btn btn-lg btn-warning main-btn-warning rounded-pill py-3 px-4 my-3 mb-3" %>
+					<%= button_to  "Sign in and Make A Review", "/login", method: 'get', class: "btn btn-lg main-btn main-btn-warning rounded-pill my-3 mb-3" %>
 				<% else %>
 					<% if !current_user.is_admin_user %>
 						<button type="button" class="btn btn-lg m-3 main-btn main-btn-review" data-toggle="modal" data-target="#formModal">
@@ -47,7 +47,7 @@
 	<div class="dropdown-divider"></div>
 	<div class="block d-flex justify-content-center">
 		<div class="my-3">
-			<h2 class="mb-3 section-title">Suggested Courses</h2>
+			<h2 class="mb-3 ml-3 section-title">Suggested Courses</h2>
 			<div class="card-deck m-0 p-0 row flex-row flex-nowrap overflow-auto" style="max-width: 100vw">
 				<% @courses_most_reviewed.each do |course| %>
 					<%= render 'shared/review_card', 
@@ -63,7 +63,7 @@
 	<div class="dropdown-divider"></div>
 	<div class="block d-flex justify-content-center">
 		<div class="my-3">
-			<h2 class="mb-3 section-title">Suggested Professors</h2>
+			<h2 class="mb-3 ml-3 section-title">Suggested Professors</h2>
 			<div class="card-deck m-0 p-0 row flex-row flex-nowrap overflow-auto" style="max-width: 100vw">
 				<% @professors_most_reviewed.each do |prof| %>
 					<%= render 'shared/review_card', 
