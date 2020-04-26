@@ -58,4 +58,9 @@ $(document).on('submit', '.new_message', function(e) {
   var values = $(this).serializeArray();
   chatChannel.speak(values);
   $(this).trigger('reset');
+
+  if ($(".suggestions").length) {
+    $(".suggestions").hide();
+    $(".attachments").show();
+  }
 });

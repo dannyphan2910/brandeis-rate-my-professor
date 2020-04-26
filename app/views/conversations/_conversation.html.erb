@@ -12,35 +12,29 @@
 	</div>
 	<div class="dropdown-divider mb-0"></div>
 	<div class="card-body msg-form pt-0 container-fluid">
+		<div class="row ml-4 d-block mb-1" style="width:85%;height:30%;">
+			<% if !conversation.messages.any? %>
+				<div class="btns row align-items-center text-center mr-2 suggestions flex-nowrap">
+					<% @new_conversation_suggestion.each do |style, text| %>
+						<a class="col">
+							<span class="<%= style %>"><%= text %></span>
+						</a>
+					<% end %>
+				</div>
+			<% else %>
+				<div class="attachments row ml-lg-4 ml-xl-4 mx-0 h-100 align-items-center">
+					<a id="attach"><i class="fas fa-paperclip fa-lg text-secondary"></i></a>
+				</div>
+			<% end %>
+		</div>
 		<div class="input-msg-container mx-lg-4 mx-xl-4 mx-0 d-xs-flex d-sm-flex d-md-flex">
-			<form class="new_message d-flex align-items-center w-100 mt-3">
+			<form class="new_message d-flex align-items-center w-100">
 				<input name="conversation_id" type="hidden" value="<%= conversation.id %>">
 				<input name="user_id" type="hidden" value="<%= user.id %>">
 				<div class="col-lg-11 col-xl-11 col-9">
-					<% if !conversation.messages.any? %>
-						<div class="btns row d-none d-lg-flex d-xl-flex align-items-center text-center mr-2">
-							<a class='col'>
-								<span class="badge badge-pill badge-warning"><%= "Hi #{conversation.opposed_user(user).first_name}!" %></span>
-							</a>
-							<a class='col'>
-								<span class="badge badge-pill badge-success"><%= "Hello! How are you today?" %></span>
-							</a>
-							<a class='col'>
-								<span class="badge badge-pill badge-info"><%= "Hi there! How’s it going?" %></span>
-							</a>
-							<a class='col'>
-								<span class="badge badge-pill badge-secondary"><%= "Hello. I am #{user.first_name}" %></span>
-							</a>
-							<a class='col'>
-								<span class="badge badge-pill badge-danger"><%= "Hey #{conversation.opposed_user(user).first_name}! Can we have a talk?" %></span>
-							</a>
-						</div>
-					<% else %>
-						<div class="mb-4"></div>
-					<% end %>
 					<textarea name="body" id="msg-textarea" class="form-control overflow-auto" style="resize: none;"></textarea>
 				</div>
-				<div class="col mt-4">
+				<div class="col">
 					<%= button_tag class: "btn btn-lg bg-transparent btn-msg" do %>
 						<i class="fas fa-paper-plane fa-lg"></i>
 					<% end %>
@@ -52,9 +46,9 @@
 
 <script>
 $("a .badge").click(function(e) {
-  e.preventDefault();
-  var message = $(this).html();
-  $('textarea').val(message);
+  	e.preventDefault();
+  	var message = $(this).html();
+  	$('textarea').val(message);
 });
 
 function backbtn() {
