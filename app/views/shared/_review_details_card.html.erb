@@ -11,24 +11,6 @@
 				<% end %>
 			</div>
 		<% end %>
-		<div class="modal fade" id ="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-lg" role="document">
-				<div class="modal-content">
-					<div class="modal-header edit-modal-header">
-						<h4 class="modal-title w-100 font-weight-bold" id="exampleModalLabel">
-							<% if logged_in? %>
-								Edit Review
-							<% end %>
-						</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body editForm">
-					</div>
-				</div>
-			</div>
-		</div>
 	</div>
 	<div class="card-body">
 		<h5 class="card-title"><%= review.title %></h5>
@@ -48,7 +30,7 @@
 		<div class="collapse" id=<%="collapse-ratings-#{review.id}"%>>
 			<div class="row mx-1">
 				<div class="col border border-info rounded mx-2 mt-2">
-					<div class="course-rating mt-2">
+					<div class="course-rating-info mt-2">
 						<h4 class="mb-3">Course Ratings</h4>
 						<% get_labels(forCourse: true).each_with_index do |label, index| %>
 							<div class="d-flex justify-content-between align-content-center">
@@ -63,7 +45,7 @@
 					</div>
 				</div>
 				<div class="col border border-info rounded mx-2 mt-2">
-					<div class="professor-rating mt-2">
+					<div class="professor-rating-info mt-2">
 						<h4 class="mb-3">Professor Ratings</h4>
 						<% get_labels(forCourse: false).each_with_index do |label, index| %>
 							<div class="d-flex justify-content-between align-content-center">
@@ -105,5 +87,23 @@
 		<small class="text-muted">Last updated on <%= review.updated_at.localtime.strftime("%H:%M:%S %m/%d/%Y") %></small>
 		<br />
 		<small class="text-muted">Created on <%= review.created_at.localtime.strftime("%H:%M:%S %m/%d/%Y") %></small>
+	</div>
+</div>
+
+<div class="modal fade" id ="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header edit-modal-header">
+				<h4 class="modal-title w-100 font-weight-bold" id="exampleModalLabel">
+					<% if logged_in? %>
+						Edit Your Review
+					<% end %>
+				</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body editForm"></div>
+		</div>
 	</div>
 </div>

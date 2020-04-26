@@ -189,7 +189,7 @@ class ReviewsController < ApplicationController
         form_input = params[:review]
         c_year = form_input[:course_year].split(" ")[0]
         c_semester = form_input[:course_year].split(" ")[1]
-        u_id = session[:user_id]
+        u_id = @current_user.id
         p_id = form_input[:professor_id]
         c_code = form_input[:course_id].split(":")[0]
         gc_id = GeneralCourse.find_by(course_code: c_code).id

@@ -151,7 +151,7 @@ $(document).ready(function() {
           <li class = "list-group-item">
             <div class = "row">
               <div class = "col-12 text-center">
-                <p>Content</p>
+                <div class = "category-label">Content</div>
 
                 <div class = "explanation">Is the content being taught in the course interesting to you?</div>
               </div>
@@ -171,7 +171,7 @@ $(document).ready(function() {
           <li class = "list-group-item">
             <div class = "row">
               <div class = "col-12 text-center">
-                <p>Participation</p>
+                <div class = "category-label">Participation</div>
 
                 <div class = "explanation">Did you feel that the course requires high level of participation?
                 (i.e. attendance, in-class participation, etc.) </div>
@@ -192,7 +192,7 @@ $(document).ready(function() {
           <li class = "list-group-item">
             <div class = "row">
               <div class = "col-12 text-center">
-                <p>Workload</p>
+                <div class = "category-label">Workload</div>
 
                 <div class = "explanation">Did the course require a great amount of time dedicated to assignments?</div>
               </div>
@@ -212,7 +212,7 @@ $(document).ready(function() {
           <li class = "list-group-item">
             <div class = "row">
               <div class = "col-12 text-center">
-                <p>Test</p>
+                <div class = "category-label">Test</div>
 
                 <div class = "explanation">What was your experience regarding amount of test and exams in this course?</div>
               </div>
@@ -233,7 +233,7 @@ $(document).ready(function() {
         <div class = "card-body">
           <div class = "row">
             <div class = "col-12 text-center">
-              <p>Grading</p>
+              <div class = "category-label">Grading</div>
 
               <div class = "explanation">Was the grading in the course harsh or lenient for this assignments and exams?</div>
             </div>
@@ -271,7 +271,7 @@ $(document).ready(function() {
           <li class = "list-group-item">
             <div class = "row">
               <div class = "col-12 text-center">
-                <p>Delivery</p>
+                <div class = "category-label">Delivery</div>
 
                 <div class = "explanation">Does the professor deliver the contents in a comprehensible manner? (i.e. tone, pacing, etc)</div>
               </div>
@@ -291,7 +291,7 @@ $(document).ready(function() {
           <li class = "list-group-item">
             <div class = "row">
               <div class = "col-12 text-center">
-                <p>Accessibility</p>
+                <div class = "category-label">Accessibility</div>
 
                 <div class = "explanation">Was the professor easy to reach both online (i.e. email) and offline(i.e office hours)?</div>
               </div>
@@ -311,7 +311,7 @@ $(document).ready(function() {
           <li class = "list-group-item">
             <div class = "row">
               <div class = "col-12 text-center">
-                <p>Expertise</p>
+                <div class = "category-label">Expertise</div>
 
                 <div class = "explanation">Did the professor demonstrate a solid grasp of the content of the course in the lecture?</div>
               </div>
@@ -331,7 +331,7 @@ $(document).ready(function() {
           <li class = "list-group-item">
             <div class = "row">
               <div class = "col-12 text-center">
-                <p>Expectation</p>
+                <div class = "category-label">Expectation</div>
 
                 <div class = "explanation">Was the professor’s expectations in terms of grading rubrics, workload, and difficulty clear throughout the course? (i.e course syllabus)</div>
               </div>
@@ -352,7 +352,7 @@ $(document).ready(function() {
         <div class = "card-body">
           <div class = "row">
             <div class = "col-12 text-center">
-              <p>Preparedness</p>
+              <div class = "category-label">Preparedness</div>
 
               <div class = "explanation">This is some explanation about what this category is about, and instructions
               on how the user should rate (1 is more toward cat1, whereas 5 is more toward its opposite.)</div>
@@ -382,7 +382,8 @@ $(document).ready(function() {
   <div class = "form-group">
     <div class = "row">
       <div class = "col-12">
-        <%= form.label :course_content %>
+        <div class = "more-rating-label"> Course Content </div>
+        
       </div>
     </div>
     <div class ="row">
@@ -398,7 +399,7 @@ $(document).ready(function() {
   <div class = "form-group">
     <div class ="row">
       <div class ="col-12">
-        <%= form.label :"Professor's Strength" %>
+        <div class = "more-rating-label"> Professor's Strength </div>
       </div>
     </div>
     <div class ="row">
@@ -413,7 +414,7 @@ $(document).ready(function() {
   <div class = "form-group">
     <div class ="row">
       <div class = "col-12">
-        <%= form.label :"Things to Improve"%>
+        <div class = "more-rating-label"> Things to Improve </div>
       </div>
     </div>
     <div class = "row">

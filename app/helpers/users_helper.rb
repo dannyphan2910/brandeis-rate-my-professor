@@ -2,7 +2,7 @@ module UsersHelper
 
     def avatar_for(user)
         if user.avatar.attached? 
-            image_tag(user.avatar,alt: 'profile picture', width: '100', height: '100', class: 'rounded-circle image')
+            image_tag(user.avatar, alt: 'profile picture', width: '100', height: '100', class: 'rounded-circle image')
         else
             gravatar_for(user)
         end
