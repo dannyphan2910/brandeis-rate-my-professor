@@ -58,6 +58,44 @@
     display: inline-block;
 }
 
+.rating-info{
+    display:flex;
+    flex-flow: row wrap;
+    text-align: center;
+}
+
+.course-rating-info{
+    order: 1;
+    width: 100%;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+
+}
+
+.professor-rating-info{
+    order: 2;
+    width: 100%;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+
+}
+.profile-search-area{
+    width: 100%;
+}
+.profile-search-box{
+    display: inline-block !important;
+    width: 66.667% !important;
+    margin-top: 5px;
+}
+
+.profile-search-button{
+    display: inline-block !important;
+    width: 20% !important;
+}
 
 @media (min-width: 768px) {
     .profile-gravatar-area{
@@ -85,5 +123,20 @@
     .course-search-area{
         order: 2;
         width: 33.333%;
+    }
+
+    .course-rating-info{
+        order: 1;
+        max-width: 100%;
+        flex-basis: 0;
+        flex-grow: 1;
+
+    }
+    
+    .professor-rating-info{
+        order: 2;
+        max-width: 100%;
+        flex-basis: 0;
+        flex-grow: 1;
     }
 }
