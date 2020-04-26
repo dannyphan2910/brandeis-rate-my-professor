@@ -4,6 +4,7 @@ class CreateMessages < ActiveRecord::Migration[6.0]
       t.text :body
       t.references :user, null: false, foreign_key: true
       t.references :conversation, null: false, foreign_key: true
+      t.boolean :is_read
 
       t.timestamps
     end

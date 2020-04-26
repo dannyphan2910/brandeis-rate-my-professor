@@ -1,0 +1,33 @@
+<div class="modal fade" id="avatar-modal" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header bg-danger">
+				<h5 class="modal-title text-dark">Change Profile Picture</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<%= form_with url: '/upload_avatar' do |f| %>
+				<div class="modal-body">
+					<p class="text-center font-weight-bold">Upload your new profile picture</p>
+					<p class="text-muted text-center">Accepted formats: PNG, JPG, JPEG. Image size < 1 MB.</p>
+							<p class="text-muted text-center">We suggest that your profile picture have a square dimension.</p>
+							<div class="input-group">
+								<div class="custom-file">
+									<%= f.file_field :avatar, accept: 'image/png,image/jpg,image/jpeg', class: 'btn-file custom-file-input', onchange: 'readURL(this)'%>
+									<%= f.label :avatar, 'Choose File', class: 'custom-file-label' %>
+								</div>
+							</div>
+							<div id="new-avatar-container" class="mt-3 d-none">
+								<img src="" id="new-avatar" class="rounded-circle mx-auto d-block" width="300" height="300" style="object-fit: cover;" alt=""/>
+							</div>
+							<div class="dropdown-divider mt-3"></div>
+							<div class="text-center d-flex justify-content-end">
+								<%= f.submit 'Upload New Picture', class: 'btn btn-primary rounded-pill d-none btn-submit-avatar mr-3' %>
+								<button type="button" class="btn btn-secondary rounded-pill py-2 px-3" data-dismiss="modal">Discard</button>
+							</div>
+						</div>
+					<% end %>
+				</div>
+			</div>
+		</div>

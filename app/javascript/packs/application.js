@@ -24,55 +24,53 @@ import "../stylesheets/application";
 import "@fortawesome/fontawesome-free/js/all";
 
 $(function () {
-    $('[data-toggle="tooltip"]').tooltip()
+  $('[data-toggle="tooltip"]').tooltip()
 })
 
 $(function () {
-    $('[data-toggle="dropdown"]').dropdown()
+  $('[data-toggle="dropdown"]').dropdown()
 })
 
-$(function() {
-    $('[data-toggle="popover"]').popover();
+$(function () {
+  $('[data-toggle="popover"]').popover();
 });
 
-$(function() {
-    $('[data-toggle="collapse"]').collapse();
+$(function () {
+  $('[data-toggle="collapse"]').collapse();
 });
 
-(function() {
-    $(document).on('click', '.toggle-window', function(e) {
-      e.preventDefault();
-      var panel = $(this).parent().parent();
-      var messages_list = panel.find('.messages-list');
-  
-      panel.find('.card-body').toggle();
-      panel.attr('class', 'card border-info');
-  
-      if (panel.find('.card-body').is(':visible')) {
-        var height = messages_list[0].scrollHeight;
-        messages_list.scrollTop(height);
-      }
-    });
+(function () {
+  $(document).on('click', '.toggle-window', function (e) {
+    e.preventDefault();
+    var panel = $(this).parent().parent();
+    var messages_list = panel.find('.messages-list');
+
+    panel.find('.card-body').toggle();
+    panel.attr('class', 'card border-info');
+
+    if (panel.find('.card-body').is(':visible')) {
+      var height = messages_list[0].scrollHeight;
+      messages_list.scrollTop(height);
+    }
+  });
 });
 
-$(document).on('turbolinks:load',function(){
-    $("select#review_course_id").on("change", function(){
-        $.ajax({
-            url: "/filter_professor_by_course",
-            type: "GET",
-            data: {gcname: $("select#review_course_id").val(), year: $("select#review_course_year").val()}
-        });
-    });
-});
-  
-  $(document).on('turbolinks:load',function(){
-    $("select#review_course_year").on("change",function(){
-      $.ajax({
-        url: "/filter_course_by_year",
-        type: "GET",
-        data: {year: $("select#review_course_year").val()}
-      });
+$(document).on('turbolinks:load', function () {
+  $("select#review_course_id").on("change", function () {
+    $.ajax({
+      url: "/filter_professor_by_course",
+      type: "GET",
+      data: { gcname: $("select#review_course_id").val(), year: $("select#review_course_year").val() }
     });
   });
+});
 
-  
+$(document).on('turbolinks:load', function () {
+  $("select#review_course_year").on("change", function () {
+    $.ajax({
+      url: "/filter_course_by_year",
+      type: "GET",
+      data: { year: $("select#review_course_year").val() }
+    });
+  });
+});

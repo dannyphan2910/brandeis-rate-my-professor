@@ -1,18 +1,26 @@
 <% users.each do |user| %>
 	<div class="list-group-item d-flex justify-content-between align-items-center border-left-0 border-right-0 rounded-0 user-item" id="user-item-<%= user.id %>">
 		<%= link_to conversations_path(user_id: user), remote: true, method: :post do %>
-			<%= gravatar_for user %>
-			<span class="h6 ml-3"><%= user.show_full_name %></span>
+			<div class="d-flex align-items-center">
+				<div>
+					<%= avatar_for user %>
+				</div>
+				<h5 class="ml-3 font-weight-normal text-wrap mb-0">
+					<%= user.show_full_name %>
+					<% if unread_messages(find_conversation_with(user.id).id, user.id) > 0 %>
+						<span class="badge badge-danger ml-5" id="notification-badge"><%= unread_messages(find_conversation_with(user.id).id, user.id) %></span>
+					<% end %>
+				</h5>
+			</div>
 		<% end %>
 		<div class="user-card-icon">
 			<i class="fas fa-ellipsis-v dropdown-toggle" type="button" id="userDropdown" data-toggle="dropdown"></i>
 			<div class="dropdown-menu" aria-labelledby="userDropdown">
-				<%= link_to "Delete", "/conversations/#{find_conversation(current_user.id, user.id).id}", method: :delete, remote: true, data: { confirm: "Do you want to delete this conversation and all of its history?" }, class: "dropdown-item" %>
+				<%= link_to "Delete", "/conversations/#{find_conversation_with(user.id).id}", method: :delete, remote: true, data: { confirm: "Do you want to delete this conversation and all of its history?" }, class: "dropdown-item" %>
 			</div>
 		</div>
 	</div>
 <% end %>
-
 <script>
 	// handle on-click effect: disable 'new message' effect (if any) + active background
 	var users = $(".user-item")
@@ -21,8 +29,10 @@
 		users.removeClass("bg-info");
 		users.removeClass("bg-light");
 		$(this).addClass("bg-light");
-	});
 
+		$("#notification-badge").hide();
+	});
+	
 	// after redirecting from 'Message' buttons, shows conversation with the user
 	var user_id = "<%= j flash[:recipient_id] %>";
 	if (user_id) {
@@ -32,7 +42,7 @@
 		user_item.find("a").click();
 		// opens conversation
 		var conversation = $('#conversations-list');
-		conversation.html("<%= j render 'conversations/conversation', conversation: find_conversation(current_user.id, flash[:recipient_id]), user: current_user if flash[:recipient_id] %>");
+		conversation.html("<%= j render 'conversations/conversation', conversation: find_conversation_with(flash[:recipient_id]), user: current_user if flash[:recipient_id] %>");
 		// scrolls to last message
 		var messages_list = conversation.find('.messages-list');
 		var height = messages_list[0].scrollHeight;
@@ -40,5 +50,12 @@
 		// highlights textarea
 		var textarea = conversation.find('textarea');
 		textarea.focus()
+	}
+	
+	if ($(window).width() < '992') {
+		users.click(function() {
+			$("#conversations-list").removeClass("d-none");
+			$(".users-container").addClass("d-none");
+		});
 	}
 </script>

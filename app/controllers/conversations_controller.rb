@@ -26,11 +26,16 @@ class ConversationsController < ApplicationController
   # POST /conversations
   # POST /conversations.json
   def create
+    recipient_id = params[:user_id]
     # get the conversation between the current user and the user passed in through the parameter
-    @conversation = Conversation.get(current_user.id, params[:user_id])
+    @conversation = Conversation.get(current_user.id, recipient_id)
 
     # if in the session there is no added conversation_id yet, we’ll add it
     add_to_conversations unless conversated?
+
+    # read all new messages
+    messages_to_read = Message.not_read(@conversation.id, recipient_id)
+    messages_to_read.update_all(is_read: true)
 
     respond_to do |format|
       format.js

@@ -10,6 +10,10 @@ RailsAdmin.config do |config|
     redirect_to main_app.root_path unless current_user.is_admin_user == true
   end
 
+  config.model 'User' do
+    
+  end
+
   config.model 'Professor' do
     object_label_method do
       :show_name
@@ -43,7 +47,7 @@ RailsAdmin.config do |config|
   ## == Gravatar integration ==
   ## To disable Gravatar integration in Navigation Bar set to false
   # config.show_gravatar = true
-  config.included_models = [User, Professor, Course]
+  config.included_models = ['User', 'Professor', 'Course']
   config.actions do
     # root actions
     dashboard

@@ -8,7 +8,7 @@
 // font-family: 'Bangers', cursive;
 // font-family: 'Roboto', sans-serif;
 
-$primary: #7678ed;
+$primary: #115bae;
 $secondary: #9a8c98;
 $warning: #f2e863;
 $danger: #f13f5b;
@@ -20,10 +20,11 @@ $main: #115bae;
     border-radius: 0 !important;
 }
 
+@import 'bootstrap/scss/bootstrap';
 @import "bootstrap";
 @import "../../assets/stylesheets/application.css";
 @import "@fortawesome/fontawesome-free";
-@import 'cards', 'nav', 'messenger', 'home';
+@import 'cards', 'nav', 'messenger', 'home', 'profile';
 
 html,
 body {

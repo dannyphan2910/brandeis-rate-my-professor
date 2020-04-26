@@ -18,4 +18,13 @@ class ProfileController < ApplicationController
       format.js { }
     end
   end
+
+  def upload_avatar
+    if params[:avatar]
+      current_user.avatar.attach(params[:avatar])
+      respond_to do |format|
+        format.html { redirect_to '/view_profile', notice: 'Your new profile picture is successfully uploaded' }
+      end
+    end
+  end
 end

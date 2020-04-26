@@ -1,8 +1,9 @@
-<div class="card rounded-0 border border-white conversation-container" data-conversation-id="<%= conversation.id %>">
-	<div class="card-header bg-transparent rounded-0 msg-header" style="height: 75px;">
+<div class="card rounded-0 border-0 conversation-container" data-conversation-id="<%= conversation.id %>" style="height: 90vh">
+	<div class="card-header bg-transparent rounded-0 msg-header d-flex align-items-center justify-content-between justify-content-lg-start" style="height: 8vh;">
+		<a id="btn-back" onclick="backbtn()"><i class="fas fa-chevron-left fa-2x text-primary d-lg-none d-xl-none"></i></a>
 		<%= link_to "#{conversation.opposed_user(user).show_full_name ||= conversation.opposed_user(user).email}", user_path(conversation.opposed_user(user).id), method: :get, class: "h3 my-2 ml-2" %>
 	</div>
-	<div class="card-body msg-body" style="height:600px;">
+	<div class="card-body msg-body" style="height:65vh;">
 		<div class="messages-list">
 			<ul>
 				<%= render 'conversations/conversation_content', messages: conversation.messages, user: user %>
@@ -10,14 +11,14 @@
 		</div>
 	</div>
 	<div class="dropdown-divider mb-0"></div>
-	<div class="card-body msg-form pt-0" style="height: 50px;">
-		<div class="input-msg-container mx-4">
-			<form class="new_message row d-flex align-items-center">
+	<div class="card-body msg-form pt-0 container-fluid">
+		<div class="input-msg-container mx-lg-4 mx-xl-4 mx-0 d-xs-flex d-sm-flex d-md-flex">
+			<form class="new_message d-flex align-items-center w-100 mt-3">
 				<input name="conversation_id" type="hidden" value="<%= conversation.id %>">
 				<input name="user_id" type="hidden" value="<%= user.id %>">
-				<div class="col-11">
+				<div class="col-lg-11 col-xl-11 col-9">
 					<% if !conversation.messages.any? %>
-						<div class="btns row d-flex align-items-center text-center mr-2">
+						<div class="btns row d-none d-lg-flex d-xl-flex align-items-center text-center mr-2">
 							<a class='col'>
 								<span class="badge badge-pill badge-warning"><%= "Hi #{conversation.opposed_user(user).first_name}!" %></span>
 							</a>
@@ -37,9 +38,9 @@
 					<% else %>
 						<div class="mb-4"></div>
 					<% end %>
-					<textarea name="body" class="form-control overflow-auto" style="resize: none;"></textarea>
+					<textarea name="body" id="msg-textarea" class="form-control overflow-auto" style="resize: none;"></textarea>
 				</div>
-				<div class="col-1 mt-4">
+				<div class="col mt-4">
 					<%= button_tag class: "btn btn-lg bg-transparent btn-msg" do %>
 						<i class="fas fa-paper-plane fa-lg"></i>
 					<% end %>
@@ -55,4 +56,10 @@ $("a .badge").click(function(e) {
   var message = $(this).html();
   $('textarea').val(message);
 });
+
+function backbtn() {
+	console.log('clicked');
+	$("#conversations-list").addClass("d-none");
+	$(".users-container").removeClass("d-none");
+}
 </script>

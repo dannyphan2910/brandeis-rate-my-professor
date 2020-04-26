@@ -12,6 +12,9 @@ class User < ApplicationRecord
     has_many :messages
     has_many :conversations, foreign_key: :sender_id
 
+    has_one_attached :avatar
+    validate :acceptable_image
+
     validates :first_name, presence: true
     validates :last_name, presence: true
     # validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP } 
@@ -65,5 +68,18 @@ class User < ApplicationRecord
         data = access_token.info
         user = User.where(email: data['email']).first
         user
+    end
+
+    def acceptable_image
+        return unless avatar.attached?
+
+        unless avatar.byte_size <= 1.megabyte
+            errors.add(:avatar, "Image is too big")
+        end
+      
+        acceptable_types = ["image/jpeg", "image/png", "image/jpg"]
+        unless acceptable_types.include?(avatar.content_type)
+            errors.add(:avatar, "Image must be a JPEG, JPG, or PNG")
+        end
     end
 end

@@ -1,8 +1,9 @@
 <div class="header m-5">
 	<div class="row d-flex justify-content-start align-items-center">
-		<div class="col-1 ml-3">
-			<%= gravatar_for current_user %>
+		<div class="col-1 ml-3 img-container">
+			<%= avatar_for current_user %>
 		</div>
+		<%= render 'change_avatar_modal' %>
 		<div class="col-4 text-left">
 			<h1><%= current_user.show_full_name %></h1>
 			<h5><%= current_user.email %></h5>
@@ -35,23 +36,51 @@
 		</div>
 		<div class="border border-info rounded py-3">
 			<div class="d-flex justify-content-center mb-3">
-			<%= form_tag 'view_profile', method: "post", remote: true, class: "search-form text-center d-flex flex-column align-content-center" do %>
-				<div class="row">
-					<div class="col">
-						<%= label_tag :search_text_courses, "Search for a course", class: 'h6' %>
+				<%= form_tag 'view_profile', method: "post", remote: true, class: "search-form text-center d-flex flex-column align-content-center" do %>
+					<div class="row">
+						<div class="col">
+							<%= label_tag :search_text_courses, "Search for a course", class: 'h6' %>
+						</div>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-8">
-						<%= text_field_tag :search_text_courses, '', placeholder: "Search", class: 'form-control mr-sm-2' %>
+					<div class="row">
+						<div class="col-8">
+							<%= text_field_tag :search_text_courses, '', placeholder: "Search", class: 'form-control mr-sm-2' %>
+						</div>
+						<div class="col">
+							<%= submit_tag "Search", class: 'btn btn-outline-info my-2 my-sm-0' %>
+						</div>
 					</div>
-					<div class="col">
-						<%= submit_tag "Search", class: 'btn btn-outline-info my-2 my-sm-0' %>
-					</div>
-				</div>
-			<% end %>
+				<% end %>
 			</div>
 			<div id="courses-result" class="mx-3 overflow-auto" style="max-height: 300px"></div>
 		</div>
 	</div>
 </div>
+<script>
+	var img = $('.image');
+	img.hover(function() {
+		img.css('opacity', '0.5');
+		img.css('cursor', 'pointer');
+	}, function() {
+		img.css('opacity', '1');
+		img.css('cursor', 'auto');
+	});
+	
+	img.click(function() {
+		$("#avatar-modal").modal('toggle');
+	});
+	
+	function readURL(input) {
+	  if (input.files && input.files[0]) {
+	    var reader = new FileReader();
+	
+	    reader.onload = function(e) {
+	      $('#new-avatar').attr('src', e.target.result);
+	    }
+	
+		reader.readAsDataURL(input.files[0]); // convert to base64 string
+		$("#new-avatar-container").removeClass("d-none");
+		$(".btn-submit-avatar").removeClass("d-none");
+	  }
+	}
+</script>

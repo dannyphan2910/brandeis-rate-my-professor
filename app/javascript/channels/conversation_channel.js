@@ -31,8 +31,9 @@ const chatChannel = consumer.subscriptions.create("ConversationChannel", {
           location.reload();
         }
         // highlights the sender in the list
-        $("#user-item-" + data['sender']).addClass('bg-info');
-        $("#user-item-" + data['sender']).parent().prepend($("#user-item-" + data['sender']));
+        var sender = $("#user-item-" + data['sender']);
+        sender.addClass('bg-info');
+        sender.parent().prepend(sender);
       }
     } else {
       // currently messaging - conversation window opened

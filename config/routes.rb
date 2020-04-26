@@ -35,6 +35,7 @@ Rails.application.routes.draw do
 
   get 'view_profile', to: 'profile#view_profile'
   post 'view_profile', to: 'profile#view_profile'
+  post 'upload_avatar', to: 'profile#upload_avatar'
 
   get 'filter_course_by_year' => 'reviews#filter_course_by_year'
   get 'filter_professor_by_course' => 'reviews#filter_professor_by_course'

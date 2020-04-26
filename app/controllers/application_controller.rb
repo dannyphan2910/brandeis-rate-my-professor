@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
     include SessionsHelper
     include SearchHelper
     include MessengerHelper
-
+    
     before_action :configure_permitted_parameters, if: :devise_controller?
     
     def login_required

@@ -76,7 +76,7 @@
 
 // CARD
 
-.card.card-block {
+.review-card {
     width: 400px;
 }
 
@@ -88,11 +88,11 @@
     }
 }
 
-.card.card-block, .card-header.bg-transparent, .card-footer.bg-transparent {
-    border-color: $main !important;
+.review-card, .review-card-header, .review-card-footer {
+    border-color: $main;
 }
 
-h4.card-title a {
+h4.review-card-title a {
     font-weight: 500 !important;
 }
 

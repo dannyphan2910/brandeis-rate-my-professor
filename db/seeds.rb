@@ -16,6 +16,8 @@ Course.delete_all
 GeneralCourse.delete_all
 Professor.delete_all
 Enrollment.delete_all
+Conversation.delete_all
+Message.delete_all
 
 require 'json'
 

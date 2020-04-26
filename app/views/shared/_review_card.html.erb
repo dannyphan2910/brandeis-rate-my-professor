@@ -1,6 +1,6 @@
-<div class="card mb-3 card-block shadow" style="width: 18rem; min-width: 18rem; max-width: 18rem;">
-    <div class="card-header bg-transparent">
-            <h4 class="card-title">
+<div class="card mb-3 card-block shadow review-card" style="width: 18rem; min-width: 18rem; max-width: 18rem;">
+    <div class="card-header bg-transparent review-card-header">
+            <h4 class="card-title review-card-title">
                 <%= link_to card_link do %>
                     <%= sanitize card_title %>
                 <% end %>
@@ -22,7 +22,7 @@
             <% end %>
         </div>
     </div>
-    <div class="card-footer bg-transparent">
+    <div class="card-footer bg-transparent review-card-footer">
         <small class="text-muted"><%= card_text %> reviews</small>
     </div>
 </div>

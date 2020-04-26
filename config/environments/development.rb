@@ -29,7 +29,10 @@ Rails.application.configure do
   end
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :local
+  # config.active_storage.service = :local
+
+  # Store files on Amazon S3.
+  config.active_storage.service = :amazon
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = true
@@ -68,7 +71,7 @@ Rails.application.configure do
     authentication: "plain",
     enable_starttls_auto: true,
     user_name: ENV["GMAIL_USERNAME"],
-    password:ENV["GMAIL_PASSWORD"]
+    password: ENV["GMAIL_PASSWORD"]
   }
   
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }

@@ -39,6 +39,8 @@ gem 'faker'
 gem 'jquery-ui-rails'
 gem 'font_awesome5_rails'
 
+gem "aws-sdk-s3", require: false
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -75,3 +77,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # administrator side 
 gem 'rails_admin', '~> 2.0'
 gem 'rails_admin_import', '~> 2.2'
+
+# emoji
