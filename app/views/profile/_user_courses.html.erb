@@ -1,0 +1,8 @@
+<% user_courses.each do |course| %>
+	<div>
+	    <%= link_to enrollment_path(course.enrollments.first.id, search_text_courses: params[:search_text_courses]), method: 'delete', remote: true, :data => {:confirm => 'Would you like to un-enroll from this course?'}, id: course.id do %>
+		    <i class="far fa-times-circle" style="color:red;"></i>
+	    <% end %>
+		<%= label_tag course.id, course.show_course_info %>
+    </div>
+<% end %>

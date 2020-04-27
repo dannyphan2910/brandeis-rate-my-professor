@@ -2,14 +2,14 @@
 	<div class="card-header d-flex justify-content-between bg-transparent border-secondary align-items-center">
 		<%= link_to "#{review.course.show_course_info} (#{review.course.show_course_offering})", "/general_courses/#{review.course.general_course_id}", class: 'text-muted' %>
 		<% if current_user && current_user.reviews.include?(review) %>
-		<div class="icons">
-			<%= link_to  "/reviews/#{review.id}", method: 'patch', class: 'mr-3', style: 'font-size:22px' do %>
-				&#9998;
-			<% end %>
-			<%= link_to  "/reviews/#{review.id}", method: 'delete', style: 'font-size:20px', :data => {:confirm => 'Would you like to delete this review?'} do %>
-				&#10005;
-			<% end %>
-		</div>
+			<div class="icons">
+				<%= link_to edit_review_path(id:review.id), class: "mr-3", :remote => true, "data-toggle" => "modal", "data-target" => "#editModal", style: 'font-size:20px' do %>
+					<i class="far fa-edit"></i>
+				<% end %>
+				<%= link_to  "/reviews/#{review.id}", method: 'delete', style: 'font-size:20px', :data => {:confirm => 'Would you like to delete this review?'} do %>
+					<i class="fa fa-times"></i>
+				<% end %>
+			</div>
 		<% end %>
 	</div>
 	<div class="card-body">
@@ -17,40 +17,52 @@
 		<p class="card-text">
 			<%= review.course_rating.content %>
 		</p>
-        <div class="collapse-btns-container">
-            <a class="collapse-button mr-3" data-toggle="collapse" data-target=<%="#collapse-ratings-#{review.id}"%> aria-expanded="false" aria-controls="collapse">
-			    <i class="fa fa-chevron-circle-down" aria-hidden="true"></i><span class="p ml-2 text-muted">View Ratings</span>
-		    </a>
-            <a class="collapse-button" data-toggle="collapse" data-target=<%="#collapse-prof-#{review.id}"%> aria-expanded="false" aria-controls="collapse">
-			    <i class="fa fa-chevron-circle-down" aria-hidden="true"></i><span class="p ml-2 text-muted">View Professor Reviews for 
+		<div class="collapse-btns-container">
+			<a class="collapse-button mr-3" data-toggle="collapse" data-target=<%="#collapse-ratings-#{review.id}"%> aria-expanded="false" aria-controls="collapse">
+				<i class="fa fa-chevron-circle-down" aria-hidden="true"></i><span class="p ml-2 text-muted">View Ratings</span>
+			</a>
+			<a class="collapse-button" data-toggle="collapse" data-target=<%="#collapse-prof-#{review.id}"%> aria-expanded="false" aria-controls="collapse">
+				<i class="fa fa-chevron-circle-down" aria-hidden="true"></i><span class="p ml-2 text-muted">View Professor Reviews for
 					<%= link_to "#{review.professor.show_name}", "/professors/#{review.professor.id}", class: "btn-link" %>
 				</span>
-		    </a>
-        </div>
-
+			</a>
+		</div>
 		<div class="collapse" id=<%="collapse-ratings-#{review.id}"%>>
 			<div class="row mx-1">
 				<div class="col border border-info rounded mx-2 mt-2">
-					<div class="course-rating mt-2">
+					<div class="course-rating-info mt-2">
 						<h4 class="mb-3">Course Ratings</h4>
-						<% (1..5).each do |num| %>
-							<p><b>Category <%= num %></b>: <%= review.course_rating["cat" + num.to_s] %> / 5</p>
+						<% get_labels(forCourse: true).each_with_index do |label, index| %>
+							<div class="d-flex justify-content-between align-content-center">
+								<div>
+									<p><b class="card-label"><%= label %></b>
+										: 
+										<%= review.course_rating["cat#{index + 1}"] %></p>
+								</div>
+								<%= icon_for(review.course_rating["cat#{index + 1}"]) %>
+							</div>
 						<% end %>
 					</div>
 				</div>
 				<div class="col border border-info rounded mx-2 mt-2">
-					<div class="professor-rating mt-2">
+					<div class="professor-rating-info mt-2">
 						<h4 class="mb-3">Professor Ratings</h4>
-						<% (1..5).each do |num| %>
-							<p><b>Category <%= num %></b>: <%= review.professor_rating["cat" + num.to_s] %> / 5</p>
+						<% get_labels(forCourse: false).each_with_index do |label, index| %>
+							<div class="d-flex justify-content-between align-content-center">
+								<div>
+									<p><b class="card-label"><%= label %></b>
+										: 
+										<%= review.professor_rating["cat#{index + 1}"] %></p>
+								</div>
+								<%= icon_for(review.professor_rating["cat#{index + 1}"]) %>
+							</div>
 						<% end %>
 					</div>
 				</div>
 			</div>
 		</div>
-
-        <div class="collapse" id=<%="collapse-prof-#{review.id}"%>>
-            <div class="row mx-1">
+		<div class="collapse" id=<%="collapse-prof-#{review.id}"%>>
+			<div class="row mx-1">
 				<div class="col border border-info rounded mx-2 mt-2">
 					<div class="course-rating mt-2">
 						<h4 class="mb-3">Professor Strength</h4>
@@ -59,26 +71,39 @@
 				</div>
 				<div class="col border border-info rounded mx-2 mt-2">
 					<div class="professor-rating mt-2">
-						<h4 class="mb-3">Improvement Suggestion</h4>
-						<%= review.professor_rating.improvement %>
+						<h4 class="mb-3">Suggestion</h4>
+						<p><%= review.professor_rating.improvement %></p>
 					</div>
 				</div>
 			</div>
-        </div>
-	</div>
-	<div class="interaction-info d-flex justify-content-end align-items-center mx-3 mb-3 mt-1">
-		<div class="rate-up mr-3">
-			<i class="fas fa-thumbs-up mr-1" style="font-size:18px;color:green;"></i>
-			<%= review.rate_up %>
-		</div>
-		<div class="rate-down">
-			<i class="fas fa-thumbs-down mr-1" style="font-size:18px;color:red;"></i>
-			<%= review.rate_down %>
 		</div>
 	</div>
+	<% if !current_user || !current_user.is_admin_user %>
+		<div class=<%= "btns-review-card-#{review.id}"%>>
+			<%= render 'shared/btns_review_details_card', review: review %>
+		</div>
+	<% end %>
 	<div class="card-footer bg-transparent border-secondary">
-		<small class="text-muted">Last updated on <%= review.updated_at %></small>
-		<br/>
-		<small class="text-muted">Created on <%= review.created_at %></small>
+		<small class="text-muted">Last updated on <%= review.updated_at.localtime.strftime("%H:%M:%S %m/%d/%Y") %></small>
+		<br />
+		<small class="text-muted">Created on <%= review.created_at.localtime.strftime("%H:%M:%S %m/%d/%Y") %></small>
+	</div>
+</div>
+
+<div class="modal fade" id ="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header edit-modal-header">
+				<h4 class="modal-title w-100 font-weight-bold" id="exampleModalLabel">
+					<% if logged_in? %>
+						Edit Your Review
+					<% end %>
+				</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body editForm"></div>
+		</div>
 	</div>
 </div>

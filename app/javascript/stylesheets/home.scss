@@ -1,0 +1,128 @@
+.block-1 {
+    min-height: 90vh;
+    width: 100%;
+
+    .block-1-content {
+        width: 100%;
+
+        .search-bar {
+            width: 100%;
+
+            .search-input {
+                width: 60%;
+            }
+        }
+    }
+}
+
+.main-btn {
+    border-radius: 50px !important;
+    padding: 10px 20px !important;
+    border: solid transparent;
+    margin-left: 0 !important;
+}
+
+.main-btn-warning {
+    background-color: $warning;
+    color: black;
+}
+
+.main-btn-review, .main-btn-search {
+    background-color: #f13f5b;
+    color: white;
+}
+
+.main-btn-warning:hover {
+    background-color: white; 
+    color: $black;
+    border: solid $warning;
+}
+
+.main-btn-review:hover, .main-btn-search:hover {
+    background-color: white; 
+    color: #f13f5b;
+    border: solid #f13f5b;
+}
+
+.main-btn-search {
+    margin-top: 5px !important;
+}
+
+.main-content {
+    .main-description-text {
+        font-size: 15px;
+    }
+
+    .custom-select {
+        border-top-left-radius: 25px !important;
+        border-bottom-left-radius: 25px !important;
+        height: 60px;
+    }
+
+    .form-control {
+        border-top-right-radius: 25px !important;
+        border-bottom-right-radius: 25px !important;
+        height: 60px;
+    }
+
+    .form-group {
+        width: 85%;
+        margin-right: 15px;
+    }
+}
+
+.or-text {
+    font-family: 'Bangers', cursive;
+    font-size: 40px;
+    color: #086bc9;
+}
+
+.section-title {
+    color:#29316d;
+}
+
+// FOOTER 
+.footer-container {
+    height: 50px;
+    
+    h6 {
+        color: white !important;
+    }
+}
+
+@media screen and (max-width: 1050px) {
+    .main-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .or-text {
+        margin-left: 0 !important;
+    }
+
+    .form-group {
+        width: 100% !important;
+        margin-right: 0 !important;
+    }
+
+    .main-btn {
+        margin: 0 auto !important;
+    }
+
+    .main-form {
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .main-pic {
+        display: none;
+    }
+
+    .main-section {
+        width: 100% !important;
+    }
+}

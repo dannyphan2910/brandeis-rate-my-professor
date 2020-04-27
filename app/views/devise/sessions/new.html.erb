@@ -1,0 +1,69 @@
+<div class="container-fluid outer-container d-flex align-items-end" style="position:absolute;z-index=1;">
+	<div class="inner-container d-flex flex-column align-items-center container-form">
+		<div class="card" style="min-width:30vw;">
+			<div class="card-body">
+				<h1 class="mt-2 mb-4 text-center">Sign In</h1>
+				<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+					<div class="container text-center">
+						<div class="row d-flex align-items-center mb-2">
+							<div class="col-3 text-left">
+								<%= f.label :email, "Your email", class: 'font-weight-bold' %>
+							</div>
+							<div class="col">
+								<%= f.email_field :email, required: true, class: 'form-control form-control-lg' %>
+							</div>
+						</div>
+						<div class="row d-flex align-items-center">
+							<div class="col-3 text-left">
+								<%= f.label :password, "Your password", class: 'font-weight-bold' %>
+							</div>
+							<div class="col">
+								<%= f.password_field :password, required: true, class: 'form-control form-control-lg' %>
+							</div>
+						</div>
+						<%= f.submit "Login", {class: 'btn btn-lg btn-success rounded-pill py-2 px-4 mt-3'}%>
+					</div>
+				<% end %>
+				<div class="btn-login mt-2 d-flex flex-column align-items-center">
+					<%= link_to "New to our site? Sign up here", new_user_registration_path, class: 'btn-link text-decoration-none' %>
+					<%= link_to "Forgot your password?", new_user_password_path, class: 'btn-link text-decoration-none' %>
+				</div>
+				<div class="dropdown-divider"></div>
+                <div class="small text-center mb-2">Social Login</div>
+				<div class="btn-login-oauth d-flex justify-content-between">
+					<%= link_to user_google_oauth2_omniauth_authorize_path, class: 'btn btn-light bg-white d-flex align-items-center p-0 rounded-0 google-auth' do %>
+						<%= image_tag 'google-auth-logo/btn_google_light_normal_ios.svg', alt: "google logo", class: 'mr-2' %>
+						<span class="p mr-2">Sign in with Google</span>
+					<% end %>
+					
+					<%= link_to user_facebook_omniauth_authorize_path, class: 'btn btn-primary d-flex align-items-center rounded-0 p-0' do %>
+						<i class="fab fa-facebook m-2" style="font-size:25px;"></i>
+						<span class="p mr-2">Sign in with Facebook</span>
+					<% end %>
+				</div>	
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	var google_login = $(".google-auth");
+	var google_logo = google_login.find('img');
+
+	function reset() {
+		google_logo.attr('src', '/assets/google-auth-logo/btn_google_light_normal_ios.svg');
+	}
+
+	google_login.hover(function() {
+		google_logo.attr('src', '/assets/google-auth-logo/btn_google_light_focus_ios.svg')
+	}).mouseleave(function() {
+		reset();
+	});
+
+	google_login.mousedown(function() {
+		google_logo.attr('src', '/assets/google-auth-logo/btn_google_light_pressed_ios.svg')
+	}).mouseleave(function() {
+		reset();
+	});
+
+</script>

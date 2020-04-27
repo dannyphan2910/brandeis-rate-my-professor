@@ -3,14 +3,6 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(email: params[:email].downcase)
-    if user && user.authenticate(params[:password])
-      log_in user
-      redirect_to root_url
-    else
-      flash[:danger] = 'Invalid username/password combination'
-      render 'new'
-    end
   end
 
   def login
@@ -24,16 +16,17 @@ class SessionsController < ApplicationController
       ["General", ""], 
       ["Course", "course"], 
       ["Professor", "professor"], 
-      ["Department", "department"]
+      # ["Department", "department"]
     ]
 
     @courses_most_reviewed = get_courses_most_reviewed(5)
     @professors_most_reviewed = get_professors_most_reviewed(5)
 
+    # delete stored OAuth data 
+    session.delete('devise.google_data') if session['devise.google_data']
+    session.delete('devise.facebook_data') if session['devise.facebook_data']
   end
 
   def destroy
-    log_out
-    redirect_to root_url
   end
 end

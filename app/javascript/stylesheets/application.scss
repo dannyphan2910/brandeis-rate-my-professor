@@ -1,51 +1,70 @@
-@import "bootstrap";
-@import "../../assets/stylesheets/application.css";
-@import '@fortawesome/fontawesome-free';
+/*
+ *= require_tree .
+ *= require_self
+ */
 
-html, body {
-    margin: 0;
-    padding: 0;
-    width: 100vw;
-    height: 100vh;
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Quicksand:wght@300;400;500;600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+// font-family: 'Quicksand', sans-serif;
+// font-family: 'Bangers', cursive;
+// font-family: 'Roboto', sans-serif;
+
+$primary: #115bae;
+$secondary: #9a8c98;
+$warning: #f2e863;
+$danger: #f13f5b;
+$success: #7ee781;
+$info: #61e8e1;
+$main: #115bae;
+
+.btn {
+    border-radius: 0 !important;
 }
 
-a, a:hover {
+@import 'bootstrap/scss/bootstrap';
+@import "bootstrap";
+@import "../../assets/stylesheets/application.css";
+@import "@fortawesome/fontawesome-free";
+@import 'cards', 'nav', 'messenger', 'home', 'profile', 'review';
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    font-family: 'Roboto', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600 !important;
+}
+
+p, a {
+    font-weight: 300 !important;
+}
+
+a,
+a:hover {
     text-decoration: none;
     color: inherit;
     cursor: pointer;
 }
 
-body::-webkit-scrollbar {
-    display: none;
+.form-control {
+    border-radius: 0 !important;
 }
 
+// body::-webkit-scrollbar {
+//     display: none;
+// }
+
 body {
-    -ms-overflow-style: none;
+   -ms-overflow-style: none;
+   overflow: hidden;
 }
 
 // FOR sessions
-nav {
-    background-color: rgb(190, 211, 238);
-    height: 100px;
-}
-
-.logo {
-    color: white;
-    width: 33.3%;
-}
-
-.nav-content {
-    width: 66.7%;
-}
-
-.search-form {
-    width: 65%;
-}
-
-.nav-links {
-    width: inherit;
-}
-
 .main {
     margin: 0;
     padding: 0;
@@ -55,42 +74,12 @@ nav {
 
 .outer-container {
     width: 100%;
-    height: 66.67%;
+    height: 70%;
 
     .inner-container {
         width: 100%;
     }
 }
-
-.card {
-    width: 400px;
-}
-
-.block-1 {
-    height: 80vh;
-    width: 100%;
-
-    .block-1-content {
-        width: 100%;
-
-        .search-bar {
-            width: 100%;
-
-            .search-input {
-                width: 60%;
-            }
-        }
-    }
-}
-
-.card-deck {
-    width: 100%;
-
-    .card-block {
-        min-width: 200px;
-    }
-}
-
 .authentication {
     width: 150px;
 }
@@ -99,60 +88,132 @@ nav {
     cursor: pointer;
 }
 
-#review_course_cat1{
-    display:none;
-    position:absolute;
-}
-
-#review_course_cat2{
-    display:none;
-    position:absolute;
-}
-#review_course_cat3{
-    display:none;
-    position:absolute;
-}
-#review_course_cat4{
-    display:none;
-    position:absolute;
-}
-
-#review_course_cat5{
-    display:none;
-    position:absolute;
-}
-
-#review_professor_cat1{
-    display:none;
-    position:absolute;
-}
-
-#review_professor_cat2{
-    display:none;
-    position:absolute;
-}
-
-#review_professor_cat3{
-    display:none;
-    position:absolute;
-}
-
-#review_professor_cat4{
-    display:none;
-    position:absolute;
-}
-
-#review_professor_cat5{
-    display:none;
-    position:absolute;
-}
 
 .suggestion-container {
-    display: -ms-flex; 
-    display: -webkit-flex; 
+    display: -ms-flex;
+    display: -webkit-flex;
     display: flex;
 }
 
 .suggestion-container > div {
     flex: 1;
 }
+
+
+
+ul,
+ol,
+li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#site-content::-webkit-scrollbar {
+   display: none;
+}
+
+
+
+
+#site-content {
+    position:absolute;
+    width: 100%;
+    height: 90%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+@media(min-width: 768px){
+    #site-content::-webkit-scrollbar {
+        display: block;
+        width: 8px;
+    }
+    #site-content::-webkit-scrollbar-track {
+        border-radius: 10px;
+    }
+    
+    #site-content::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+        background-color: transparent;
+    }
+    
+    #site-content.scrolling::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+        background-color: #739ace;
+    }
+}
+#editModal::-webkit-scrollbar {
+    width: 8px;
+}
+
+#editModal::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+#editModal::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    background: white;
+}
+
+#editModal {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+#formModal::-webkit-scrollbar {
+    width: 8px;
+}
+
+#formModal::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: transparent;
+}
+
+#formModal::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    background: white;
+}
+
+#formModal {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.google-auth {
+    border-color: #F2F2F2;
+}
+
+.google-auth:hover {
+    border-color: #4285F4;
+}
+.thank-you-message{
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.thankyou-redirect-profile{
+    text-align: center;
+}
+
+#scrollbar-area{
+    z-index:100000;
+    position:absolute;
+    right: 0;
+    height:90%;
+    width: 10px;
+    background-color: transparent;
+}
+
+#scrollbar-area.mouse-on{
+    z-index:-1;
+}
+
+
+
+

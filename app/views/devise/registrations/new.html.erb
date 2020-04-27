@@ -1,0 +1,58 @@
+<div class="container-fluid outer-container d-flex align-items-end" style="position:absolute;z-index=1;">
+	<div class="inner-container d-flex flex-column align-items-center container-form">
+		<div class="card" style="min-width:35vw;">
+			<div class="card-body">
+				<h1 class="mt-2 mb-4 text-center">Create Your Account</h1>
+				<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |form| %>
+					<div class="container text-center">
+						<div class="row d-flex align-items-center mb-2">
+							<div class="col-3 text-left">
+								<%= form.label :first_name, class: 'font-weight-bold' %>
+							</div>
+							<div class="col">
+								<%= form.text_field :first_name, required: true, value: @suggested_first_name, class: 'form-control form-control-lg' %>
+							</div>
+						</div>
+						<div class="row d-flex align-items-center mb-2">
+							<div class="col-3 text-left">
+								<%= form.label :last_name, class: 'font-weight-bold' %>
+							</div>
+							<div class="col">
+								<%= form.text_field :last_name, required: true, value: @suggested_last_name, class: 'form-control form-control-lg' %>
+							</div>
+						</div>
+						<div class="row d-flex align-items-center mb-2">
+							<div class="col-3 text-left">
+								<%= form.label :email, class: 'font-weight-bold' %>
+							</div>
+							<div class="col">
+								<%= form.email_field :email, required: true, value: @suggested_email, class: 'form-control form-control-lg' %>
+							</div>
+						</div>
+						<div class="row d-flex align-items-center mb-2">
+							<div class="col-3 text-left">
+								<%= form.label :password, class: 'font-weight-bold' %>
+							</div>
+							<div class="col">
+								<%= form.password_field :password, required: true, class: 'form-control form-control-lg' %>
+							</div>
+						</div>
+						<div class="row d-flex align-items-center mb-2">
+							<div class="col-3 text-left">
+								<%= form.label :password_confirmation, class: 'font-weight-bold' %>
+							</div>
+							<div class="col">
+								<%= form.password_field :password_confirmation, required: true, class: 'form-control form-control-lg' %>
+							</div>
+						</div>
+						<%= form.submit 'Register', {class: 'btn btn-lg btn-info rounded-pill py-2 px-4 mt-3'} %>
+					</div>
+				<% end %>
+				<div class="btn-login mt-2 d-flex flex-column align-items-center">
+					<%= link_to "Already have an account?", new_session_path(resource_name), class: 'btn-link text-decoration-none' %>
+					<%= link_to 'Back to home page', "/", class: 'btn-link text-decoration-none' %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

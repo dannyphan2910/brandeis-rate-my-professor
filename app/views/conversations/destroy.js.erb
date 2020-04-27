@@ -1,0 +1,4 @@
+$("#users-list").html("<%= j render partial: 'messenger/users_list', locals: { users: @users } %>");
+$('#users-list').scrollTop(0);
+
+$('#conversations-list').empty();

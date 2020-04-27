@@ -1,0 +1,10 @@
+$("#write-review-modal").html(
+    "<div class = 'thank-you-message'>" +
+        "Thank you for submitting your review." +
+    "</div>" +
+    "<div class = 'thankyou-redirect-profile'>" +
+            "<%= j button_to  'View Review', '/view_profile', method: :get, class: 'btn btn-outline-primary' %>" +           
+    "</div>"   
+)
+
+$("#write-review-modal").addClass("reviewed")

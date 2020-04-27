@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @user_courses = @user.general_courses.order(:course_code)
   end
 
   # GET /users/new
@@ -27,8 +28,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      log_in(@user)
-      redirect_to root_url
+      log_in @user
+      redirect_to '/'
     else
       errors = ''
       @user.errors.full_messages.each do |message|

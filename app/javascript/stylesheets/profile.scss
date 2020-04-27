@@ -1,0 +1,164 @@
+
+.profile-area{
+    display:flex;
+    flex-flow: row wrap;
+    padding-top: 0.5rem;
+}
+
+.review-view-area{
+    display:flex;
+    flex-flow: row wrap;
+}
+
+.review-cards-area{
+    order: 2;
+    width: 100%;
+    padding: 1rem;
+    margin-top: 3rem;
+}
+
+.course-search-area{
+    order: 1;
+    width: 100%;
+    padding: 1rem;
+    border-bottom: 1px solid #e9ecef;
+    
+}
+
+.profile-gravatar-area{
+    text-align: center;
+    order: 1;
+    width: 100%;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+}
+
+.profile-name-area{
+    text-align: center;
+    order: 2;
+    width: 100%;
+
+}
+
+.profile-button-area{
+    text-align: center;
+    order: 3;
+    width: 100%;
+    margin-bottom: 1rem;
+    padding-top: 20px;
+
+}
+
+.profile-page-labels{
+    margin-bottom: 2rem;
+} 
+
+.message-button{
+    margin-right: 10px;
+}
+
+.message-button-area{
+    display: inline-block;
+}
+
+.login-button-area{
+    display: inline-block;
+}
+
+.rating-info{
+    display:flex;
+    flex-flow: row wrap;
+    text-align: center;
+}
+
+.course-rating-info{
+    order: 1;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.professor-rating-info{
+    order: 2;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.profile-search-area{
+    width: 100%;
+}
+.profile-search-box{
+    display: inline-block !important;
+    width: 66.667% !important;
+    margin-top: 5px;
+}
+
+.profile-search-button{
+    display: inline-block !important;
+    width: 20% !important;
+    margin-top:-3px;
+    height: calc(1.5em + 0.75rem + 2px);
+    color: $info !important;
+
+}
+
+@media (min-width: 768px) {
+    .profile-gravatar-area{
+        order: 1;
+        width: 100px;
+        margin: 3rem;
+    }
+    
+    .profile-name-area{
+        order: 2;
+        width: 33.333%;
+        text-align: left;
+        flex-basis: 0;
+        flex-grow: 1;
+        margin-top: 3.25rem;
+        align-content: center;
+        height: 100px;
+
+    }
+    
+    .profile-button-area{
+        order: 3;
+        width: 33.333%;
+        margin-bottom: 0;
+        flex-basis: 0;
+        flex-grow: 1;
+        text-align: right;
+        padding-right: 3rem;
+        margin-top: 4rem;
+        padding-top: 0;
+
+    }    
+
+    .review-cards-area{
+        order: 1;
+        width: 66.667%;
+        padding-left: 3rem;
+    }
+    
+    .course-search-area{
+        order: 2;
+        width: 33.333%;
+        padding-right: 3rem;
+    }
+
+    .course-rating-info{
+        order: 1;
+        max-width: 100%;
+        flex-basis: 0;
+        flex-grow: 1;
+
+    }
+    
+    .professor-rating-info{
+        order: 2;
+        max-width: 100%;
+        flex-basis: 0;
+        flex-grow: 1;
+    }
+}
