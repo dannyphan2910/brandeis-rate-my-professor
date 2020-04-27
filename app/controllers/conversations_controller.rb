@@ -37,14 +37,6 @@ class ConversationsController < ApplicationController
     messages_to_read = Message.not_read(@conversation.id, recipient_id)
     messages_to_read.update_all(is_read: true)
 
-    @new_conversation_suggestion = {
-      "badge badge-pill badge-warning" => "Hi #{@conversation.opposed_user(current_user).first_name}!",
-      "badge badge-pill badge-success d-none d-lg-block d-xl-block" => "Hello! How are you today?",
-      "badge badge-pill badge-info d-none d-lg-block d-xl-block" => "Hi there! How’s it going?",
-      "badge badge-pill badge-secondary d-none d-lg-block d-xl-block" => "Hello. I am #{current_user.first_name}",
-      "badge badge-pill badge-danger d-none d-lg-block d-xl-block" => "Hey #{@conversation.opposed_user(current_user).first_name}! Can we have a talk?"
-    }
-
     respond_to do |format|
       format.js
     end

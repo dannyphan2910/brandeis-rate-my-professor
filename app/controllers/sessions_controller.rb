@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
       ["General", ""], 
       ["Course", "course"], 
       ["Professor", "professor"], 
-      ["Department", "department"]
+      # ["Department", "department"]
     ]
 
     @courses_most_reviewed = get_courses_most_reviewed(5)

@@ -15,7 +15,7 @@
 		<div class="row ml-4 d-block mb-1" style="width:85%;height:30%;">
 			<% if !conversation.messages.any? %>
 				<div class="btns row align-items-center text-center mr-2 suggestions flex-nowrap">
-					<% @new_conversation_suggestion.each do |style, text| %>
+					<% new_conversation_suggestion(conversation).each do |style, text| %>
 						<a class="col">
 							<span class="<%= style %>"><%= text %></span>
 						</a>
