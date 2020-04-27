@@ -23,14 +23,18 @@
 
 <div class = "review-view-area">
 	<div class = "review-cards-area">
-		<h1> My Reviews </h1>
+		<div class = "profile-page-labels">
+			<h1> My Reviews </h1>
+		</div>
 		<% @user_reviews.each do |review| %>
 			<%= render 'shared/review_details_card', review: review %>
 		<% end %>
 	</div>
 	<div class = "course-search-area">
-	 	<div class="mt-5">
- 			<h1>My Courses</h1>
+		 <div class="mt-5">
+			<div class = "profile-page-labels">
+				 <h1>My Courses</h1>
+			</div>
  			<p class="font-italic text-muted">By choosing your enrolled courses, you agree to share the information to other Brandeis students</p>
  		</div>
  		<div id="user-courses" class="mx-3 mb-2">
@@ -46,7 +50,7 @@
  				</div>
  				<div class="profile-search-area">
  						<%= text_field_tag :search_text_courses, '', placeholder: "Search", class: 'form-control profile-search-box' %>
- 						<%= submit_tag "Search", class: 'btn btn-outline-info profile-search-button' %>
+ 						<%= image_submit_tag "search_icon.svg", class: 'btn btn-outline-info profile-search-button' %>
  				</div>
  			<% end %>
  			</div>
