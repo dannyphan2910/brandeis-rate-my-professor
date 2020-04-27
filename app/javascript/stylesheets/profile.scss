@@ -14,6 +14,7 @@
     order: 2;
     width: 100%;
     padding: 1rem;
+    margin-top: 3rem;
 }
 
 .course-search-area{
@@ -21,13 +22,15 @@
     width: 100%;
     padding: 1rem;
     border-bottom: 1px solid #e9ecef;
+    
 }
 
 .profile-gravatar-area{
-    padding-top: 3px;
     text-align: center;
     order: 1;
     width: 100%;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
 }
 
 .profile-name-area{
@@ -41,10 +44,14 @@
     text-align: center;
     order: 3;
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
     padding-top: 20px;
 
 }
+
+.profile-page-labels{
+    margin-bottom: 2rem;
+} 
 
 .message-button{
     margin-right: 10px;
@@ -90,34 +97,54 @@
 .profile-search-button{
     display: inline-block !important;
     width: 20% !important;
+    margin-top:-3px;
+    height: calc(1.5em + 0.75rem + 2px);
+    color: $info !important;
+
 }
 
 @media (min-width: 768px) {
     .profile-gravatar-area{
         order: 1;
-        width: 33.333%;
-        margin-top: 0;
+        width: 100px;
+        margin: 3rem;
     }
     
     .profile-name-area{
         order: 2;
         width: 33.333%;
+        text-align: left;
+        flex-basis: 0;
+        flex-grow: 1;
+        margin-top: 3.25rem;
+        align-content: center;
+        height: 100px;
+
     }
     
     .profile-button-area{
         order: 3;
         width: 33.333%;
         margin-bottom: 0;
+        flex-basis: 0;
+        flex-grow: 1;
+        text-align: right;
+        padding-right: 3rem;
+        margin-top: 4rem;
+        padding-top: 0;
+
     }    
 
     .review-cards-area{
         order: 1;
         width: 66.667%;
+        padding-left: 3rem;
     }
     
     .course-search-area{
         order: 2;
         width: 33.333%;
+        padding-right: 3rem;
     }
 
     .course-rating-info{

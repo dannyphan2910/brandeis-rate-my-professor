@@ -1,7 +1,7 @@
 <% if !([new_user_session_path, new_user_registration_path, new_user_password_path, edit_user_password_path].include? request.path) %>
 	<nav class="navbar navbar-expand-lg navbar-light">
 		<%= button_to root_path, class: "d-lg-none d-xl-none", method: :get do %>
-			<%= image_tag 'brandeis_logo.svg', width: '50', height: '50', class: "d-inline-block align-top logo-img", alt: 'Brandeis logo'%>
+			<%= image_tag 'brandeis_logo_favicon.svg', width: '50', height: '50', class: "d-inline-block align-top logo-img", alt: 'Brandeis logo'%>
 		<% end %>
 		<span class="d-flex justify-content-between align-items-center d-lg-none d-xl-none">
 			<% if logged_in? %>
@@ -36,11 +36,6 @@
 					<a class="nav-item nav-link left-align h5 text-center nav-text nav-review-text" data-toggle="modal" data-target="#formModal">Make A Review</a>
 				<% end %>
 				<% if logged_in? %>
-					<div class="modal fade" id ="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
-						<div class="container">
-							<%= render 'shared/reviewForm' %>
-						</div>
-					</div>
 					<div class="dropdown nav-item nav-link left-align authentication">
 						<a class="dropdown-toggle h5 nav-text" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							Hi <%= current_user.first_name %>!
@@ -62,3 +57,9 @@
 		</div>
 	</nav>
 <% end %>
+
+<div class="modal fade" id ="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
+						<div class="container">
+							<%= render 'shared/reviewForm' %>
+						</div>
+					</div>
