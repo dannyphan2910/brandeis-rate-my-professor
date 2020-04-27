@@ -31,7 +31,7 @@
                                     <div class="input-group-prepend">
 										<%= select_tag :filter, options_for_select(@filters_option, ""), class: 'custom-select btn' %>
 									</div>
-									<%= text_field_tag :search_text, params[:search_text], placeholder: "Search for a course, professor, or department...", class: 'form-control' %>
+									<%= text_field_tag :search_text, params[:search_text], placeholder: "Search for a course or professor...", class: 'form-control' %>
 								</div>
 							</div>
 							<%= submit_tag "Search", class: 'btn btn-lg m-3 main-btn main-btn-search' %>
