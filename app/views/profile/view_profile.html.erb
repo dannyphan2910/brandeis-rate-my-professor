@@ -10,7 +10,9 @@
 	<div class = "profile-button-area">
 		<div class = "message-login-button">
 			<div class = "message-button-area">
-				<%= button_to "Messages", "/messenger_home", method: :get, class: "btn btn-outline-primary message-button btn-lg" %>
+				<%= button_to "/messenger_home", method: :get, class: "btn btn-outline-primary message-button btn-lg" do %>
+					Messages
+				<% end %>
 			</div>
 			<div class = "login-button-area">
 				<%= button_to "Log Out", destroy_user_session_path, method: :delete, class: "btn btn-outline-danger btn-lg" %>
