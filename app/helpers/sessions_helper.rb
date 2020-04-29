@@ -35,8 +35,7 @@ module SessionsHelper
     end
 
     def get_hash data
-        arr = (data['course_title']) ? get_labels(forCourse: true) : get_labels(forCourse: false)
-            
+        arr = data["prof_first_name"] ? get_labels(false) : get_labels(true)
         res = {}
         (1..5).each do |num|
             res["avg_cat" + num.to_s] = arr[num-1]
