@@ -30,7 +30,7 @@
 				<% @courses.each do |course| %>
 					<li class="list-group-item">
 						<a class="d-flex justify-content-between align-items-center" onclick=<%="get_focus(#{course.id})"%>>
-							<%= course.show_course_offering %>
+							<%= "#{course.show_course_offering} (#{course.professor.show_name})" %>
 							<span class="badge badge-primary badge-pill"><%= course.reviews.length %></span>
 						</a>
 					</li>
@@ -57,7 +57,7 @@
 				<div class="card-header bg-transparent d-flex justify-content-between" id=<%= "heading#{course.id}"%>>
 					<h2 class="mb-0 w-50">
 						<a data-toggle="collapse" data-target=<%= "#collapse#{course.id}"%> aria-expanded="true" aria-controls=<%= "collapse#{course.id}"%>>
-							<i class="fa fa-caret-down" aria-hidden="true"></i><span class="p ml-sm-2 text-muted"><%= course.show_course_offering%></span>
+							<i class="fa fa-caret-down" aria-hidden="true"></i><span class="p ml-sm-2 text-muted text-break"><%= sanitize "#{course.show_course_offering}<br/>(#{course.professor.show_name})" %></span>
 						</a>
 					</h2>
 					<div class="score-container d-flex align-content-center flex-column flex-lg-row flex-xl-row">

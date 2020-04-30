@@ -21,4 +21,8 @@ class MessengerController < ApplicationController
     end
   end
 
+  # POST /attach/:id
+  def attach
+    puts params
+  end
 end

@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
+  resources :departments
   devise_for :users, path: '/', path_names: { sign_in: 'login', sign_out: 'logout', registration: 'users' }, controllers: {
     omniauth_callbacks: 'users/omniauth_callbacks',
     registrations: 'users/registrations',
-    passwords: 'users/passwords'
+    passwords: 'users/passwords',
+    sessions: 'users/sessions'
   }
 
   resources :conversations do
@@ -40,8 +42,10 @@ Rails.application.routes.draw do
   get 'filter_course_by_year' => 'reviews#filter_course_by_year'
   get 'filter_professor_by_course' => 'reviews#filter_professor_by_course'
   get 'open_edit_modal' => 'reviews#open_edit_modal'
+
   get 'messenger_home', to: 'messenger#show'
   post 'message/:id', to: 'messenger#message'
+  post 'attach', to: 'messenger#attach'
 
   root 'sessions#welcome'
 end

@@ -13,10 +13,6 @@ class Message < ApplicationRecord
   def acceptable_attachments
     return unless attachments.attached?
 
-    if attachments.length() > 2
-      errors.add(:attachments, "Only 2 attachments per message")
-    end
-
     attachments.each do |attachment|
       unless avatar.byte_size <= 1.megabyte
         errors.add(:attachments, "Image is too big")

@@ -11,6 +11,12 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user_courses = @user.general_courses.order(:course_code)
+    @users_courses_by_dept = {}
+    @user_courses.each do |course|
+      @users_courses_by_dept[course.department] = [] if !@users_courses_by_dept.key?(course.department)
+      @users_courses_by_dept[course.department].push(course)
+    end
+    @users_courses_by_dept.sort_by {|k, v| k}
   end
 
   # GET /users/new

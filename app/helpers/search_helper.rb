@@ -9,10 +9,13 @@ module SearchHelper
                 record_hash['course_code'] = record.course_code
                 record_hash['course_title'] = record.course_title
                 record_hash['course_description'] = record.course_description
+            else
+                record_hash['dept_name'] = record.department.dept_name
             end
             record_hash.merge! average
             result.push(record_hash)
         end
+        puts result
         return result
     end
 end
