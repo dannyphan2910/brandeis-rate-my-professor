@@ -10,8 +10,41 @@ class DepartmentsController < ApplicationController
   # GET /departments/1
   # GET /departments/1.json
   def show
-    @courses = @department.general_courses.order(:course_code, :course_title)
-    @professors = @department.professors.order(:prof_first_name, :prof_last_name)
+    @filter_courses = [
+      ["By Course Title ASC", "courses_asc"],
+      ["By Course Title DESC", "courses_desc"]
+    ]
+    @filter_professors = [
+      ["By First Name ASC", "professors_first_asc"],
+      ["By First Name DESC", "professors_first_desc"],
+      ["By Last Name ASC", "professors_last_asc"],
+      ["By Last Name DESC", "professors_last_desc"]
+    ]
+
+    @courses_filter = params[:filter_courses] || "courses_asc"
+    @professors_filter = params[:filter_professors] || "professors_first_asc"
+
+    case @courses_filter
+      when "courses_asc"
+        @courses = @department.general_courses.order(:course_code, :course_title)
+      when "courses_desc"
+        @courses = @department.general_courses.order(course_code: :desc, course_title: :desc)
+    end
+    
+    case @professors_filter
+      when "professors_first_asc"
+        @professors = @department.professors.order(:prof_first_name)
+      when "professors_first_desc"
+        @professors = @department.professors.order(prof_first_name: :desc)
+      when "professors_last_asc"
+        @professors = @department.professors.order(:prof_last_name)
+      when "professors_last_desc"
+        @professors = @department.professors.order(prof_last_name: :desc)
+    end
+    
+    if request.xhr?
+      render 'show.js.erb'
+    end
   end
 
   # GET /departments/new

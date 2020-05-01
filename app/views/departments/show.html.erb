@@ -6,35 +6,55 @@
 	</div>
 </div>
 <div class="dropdown-divider"></div>
-<div class="department-container d-flex m-lg-5 m-xl-5 m-1 flex-column flex-lg-row flex-xl-row">
-	<div class="col-lg">
+<div class="department-container d-flex m-lg-5 m-xl-5 m-1 mt-5 flex-column flex-sm-row flex-md-row flex-lg-row flex-xl-row">
+	<div class="col-lg mb-5">
 		<div class="available-courses">
-			<h4 class="mb-5"><%= @courses.length %> Available Courses</h4>
-			<ul class="list-group">
-				<% @courses.each do |course| %>
-					<li class="list-group-item">
-						<%= link_to general_course_path(course.id), class: "d-flex justify-content-between align-items-center" do %>
-							<%= course.show_course_info %>
-							<span class="badge badge-primary badge-pill"><%= course.reviews.length %></span>
-						<% end %>
-					</li>
-				<% end %>
-			</ul>
+			<div class="mb-5 d-flex justify-content-between flex-column flex-lg-row flex-xl-row">
+				<h4><%= @courses.length %> Available Courses</h4>
+				<div class="input-group w-auto">
+					<div class="input-group-prepend" style="height:35px;"><span class="input-group-text filter-courses-input"><i class="fas fa-sort-alpha-down"></i></span></div>
+					<%= select_tag "filter_courses", options_for_select(@filter_courses), class: "custom-select w-auto", style: "height:35px;" %>
+				</div>
+			</div>
+			<div id="dept_courses">
+				<%= render 'dept_courses' %>
+			</div>
 		</div>
 	</div>
-	<div class="col-lg">
+	<div class="col-lg mb-5">
 		<div class="available-profs">
-			<h4 class="mb-5"><%= @professors.length %> Available Professors</h4>
-			<ul class="list-group">
-				<% @professors.each do |professor| %>
-					<li class="list-group-item">
-						<%= link_to professor_path(professor.id), class: "d-flex justify-content-between align-items-center" do %>
-							<%= professor.show_name %>
-							<span class="badge badge-primary badge-pill"><%= professor.reviews.length %></span>
-						<% end %>
-					</li>
-				<% end %>
-			</ul>
+			<div class="mb-5 d-flex justify-content-between flex-column flex-lg-row flex-xl-row">
+				<h4><%= @professors.length %> Available Professors</h4>
+				<div class="input-group w-auto">
+					<div class="input-group-prepend" style="height:35px;"><span class="input-group-text filter-professors-input"><i class="fas fa-sort-alpha-down"></i></span></div>
+					<%= select_tag "filter_professors", options_for_select(@filter_professors), class: "custom-select w-auto", style: "height:35px;" %>
+				</div>
+			</div>
+			<div id="dept_profs">
+				<%= render 'dept_profs' %>
+			</div>
 		</div>
 	</div>
 </div>
+
+<script>
+$(document).on('turbolinks:load', function () {
+  $("select#filter_courses").on("change", function () {
+    $.ajax({
+      url: "<%= j department_path(@department.id) %>",
+      type: "GET",
+	  data: { filter_courses: $("select#filter_courses").val(), filter_professors: $("select#filter_professors").val() }
+    });
+  });
+});
+
+$(document).on('turbolinks:load', function () {
+  $("select#filter_professors").on("change", function () {
+    $.ajax({
+      url: "<%= j department_path(@department.id) %>",
+      type: "GET",
+      data: { filter_courses: $("select#filter_courses").val(), filter_professors: $("select#filter_professors").val() }
+    });
+  });
+});
+</script>
