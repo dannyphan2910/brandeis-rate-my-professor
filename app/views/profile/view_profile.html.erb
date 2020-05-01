@@ -11,7 +11,11 @@
 		<div class = "message-login-button">
 			<div class = "message-button-area">
 				<%= button_to "/messenger_home", method: :get, class: "btn btn-outline-primary message-button btn-lg" do %>
-					Messages
+					Messages 
+					<% unread = total_unread_messages %>
+					<% if unread > 0 %>
+						<span class="badge badge-danger rounded-0"><%= unread %></span>
+					<% end %>
 				<% end %>
 			</div>
 			<div class = "login-button-area">

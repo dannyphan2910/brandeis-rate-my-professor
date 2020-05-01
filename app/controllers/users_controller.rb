@@ -16,7 +16,7 @@ class UsersController < ApplicationController
       @users_courses_by_dept[course.department] = [] if !@users_courses_by_dept.key?(course.department)
       @users_courses_by_dept[course.department].push(course)
     end
-    @users_courses_by_dept.sort_by {|k, v| k}
+    @users_courses_by_dept.sort_by { |department, courses| department.dept_name }
   end
 
   # GET /users/new

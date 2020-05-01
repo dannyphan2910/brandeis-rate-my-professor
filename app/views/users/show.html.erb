@@ -8,7 +8,9 @@
 			<h5><%= @user.email %></h5>
 		</div>
 		<div class="col text-right">
-			<%= button_to "Message", "/message/#{@user.id}", method: :post, remote: true, class: "btn btn-outline-primary btn-lg" %>
+			<% if logged_in? %>
+				<%= button_to "Message", "/message/#{@user.id}", method: :post, remote: true, class: "btn btn-outline-primary btn-lg" %>
+			<% end %>
 		</div>
 	</div>
 </div>
@@ -17,7 +19,11 @@
 	<h1>Enrolled Courses</h1>
 	<div class="enrolled-classes">
 		<% @users_courses_by_dept.each do |dept, courses| %>
-			<h2 class="pb-3 border-bottom mt-5"><%= dept %></h2>
+			<div class="pb-3 border-bottom mt-5">
+				<%= link_to department_path(dept.id) do%>
+					<h2><%= dept.dept_name %></h2>
+				<% end %>
+			</div>
 			<div class="taken-classes mt-2">
 				<% courses.each do |course| %>
 					<h4><%= link_to course.show_course_info, general_course_path(course.id) %></h4>

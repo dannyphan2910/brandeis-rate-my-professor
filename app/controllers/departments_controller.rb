@@ -10,6 +10,8 @@ class DepartmentsController < ApplicationController
   # GET /departments/1
   # GET /departments/1.json
   def show
+    @courses = @department.general_courses.order(:course_code, :course_title)
+    @professors = @department.professors.order(:prof_first_name, :prof_last_name)
   end
 
   # GET /departments/new

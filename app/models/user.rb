@@ -17,10 +17,6 @@ class User < ApplicationRecord
 
     validates :first_name, presence: true
     validates :last_name, presence: true
-    # validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP } 
-    # validates :password, presence: true, confirmation: { case_sensitive: true }
-
-    # scope :conversation_with, -> (user_id) { where.not(id: user_id).joins("INNER JOIN conversations ON conversations.sender_id = users.id OR conversations.recipient_id = users.id") }
     
     def self.conversation_with user_id
         users = where.not(id: user_id)

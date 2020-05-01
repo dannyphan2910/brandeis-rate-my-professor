@@ -2,7 +2,7 @@
 	<div class="row d-flex justify-content-start align-items-center">
 		<div class="col">
 			<h1 class="text-break"><span class="border-bottom border-danger"><%= "#{@professor.show_name}" %></span></h1>
-			<h3 class="text-muted text-break"><%= @professor.department.dept_name %></h3>
+			<h3 class="text-muted text-break"><%= link_to @professor.department.dept_name, department_path(@professor.department.id), class: 'font-weight-normal' %></h3>
 			<p class="text-break"><%= @professor.prof_info %></p>
 		</div>
 	</div>

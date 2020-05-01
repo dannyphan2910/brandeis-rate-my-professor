@@ -15,7 +15,18 @@ module SearchHelper
             record_hash.merge! average
             result.push(record_hash)
         end
-        puts result
+        return result
+    end
+
+    def get_dept_result records
+        result = []
+        records.each do |record|
+            average = record.get_info
+            record_hash = record.as_json
+            record_hash.merge! average
+            puts record_hash
+            result.push(record_hash)
+        end
         return result
     end
 end

@@ -1,9 +1,40 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Dept name:</strong>
-  <%= @department.dept_name %>
-</p>
-
-<%= link_to 'Edit', edit_department_path(@department) %> |
-<%= link_to 'Back', departments_path %>
+<div class="header m-5">
+	<div class="row d-flex justify-content-start align-items-center">
+		<div class="col text-center">
+			<h1 class="text-break"><span class="border-bottom border-danger"><%= "#{@department.dept_name}"%></span></h1>
+		</div>
+	</div>
+</div>
+<div class="dropdown-divider"></div>
+<div class="department-container d-flex m-lg-5 m-xl-5 m-1 flex-column flex-lg-row flex-xl-row">
+	<div class="col-lg">
+		<div class="available-courses">
+			<h4 class="mb-5"><%= @courses.length %> Available Courses</h4>
+			<ul class="list-group">
+				<% @courses.each do |course| %>
+					<li class="list-group-item">
+						<%= link_to general_course_path(course.id), class: "d-flex justify-content-between align-items-center" do %>
+							<%= course.show_course_info %>
+							<span class="badge badge-primary badge-pill"><%= course.reviews.length %></span>
+						<% end %>
+					</li>
+				<% end %>
+			</ul>
+		</div>
+	</div>
+	<div class="col-lg">
+		<div class="available-profs">
+			<h4 class="mb-5"><%= @professors.length %> Available Professors</h4>
+			<ul class="list-group">
+				<% @professors.each do |professor| %>
+					<li class="list-group-item">
+						<%= link_to professor_path(professor.id), class: "d-flex justify-content-between align-items-center" do %>
+							<%= professor.show_name %>
+							<span class="badge badge-primary badge-pill"><%= professor.reviews.length %></span>
+						<% end %>
+					</li>
+				<% end %>
+			</ul>
+		</div>
+	</div>
+</div>

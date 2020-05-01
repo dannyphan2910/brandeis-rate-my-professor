@@ -73,7 +73,7 @@ sections.each_value do |section|
     course_id = section["course"]
     course = courses[course_id]
     if !GeneralCourse.exists?(course_code: course["code"])
-        gc = GeneralCourse.create(course_code: course["code"], course_title: course["name"], course_description: course["course_description"]) 
+        gc = GeneralCourse.create(course_code: course["code"], course_title: course["name"], course_description: course["description"]) 
     else
         gc = GeneralCourse.find_by(course_code: course["code"])
     end

@@ -26,6 +26,21 @@ import "bootstrap";
 import "../stylesheets/application";
 import "@fortawesome/fontawesome-free/js/all";
 
+// push notification
+Notification.requestPermission().then(function (result) {})
+
+// turbolinks loading 
+Turbolinks.setProgressBarDelay(0);
+
+$(document).on('turbolinks:before-visit', function() {
+  $(".se-pre-con").show();
+});
+
+$(document).on('turbolinks:load', function() {
+  $(".se-pre-con").hide();
+});
+
+// bootstrap
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
@@ -42,6 +57,7 @@ $(function () {
   $('[data-toggle="collapse"]').collapse();
 });
 
+// messaging
 (function () {
   $(document).on('click', '.toggle-window', function (e) {
     e.preventDefault();
@@ -58,6 +74,7 @@ $(function () {
   });
 });
 
+// forms
 $(document).on('turbolinks:load', function () {
   $("select#review_course_id").on("change", function () {
     $.ajax({
