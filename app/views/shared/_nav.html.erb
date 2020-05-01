@@ -19,11 +19,11 @@
 			</span>
 			<%= image_tag 'brandeis_logo.svg', width: '100', height: '100', class: "d-inline-block align-top logo-img", alt: 'Brandeis logo'%>
 		</a>
-		<div class="collapse navbar-collapse nav-content" id="navbarToggler">
+		<div class="navbar-collapse nav-content" id="navbarToggler">
 			<% if request.path == root_path %>
-				<div class="form-inline my-2 my-lg-0 search-form d-flex justify-content-center d-none d-lg-block d-xl-block"></div>
+				<div class="form-inline my-2 my-lg-0 search-form justify-content-center d-none d-lg-block d-xl-block"></div>
 			<% else %>
-				<div class="d-flex my-2 my-lg-0 search-form justify-content-center d-none d-lg-flex d-xl-flex">
+				<div class="my-2 my-lg-0 search-form justify-content-center d-none d-lg-flex d-xl-flex">
 					<%= form_tag "/search", method: "get", class: "form-inline" do %>
 						<%= text_field_tag :search_text, '', placeholder: "Search", class: 'form-control mr-sm-2' %>
 						<%= submit_tag "Search", class: 'btn btn-outline-light my-2 my-sm-0' %>

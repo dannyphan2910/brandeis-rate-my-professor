@@ -106,6 +106,14 @@
 <script>
 	function get_focus(course_id) {
 		$("#collapse" + course_id).collapse('show');
-		document.getElementById("#collapse-offering-" + course_id).scrollIntoView();
+		var target = document.getElementById("#collapse-offering-" + course_id);
+		target.scrollIntoView();
+		// target.parentNode.scrollTop = target.offsetTop;
+		// now account for fixed header
+		var scrolledY = window.scrollY;
+	
+		if (scrolledY){
+	  		window.scroll(0, scrolledY - $(document).height() * 0.1);
+		}
 	}
 </script>
