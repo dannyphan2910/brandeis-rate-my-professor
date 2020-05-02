@@ -31,9 +31,7 @@ import "@fortawesome/fontawesome-free/js/all";
 // push notification
 Notification.requestPermission().then(function (result) {})
 
-// turbolinks loading 
-Turbolinks.setProgressBarDelay(0);
-
+// turbolinks loading screen
 $(document).on('turbolinks:before-visit', function() {
   $(".se-pre-con").show();
 });
