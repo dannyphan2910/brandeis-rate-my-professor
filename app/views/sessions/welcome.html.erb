@@ -8,7 +8,7 @@
 				</p>
 			</div>
 			<div class="main-content">
-				<% if !logged_in?%>
+				<% if !logged_in? %>
 					<%= button_to  "Sign in and Make A Review", "/login", method: 'get', class: "btn btn-lg main-btn main-btn-warning rounded-pill my-3 mb-3" %>
 				<% else %>
 					<% if !current_user.is_admin_user %>
@@ -24,7 +24,7 @@
 					<div class="my-3 ml-4 or-text">OR</div>
 				<% end %>
 				<div>
-					<%= form_tag "/search", method: "get", class: "form" do %>
+					<%= form_tag "/search", method: "get", class: "form main-form" do %>
 						<div class="main-form d-flex">
 							<div class="form-group">
 								<div class="input-group">
@@ -77,6 +77,6 @@
 		</div>
 	</div>
 	<footer class="footer-container bg-secondary text-center d-flex flex-column justify-content-center">
-		<h6 class="text-muted">Made with &#10084; at <%= link_to 'Brandeis University', 'https://www.brandeis.edu/' %></h6>
+		<h6 class="text-muted">Made with &#10084; at <%= link_to 'Brandeis University', 'https://www.brandeis.edu/' %>. <%= link_to 'Contact Us?', '/contact' %></h6>
 	</footer>
 </div>

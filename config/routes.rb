@@ -47,5 +47,8 @@ Rails.application.routes.draw do
   post 'message/:id', to: 'messenger#message'
   post 'attach', to: 'messenger#attach'
 
+  get 'contact', to: 'contact#index'
+  post 'contact', to: 'contact#email'
+
   root 'sessions#welcome'
 end

@@ -1,0 +1,13 @@
+$("#suggested-courses-container").html("<%= j render 'courses' %>");
+
+var btn_filter_courses = $("#btn-filter-courses");
+var switch_to_gc = btn_filter_courses.text().includes("Offerings");
+if (switch_to_gc) {
+    btn_filter_courses.removeClass("btn-success");
+    btn_filter_courses.addClass("btn-info");
+    btn_filter_courses.text("Show Only Courses");
+} else {
+    btn_filter_courses.removeClass("btn-info");
+    btn_filter_courses.addClass("btn-success");
+    btn_filter_courses.text("Show All Offerings");
+}

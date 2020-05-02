@@ -11,6 +11,8 @@ require('jquery')
 require("jquery-ui")
 require("jquery-bar-rating")
 require('js-autocomplete')
+require("trix")
+require("@rails/actiontext")
 
 window.jQuery = $;
 window.$ = $;
@@ -36,9 +38,19 @@ $(document).on('turbolinks:before-visit', function() {
   $(".se-pre-con").show();
 });
 
+$(document).on('submit', '.main-form', function(e) {
+  $(".se-pre-con").show();
+})
+
 $(document).on('turbolinks:load', function() {
   $(".se-pre-con").hide();
 });
+
+// prevent attachments for contact form
+window.addEventListener("trix-file-accept", function(event) {
+  event.preventDefault()
+  alert("File attachment not supported for contact form!")
+})
 
 // bootstrap
 $(function () {
@@ -94,3 +106,6 @@ $(document).on('turbolinks:load', function () {
     });
   });
 });
+
+require("trix")
+require("@rails/actiontext")

@@ -5,13 +5,27 @@ class SearchController < ApplicationController
     if !@search_text.blank?
       do_search
     end
+
+    if request.xhr?
+      render 'filter.js.erb'
+    end
   end
 
   def do_search
-      @courses = get_courses unless (@filter == "professor" || @filter == "department")
+      if params[:filter_general_courses] && params[:filter_general_courses] === "true"
+        @courses = get_general_courses unless (@filter == "professor" || @filter == "department")
+      else
+        @courses = get_courses unless (@filter == "professor" || @filter == "department")
+      end
+
       @professors = get_professors unless (@filter == "course" || @filter == "department")
       @departments = get_departments unless (@filter == "professor" || @filter == "course")
       @total_result = (@courses.nil? ? 0 : @courses.length) + (@professors.nil? ? 0 : @professors.length) + (@department.nil? ? 0 : @department.length)
+  end
+
+  def get_general_courses
+    courses = GeneralCourse.search(@search_text)
+    return get_hash_result courses, true
   end
 
   def get_courses

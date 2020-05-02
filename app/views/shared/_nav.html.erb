@@ -24,7 +24,7 @@
 				<div class="form-inline my-2 my-lg-0 search-form justify-content-center d-none d-lg-block d-xl-block"></div>
 			<% else %>
 				<div class="my-2 my-lg-0 search-form justify-content-center d-none d-lg-flex d-xl-flex">
-					<%= form_tag "/search", method: "get", class: "form-inline" do %>
+					<%= form_tag "/search", method: "get", class: "form-inline main-form" do %>
 						<%= text_field_tag :search_text, '', placeholder: "Search", class: 'form-control mr-sm-2' %>
 						<%= submit_tag "Search", class: 'btn btn-outline-light my-2 my-sm-0' %>
 					<% end %>

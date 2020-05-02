@@ -8,16 +8,12 @@
     <div class="dropdown-divider"></div>
     <div class="block mr-4">
         <div class="my-3">
-            <h2 class="mb-3 mx-5">Suggested Courses</h2>
-            <div class="card-deck row flex-row flex-nowrap overflow-auto ml-4">
-                <% @courses.each do |course| %>
-                <%= render 'shared/review_card',
-                    data: course,
-                    card_link: "/general_courses/#{course["general_course_id"]}",
-                    card_title: "#{course["course_code"]}: <div class='h6'>#{course["course_title"]}</div>", 
-                    card_subtitle: "#{course["semester"]} #{course["year"].to_s}",
-                    card_text: course["total_reviews"] %>
-                <% end %>
+            <div class="mx-5 mb-3 d-flex align-items-center">
+                <h2>Suggested Courses</h2>
+                <button id="btn-filter-courses" class='btn btn-sm btn-success rounded-pill px-3 ml-3'>Show All Offerings</button>
+            </div>
+            <div id="suggested-courses-container">
+                <%= render 'courses' %>
             </div>
         </div>
     </div>
@@ -58,3 +54,19 @@
     </div>
     <% end %>
 </div>
+
+<script>
+var btn_filter_courses = $("#btn-filter-courses");
+btn_filter_courses.click(function() {
+    var switch_to_gc = btn_filter_courses.text().includes("Offerings");
+    $(".se-pre-con").show();
+    $.ajax({
+      url: "/search",
+      type: "POST",
+      data: { filter_general_courses: switch_to_gc, search_text: "<%=@search_text%>%", filter: "<%=@filter%>" },
+      success: function(data) {
+          $(".se-pre-con").hide();
+      }
+    });
+})
+</script>

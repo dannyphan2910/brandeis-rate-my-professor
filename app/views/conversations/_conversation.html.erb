@@ -22,19 +22,7 @@
 					<% end %>
 				</div>
 			<% else %>
-				<div class="attachments row ml-lg-4 ml-xl-4 mx-0 h-100 align-items-center">
-					<div class="attachment-container">
-						<label for="attachment" class="m-0" id="attach">
-							<a><i class="fas fa-paperclip fa-lg text-secondary mr-2"></i></a>
-						</label>
-						<input id="attachment" type="file" accept='image/png,image/jpg,image/jpeg' class="d-none">
-					</div>
-					<div class="attachment-btns">
-						<button type="button" id="attachment-1" class="btn-sm m-0 mr-2 py-0 btn-primary rounded-pill">
-							<i class="fas fa-file-image mr-1"></i>
-							img.png
-						</button>
-					</div>
+				<div class="mb-4">
 				</div>
 			<% end %>
 		</div>
@@ -65,30 +53,4 @@
 		$("#conversations-list").addClass("d-none");
 		$(".users-container").removeClass("d-none");
 	}
-
-	// if ($(".attachment-btns button").length >= 2) {
-	// 	$("#attachment").prop("disabled", true);
-	// }
-
-	// 	$("#attachment").on("change", function() {
-	// 		console.log("IMHERE")
-	// 		var fd = new FormData();
-	// 		fd.append('file', this.files[0])
-
-	// 		$.ajax({
-	// 			type: 'POST',
-	// 			url: '/attach',
-	// 			data: fd,
-	// 			success(data) {
-	// 				console.log("attached", data);
-	// 				return false;
-	// 			},
-	// 			error(data) {
-	// 				console.log("error", data);
-	// 				return false;
-	// 			},
-	// 			contentType: false,
-	// 			processData: false
-	// 		});
-	// 	});
 </script>

@@ -1,0 +1,10 @@
+<div class="card-deck row flex-row flex-nowrap overflow-auto ml-4">
+	<% @courses.each do |course| %>
+		<%= render 'shared/review_card',
+                    data: course,
+                    card_link: "/general_courses/#{course["general_course_id"]}",
+                    card_title: "#{course["course_code"]}: <div class='h6'>#{course["course_title"]}</div>", 
+                    card_subtitle: "#{course["semester"]} #{course["year"].to_s}",
+                    card_text: course["total_reviews"] %>
+	<% end %>
+</div>
