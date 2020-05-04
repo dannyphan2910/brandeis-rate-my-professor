@@ -122,3 +122,10 @@ h4.review-card-title a {
 .fa-grin-stars {
     color: #ffbb33;
 }
+
+@media(max-width: 400px){
+    .review-card{
+        margin-left: 2.8rem !important;
+    }
+
+}
