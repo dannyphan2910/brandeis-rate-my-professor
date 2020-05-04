@@ -1,17 +1,13 @@
-<div class="header m-5">
-	<div class="row d-flex justify-content-start align-items-center">
-		<div class="col-1 ml-3">
-			<%= avatar_for @user %>
-		</div>
-		<div class="col-4 text-left">
-			<h1><%= @user.show_full_name %></h1>
-			<h5><%= @user.email %></h5>
-		</div>
-		<div class="col text-right">
-			<% if logged_in? %>
-				<%= button_to "Message", "/message/#{@user.id}", method: :post, remote: true, class: "btn btn-outline-primary btn-lg" %>
-			<% end %>
-		</div>
+<div class = "profile-area">
+	<div class = "profile-gravatar-area">
+		<%= avatar_for @user %>
+	</div>
+	<div class = "profile-name-area">
+		<h1><%= @user.show_full_name %></h1>
+		<h5><%= @user.email %></h5>
+	</div>
+	<div class = "profile-button-area">
+		<%= button_to "Message", "/message/#{@user.id}", method: :post, remote: true, class: "btn btn-outline-primary btn-lg" %>
 	</div>
 </div>
 <div class="dropdown-divider"></div>
