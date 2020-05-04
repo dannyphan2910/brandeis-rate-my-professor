@@ -29,6 +29,5 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
-/public/packs/manifest.json
 
 .env
