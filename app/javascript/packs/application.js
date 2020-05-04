@@ -41,6 +41,7 @@ $(document).on('submit', '.main-form', function(e) {
 })
 
 $(document).on('turbolinks:load', function() {
+  console.log("LOADED");
   $(".se-pre-con").hide();
 });
 
@@ -85,25 +86,25 @@ $(function () {
 });
 
 // forms
-$(document).on('turbolinks:load', function () {
-  $("select#review_course_id").on("change", function () {
-    $.ajax({
-      url: "/filter_professor_by_course",
-      type: "GET",
-      data: { gcname: $("select#review_course_id").val(), year: $("select#review_course_year").val() }
-    });
-  });
-});
+// $(document).on('turbolinks:load', function () {
+//   $("select#review_course_id").on("change", function () {
+//     $.ajax({
+//       url: "/filter_professor_by_course",
+//       type: "GET",
+//       data: { gcname: $("select#review_course_id").val(), year: $("select#review_course_year").val() }
+//     });
+//   });
+// });
 
-$(document).on('turbolinks:load', function () {
-  $("select#review_course_year").on("change", function () {
-    $.ajax({
-      url: "/filter_course_by_year",
-      type: "GET",
-      data: { year: $("select#review_course_year").val() }
-    });
-  });
-});
+// $(document).on('turbolinks:load', function () {
+//   $("select#review_course_year").on("change", function () {
+//     $.ajax({
+//       url: "/filter_course_by_year",
+//       type: "GET",
+//       data: { year: $("select#review_course_year").val() }
+//     });
+//   });
+// });
 
 require("trix")
 require("@rails/actiontext")
