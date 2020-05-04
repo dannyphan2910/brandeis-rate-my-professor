@@ -8,7 +8,7 @@ new webpack.ProvidePlugin({
     $: 'jquery',
     jQuery: 'jquery',
     'window.Tether': "tether",
-    Popper: ["popper.js", "default"]
+    Popper: ["popper.js", "default"],
 }),
 );
 

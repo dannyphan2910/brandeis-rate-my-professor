@@ -22,8 +22,7 @@
 					<% end %>
 				</div>
 			<% else %>
-				<div class="mb-4">
-				</div>
+				<div class="mb-1"></div>
 			<% end %>
 		</div>
 		<div class="input-msg-container mx-lg-4 mx-xl-4 mx-0 d-xs-flex d-sm-flex d-md-flex">
@@ -53,4 +52,16 @@
 		$("#conversations-list").addClass("d-none");
 		$(".users-container").removeClass("d-none");
 	}
+
+	// function handleAttachment(input) {
+	// 	if (input.files && input.files.length > 0) {
+	// 		if (input.files.length > 2) {
+	// 			alert("Sorry, we only allow 2 image attachments per message.")
+	// 		}  else {
+	// 			var form = $("form#attachment-form")[0];
+	// 			$.rails.fire(form, 'submit');
+	// 		}
+	// 	}
+	// }
+
 </script>

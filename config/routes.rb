@@ -45,7 +45,6 @@ Rails.application.routes.draw do
 
   get 'messenger_home', to: 'messenger#show'
   post 'message/:id', to: 'messenger#message'
-  post 'attach', to: 'messenger#attach'
 
   get 'contact', to: 'contact#index'
   post 'contact', to: 'contact#email'

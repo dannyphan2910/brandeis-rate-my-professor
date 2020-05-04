@@ -3,11 +3,6 @@
     <div class="rounded-lg <%= user.id == message.user_id ? 'message-sent' : 'message-received' %>">
       <h6><%= message.user.show_full_name %></h6>
       <p><%= message.body %></p>
-      <% if message.attachments.attached? %>
-        <% message.attachments.each do |image| %>
-          <%= image_tag image, alt: 'image', width: '100' %>
-        <% end %>
-      <% end %>
       <small class="text-muted"><%= message.created_at.localtime.strftime("%H:%M:%S %m/%d/%Y") %></small>
     </div>
   </div>
