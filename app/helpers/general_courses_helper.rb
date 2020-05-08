@@ -1,6 +1,14 @@
 module GeneralCoursesHelper
-    def match_score real_participation, base_participation, real_workload, base_workload, real_grading, base_grading
-        puts real_participation, base_participation, real_workload, base_workload, real_grading, base_grading
+    def match_score general_course, likes_participation, likes_workload, likes_grading
+        gc_stat = general_course.get_average
+        real_participation = gc_stat['avg_cat2']
+        real_workload = (gc_stat['avg_cat3'] + gc_stat['avg_cat4']) / 2.0
+        real_grading = gc_stat['avg_cat4']
+
+        base_participation = likes_participation ? 1 : 5
+        base_workload = likes_workload ? 1 : 5
+        base_grading = likes_grading ? 1 : 5
+
         100 - ((real_participation - base_participation).abs + (real_workload - base_workload).abs + (real_grading - base_grading).abs) * 100 / 12.0
     end
 

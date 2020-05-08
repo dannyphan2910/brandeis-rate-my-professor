@@ -14,21 +14,21 @@ class GeneralCoursesController < ApplicationController
     @courses = @general_course.courses.order(year: :desc, semester: :asc)
     @highest_rated_review = @reviews.ordered_by_rate_up.first
     @overall_stat = @general_course.as_json.merge! @general_course.get_average
+
+    if current_user && current_user.preference
+      @score = match_score @general_course, current_user.preference.likes_participation, current_user.preference.likes_workload, current_user.preference.likes_testing 
+      @indicator = analyze_score @score
+    end
   end
 
   # POST /general_courses/1/match
   def match
     if params[:pref_participation] && params[:pref_workload] && params[:pref_grading] 
-      gc_stat = @general_course.get_average
-      participation = gc_stat['avg_cat2']
-      workload = (gc_stat['avg_cat3'] + gc_stat['avg_cat4']) / 2.0
-      grading = gc_stat['avg_cat4']
+      likes_participation = params[:pref_participation] == 'no'
+      likes_workload = params[:pref_workload] == 'no'
+      likes_testing = params[:pref_grading] == 'no'
 
-      pref_participation = params[:pref_participation] == 'no' ? 1 : 5
-      pref_workload = params[:pref_workload] == 'no' ? 1 : 5
-      pref_grading = params[:pref_grading] == 'no' ? 1 : 5
-
-      @score = match_score participation, pref_participation, workload, pref_workload, grading, pref_grading
+      @score = match_score @general_course, likes_participation, likes_workload, likes_testing
       @indicator = analyze_score @score
 
       respond_to do |format|
