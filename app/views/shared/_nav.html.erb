@@ -1,5 +1,5 @@
 <% if !([new_user_session_path, new_user_registration_path, new_user_password_path, edit_user_password_path].include? request.path) %>
-	<nav class="navbar navbar-expand-lg navbar-light">
+	<nav class="navbar navbar-expand-lg sticky-top w-100">
 		<%= link_to root_path, class: "d-lg-none d-xl-none", method: :get do %>
 			<%= image_tag 'brandeis_logo_favicon.svg', width: '50', height: '50', class: "d-inline-block align-top logo-img", alt: 'Brandeis logo'%>
 		<% end %>

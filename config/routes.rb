@@ -11,10 +11,16 @@ Rails.application.routes.draw do
     resources :messages, only: [:create]
   end
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+
   resources :enrollments
   resources :rate_downs
   resources :rate_ups
-  resources :general_courses
+  resources :general_courses do
+    member do
+      post 'match'
+    end
+  end
+
   resources :professors
   resources :courses
   resources :professor_ratings
@@ -27,10 +33,6 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  # get 'login', to: 'sessions#new'
-  # post 'login', to: 'sessions#create'
-  # get 'welcome', to: 'sessions#welcome'
-  # get 'logout', to: 'sessions#destroy'
 
   get 'search', to: 'search#search_result'
   post 'search', to: 'search#search_result'
