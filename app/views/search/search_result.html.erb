@@ -12,7 +12,7 @@
         <h2>Suggested Courses</h2>
         <button id="btn-filter-courses" class='btn btn-sm btn-success rounded-pill px-3 ml-3'>Show All Offerings</button>
     </div>
-    <div class="mx-lg-5 mx-3">
+    <div class="ml-lg-5 ml-3">
         <div id="suggested-courses-container">
             <%= render 'courses' %>
         </div>
@@ -25,8 +25,8 @@
 
 <div class="my-3">
     <h2 class="mb-3 mx-5 align-items-center">Suggested Professors</h2>
-    <div class = "mx-lg-5 mx-3">
-        <div class="card-deck row flex-row flex-nowrap overflow-auto">
+    <div class = "ml-lg-5 ml-3">
+        <div class="card-deck row flex-row flex-nowrap">
             <% @professors.each do |prof| %>
             <%= render 'shared/review_card', 
                 data: prof,
@@ -45,7 +45,7 @@
 <div class="dropdown-divider"></div>
 <div class="my-3">
     <h2 class="mb-3 mx-5">Suggested Departments</h2>
-    <div class = "mx-lg-5 mx-3">
+    <div class = "ml-lg-5 ml-3">
         <div class="card-deck row flex-row flex-nowrap overflow-auto">
             <% @departments.each do |department| %>
                 <%= render 'shared/dept_card', 
