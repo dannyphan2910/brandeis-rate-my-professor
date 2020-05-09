@@ -52,9 +52,15 @@
 .profile-page-labels{
     margin-bottom: 2rem;
 } 
-
+.preference-button{
+    margin-right: 10px;
+}
 .message-button{
     margin-right: 10px;
+}
+
+.preference-area{
+    display: inline-block;
 }
 
 .message-button-area{
@@ -103,6 +109,21 @@
 
 }
 
+.message-login-button{
+    display: none;
+}
+
+.mobile-message-button{
+    margin: 10px 20px 0px 20px;
+}
+
+.mobile-preference-button{
+    margin: 10px 20px 0px 20px;
+}
+
+.mobile-logout-button{
+    margin: 10px 20px 0px 20px;
+}
 @media (min-width: 768px) {
     .profile-gravatar-area{
         order: 1;
@@ -160,5 +181,13 @@
         max-width: 100%;
         flex-basis: 0;
         flex-grow: 1;
+    }
+
+    .message-login-button{
+        display: block;
+    }
+
+    .mobile-buttons-area{
+        display:none;
     }
 }

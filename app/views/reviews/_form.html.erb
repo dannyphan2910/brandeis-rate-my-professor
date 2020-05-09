@@ -104,10 +104,10 @@ $(document).ready(function() {
   <div class = "card-body">
   <div class = "form-group">
     <div class = "row">
-      <div class = "col-3">
+      <div class = "col-3 review-info-label">
         <h5> <label for="course_year"> Semester... </label></h5>
       </div>
-      <div class = "col-9">
+      <div class = "col-9 review-mobile-selectbox">
         <%= form.select(:course_year, options_for_select(all_years),{prompt: "Select year"},{class:"form-control",style:"width:100%", onchange: "reviewCourseYear()"}) %>
       </div>
     </div>
@@ -115,10 +115,12 @@ $(document).ready(function() {
 
   <div class = "form-group">
     <div class = "row">
-      <div class = "col-3">
-        <h5> <label for="course_id"> Review For... </label></h5>
+      <div class = "col-3 review-info-label">
+        <div class = "first-section-label">
+        <h5><label for="course_id"> Review For... </label></h5>
+        </div>
       </div>
-      <div class = "col-9">
+      <div class = "col-9 review-mobile-selectbox">
         <%= form.select(:course_id, options_for_select(all_courses), {prompt: "Select A Course"}, {class:"form-control",:disabled => true, style:"width:100%;",onchange: "reviewCourseId()"}) %>
        </div>
     </div>
@@ -126,10 +128,10 @@ $(document).ready(function() {
   
   <div class = "form-group">
     <div class = "row">
-      <div class = "col-3">
+      <div class = "col-3 review-info-label">
         <h5><%= form.label :professor_id %></h5>
       </div>
-      <div class = "col-9">
+      <div class = "col-9 review-mobile-selectbox">
         <%= form.collection_select :professor_id, Professor.all, :id, :show_name, { prompt: 'Select A Professor' }, {class:"form-control",:disabled => true, style:"width:100% "} %>
       </div>
     </div>
@@ -137,10 +139,10 @@ $(document).ready(function() {
 
   <div class = "form-group">
     <div class = "row"> 
-      <div class = "col-3">
+      <div class = "col-3 review-info-label">
         <h5><%= form.label :title %></h5>
       </div>
-      <div class = "col-9">
+      <div class = "col-9 review-mobile-selectbox">
         <%= form.text_field :title, class:"form-control", placeholder: "Title of your review", maxlength: 50, size: 30, style: "width: 100%" %>
       </div>
     </div>
@@ -153,7 +155,7 @@ $(document).ready(function() {
   <div class = "row">
     <div class = "col-12">
       <div class = "card" style="width:100%">
-        <div class = "card-header">
+        <div class = "card-header text-white" style="background-color:#B0B1EB;">
           <div class = "row">
             <div class = "col text-center">
               <h5>Course Ratings</h5>
@@ -172,13 +174,13 @@ $(document).ready(function() {
               </div>
             </div>
             <div class ="row">
-              <div class = "col-3 text-right">
+              <div class = "col-3 text-right ratings-label">
                 Not Interesting 
               </div>
               <div class = "col-6 text-center">
                 <%= c_form.select :cat1, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]],{},{class:"review_write_course_cat1"} %>
               </div>
-              <div class = "col-3 text-left">
+              <div class = "col-3 text-left ratings-label">
                 Very Interesting
               </div>
             </div>
@@ -193,13 +195,13 @@ $(document).ready(function() {
               </div>
             </div>
             <div class ="row">   
-              <div class = "col-3 text-right">
+              <div class = "col-3 text-right ratings-label">
                 Strict
               </div>
               <div class = "col-6 text-center">
                 <%= c_form.select :cat2, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]],{},{class:"review_write_course_cat2"} %>
               </div>
-              <div class = "col-3 text-left">
+              <div class = "col-3 text-left ratings-label">
                 Lenient
               </div>
             </div>
@@ -213,13 +215,13 @@ $(document).ready(function() {
               </div>
             </div>
             <div class ="row">
-              <div class = "col-3 text-right">
+              <div class = "col-3 text-right ratings-label">
                 Very Intense
               </div>
               <div class = "col-6 text-center">
                 <%= c_form.select :cat3, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]],{},{class:"review_write_course_cat3"} %>
               </div>
-              <div class = "col-3 text-left">
+              <div class = "col-3 text-left ratings-label">
                 Not Intense
               </div>
             </div>
@@ -233,13 +235,13 @@ $(document).ready(function() {
               </div>
             </div>
             <div class ="row">
-              <div class = "col-3 text-right">
+              <div class = "col-3 text-right ratings-label">
                 Many Tests
               </div>
               <div class = "col-6 text-center">
                 <%= c_form.select :cat4, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]],{},{class:"review_write_course_cat4"} %>
               </div>
-              <div class = "col-3 text-left">
+              <div class = "col-3 text-left ratings-label">
                 Little or No Test
               </div>
             </div>
@@ -254,13 +256,13 @@ $(document).ready(function() {
             </div>
           </div>
           <div class ="row">
-            <div class ="col-3 text-right">
+            <div class ="col-3 text-right ratings-label">
               Very Strict
             </div>
             <div class ="col-6 text-center">
               <%= c_form.select :cat5, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]],{},{class:"review_write_course_cat5"} %>
             </div>
-            <div class ="col-3 text-left">
+            <div class ="col-3 text-left ratings-label">
               Not Strict
             </div>
           </div>
@@ -273,7 +275,7 @@ $(document).ready(function() {
   <div class = "row">
     <div class="col-12">
       <div class="card" style="width:100%">
-        <div class = "card-header">
+        <div class = "card-header text-white" style="background-color:#B0B1EB;">
           <div class = "row">
             <div class = "col text-center">
               <h5>Professor Ratings</h5>
@@ -442,17 +444,17 @@ $(document).ready(function() {
 </fieldset>  
   
   <div class = "row">
-    <div class = "col-4 text-center">
+    <div class = "col-3 text-center">
         
     </div>
-    <div class = "col-4 text-center">
+    <div class = "col-6 text-center">
       <div class="actions">
         <div class = "real-submit">
           <%= form.submit 'Submit Review', class: 'form-submission btn btn-outline-primary btn-block' %>
         </div>
       </div>
     </div>
-    <div class = "col-4 text-center">
+    <div class = "col-3 text-center">
     
     </div>
   </div>
