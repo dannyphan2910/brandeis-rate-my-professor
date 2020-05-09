@@ -8,6 +8,8 @@ class CourseProfessorValidator < ActiveModel::Validator
     end
 end
 
+
+
 class Review < ApplicationRecord
     belongs_to :user
     belongs_to :course
@@ -27,6 +29,15 @@ class Review < ApplicationRecord
     accepts_nested_attributes_for :course_rating, :professor_rating
 
     scope :ordered_by_rate_up, -> { all.sort_by(&:rate_up).reverse }
+    def course_review
+        cr = CourseRating.find(self.id)
+        return "Content: #{cr.cat1}, Participation: #{cr.cat2}, Workload: #{cr.cat3}, Testing: #{cr.cat4}, Grading: #{cr.cat5}, Comment:#{cr.content}"
+    end
+    
+    def professor_review
+        pr = ProfessorRating.find(self.id)
+        return "Delivery: #{pr.cat1}, Accessibility: #{pr.cat2}, Expertise: #{pr.cat3}, Expectations: #{pr.cat4}, Preparedness: #{pr.cat5}, Strength: #{pr.strength}, Improvement: #{pr.improvement}"
+    end
 
     def rate_up
         rate_ups.length

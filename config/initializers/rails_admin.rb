@@ -25,6 +25,33 @@ RailsAdmin.config do |config|
       :admin_course_label
     end
   end
+
+  config.model 'Review' do
+    list do
+      field :user_id
+      field :created_at
+      field :updated_at
+      field :course
+      field :professor
+      field :course_review
+      field :professor_review
+    end
+    show do
+      field :user_id
+      field :created_at
+      field :updated_at
+      field :course
+      field :professor
+      field :course_review
+      field :professor_review
+    end
+  end
+
+  # config.model 'Review' do
+  #   configure :all do
+  #     read_only true
+  #   end
+  # end
   ### Popular gems integration
 
   ## == Devise ==
@@ -47,7 +74,7 @@ RailsAdmin.config do |config|
   ## == Gravatar integration ==
   ## To disable Gravatar integration in Navigation Bar set to false
   # config.show_gravatar = true
-  config.included_models = ['User', 'Professor', 'Course', 'GeneralCourse']
+  config.included_models = ['User', 'Professor', 'Course', 'GeneralCourse', 'Review']
   config.actions do
     # root actions
     dashboard
@@ -57,7 +84,9 @@ RailsAdmin.config do |config|
     export
     bulk_delete
     show
-    edit
+    edit do
+      except 'Review'
+    end
     delete
     import
     ## With an audit adapter, you can add:
