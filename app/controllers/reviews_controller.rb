@@ -205,8 +205,8 @@ class ReviewsController < ApplicationController
       return params.require(:review).permit(
         :user_id,
         :title,
-        :rate_up,
-        :rate_down,
+        # :rate_up,
+        # :rate_down,
         :course_id,
         :professor_id,
         professor_rating_attributes:[:cat1, :cat2, :cat3, :cat4, :cat5, :strength, :improvement],

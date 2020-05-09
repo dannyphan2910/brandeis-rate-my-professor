@@ -1,0 +1,10 @@
+<ul class="list-group">
+	<% @courses.each do |course| %>
+		<li class="list-group-item">
+			<%= link_to general_course_path(course.id), class: "d-flex justify-content-between align-items-center" do %>
+				<%= course.show_course_info %>
+				<span class="badge badge-primary badge-pill"><%= course.reviews.length %></span>
+			<% end %>
+		</li>
+	<% end %>
+</ul>

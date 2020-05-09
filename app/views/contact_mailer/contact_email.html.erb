@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h3>You got a new message from <span style="color:red;"><%= "#{@contact_email[:name]} (#{@contact_email[:email]})" %></span>!</h3>
+    <p><i><%= @contact_email[:timestamp] %></i></p>
+    <p>===============================================</p>
+    <h3>Message:</h3>
+    <p>===============================================</p>
+    <div><%= sanitize @contact_email[:message] %></div>
+  </body>
+</html>

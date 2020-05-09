@@ -1,0 +1,28 @@
+<div class="header m-5 text-center">
+	<h1>Contact Us</h1>
+	<p>The <span class="font-weight-bold"><i style="color:#003478;">Brandeis Rate My Professor</i></span> team is here to help! Feel free to fill out the contact form below and we will get back to you as soon as possile!</p>
+</div>
+<div class="dropdown-divider"></div>
+<div class="contact-form m-lg-5 m-xl-5 m-1">
+	<%= form_with url: '/contact', method: :post do |f| %>
+		<div class="container d-flex flex-column justify-content-center">
+			<div class="d-flex flex-column flex-md-row flex-lg-row flex-xl-row mb-5">
+				<div class="col-lg-4">
+					<%= f.label :name, "Your Name", class: 'font-weight-bold' %>
+					<%= f.text_field :name, required: true, class: 'form-control form-control-lg' %>
+				</div>
+				<div class="col-lg">
+					<%= f.label :email, "Your Email", class: 'font-weight-bold' %>
+					<%= f.email_field :email, required: true, class: 'form-control form-control-lg' %>
+				</div>
+			</div>
+			<div class="mb-5">
+				<%= f.label :message, "Your Message", class: 'font-weight-bold' %>
+				<%= f.rich_text_area :message %>
+			</div>
+			<div class="btn-contact text-center">
+				<%= f.submit "Message Us", {class: 'btn btn-lg btn-primary rounded-pill py-2 px-4 my-3'}%>
+			</div>
+		</div>
+	<% end %>
+</div>

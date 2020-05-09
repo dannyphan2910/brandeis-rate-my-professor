@@ -1,0 +1,13 @@
+<div class="result-intro text-center mb-3">
+	<h4 class="text-primary">The Result is In!</h4>
+	<p>Your match for <b><%= @general_course.show_course_info %></b> is: </p>
+</div>
+<div class="result-match d-flex flex-column align-items-center">
+	<div class="d-flex align-items-center mb-4">
+		<%= match_icon_for @indicator %>
+		<h3 class="ml-5"><%= "#{number_with_precision @score, precision: 2}%"%></h3>
+	</div>
+    <h1 class="<%= is_likely(@indicator) ? 'text-success' : (is_unlikely(@indicator) ? 'text-danger' : 'text-secondary') %>">
+        <%= @indicator %>
+    </h1>
+</div>

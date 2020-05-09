@@ -1,8 +1,8 @@
 require 'test_helper'
 
 class UserFlowTest < ActionDispatch::IntegrationTest
-  fixtures :users
   include Devise::Test::IntegrationHelpers
+  fixtures :users
 
   test "can see home page" do
     get '/'
@@ -29,5 +29,14 @@ class UserFlowTest < ActionDispatch::IntegrationTest
     post '/login', params: { email: users(:one).email, password: '123123' }
     assert_response :success
     assert_equal path, '/login'
+  end
+
+  test 'can log out' do
+    @user = User.create(email: 'test@test.com', password: "password", password_confirmation: "password")
+    sign_in @user
+    get root_path
+    assert_select "a", "Log Out"
+    delete '/logout'
+    assert_redirected_to root_path
   end
 end

@@ -2,7 +2,7 @@
 	<div class="row d-flex justify-content-start align-items-center">
 		<div class="col">
 			<h1 class="text-break"><span class="border-bottom border-danger"><%= "#{@professor.show_name}" %></span></h1>
-			<h3 class="text-muted text-break"><%= @professor.dept_name %></h3>
+			<h3 class="text-muted text-break"><%= link_to @professor.department.dept_name, department_path(@professor.department.id), class: 'font-weight-normal' %></h3>
 			<p class="text-break"><%= @professor.prof_info %></p>
 		</div>
 	</div>
@@ -57,7 +57,7 @@
 				<div class="collapse-by-offering" id=<%= "#collapse-offering-#{course.id}" %>>
 					<div class="card-header bg-transparent d-flex justify-content-between" id=<%= "heading#{course.id}"%>>
 						<h4 class="mb-2 w-50">
-							<a data-toggle="collapse" data-target=<%= "#collapse#{course.id}"%> <%= "#collapse#{course.id}"%> aria-expanded="true" aria-controls=<%= "collapse#{course.id}"%>>
+							<a data-toggle="collapse" data-target=<%= "#collapse#{course.id}"%> aria-expanded="true" aria-controls=<%= "collapse#{course.id}"%>>
 								<i class="fa fa-caret-down" aria-hidden="true"></i><span class="p ml-sm-2 text-muted text-break"><%= sanitize "#{course.show_course_info}<br/>(#{course.show_course_offering})" %></span>
 							</a>
 						</h4>
@@ -90,7 +90,6 @@
 	</div>
 	<script>
 		function get_focus(course_id) {
-			console.log(course_id);
 			$("#collapse" + course_id).collapse('show');
 			document.getElementById("#collapse-offering-" + course_id).scrollIntoView();
 		}

@@ -22,9 +22,7 @@
 					<% end %>
 				</div>
 			<% else %>
-				<div class="attachments row ml-lg-4 ml-xl-4 mx-0 h-100 align-items-center">
-					<a id="attach"><i class="fas fa-paperclip fa-lg text-secondary"></i></a>
-				</div>
+				<div class="mb-1"></div>
 			<% end %>
 		</div>
 		<div class="input-msg-container mx-lg-4 mx-xl-4 mx-0 d-xs-flex d-sm-flex d-md-flex">
@@ -43,17 +41,27 @@
 		</div>
 	</div>
 </div>
-
 <script>
-$("a .badge").click(function(e) {
-  	e.preventDefault();
-  	var message = $(this).html();
-  	$('textarea').val(message);
-});
+	$("a .badge").click(function(e) {
+	  	e.preventDefault();
+	  	var message = $(this).html();
+	  	$('textarea').val(message);
+	});
+	
+	function backbtn() {
+		$("#conversations-list").addClass("d-none");
+		$(".users-container").removeClass("d-none");
+	}
 
-function backbtn() {
-	console.log('clicked');
-	$("#conversations-list").addClass("d-none");
-	$(".users-container").removeClass("d-none");
-}
+	// function handleAttachment(input) {
+	// 	if (input.files && input.files.length > 0) {
+	// 		if (input.files.length > 2) {
+	// 			alert("Sorry, we only allow 2 image attachments per message.")
+	// 		}  else {
+	// 			var form = $("form#attachment-form")[0];
+	// 			$.rails.fire(form, 'submit');
+	// 		}
+	// 	}
+	// }
+
 </script>

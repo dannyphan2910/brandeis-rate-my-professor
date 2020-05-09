@@ -1,0 +1,68 @@
+<div class="modal fade" id="matchingModal" tabindex="-1" role="dialog" aria-labelledby="matchingModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document" style="min-width: 50vw;">
+		<div class="modal-content">
+			<div class="modal-header bg-danger">
+				<h5 class="modal-title" id="matchingModalLabel">Find Your Course Matching</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<% if @reviews.length == 0 %>
+					<h3 class="font-weight-normal text-center">Sorry, there is insufficient data to check for a course match. Please check again later!</h3>
+				<% elsif current_user && current_user.preference %>
+					<%= render 'match_result' %>
+				<% else %>
+					<p class="font-italic text-center">We use the data given by the course's past reviews to see if you would enjoy the course. Fill out the questions below and we will find if this course is a possible match for your interests!</p>
+					<%= form_with url: match_general_course_path(id: @general_course.id), id: 'match-form', remote: true do |f| %>
+						<table class="table table-borderless text-left">
+							<thead>
+								<tr>
+									<th scope="col"></th>
+									<th scope="col" class="font-weights-normal text-center">Yes</th>
+									<th scope="col" class="font-weights-normal text-center">No</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr id="match-q1">
+									<th scope="row">Would you mind a high level of required participation in the class?</th>
+									<td class="text-center"><%= f.radio_button :pref_participation, "yes" %></td>
+									<td class="text-center"><%= f.radio_button :pref_participation, "no" %></td>
+								</tr>
+								<tr id="match-q2">
+									<th scope="row">Would you mind a challenging coursework (but might be rewarding)?</th>
+									<td class="text-center"><%= f.radio_button :pref_workload, "yes" %></td>
+									<td class="text-center"><%= f.radio_button :pref_workload, "no" %></td>
+								</tr>
+								<tr id="match-q3">
+									<th scope="row">Would you mind a course's strict grading (assuming you enjoy its content)?</th>
+									<td class="text-center"><%= f.radio_button :pref_grading, "yes" %></td>
+									<td class="text-center"><%= f.radio_button :pref_grading, "no" %></td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="text-center">
+							<%= f.submit "Calculate", class: 'btn btn-danger rounded-pill px-4', id: 'match-submit-btn', disabled: true %>
+						</div>
+					<% end %>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	var form = $("#match-form");
+	var q1 = form.find("#match-q1");
+	var q2 = form.find("#match-q2");
+	var q3 = form.find("#match-q3");
+	
+	form.change(function() {
+	    if (q1.find("input[type=radio]:checked").length == 0 ||
+	        q2.find("input[type=radio]:checked").length == 0 ||
+	        q3.find("input[type=radio]:checked").length == 0) {
+	        $("#match-submit-btn").prop('disabled', true);
+	    } else {
+	        $("#match-submit-btn").prop('disabled', false);
+	    }
+	})
+</script>

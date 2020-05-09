@@ -32,7 +32,7 @@
 				<div class="col border border-info rounded mx-2 mt-2">
 					<div class="course-rating-info mt-2">
 						<h4 class="mb-3">Course Ratings</h4>
-						<% get_labels(forCourse: true).each_with_index do |label, index| %>
+						<% get_labels(true).each_with_index do |label, index| %>
 							<div class="d-flex justify-content-between align-content-center">
 								<div>
 									<p><b class="card-label"><%= label %></b>
@@ -47,7 +47,7 @@
 				<div class="col border border-info rounded mx-2 mt-2">
 					<div class="professor-rating-info mt-2">
 						<h4 class="mb-3">Professor Ratings</h4>
-						<% get_labels(forCourse: false).each_with_index do |label, index| %>
+						<% get_labels(false).each_with_index do |label, index| %>
 							<div class="d-flex justify-content-between align-content-center">
 								<div>
 									<p><b class="card-label"><%= label %></b>

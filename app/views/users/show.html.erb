@@ -11,13 +11,20 @@
 	</div>
 </div>
 <div class="dropdown-divider"></div>
-<div class="reviews mx-5 row">
-	<div class="col-8">
-		<h1 class="my-5">Enrolled Courses</h1>
-		<ul>
-			<% @user_courses.each do |course| %>
-				<li><%= course.show_course_info %></li>
-			<% end %>
-		</ul>
+<div class="m-5">
+	<h1>Enrolled Courses</h1>
+	<div class="enrolled-classes">
+		<% @users_courses_by_dept.each do |dept, courses| %>
+			<div class="pb-3 border-bottom mt-5">
+				<%= link_to department_path(dept.id) do%>
+					<h2><%= dept.dept_name %></h2>
+				<% end %>
+			</div>
+			<div class="taken-classes mt-2">
+				<% courses.each do |course| %>
+					<h4><%= link_to course.show_course_info, general_course_path(course.id) %></h4>
+				<% end %>
+			</div>
+		<% end %>
 	</div>
 </div>

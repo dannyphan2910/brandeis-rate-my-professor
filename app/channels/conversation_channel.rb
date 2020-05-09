@@ -20,11 +20,5 @@ class ConversationChannel < ApplicationCable::Channel
     puts message_params
 
     Message.create(message_params)
-
-    # sends data to the front-end of the specified channel -> to method 'received'
-    # ActionCable.server.broadcast(
-    #   "conversations-#{current_user.id}",
-    #   message: message_params
-    # )
   end
 end

@@ -1,5 +1,5 @@
 class GeneralCoursesController < ApplicationController
-  before_action :set_general_course, only: [:show, :edit, :update, :destroy]
+  before_action :set_general_course, only: [:show, :edit, :update, :destroy, :match]
 
   # GET /general_courses
   # GET /general_courses.json
@@ -14,6 +14,27 @@ class GeneralCoursesController < ApplicationController
     @courses = @general_course.courses.order(year: :desc, semester: :asc)
     @highest_rated_review = @reviews.ordered_by_rate_up.first
     @overall_stat = @general_course.as_json.merge! @general_course.get_average
+
+    if current_user && current_user.preference
+      @score = match_score @general_course, current_user.preference.likes_participation, current_user.preference.likes_workload, current_user.preference.likes_testing 
+      @indicator = analyze_score @score
+    end
+  end
+
+  # POST /general_courses/1/match
+  def match
+    if params[:pref_participation] && params[:pref_workload] && params[:pref_grading] 
+      likes_participation = params[:pref_participation] == 'no'
+      likes_workload = params[:pref_workload] == 'no'
+      likes_testing = params[:pref_grading] == 'no'
+
+      @score = match_score @general_course, likes_participation, likes_workload, likes_testing
+      @indicator = analyze_score @score
+
+      respond_to do |format|
+        format.js
+      end
+    end
   end
 
   # GET /general_courses/new

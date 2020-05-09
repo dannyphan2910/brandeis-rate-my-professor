@@ -17,6 +17,15 @@ const chatChannel = consumer.subscriptions.create("ConversationChannel", {
     var conversation = $('#conversations-list').find("[data-conversation-id='" + data['conversation_id'] + "']");
     // if under the data[‘window’] we pass a partial. If yes, it means that something should be rendered for a recipient. If it’s empty, it means that we should render a code (a message) for a sender.
     if (data['window'] !== undefined) {
+      // PUSH NOTIFICATION
+      if (Notification.permission === 'granted') {
+        var title = 'New Message from ' + data['sender_name']
+        var body = 'You have a new message! Check your inbox!'
+        var options = { body: body }
+        new Notification(title, options)
+      }
+
+      // MESSENGER EFFECTS
       var conversation_visible = conversation.is(':visible');
       // // if a conversation’s window is visible
       if (conversation_visible) {
@@ -58,9 +67,4 @@ $(document).on('submit', '.new_message', function(e) {
   var values = $(this).serializeArray();
   chatChannel.speak(values);
   $(this).trigger('reset');
-
-  if ($(".suggestions").length) {
-    $(".suggestions").hide();
-    $(".attachments").show();
-  }
 });

@@ -1,6 +1,6 @@
-<div class="container-fluid outer-container d-flex align-items-end" style="position:absolute;z-index=1;">
+<div class="container-fluid outer-container d-flex align-items-end" style="position:absolute;z-index=1;height:60vh">
 	<div class="inner-container d-flex flex-column align-items-center container-form">
-		<div class="card" style="min-width:30%;">
+		<div class="card">
 			<div class="card-body">
 				<h1 class="mt-2 mb-4 text-center">Change Your Password</h1>
 				<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>

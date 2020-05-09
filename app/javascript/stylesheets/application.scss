@@ -20,11 +20,12 @@ $main: #115bae;
     border-radius: 0 !important;
 }
 
+@import './actiontext.scss';
 @import 'bootstrap/scss/bootstrap';
 @import "bootstrap";
 @import "../../assets/stylesheets/application.css";
 @import "@fortawesome/fontawesome-free";
-@import 'cards', 'nav', 'messenger', 'home', 'profile', 'review';
+@import 'cards', 'nav', 'messenger', 'home', 'profile', 'review', 'loading';
 
 html,
 body {
@@ -55,10 +56,6 @@ a:hover {
     border-radius: 0 !important;
 }
 
-// body::-webkit-scrollbar {
-//     display: none;
-// }
-
 body {
    -ms-overflow-style: none;
    overflow: hidden;
@@ -73,11 +70,10 @@ body {
 }
 
 .outer-container {
-    width: 100%;
-    height: 70%;
+    width: 100vw;
 
     .inner-container {
-        width: 100%;
+        width: 100vw;
     }
 }
 .authentication {

@@ -65,6 +65,21 @@ $(document).ready(function() {
 
 });
 
+  function reviewCourseId() {
+    $.ajax({
+      url: "/filter_professor_by_course",
+      type: "GET",
+      data: { gcname: $("select#review_course_id").val(), year: $("select#review_course_year").val() }
+    });
+  };
+
+  function reviewCourseYear() {
+    $.ajax({
+      url: "/filter_course_by_year",
+      type: "GET",
+      data: { year: $("select#review_course_year").val() }
+    });
+  };
 
 
 </script>
@@ -93,7 +108,7 @@ $(document).ready(function() {
         <h5> <label for="course_year"> Semester... </label></h5>
       </div>
       <div class = "col-9">
-        <%= form.select(:course_year, options_for_select(all_years),{prompt: "Select year"},{class:"form-control",style:"width:100%"}) %>
+        <%= form.select(:course_year, options_for_select(all_years),{prompt: "Select year"},{class:"form-control",style:"width:100%", onchange: "reviewCourseYear()"}) %>
       </div>
     </div>
   </div>
@@ -104,7 +119,7 @@ $(document).ready(function() {
         <h5> <label for="course_id"> Review For... </label></h5>
       </div>
       <div class = "col-9">
-        <%= form.select(:course_id, options_for_select(all_courses), {prompt: "Select A Course"}, {class:"form-control",:disabled => true, style:"width:100%;"}) %>
+        <%= form.select(:course_id, options_for_select(all_courses), {prompt: "Select A Course"}, {class:"form-control",:disabled => true, style:"width:100%;",onchange: "reviewCourseId()"}) %>
        </div>
     </div>
   </div>

@@ -9,8 +9,20 @@
 	</div>
 	<div class = "profile-button-area">
 		<div class = "message-login-button">
+			<div class="mr-2">
+				<button type="button" class="btn btn-lg btn-outline-dark" data-toggle="modal" data-target="#prefModal">
+            		My Preference
+        		</button>
+				<%= render 'modal_preference' %>
+			</div>
 			<div class = "message-button-area">
-				<%= button_to "Messages", "/messenger_home", method: :get, class: "btn btn-outline-primary message-button btn-lg" %>
+				<%= button_to "/messenger_home", method: :get, class: "btn btn-outline-primary message-button btn-lg" do %>
+					Messages 
+					<% unread = total_unread_messages %>
+					<% if unread > 0 %>
+						<span class="badge badge-danger rounded-0"><%= unread %></span>
+					<% end %>
+				<% end %>
 			</div>
 			<div class = "login-button-area">
 				<%= button_to "Log Out", destroy_user_session_path, method: :delete, class: "btn btn-outline-danger btn-lg" %>
@@ -30,7 +42,7 @@
 			<%= render 'shared/review_details_card', review: review %>
 		<% end %>
 	</div>
-	<div class = "course-search-area">
+	<div class="course-search-area">
 		 <div class="mt-5">
 			<div class = "profile-page-labels">
 				 <h1>My Courses</h1>
@@ -42,15 +54,15 @@
  		</div>
  		<div class="border border-info rounded py-3">
  			<div class="d-flex justify-content-center mb-3">
- 			<%= form_tag 'view_profile', method: "post", remote: true, class: "search-form text-center d-flex flex-column align-content-center" do %>
+ 			<%= form_tag 'view_profile', method: "post", remote: true, class: "text-center d-flex flex-column align-content-center" do %>
  				<div class="row">
  					<div class="col">
  						<%= label_tag :search_text_courses, "Search for a course", class: 'h6' %>
  					</div>
  				</div>
  				<div class="profile-search-area">
- 						<%= text_field_tag :search_text_courses, '', placeholder: "Search", class: 'form-control profile-search-box' %>
- 						<%= image_submit_tag "search_icon.svg", class: 'btn btn-outline-info profile-search-button' %>
+ 					<%= text_field_tag :search_text_courses, '', placeholder: "Search", class: 'form-control profile-search-box' %>
+ 					<%= image_submit_tag "search_icon.svg", class: 'btn btn-outline-info profile-search-button' %>
  				</div>
  			<% end %>
  			</div>

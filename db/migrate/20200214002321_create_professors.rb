@@ -4,7 +4,7 @@ class CreateProfessors < ActiveRecord::Migration[6.0]
       t.string :prof_first_name
       t.string :prof_last_name
       t.string :prof_email
-      t.string :dept_name
+      t.integer :department_id
       t.string :prof_info
 
       t.timestamps

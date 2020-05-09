@@ -8,6 +8,10 @@ class GeneralCourse < ApplicationRecord
 
     scope :search, -> (term) { where("UPPER(course_code) LIKE ? OR UPPER(course_title) LIKE ?", "%#{term.upcase}%", "%#{term.upcase}%").order("course_code ASC") }
 
+    def department
+        professors.first.department
+    end
+
     def show_course_info
         "#{course_code}: #{course_title}"
     end
@@ -22,10 +26,6 @@ class GeneralCourse < ApplicationRecord
     def self.not_taken_by_user user_id
         taken = Enrollment.where(user_id: user_id).select(:general_course_id)
         GeneralCourse.where.not(id: taken)
-    end
-
-    def show_course_info
-        "#{course_code}: #{course_title}"
     end
 
     # Calculates the average of each category for every rating

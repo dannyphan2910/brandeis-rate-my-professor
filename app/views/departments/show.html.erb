@@ -1,0 +1,60 @@
+<div class="header m-5">
+	<div class="row d-flex justify-content-start align-items-center">
+		<div class="col text-center">
+			<h1 class="text-break"><span class="border-bottom border-danger"><%= "#{@department.dept_name}"%></span></h1>
+		</div>
+	</div>
+</div>
+<div class="dropdown-divider"></div>
+<div class="department-container d-flex m-lg-5 m-xl-5 m-1 mt-5 flex-column flex-sm-row flex-md-row flex-lg-row flex-xl-row">
+	<div class="col-lg mb-5">
+		<div class="available-courses">
+			<div class="mb-5 d-flex justify-content-between flex-column flex-lg-row flex-xl-row">
+				<h4><%= @courses.length %> Available Courses</h4>
+				<div class="input-group w-auto">
+					<div class="input-group-prepend" style="height:35px;"><span class="input-group-text filter-courses-input"><i class="fas fa-sort-alpha-down"></i></span></div>
+					<%= select_tag "filter_courses", options_for_select(@filter_courses), class: "custom-select w-auto", style: "height:35px;" %>
+				</div>
+			</div>
+			<div id="dept_courses">
+				<%= render 'dept_courses' %>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg mb-5">
+		<div class="available-profs">
+			<div class="mb-5 d-flex justify-content-between flex-column flex-lg-row flex-xl-row">
+				<h4><%= @professors.length %> Available Professors</h4>
+				<div class="input-group w-auto">
+					<div class="input-group-prepend" style="height:35px;"><span class="input-group-text filter-professors-input"><i class="fas fa-sort-alpha-down"></i></span></div>
+					<%= select_tag "filter_professors", options_for_select(@filter_professors), class: "custom-select w-auto", style: "height:35px;" %>
+				</div>
+			</div>
+			<div id="dept_profs">
+				<%= render 'dept_profs' %>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+$(document).on('turbolinks:load', function () {
+  $("select#filter_courses").on("change", function () {
+    $.ajax({
+      url: "<%= j department_path(@department.id) %>",
+      type: "GET",
+	  data: { filter_courses: $("select#filter_courses").val(), filter_professors: $("select#filter_professors").val() }
+    });
+  });
+});
+
+$(document).on('turbolinks:load', function () {
+  $("select#filter_professors").on("change", function () {
+    $.ajax({
+      url: "<%= j department_path(@department.id) %>",
+      type: "GET",
+      data: { filter_courses: $("select#filter_courses").val(), filter_professors: $("select#filter_professors").val() }
+    });
+  });
+});
+</script>

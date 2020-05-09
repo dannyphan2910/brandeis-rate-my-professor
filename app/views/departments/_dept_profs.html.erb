@@ -1,0 +1,10 @@
+<ul class="list-group">
+	<% @professors.each do |professor| %>
+		<li class="list-group-item">
+			<%= link_to professor_path(professor.id), class: "d-flex justify-content-between align-items-center" do %>
+				<%= professor.show_name %>
+				<span class="badge badge-primary badge-pill"><%= professor.reviews.length %></span>
+			<% end %>
+		</li>
+	<% end %>
+</ul>

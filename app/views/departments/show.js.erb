@@ -1,0 +1,13 @@
+$("#dept_courses").html("<%= j render 'dept_courses' %>");
+<% if @courses_filter.include? "desc" %>
+    $(".filter-courses-input").html("<i class=\"fas fa-sort-alpha-up\"></i>");
+<% else %>
+    $(".filter-courses-input").html("<i class=\"fas fa-sort-alpha-down\"></i>");
+<% end %>
+
+$("#dept_profs").html("<%= j render 'dept_profs' %>");
+<% if @professors_filter.include? "desc" %>
+    $(".filter-professors-input").html("<i class=\"fas fa-sort-alpha-up\"></i>");
+<% else %>
+    $(".filter-professors-input").html("<i class=\"fas fa-sort-alpha-down\"></i>");
+<% end %>

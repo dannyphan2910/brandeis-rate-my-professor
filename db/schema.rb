@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_24_055116) do
+ActiveRecord::Schema.define(version: 2020_05_08_042115) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "action_text_rich_texts", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "body"
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
+  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -67,6 +77,12 @@ ActiveRecord::Schema.define(version: 2020_04_24_055116) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "departments", force: :cascade do |t|
+    t.string "dept_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "enrollments", force: :cascade do |t|
     t.integer "user_id"
     t.integer "general_course_id"
@@ -86,10 +102,20 @@ ActiveRecord::Schema.define(version: 2020_04_24_055116) do
     t.text "body"
     t.bigint "user_id", null: false
     t.bigint "conversation_id", null: false
+    t.boolean "is_read"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "preferences", force: :cascade do |t|
+    t.integer "user_id"
+    t.boolean "likes_participation"
+    t.boolean "likes_workload"
+    t.boolean "likes_testing"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "professor_ratings", force: :cascade do |t|
@@ -109,7 +135,7 @@ ActiveRecord::Schema.define(version: 2020_04_24_055116) do
     t.string "prof_first_name"
     t.string "prof_last_name"
     t.string "prof_email"
-    t.string "dept_name"
+    t.integer "department_id"
     t.string "prof_info"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

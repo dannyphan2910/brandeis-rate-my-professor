@@ -10,6 +10,14 @@ module MessengerHelper
     Message.not_read(conversation_id, recipient_id).count
   end
 
+  def total_unread_messages
+    count = 0
+    if logged_in?
+      Conversation.with(current_user).each { |convo| count += convo.messages.where(user_id: convo.opposed_user(current_user), is_read: nil).length }
+    end
+    count
+  end
+
   def new_conversation_suggestion conversation
     @new_conversation_suggestion = {
       "badge badge-pill badge-warning" => "Hi #{conversation.opposed_user(current_user).first_name}!",

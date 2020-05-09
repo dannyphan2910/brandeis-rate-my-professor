@@ -26,7 +26,8 @@ class MessageBroadcastJob < ApplicationJob
       window: render_window(message.conversation, recipient),
       message: render_message(message, recipient),
       conversation_id: message.conversation_id,
-      sender: sender.id
+      sender: sender.id,
+      sender_name: sender.show_full_name
     )
   end
 

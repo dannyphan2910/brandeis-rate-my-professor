@@ -11,6 +11,8 @@ require('jquery')
 require("jquery-ui")
 require("jquery-bar-rating")
 require('js-autocomplete')
+require("trix")
+require("@rails/actiontext")
 
 window.jQuery = $;
 window.$ = $;
@@ -26,6 +28,29 @@ import "bootstrap";
 import "../stylesheets/application";
 import "@fortawesome/fontawesome-free/js/all";
 
+// push notification
+Notification.requestPermission()
+
+// turbolinks loading screen
+$(document).on('turbolinks:before-visit', function() {
+  $(".se-pre-con").show();
+});
+
+$(document).on('submit', '.main-form', function(e) {
+  $(".se-pre-con").show();
+})
+
+$(document).on('turbolinks:load', function() {
+  $(".se-pre-con").hide();
+});
+
+// prevent attachments for contact form
+window.addEventListener("trix-file-accept", function(event) {
+  event.preventDefault()
+  alert("File attachment not supported for contact form!")
+})
+
+// bootstrap
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
@@ -42,6 +67,7 @@ $(function () {
   $('[data-toggle="collapse"]').collapse();
 });
 
+// messaging
 (function () {
   $(document).on('click', '.toggle-window', function (e) {
     e.preventDefault();
@@ -58,22 +84,5 @@ $(function () {
   });
 });
 
-$(document).on('turbolinks:load', function () {
-  $("select#review_course_id").on("change", function () {
-    $.ajax({
-      url: "/filter_professor_by_course",
-      type: "GET",
-      data: { gcname: $("select#review_course_id").val(), year: $("select#review_course_year").val() }
-    });
-  });
-});
-
-$(document).on('turbolinks:load', function () {
-  $("select#review_course_year").on("change", function () {
-    $.ajax({
-      url: "/filter_course_by_year",
-      type: "GET",
-      data: { year: $("select#review_course_year").val() }
-    });
-  });
-});
+require("trix")
+require("@rails/actiontext")
