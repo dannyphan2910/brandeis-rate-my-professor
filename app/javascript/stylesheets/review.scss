@@ -113,6 +113,10 @@
     height: 100%;
 
 }
+
+.ratings-label{
+    font-size: medium
+}
 // @media (max-width: 767px) {
 //     // Modals
 //     .modal-lg {
@@ -134,8 +138,19 @@
 //     }
   
 //   }
+
   
   @media (max-width: 767px) {
+    .ratings-label{
+        font-size: small !important;
+    }
+    .review-info-label{
+        display:none;
+    }
+    .review-mobile-selectbox{
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+    }
     // Modals
     .modal-lg {
       position: fixed;

@@ -13,7 +13,6 @@
 				<button type="button" class="btn btn-lg btn-outline-dark preference-button" data-toggle="modal" data-target="#prefModal">
             		My Preference
         		</button>
-				<%= render 'modal_preference' %>
 			</div>
 			<div class = "message-button-area">
 				<%= button_to "/messenger_home", method: :get, class: "btn btn-outline-primary message-button btn-lg" do %>
@@ -81,6 +80,8 @@
  		</div>
 	</div>
 </div>
+
+<%= render 'modal_preference' %>
 
 <script>
 	var img = $('.image');
