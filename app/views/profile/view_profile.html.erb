@@ -9,8 +9,8 @@
 	</div>
 	<div class = "profile-button-area">
 		<div class = "message-login-button">
-			<div class="mr-2">
-				<button type="button" class="btn btn-lg btn-outline-dark" data-toggle="modal" data-target="#prefModal">
+			<div class="preference-area">
+				<button type="button" class="btn btn-lg btn-outline-dark preference-button" data-toggle="modal" data-target="#prefModal">
             		My Preference
         		</button>
 				<%= render 'modal_preference' %>
@@ -28,6 +28,17 @@
 				<%= button_to "Log Out", destroy_user_session_path, method: :delete, class: "btn btn-outline-danger btn-lg" %>
 			</div>
 		</div>	
+		<div class = "mobile-buttons-area">
+			<%= link_to '', {'data-toggle' => 'modal', 'data-target' => "#prefModal"} do%>
+				<%= image_tag "preference_icon.svg", size: "50x52", class: "mobile-preference-button" %>
+			<% end %>
+			<%= link_to '/messenger_home', method: :get do %>
+				<%= image_tag "message_icon.svg", size:"50x52", class: "mobile-message-button" %>
+			<% end %>
+			<%= link_to destroy_user_session_path, method: :delete do %>
+				<%= image_tag "logout_icon.svg", size:"50x52", class: "mobile-logout-button" %>
+			<% end %>
+		</div>
 	</div>
 </div>
 
