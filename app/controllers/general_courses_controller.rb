@@ -16,8 +16,9 @@ class GeneralCoursesController < ApplicationController
     @overall_stat = @general_course.as_json.merge! @general_course.get_average
 
     if current_user && current_user.preference
-      @score = match_score @general_course, current_user.preference.likes_participation, current_user.preference.likes_workload, current_user.preference.likes_testing 
-      @indicator = analyze_score @score
+      score_analyzer = ScoreAnalyzer::MatchScore.new(@general_course, current_user.preference.likes_participation, current_user.preference.likes_workload, current_user.preference.likes_testing)
+      @score = score_analyzer.match_score
+      @indicator = score_analyzer.analyze_score
     end
   end
 
@@ -28,8 +29,9 @@ class GeneralCoursesController < ApplicationController
       likes_workload = params[:pref_workload] == 'no'
       likes_testing = params[:pref_grading] == 'no'
 
-      @score = match_score @general_course, likes_participation, likes_workload, likes_testing
-      @indicator = analyze_score @score
+      score_analyzer = ScoreAnalyzer::MatchScore.new(@general_course, likes_participation, likes_workload, likes_testing)
+      @score = score_analyzer.match_score
+      @indicator = score_analyzer.analyze_score
 
       respond_to do |format|
         format.js

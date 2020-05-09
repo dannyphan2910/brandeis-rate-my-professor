@@ -20,20 +20,6 @@ module SessionsHelper
         @current_user = nil
     end
 
-    # Returns most reviewed courses
-    def get_courses_most_reviewed num
-        ids = Course.joins(:reviews).group(:id).count(:all).sort_by {|k,v| v}.reverse.first(num).to_h.keys
-        courses = Course.where(id: ids)
-        return get_hash_result courses, true
-    end
-    
-    # Returns most reviewed professors
-    def get_professors_most_reviewed num
-        ids = Professor.joins(:reviews).group(:id).count(:all).sort_by {|k,v| v}.reverse.first(num).to_h.keys
-        professors = Professor.where(id: ids)
-        return get_hash_result professors, false
-    end
-
     def get_hash data
         arr = data["prof_first_name"] ? get_labels(false) : get_labels(true)
         res = {}

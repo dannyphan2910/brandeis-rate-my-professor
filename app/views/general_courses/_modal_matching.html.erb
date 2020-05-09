@@ -7,7 +7,7 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<div class="modal-body">
+			<div class="modal-body" id="match-content">
 				<% if @reviews.length == 0 %>
 					<h3 class="font-weight-normal text-center">Sorry, there is insufficient data to check for a course match. Please check again later!</h3>
 				<% elsif current_user && current_user.preference %>
