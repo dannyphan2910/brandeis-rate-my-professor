@@ -20,7 +20,7 @@ class SearchController < ApplicationController
 
       @professors = get_professors unless (@filter == "course" || @filter == "department")
       @departments = get_departments unless (@filter == "professor" || @filter == "course")
-      @total_result = (@courses.nil? ? 0 : @courses.length) + (@professors.nil? ? 0 : @professors.length) + (@department.nil? ? 0 : @department.length)
+      @total_result = (@courses.nil? ? 0 : @courses.length) + (@professors.nil? ? 0 : @professors.length) + (@departments.nil? ? 0 : @departments.length)
   end
 
   def get_general_courses

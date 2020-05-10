@@ -70,7 +70,7 @@ class User < ApplicationRecord
     def acceptable_image
         return unless avatar.attached?
 
-        unless avatar.byte_size <= 1.megabyte
+        unless avatar.byte_size <= 5.megabyte
             errors.add(:avatar, "Image is too big")
         end
       

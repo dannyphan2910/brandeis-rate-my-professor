@@ -18,13 +18,12 @@ const chatChannel = consumer.subscriptions.create("ConversationChannel", {
     // if under the data[‘window’] we pass a partial. If yes, it means that something should be rendered for a recipient. If it’s empty, it means that we should render a code (a message) for a sender.
     if (data['window'] !== undefined) {
       // PUSH NOTIFICATION
-      if (Notification.permission === 'granted') {
+      if (!navigator.userAgent.match(/(iPod|iPhone|iPad)/) && Notification.permission === 'granted') {
         var title = 'New Message from ' + data['sender_name']
         var body = 'You have a new message! Check your inbox!'
         var options = { body: body }
         new Notification(title, options)
       }
-
       // MESSENGER EFFECTS
       var conversation_visible = conversation.is(':visible');
       // // if a conversation’s window is visible

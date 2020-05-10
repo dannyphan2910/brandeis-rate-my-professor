@@ -29,7 +29,9 @@ import "../stylesheets/application";
 import "@fortawesome/fontawesome-free/js/all";
 
 // push notification
-Notification.requestPermission()
+if (!navigator.userAgent.match(/(iPod|iPhone|iPad)/)) {
+  Notification.requestPermission();
+}
 
 // turbolinks loading screen
 $(document).on('turbolinks:before-visit', function() {
