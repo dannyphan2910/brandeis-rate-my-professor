@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
     include SessionsHelper
-    include SearchHelper
     include MessengerHelper
     include GeneralCoursesHelper
     

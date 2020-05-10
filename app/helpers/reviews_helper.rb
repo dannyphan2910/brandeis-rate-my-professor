@@ -21,4 +21,8 @@ module ReviewsHelper
         courses = GeneralCourse.all.map { |gc| gc.show_course_info }
         return courses
     end
+
+    def all_professors
+        Professor.all
+    end
 end

@@ -132,7 +132,7 @@ $(document).ready(function() {
         <h5><%= form.label :professor_id %></h5>
       </div>
       <div class = "col-9 review-mobile-selectbox">
-        <%= form.collection_select :professor_id, Professor.all, :id, :show_name, { prompt: 'Select A Professor' }, {class:"form-control",:disabled => true, style:"width:100% "} %>
+        <%= form.collection_select :professor_id, all_professors, :id, :show_name, { prompt: 'Select A Professor' }, {class:"form-control",:disabled => true, style:"width:100% "} %>
       </div>
     </div>
   </div>

@@ -34,11 +34,9 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'jquery-rails'
 gem 'bootstrap',  '~>4.3.1'
+gem 'font_awesome5_rails'
 
 gem 'faker'
-
-gem 'jquery-ui-rails'
-gem 'font_awesome5_rails'
 
 gem "aws-sdk-s3", require: false
 

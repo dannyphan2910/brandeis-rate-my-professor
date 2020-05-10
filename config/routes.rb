@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :preferences
-  resources :departments
+  resources :preferences, only: [:create]
+  resources :departments, only: [:show]
   devise_for :users, path: '/', path_names: { sign_in: 'login', sign_out: 'logout', registration: 'users' }, controllers: {
     omniauth_callbacks: 'users/omniauth_callbacks',
     registrations: 'users/registrations',
@@ -8,24 +8,19 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
 
-  resources :conversations do
-    resources :messages, only: [:create]
-  end
+  resources :conversations, only: [:create, :destroy]
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
-  resources :enrollments
-  resources :rate_downs
-  resources :rate_ups
-  resources :general_courses do
+  resources :enrollments, only: [:create, :destroy]
+  resources :rate_downs, only: [:create, :destroy]
+  resources :rate_ups, only: [:create, :destroy]
+  resources :general_courses, only: [:show] do
     member do
       post 'match'
     end
   end
 
-  resources :professors
-  resources :courses
-  resources :professor_ratings
-  resources :course_ratings
+  resources :professors, only: [:show]
   resources :reviews do
     collection do
       get :open_edit_modal

@@ -365,7 +365,6 @@ DEPENDENCIES
   image_processing (~> 1.2)
   jbuilder (~> 2.7)
   jquery-rails
-  jquery-ui-rails
   json
   listen (>= 3.0.5, < 3.2)
   omniauth-facebook

@@ -31,19 +31,6 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(user_params)
-
-    if @user.save
-      log_in @user
-      redirect_to '/'
-    else
-      errors = ''
-      @user.errors.full_messages.each do |message|
-        errors += message + "\n"
-      end
-      puts errors;
-      redirect_to '/users/new', alert: errors
-    end
   end
 
   # PATCH/PUT /users/1
