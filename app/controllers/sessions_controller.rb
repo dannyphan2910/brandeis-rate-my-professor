@@ -19,8 +19,8 @@ class SessionsController < ApplicationController
       ["Department", "department"]
     ]
 
-    @courses_most_reviewed = get_courses_most_reviewed(5)
-    @professors_most_reviewed = get_professors_most_reviewed(5)
+    @courses_most_reviewed = ScoreAnalyzer::ReviewScore.new.get_courses_most_reviewed(5)
+    @professors_most_reviewed = ScoreAnalyzer::ReviewScore.new.get_professors_most_reviewed(5)
 
     # delete stored OAuth data 
     session.delete('devise.google_data') if session['devise.google_data']

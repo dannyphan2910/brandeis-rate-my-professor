@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
     include SessionsHelper
-    include SearchHelper
     include MessengerHelper
+    include GeneralCoursesHelper
     
     before_action :configure_permitted_parameters, if: :devise_controller?
     

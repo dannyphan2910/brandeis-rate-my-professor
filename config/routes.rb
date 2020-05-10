@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  resources :departments
+  resources :preferences, only: [:create]
+  resources :departments, only: [:show]
   devise_for :users, path: '/', path_names: { sign_in: 'login', sign_out: 'logout', registration: 'users' }, controllers: {
     omniauth_callbacks: 'users/omniauth_callbacks',
     registrations: 'users/registrations',
@@ -7,18 +8,19 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
 
-  resources :conversations do
-    resources :messages, only: [:create]
-  end
+  resources :conversations, only: [:create, :destroy]
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  resources :enrollments
-  resources :rate_downs
-  resources :rate_ups
-  resources :general_courses
-  resources :professors
-  resources :courses
-  resources :professor_ratings
-  resources :course_ratings
+
+  resources :enrollments, only: [:create, :destroy]
+  resources :rate_downs, only: [:create, :destroy]
+  resources :rate_ups, only: [:create, :destroy]
+  resources :general_courses, only: [:show] do
+    member do
+      post 'match'
+    end
+  end
+
+  resources :professors, only: [:show]
   resources :reviews do
     collection do
       get :open_edit_modal
@@ -27,10 +29,6 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  # get 'login', to: 'sessions#new'
-  # post 'login', to: 'sessions#create'
-  # get 'welcome', to: 'sessions#welcome'
-  # get 'logout', to: 'sessions#destroy'
 
   get 'search', to: 'search#search_result'
   post 'search', to: 'search#search_result'

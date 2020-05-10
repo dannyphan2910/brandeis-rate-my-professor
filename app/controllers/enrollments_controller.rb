@@ -57,12 +57,6 @@ class EnrollmentsController < ApplicationController
   # DELETE /enrollments/1.json
   def destroy
     @enrollment.destroy
-    # user_id = current_user.id
-    # general_course_id = params[:general_course_id]
-    # puts user_id, general_course_id
-    # if Enrollment.exists?(user_id: user_id, general_course_id: general_course_id)
-    #   Enrollment.find_by(user_id: user_id, general_course_id: general_course_id).delete
-    # end
     @user_courses = current_user.general_courses.order(:course_code)
     @courses = params[:search_text_courses].blank? ? [] : GeneralCourse.not_taken_by_user(current_user.id).search(params[:search_text_courses])
     respond_to do |format|

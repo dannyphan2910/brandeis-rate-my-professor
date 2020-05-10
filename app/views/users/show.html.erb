@@ -6,9 +6,11 @@
 		<h1><%= @user.show_full_name %></h1>
 		<h5><%= @user.email %></h5>
 	</div>
+	<% if logged_in? %>
 	<div class = "profile-button-area">
 		<%= button_to "Message", "/message/#{@user.id}", method: :post, remote: true, class: "btn btn-outline-primary btn-lg" %>
 	</div>
+	<% end %>
 </div>
 <div class="dropdown-divider"></div>
 <div class="m-5">

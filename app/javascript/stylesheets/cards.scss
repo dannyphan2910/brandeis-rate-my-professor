@@ -81,8 +81,10 @@
 }
 
 .card-deck {
+    position: relative;
     width: 100%;
-
+    overflow-x: scroll;
+    overflow-y: hidden;
     .card-block {
         min-width: 200px;
     }
@@ -121,6 +123,12 @@ h4.review-card-title a {
 
 .fa-grin-stars {
     color: #ffbb33;
+}
+
+.suggested-course-container{
+    width: 100%;
+    overflow-x: scroll !important;
+    overflow-y: hidden !important;
 }
 
 @media(max-width: 400px){

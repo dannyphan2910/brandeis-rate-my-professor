@@ -29,7 +29,7 @@ import "../stylesheets/application";
 import "@fortawesome/fontawesome-free/js/all";
 
 // push notification
-Notification.requestPermission().then(function (result) {})
+Notification.requestPermission()
 
 // turbolinks loading screen
 $(document).on('turbolinks:before-visit', function() {
@@ -41,7 +41,6 @@ $(document).on('submit', '.main-form', function(e) {
 })
 
 $(document).on('turbolinks:load', function() {
-  console.log("LOADED");
   $(".se-pre-con").hide();
 });
 

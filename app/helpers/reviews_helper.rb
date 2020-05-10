@@ -1,12 +1,6 @@
 module ReviewsHelper
     def all_years
-        years = []
-        Course.all.each do |c|
-            year_sem = "" + c.year.to_s + " " +  c.semester.to_s
-            if !years.include?(year_sem)
-                years.push(year_sem)
-            end
-        end
+        years = Course.pluck(:semester, :year).uniq.map { |sem| sem[1].to_s + " " + sem[0] }
         years = years.sort do |a,b|
             if a.split(" ")[0] > b.split(" ")[0]
                 -1
@@ -24,12 +18,11 @@ module ReviewsHelper
     end
 
     def all_courses
-        courses = []
-        GeneralCourse.all.each do |gc|
-            if !courses.include?(gc.show_course_info)
-                courses.push(gc.show_course_info)
-            end
-        end
+        courses = GeneralCourse.all.map { |gc| gc.show_course_info }
         return courses
+    end
+
+    def all_professors
+        Professor.all
     end
 end

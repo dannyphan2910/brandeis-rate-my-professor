@@ -11,7 +11,7 @@ class ProfessorsController < ApplicationController
   # GET /professors/1.json
   def show
     @reviews = @professor.reviews
-    @courses = @professor.courses
+    @courses = @professor.courses.sort_by { |course| course.show_course_info }
     @highest_rated_review = @reviews.ordered_by_rate_up.first
     @overall_stat = @professor.as_json.merge! @professor.get_average
   end
