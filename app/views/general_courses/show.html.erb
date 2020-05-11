@@ -100,7 +100,7 @@
         <% @general_course.users.each do |user| %>
         <li class="list-group-item d-flex justify-content-between align-items-center border-left-0 border-right-0">
             <p class="mt-2"><%= "#{user.show_full_name}" %></p>
-            <% if user.id != current_user.id %>
+            <% if !logged_in || (current_user && user.id != current_user.id) %>
             <%= button_to 'View Profile', user_path(user.id), method: :get, class: 'btn btn-outline-primary ml-3' %>
             <% else %>
             <%= button_to 'My Profile', '/view_profile', method: :get, class: 'btn btn-outline-info ml-3' %>
