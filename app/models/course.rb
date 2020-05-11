@@ -3,7 +3,7 @@ class Course < ApplicationRecord
     has_many :course_ratings, through: :reviews
     belongs_to :professor
     belongs_to :general_course
-    delegate :course_code, :course_title, :course_description, to: :general_course
+    delegate :course_code, :course_title, :course_description, to: :general_course, allow_nil: true
 
     scope :search, -> (term) { joins(:general_course).where("UPPER(general_courses.course_code) LIKE ? OR UPPER(general_courses.course_title) LIKE ?", "%#{term.upcase}%", "%#{term.upcase}%").order("general_courses.course_code ASC") }
 

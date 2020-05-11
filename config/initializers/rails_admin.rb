@@ -1,11 +1,5 @@
 RailsAdmin.config do |config|
 
-
-  # config.authenticate_with do
-  #   warden.authenticate! scope: :user
-  # end
-  # config.current_user_method(&:current_user)
-
   config.authorize_with do
     redirect_to main_app.root_path unless current_user.is_admin_user == true
   end
@@ -20,9 +14,23 @@ RailsAdmin.config do |config|
     end
   end
 
+  config.model 'GeneralCourse' do
+    object_label_method do
+      :course_code
+    end
+  end
+
   config.model 'Course' do
     object_label_method do
       :admin_course_label
+    end
+    list do 
+      field :professor
+      field :semester
+      field :year
+      field :general_course
+      field :created_at
+      field :updated_at
     end
   end
 
@@ -47,11 +55,6 @@ RailsAdmin.config do |config|
     end
   end
 
-  # config.model 'Review' do
-  #   configure :all do
-  #     read_only true
-  #   end
-  # end
   ### Popular gems integration
 
   ## == Devise ==
